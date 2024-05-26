@@ -47,5 +47,6 @@
   "class-vc-notice-controller.php": "Plugin Notice System",
   "class-vc-post-custom-layout.php": "Plugin Post Custom Layout Manager",
   "ai/vc-ai-ajax.php": "Ajax Hooks for Ai system",
-  "vc-seo.php": "Hooks for SEO module"
+  "vc-seo.php": "Hooks for SEO module",
+  "vc-settings-auto-save.php": "Logic for auto-save in General settings"
 }

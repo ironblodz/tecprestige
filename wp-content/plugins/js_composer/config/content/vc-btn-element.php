@@ -346,6 +346,9 @@ function vc_btn_element_params() {
 			'heading' => esc_html__( 'CSS box', 'js_composer' ),
 			'param_name' => 'css',
 			'group' => esc_html__( 'Design Options', 'js_composer' ),
+			'value' => array(
+				'margin-bottom' => '22px',
+			),
 		),
 	) );
 
@@ -356,6 +359,7 @@ function vc_btn_element_params() {
 		'name' => esc_html__( 'Button', 'js_composer' ),
 		'base' => 'vc_btn',
 		'icon' => 'icon-wpb-ui-button',
+		'element_default_class' => 'vc_do_btn',
 		'category' => array(
 			esc_html__( 'Content', 'js_composer' ),
 		),

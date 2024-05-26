@@ -12,7 +12,8 @@ if ( ! defined( 'ABSPATH' ) ) {
 
 $atts = vc_map_get_attributes( $this->getShortcode(), $atts );
 $this->buildTemplate( $atts, $content );
-$cssClass = trim( 'vc_general ' . esc_attr( implode( ' ', $this->getTemplateVariable( 'css-class' ) ) ) );
+$element_class = empty( $this->settings['element_default_class'] ) ? '' : $this->settings['element_default_class'];
+$cssClass = trim( 'vc_general ' . esc_attr( implode( ' ', $this->getTemplateVariable( 'css-class' ) ) ) . ' ' . esc_attr( $element_class ) );
 $currency = isset( $atts['currency'] ) ? $atts['currency'] : '';
 $price = isset( $atts['price'] ) ? $atts['price'] : '';
 $period = isset( $atts['period'] ) ? $atts['period'] : '';

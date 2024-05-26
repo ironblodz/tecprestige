@@ -8,6 +8,7 @@ function vc_icon_element_params() {
 		'name' => esc_html__( 'Icon', 'js_composer' ),
 		'base' => 'vc_icon',
 		'icon' => 'icon-wpb-vc_icon',
+		'element_default_class' => 'vc_do_icon',
 		'category' => esc_html__( 'Content', 'js_composer' ),
 		'description' => esc_html__( 'Eye catching icons from libraries', 'js_composer' ),
 		'params' => array(
@@ -257,6 +258,9 @@ function vc_icon_element_params() {
 				'heading' => esc_html__( 'CSS box', 'js_composer' ),
 				'param_name' => 'css',
 				'group' => esc_html__( 'Design Options', 'js_composer' ),
+				'value' => array(
+					'margin-bottom' => '35px',
+				),
 			),
 		),
 		'js_view' => 'VcIconElementView_Backend',

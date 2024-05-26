@@ -7,6 +7,7 @@ return array(
 	'name' => esc_html__( 'Raw HTML', 'js_composer' ),
 	'base' => 'vc_raw_html',
 	'icon' => 'icon-wpb-raw-html',
+	'element_default_class' => 'wpb_content_element',
 	'category' => esc_html__( 'Structure', 'js_composer' ),
 	'wrapper_class' => 'clearfix',
 	'description' => esc_html__( 'Output raw HTML code on your page', 'js_composer' ),
@@ -37,6 +38,9 @@ return array(
 			'heading' => esc_html__( 'CSS box', 'js_composer' ),
 			'param_name' => 'css',
 			'group' => esc_html__( 'Design Options', 'js_composer' ),
+			'value' => array(
+				'margin-bottom' => '35px',
+			),
 		),
 	),
 );

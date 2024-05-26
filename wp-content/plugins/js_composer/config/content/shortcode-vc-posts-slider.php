@@ -7,6 +7,7 @@ return array(
 	'name' => esc_html__( 'Posts Slider', 'js_composer' ),
 	'base' => 'vc_posts_slider',
 	'icon' => 'icon-wpb-slideshow',
+	'element_default_class' => 'wpb_content_element',
 	'category' => esc_html__( 'Content', 'js_composer' ),
 	'description' => esc_html__( 'Slider with WP Posts', 'js_composer' ),
 	'params' => array(
@@ -168,6 +169,9 @@ return array(
 			'heading' => esc_html__( 'CSS box', 'js_composer' ),
 			'param_name' => 'css',
 			'group' => esc_html__( 'Design Options', 'js_composer' ),
+			'value' => array(
+				'margin-bottom' => '35px',
+			),
 		),
 	),
 );

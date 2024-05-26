@@ -7,6 +7,7 @@ return array(
 	'name' => esc_html__( 'Text Block', 'js_composer' ),
 	'icon' => 'icon-wpb-layer-shape-text',
 	'wrapper_class' => 'clearfix',
+	'element_default_class' => 'wpb_content_element',
 	'category' => esc_html__( 'Content', 'js_composer' ),
 	'description' => esc_html__( 'A block of text with WYSIWYG editor', 'js_composer' ),
 	'params' => array(
@@ -35,6 +36,9 @@ return array(
 			'heading' => esc_html__( 'CSS box', 'js_composer' ),
 			'param_name' => 'css',
 			'group' => esc_html__( 'Design Options', 'js_composer' ),
+			'value' => array(
+				'margin-bottom' => '35px',
+			),
 		),
 	),
 );

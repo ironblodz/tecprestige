@@ -73,7 +73,6 @@ class Vc_Post_Admin {
 
 		$this->setPostMeta( $post_id );
 
-		wpbakery()->buildShortcodesCustomCss( $post_id );
 		wp_cache_flush();
 		ob_clean();
 	}
@@ -279,7 +278,13 @@ class Vc_Post_Admin {
 
 		$this->setPostMetaByList( $id, $meta_list );
 
-		wpbakery()->buildShortcodesCustomCss( $id );
+		$types = [
+			'default',
+			'custom',
+		];
+		foreach ( $types as $type ) {
+			wpbakery()->buildShortcodesCss( $id, $type );
+		}
 	}
 
 	/**

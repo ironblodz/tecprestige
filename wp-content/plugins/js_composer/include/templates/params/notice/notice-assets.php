@@ -44,12 +44,22 @@ if ( ! defined( 'ABSPATH' ) ) {
 	}
 </style>
 <script>
+	window.vcAdminNonce = '<?php echo esc_js( vc_generate_nonce( 'vc-admin-nonce' ) ); ?>';
+
 	(function ( $ ) {
-		var setCookie = function ( c_name, value, days ) {
-			var date = new Date();
-			date.setDate( date.getDate() + days );
-			var c_value = encodeURIComponent( value ) + ((null === days) ? "" : "; expires=" + date.toUTCString());
-			document.cookie = c_name + "=" + c_value;
+		var addNoticeToDisableList = function ( notice_id ) {
+			var data = {
+				notice_id: notice_id,
+				action: 'wpb_add_notice_to_close_list',
+				_vcnonce: window.vcAdminNonce
+			};
+			$.ajax( {
+				type: 'POST',
+				url: window.ajaxurl,
+				data: data,
+			}).fail( function ( response ) {
+				console.error( 'Failed to add notice to disable list', response)
+			});
 		};
 
 		$( document ).off( 'click.wpb-notice-dismiss' ).on( 'click.wpb-notice-dismiss', '.wpb-notice-dismiss', function ( e ) {
@@ -61,13 +71,13 @@ if ( ! defined( 'ABSPATH' ) ) {
 					$el.remove();
 				} );
 			} );
-			setCookie( $el.attr('id'), 1, 3000 );
+			addNoticeToDisableList( $el.attr('id').replace('wpb-notice-', '') );
 		});
 		$( document ).off( 'click.wpb-notice-button' ).on( 'click.wpb-notice-button', '.wpb-notice-button', function ( e ) {
 			e.preventDefault();
 			var $el = jQuery( this )
 
-			var link = $el.attr('data-notice-link')			
+			var link = $el.attr('data-notice-link')
 
 			if ( link ) {
 				window.open(link, '_blank')

@@ -59,8 +59,9 @@ if ( 'custom_link' === $onclick ) {
 $images = explode( ',', $images );
 $i = - 1;
 
+$element_class = empty( $this->settings['element_default_class'] ) ? '' : $this->settings['element_default_class'];
 $class_to_filter = 'wpb_images_carousel wpb_content_element vc_clearfix';
-$class_to_filter .= vc_shortcode_custom_css_class( $css, ' ' ) . $this->getExtraClass( $el_class ) . $this->getCSSAnimation( $css_animation );
+$class_to_filter .= vc_shortcode_custom_css_class( $css, ' ' ) . ' ' . esc_attr( $element_class ) . $this->getExtraClass( $el_class ) . $this->getCSSAnimation( $css_animation );
 $css_class = apply_filters( VC_SHORTCODE_CUSTOM_CSS_FILTER_TAG, $class_to_filter, $this->settings['base'], $atts );
 
 $carousel_id = 'vc_images-carousel-' . WPBakeryShortCode_Vc_Images_Carousel::getCarouselIndex();

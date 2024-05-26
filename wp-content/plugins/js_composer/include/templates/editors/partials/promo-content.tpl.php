@@ -5,16 +5,16 @@ if ( ! defined( 'ABSPATH' ) ) {
 
 /** @var bool $is_about_page */
 ?>
-<img class="vc-featured-img" src="<?php echo esc_url( vc_asset_url( 'vc/wpb_introduce_seo.png' ) ); ?>"/>
+<img class="vc-featured-img" src="<?php echo esc_url( vc_asset_url( 'vc/wpb_introduce_ux_improvements.png' ) ); ?>"/>
 
 <div class="vc-feature-text">
-	<h3><?php esc_html_e( 'Introducing WPBakery SEO', 'js_composer' ); ?></h3>
+	<h3><?php esc_html_e( 'Instant edit and UX improvements', 'js_composer' ); ?></h3>
 
-	<p><?php esc_html_e( 'Streamline your search engine optimization efforts with WPBakery\'s built-in SEO toolkit. Access WPBakery\'s SEO tools directly from the editor to boost your website\'s visibility and attract a wider audience:', 'js_composer' ); ?></p>
+	<p><?php esc_html_e( 'Work faster with the updated WPBakery edit forms. See all the changes you make to your elements instantly. You can now enable auto-save functionality in the general settings under WPBakery Page Builder in the WordPress admin dashboard, to experience the enhanced user experience for better content management.', 'js_composer' ); ?></p>
 	<ul>
-		<li><?php esc_html_e( 'Get social media sharing previews', 'js_composer' ); ?></li>
-		<li><?php esc_html_e( 'Gain insights from content analysis and receive suggestions for improvement', 'js_composer' ); ?></li>
-		<li><?php esc_html_e( 'Track your site\'s SEO health with a color-coded status indicator', 'js_composer' ); ?></li>
+		<li><?php esc_html_e( 'Instant element update and preview', 'js_composer' ); ?></li>
+		<li><?php esc_html_e( 'Default value placeholders in Design Options', 'js_composer' ); ?></li>
+		<li><?php esc_html_e( 'Enhanced plugin security', 'js_composer' ); ?></li>
 	</ul>
 	<?php
 	$tabs = vc_settings()->getTabs();

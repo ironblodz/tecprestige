@@ -66,8 +66,9 @@ if ( 'custom' === $color && '' !== $accent_color ) {
 	}
 }
 
+$element_class = empty( $this->settings['element_default_class'] ) ? '' : $this->settings['element_default_class'];
 $class_to_filter = $class;
-$class_to_filter .= vc_shortcode_custom_css_class( $css, ' ' ) . $this->getExtraClass( $el_class ) . $this->getCSSAnimation( $css_animation );
+$class_to_filter .= vc_shortcode_custom_css_class( $css, ' ' ) . ' ' . esc_attr( $element_class ) . $this->getExtraClass( $el_class ) . $this->getCSSAnimation( $css_animation );
 $css_class = apply_filters( VC_SHORTCODE_CUSTOM_CSS_FILTER_TAG, $class_to_filter, $this->settings['base'], $atts );
 $css_class = esc_attr( trim( $css_class ) );
 $icon = '';

@@ -97,6 +97,7 @@ vc_include_template(
 	window.vcAdminNonce = '<?php echo esc_js( vc_generate_nonce( 'vc-admin-nonce' ) ); ?>';
 	window.wpb_js_google_fonts_save_nonce = '<?php echo esc_js( wp_create_nonce( 'wpb_js_google_fonts_save' ) ); ?>';
 	window.vc_post_id = <?php echo esc_js( $post_ID ); ?>;
+	window.vc_auto_save = <?php echo wp_json_encode( get_option( 'wpb_js_auto_save' ) ) ?>;
 </<?php echo esc_attr( $custom_tag ); ?>>
 
 <?php vc_include_template( 'editors/partials/vc_settings-image-block.tpl.php' ); ?>

@@ -1098,10 +1098,6 @@ class Vc_Vendor_Woocommerce {
 	 * @param array $shortcodes
 	 * @return array|mixed
 	 */
-	/**
-	 * @param array $shortcodes
-	 * @return array|mixed
-	 */
 	public function mapGridItemShortcodes( array $shortcodes ) {
 		require_once vc_path_dir( 'VENDORS_DIR', 'plugins/woocommerce/class-vc-gitem-woocommerce-shortcode.php' );
 		require_once vc_path_dir( 'VENDORS_DIR', 'plugins/woocommerce/grid-item-attributes.php' );
@@ -1505,9 +1501,6 @@ class Vc_Vendor_Woocommerce {
 	/**
 	 * @return array
 	 */
-	/**
-	 * @return array
-	 */
 	public static function getProductsFieldsList() {
 		return array(
 			esc_html__( 'SKU', 'woocommerce' ) => 'sku',
@@ -1530,10 +1523,6 @@ class Vc_Vendor_Woocommerce {
 	 * @param $key
 	 * @return string
 	 */
-	/**
-	 * @param $key
-	 * @return string
-	 */
 	public static function getProductFieldLabel( $key ) {
 		if ( false === self::$product_fields_list ) {
 			self::$product_fields_list = array_flip( self::getProductsFieldsList() );
@@ -1542,9 +1531,6 @@ class Vc_Vendor_Woocommerce {
 		return isset( self::$product_fields_list[ $key ] ) ? self::$product_fields_list[ $key ] : '';
 	}
 
-	/**
-	 * @return array
-	 */
 	/**
 	 * @return array
 	 */
@@ -1566,10 +1552,6 @@ class Vc_Vendor_Woocommerce {
 		);
 	}
 
-	/**
-	 * @param $key
-	 * @return string
-	 */
 	/**
 	 * @param $key
 	 * @return string

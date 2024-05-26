@@ -527,6 +527,9 @@ class Vc_Templates_Panel_Editor {
 			$category_templates = array();
 			if ( is_array( $user_templates ) ) {
 				foreach ( $user_templates as $template_id => $template_data ) {
+					if ( ! is_array( $template_data ) || ! isset( $template_data['name'] ) ) {
+						continue;
+					}
 					$category_templates[] = array(
 						'unique_id' => $template_id,
 						'name' => $template_data['name'],
@@ -807,7 +810,7 @@ class Vc_Templates_Panel_Editor {
 	 */
 	public function addFrontendTemplatesShortcodesCustomCss() {
 		$output = $shortcodes_custom_css = '';
-		$shortcodes_custom_css = wpbakery()->parseShortcodesCustomCss( vc_frontend_editor()->getTemplateContent() );
+		$shortcodes_custom_css = wpbakery()->parseShortcodesCss( vc_frontend_editor()->getTemplateContent(), 'custom' );
 		if ( ! empty( $shortcodes_custom_css ) ) {
 			$shortcodes_custom_css = wp_strip_all_tags( $shortcodes_custom_css );
 			$first_tag = 'style';
@@ -858,9 +861,6 @@ HTML;
 		return $output;
 	}
 
-	/**
-	 * @return string
-	 */
 	/**
 	 * @return string
 	 */

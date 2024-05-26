@@ -240,6 +240,13 @@ $params = array_merge( array(
 		'heading' => esc_html__( 'CSS box', 'js_composer' ),
 		'param_name' => 'css',
 		'group' => esc_html__( 'Design Options', 'js_composer' ),
+		'value' => array(
+			'padding-top' => '28px',
+			'padding-right' => '28px',
+			'padding-bottom' => '28px',
+			'padding-left' => '28px',
+			'margin-bottom' => '35px',
+		),
 	),
 ) );
 
@@ -247,6 +254,7 @@ return array(
 	'name' => esc_html__( 'Call to Action', 'js_composer' ),
 	'base' => 'vc_cta',
 	'icon' => 'icon-wpb-call-to-action',
+	'element_default_class' => 'vc_do_cta3',
 	'category' => array( esc_html__( 'Content', 'js_composer' ) ),
 	'description' => esc_html__( 'Catch visitors attention with CTA block', 'js_composer' ),
 	'since' => '4.5',

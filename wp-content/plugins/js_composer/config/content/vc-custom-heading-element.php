@@ -8,6 +8,7 @@ function vc_custom_heading_element_params() {
 		'name' => esc_html__( 'Custom Heading', 'js_composer' ),
 		'base' => 'vc_custom_heading',
 		'icon' => 'icon-wpb-ui-custom_heading',
+		'element_default_class' => 'vc_do_custom_heading',
 		'show_settings_on_create' => true,
 		'category' => esc_html__( 'Content', 'js_composer' ),
 		'description' => esc_html__( 'Text with Google fonts', 'js_composer' ),
@@ -102,6 +103,10 @@ function vc_custom_heading_element_params() {
 				'heading' => esc_html__( 'CSS box', 'js_composer' ),
 				'param_name' => 'css',
 				'group' => esc_html__( 'Design Options', 'js_composer' ),
+				'value' => array(
+					'margin-bottom' => '0.625rem',
+					'margin-top' => '0',
+				),
 			),
 		),
 	);

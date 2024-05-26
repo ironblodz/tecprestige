@@ -203,8 +203,9 @@ if ( $styles ) {
 	$attributes[] = 'style="' . esc_attr( implode( ' ', $styles ) ) . '"';
 }
 
+$element_class = empty( $this->settings['element_default_class'] ) ? '' : $this->settings['element_default_class'];
 $class_to_filter = implode( ' ', array_filter( $wrapper_classes ) );
-$class_to_filter .= vc_shortcode_custom_css_class( $css, ' ' );
+$class_to_filter .= vc_shortcode_custom_css_class( $css, ' ' ) . ' ' . $element_class;
 $css_class = apply_filters( VC_SHORTCODE_CUSTOM_CSS_FILTER_TAG, $class_to_filter, $this->settings['base'], $atts );
 
 if ( $button_classes ) {

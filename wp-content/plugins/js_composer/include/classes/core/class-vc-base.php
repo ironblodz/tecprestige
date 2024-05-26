@@ -51,7 +51,7 @@ class Vc_Base {
 	 * List of shortcodes map to VC.
 	 *
 	 * @since  4.2
-	 * @access public
+
 	 * @var array WPBakeryShortCodeFishBones
 	 */
 	protected $shortcodes = array();
@@ -63,7 +63,7 @@ class Vc_Base {
 	 * Load default object like shortcode parsing.
 	 *
 	 * @since  4.2
-	 * @access public
+
 	 */
 	public function init() {
 		do_action( 'vc_before_init_base' );
@@ -106,7 +106,7 @@ class Vc_Base {
 	 * Build VC for frontend pages.
 	 *
 	 * @since  4.2
-	 * @access public
+
 	 */
 	public function initPage() {
 		do_action( 'vc_build_page' );
@@ -156,7 +156,7 @@ class Vc_Base {
 	 * Load admin required modules and elements
 	 *
 	 * @since  4.2
-	 * @access public
+
 	 */
 	public function initAdmin() {
 		do_action( 'vc_build_admin_page' );
@@ -187,7 +187,7 @@ class Vc_Base {
 	 *
 	 * @return Vc_Shortcode_Edit_Form
 	 * @since  4.2
-	 * @access public
+
 	 * @see    Vc_Shortcode_Edit_Form::__construct
 	 */
 	public function editForm() {
@@ -218,7 +218,7 @@ class Vc_Base {
 	 * Get templates manager.
 	 * @return bool|Vc_Templates_Panel_Editor
 	 * @since  4.4
-	 * @access public
+
 	 * @see    Vc_Templates_Panel_Editor::__construct
 	 */
 	public function templatesPanelEditor() {
@@ -229,7 +229,7 @@ class Vc_Base {
 	 * Get preset manager.
 	 * @return bool|Vc_Preset_Panel_Editor
 	 * @since  5.2
-	 * @access public
+
 	 * @see    Vc_Preset_Panel_Editor::__construct
 	 */
 	public function presetPanelEditor() {
@@ -244,7 +244,7 @@ class Vc_Base {
 	 * @return Vc_Shortcodes_Manager|null
 	 * @see    WPBakeryShortCodeFishBones
 	 * @since  4.2
-	 * @access public
+
 	 *
 	 */
 	public function getShortCode( $tag ) {
@@ -256,7 +256,7 @@ class Vc_Base {
 	 *
 	 * @param $tag - shortcode tag
 	 * @since  4.2
-	 * @access public
+
 	 *
 	 */
 	public function removeShortCode( $tag ) {
@@ -282,15 +282,50 @@ class Vc_Base {
 	 * Build custom css styles for page from shortcodes attributes created by VC editors.
 	 *
 	 * Called by save method, which is hooked by edit_post action.
-	 * Function creates meta data for post with the key '_wpb_shortcodes_custom_css'
+	 * Function creates metadata for post with the key '_wpb_shortcodes_custom_css'
 	 * and value as css string, which will be added to the footer of the page.
 	 *
 	 * @param $id
 	 * @throws \Exception
 	 * @since  4.2
-	 * @access public
+	 * @deprecated 7.6 Use buildShortcodesCss()
 	 */
 	public function buildShortcodesCustomCss( $id ) {
+		_deprecated_function( 'Vc_Base::buildShortcodesCustomCss()', '7.6', 'Vc_Base::buildShortcodesCss()' );
+		$this->buildShortcodesCss( $id, 'custom' );
+	}
+
+	/**
+	 * Parse shortcodes custom css string.
+	 *
+	 * @param $content
+	 *
+	 * @return string
+	 * @throws \Exception
+	 * @see    WPBakeryCssEditor
+	 * @since  4.2
+	 * @deprecated 7.6 Use parseShortcodesCss()
+	 */
+	public function parseShortcodesCustomCss( $content ) {
+		_deprecated_function( 'Vc_Base::parseShortcodesCustomCss()', '7.6', 'Vc_Base::parseShortcodesCss()' );
+		return $this->parseShortcodesCss( $content, 'custom' );
+	}
+
+	/**
+	 * Builds custom css styles for page from shortcodes attributes created by VC editors,
+	 * builds default css styles from shortcodes. Based on type custom or default.
+	 *
+	 * Called by save method, which is hooked by edit_post action.
+	 * Function creates metadata for post with the
+	 * '_wpb_shortcodes_custom_css' and '_wpb_shortcodes_default_css' keys
+	 * and value as css string, which will be added to the footer of the page.
+	 *
+	 * @param $id
+	 * @param $type
+	 * @throws \Exception
+	 * @since  7.6
+	 */
+	public function buildShortcodesCss( $id, $type ) {
 		if ( 'dopreview' === vc_post_param( 'wp-preview' ) && wp_revisions_enabled( get_post( $id ) ) ) {
 			$latest_revision = wp_get_post_revisions( $id );
 			if ( ! empty( $latest_revision ) ) {
@@ -304,51 +339,52 @@ class Vc_Base {
 		 * vc_filter: vc_base_build_shortcodes_custom_css
 		 * @since 4.4
 		 */
-		$css = apply_filters( 'vc_base_build_shortcodes_custom_css', $this->parseShortcodesCustomCss( $post->post_content ), $id );
+		$css = apply_filters( 'vc_base_build_shortcodes_' . esc_html__( $type ) . '_css', $this->parseShortcodesCss( $post->post_content, $type ), $id );
+
 		if ( empty( $css ) ) {
-			delete_metadata( 'post', $id, '_wpb_shortcodes_custom_css' );
+			delete_metadata( 'post', $id, '_wpb_shortcodes_' . esc_html__( $type ) . '_css' );
 		} else {
-			update_metadata( 'post', $id, '_wpb_shortcodes_custom_css', $css );
-			update_metadata( 'post', $id, '_wpb_shortcodes_custom_css_updated', true );
+			update_metadata( 'post', $id, '_wpb_shortcodes_' . esc_html__( $type ) . '_css', $css );
+			update_metadata( 'post', $id, '_wpb_shortcodes_' . esc_html__( $type ) . '_css_updated', true );
 		}
 	}
 
 	/**
-	 * Parse shortcodes custom css string.
+	 * Parse shortcodes css string.
 	 *
-	 * This function is used by self::buildShortcodesCustomCss and creates css string from shortcodes attributes
-	 * like 'css_editor'.
+	 * This function creates css string from shortcodes attributes like 'css_editor'.
 	 *
 	 * @param $content
 	 *
 	 * @return string
 	 * @throws \Exception
 	 * @see    WPBakeryCssEditor
-	 * @since  4.2
-	 * @access public
+	 * @since  7.6
 	 */
-	public function parseShortcodesCustomCss( $content ) {
+	public function parseShortcodesCss( $content, $type ) {
 		$css = '';
-		if ( ! preg_match( '/\s*(\.[^\{]+)\s*\{\s*([^\}]+)\s*\}\s*/', $content ) ) {
+		// Following RegExp pattern only applies for when custom CSS is set
+		if ( ! preg_match( '/\s*(\.[^\{]+)\s*\{\s*([^\}]+)\s*\}\s*/', $content ) && 'custom' == $type ) {
 			return $css;
 		}
 		WPBMap::addAllMappedShortcodes();
 		preg_match_all( '/' . get_shortcode_regex() . '/', $content, $shortcodes );
-		foreach ( $shortcodes[2] as $index => $tag ) {
+		$tag_list = $shortcodes[2];
+		foreach ( $tag_list as $index => $tag ) {
 			$shortcode = WPBMap::getShortCode( $tag );
-			$attr_array = shortcode_parse_atts( trim( $shortcodes[3][ $index ] ) );
-			if ( isset( $shortcode['params'] ) && ! empty( $shortcode['params'] ) ) {
-				foreach ( $shortcode['params'] as $param ) {
-					if ( isset( $param['type'] ) && 'css_editor' === $param['type'] && isset( $attr_array[ $param['param_name'] ] ) ) {
-						$css .= $attr_array[ $param['param_name'] ];
-					}
-				}
+			if ( empty( $shortcode['params'] ) ) {
+				continue;
 			}
+
+			$shortcode_css_list = $shortcodes[3];
+			$attr_array = shortcode_parse_atts( trim( $shortcode_css_list[ $index ] ) );
+			$css = $this->get_css_from_shortcode_params( $type, $shortcode, $attr_array, $css );
 		}
 
 		$css_lib = [];
-		foreach ( $shortcodes[5] as $shortcode_content ) {
-			$shortcode_css = $this->parseShortcodesCustomCss( $shortcode_content );
+		$shortcode_inner_content_list = $shortcodes[5];
+		foreach ( $shortcode_inner_content_list as $shortcode_content ) {
+			$shortcode_css = $this->parseShortcodesCss( $shortcode_content, $type );
 
 			if ( in_array( $shortcode_css, $css_lib ) ) {
 				continue;
@@ -361,6 +397,65 @@ class Vc_Base {
 
 		return $css;
 	}
+
+	/**
+	 * Get css from shortcode params.
+	 *
+	 * @since 7.6
+	 *
+	 * @param string $type
+	 * @param array $shortcode
+	 * @param array $attr
+	 * @param string $css
+	 * @return string
+	 */
+	public function get_css_from_shortcode_params( $type, $shortcode, $attr, $css ) {
+		foreach ( $shortcode['params'] as $param ) {
+			if ( $this->is_custom_css_type( $type, $param, $attr ) ) {
+				$css .= $attr[ $param['param_name'] ];
+			} elseif ( $this->is_default_css_type( $type, $param, $shortcode ) ) {
+				$do_values = $param['value'];
+				$css .= '.' . esc_attr( $shortcode['element_default_class'] ) . '{';
+				foreach ( $do_values as $key => $default_do_value ) {
+					$css .= esc_attr( $key ) . ':' . esc_attr( $default_do_value ) . ';';
+				}
+				if ( '' !== $css ) {
+					$css = $css . '}';
+				}
+			}
+		}
+
+		return $css;
+	}
+
+	/**
+	 * Check if CSS type is custom and param type is css_editor
+	 *
+	 * @since  7.6
+	 * @return bool
+	 */
+	public function is_custom_css_type( $type, $param, $attr_array ) {
+		return 'custom' == $type &&
+				isset( $param['type'] ) &&
+				'css_editor' === $param['type'] &&
+				isset( $attr_array[ $param['param_name'] ] );
+	}
+
+	/**
+	 * Check if CSS type is default and 'element_default_class' property is set
+	 *
+	 * @since  7.6
+	 * @return bool
+	 */
+	public function is_default_css_type( $type, $param, $shortcode ) {
+		return  'default' == $type &&
+				isset( $param['param_name'] ) &&
+				'css' === $param['param_name'] &&
+				isset( $param['value'] ) &&
+				isset( $shortcode['element_default_class'] ) &&
+				'wpb_content_element' !== $shortcode['element_default_class'];
+	}
+
 
 	/**
 	 * Get current post id.
@@ -380,6 +475,22 @@ class Vc_Base {
 	}
 
 	/**
+	 * Hooked class method by wp_footer WP action to output shortcodes css editor settings from page meta data.
+	 *
+	 * Method gets post meta value for page by key '_wpb_shortcodes_custom_css' and if it is not empty
+	 * outputs css string wrapped into style tag.
+	 *
+	 * @param int $id
+	 *
+	 * @since  4.2
+	 * @access public
+	 * @deprecated 7.6 Use addPageCustomCss()
+	 */
+	public function addShortcodesCustomCss( $id = null ) {
+		_deprecated_function( 'Vc_Base::addShortcodesCustomCss()', '7.6', 'Vc_Base::addPageCustomCss()' );
+	}
+
+	/**
 	 * Hooked class method by wp_head WP action to output post custom css.
 	 *
 	 * Method gets post meta value for page by key '_wpb_post_custom_css' and if it is not empty
@@ -387,7 +498,6 @@ class Vc_Base {
 	 *
 	 * @param int $id
 	 * @since  4.2
-	 * @access public
 	 *
 	 */
 	public function addPageCustomCss( $id = null ) {
@@ -415,18 +525,14 @@ class Vc_Base {
 	}
 
 	/**
-	 * Hooked class method by wp_footer WP action to output shortcodes css editor settings from page meta data.
-	 *
-	 * Method gets post meta value for page by key '_wpb_shortcodes_custom_css' and if it is not empty
-	 * outputs css string wrapped into style tag.
+	 * Get the custom and default (Design Options - css_editor parameter) values of shortcodes,
+	 * parse the values, compile them into a CSS string and output it inside the respective style tag.
 	 *
 	 * @param int $id
 	 *
-	 * @since  4.2
-	 * @access public
-	 *
+	 * @since  7.6
 	 */
-	public function addShortcodesCustomCss( $id = null ) {
+	public function addShortcodesCss( $id = null ) {
 		if ( ! $id && is_singular() ) {
 			$id = get_the_ID();
 		}
@@ -447,12 +553,19 @@ class Vc_Base {
 			}
 		}
 
-		$shortcodes_custom_css = $this->get_shortcodes_custom_css( $id );
-		if ( ! empty( $shortcodes_custom_css ) ) {
-			$shortcodes_custom_css = wp_strip_all_tags( $shortcodes_custom_css );
-			echo '<style type="text/css" data-type="vc_shortcodes-custom-css">';
-			echo $shortcodes_custom_css;
-			echo '</style>';
+		$types = [
+			'default',
+			'custom',
+		];
+
+		foreach ( $types as $type ) {
+			$shortcodes_css = $this->get_shortcodes_css( $id, $type );
+			if ( ! empty( $shortcodes_css ) ) {
+				$shortcodes_css = wp_strip_all_tags( $shortcodes_css );
+				echo '<style type="text/css" data-type="vc_shortcodes-' . esc_attr( $type ) . '-css">';
+				echo $shortcodes_css;
+				echo '</style>';
+			}
 		}
 	}
 
@@ -464,17 +577,32 @@ class Vc_Base {
 	 *
 	 * @since  6.2
 	 * @access public
+	 * @deprecated 7.6 Use get_shortcodes_css()
 	 */
 	public function get_shortcodes_custom_css( $id ) {
-		$is_updated = get_metadata( 'post', $id, '_wpb_shortcodes_custom_css_updated', true );
+		_deprecated_function( 'Vc_Base::get_shortcodes_custom_css()', '7.6', 'Vc_Base::get_shortcodes_css()' );
+		return $this->get_shortcodes_css( $id, 'custom' );
+	}
+
+	/**
+	 * Get the CSS of all the shortcodes for particular post based on parameter (custom or default).
+	 *
+	 * @param int $id
+	 * @param string $type
+	 * @return mixed
+	 *
+	 * @since  7.6
+	 */
+	public function get_shortcodes_css( $id, $type ) {
+		$is_updated = get_metadata( 'post', $id, '_wpb_shortcodes_' . esc_html__( $type ) . '_css_updated', true );
 
 		if ( empty( $is_updated ) ) {
-			$this->buildShortcodesCustomCss( $id );
+			$this->buildShortcodesCss( $id, $type );
 		}
 
-		$shortcodes_custom_css = get_metadata( 'post', $id, '_wpb_shortcodes_custom_css', true );
+		$shortcodes_css = get_metadata( 'post', $id, '_wpb_shortcodes_' . esc_html__( $type ) .'_css', true );
 
-		return apply_filters( 'vc_shortcodes_custom_css', $shortcodes_custom_css, $id );
+		return apply_filters( 'vc_shortcodes_'. esc_html__( $type ) . '_css', $shortcodes_css, $id );
 	}
 
 	/**
@@ -482,7 +610,7 @@ class Vc_Base {
 	 */
 	public function addFrontCss( $id = null ) {
 		$this->addPageCustomCss( $id );
-		$this->addShortcodesCustomCss( $id );
+		$this->addShortcodesCss( $id );
 	}
 
 	public function addNoScript() {
@@ -501,7 +629,6 @@ class Vc_Base {
 	 * Calls wp_register_style for required css libraries files.
 	 *
 	 * @since  3.1
-	 * @access public
 	 */
 	public function frontCss() {
 		wp_register_style( 'flexslider', vc_asset_url( 'lib/flexslider/flexslider.min.css' ), array(), WPB_VC_VERSION );
@@ -557,7 +684,6 @@ class Vc_Base {
 	 * Calls wp_register_script for required css libraries files.
 	 *
 	 * @since  3.1
-	 * @access public
 	 */
 	public function frontJsRegister() {
 		wp_register_script( 'prettyphoto', vc_asset_url( 'lib/prettyphoto/js/jquery.prettyPhoto.min.js' ), array( 'jquery-core' ), WPB_VC_VERSION, true );
@@ -591,7 +717,6 @@ class Vc_Base {
 	 *
 	 * @since  3.1
 	 * vc_filter: vc_i18n_locale_composer_js_view, since 4.4 - override localization for js
-	 * @access public
 	 */
 	public function registerAdminJavascript() {
 		/**
@@ -607,7 +732,6 @@ class Vc_Base {
 	 * Calls wp_register_style for required css libraries files for admin dashboard.
 	 *
 	 * @since  3.1
-	 * @access public
 	 */
 	public function registerAdminCss() {
 		/**
@@ -658,7 +782,6 @@ class Vc_Base {
 	/**
 	 * Hooked class method by wp_head WP action.
 	 * @since  4.2
-	 * @access public
 	 */
 	public function addMetaData() {
 		echo '<meta name="generator" content="Powered by WPBakery Page Builder - drag and drop page builder for WordPress."/>' . "\n";
@@ -674,7 +797,6 @@ class Vc_Base {
 	 *
 	 * @return array
 	 * @since  4.2
-	 * @access public
 	 *
 	 */
 	public function bodyClass( $classes ) {
@@ -691,7 +813,6 @@ class Vc_Base {
 	 *
 	 * @return string
 	 * @since  4.2
-	 * @access public
 	 *
 	 */
 	public function excerptFilter( $output ) {
@@ -709,7 +830,7 @@ class Vc_Base {
 	}
 
 	/**
-	 * Remove unwanted wraping with p for content.
+	 * Remove unwanted wrapping with p for content.
 	 *
 	 * Hooked by 'the_content' filter.
 	 * @param null $content
@@ -876,7 +997,6 @@ class Vc_Base {
 			'consecutiveSentences' => esc_html__( 'Consecutive sentences', 'js_composer' ),
 			'consecutiveSentencesSuccess' => esc_html__( 'There is enough variety in your sentences. That\'s great!', 'js_composer' ),
 			'consecutiveSentencesFail' => esc_html__( 'The text contains %1$s consecutive sentences starting with the same word.', 'js_composer' ),
-			'keyphraseInIntroductionEmpty' => esc_html__( 'Your keyphrase do not appear in the first paragraph.', 'js_composer' ),
 			'passiveVoice' => esc_html__( 'Passive voice', 'js_composer' ),
 			'passiveVoiceError' => esc_html__( '%s of the sentences contain passive voice, which is more than the recommended maximum of 10%', 'js_composer' ),
 			'passiveVoiceSuccess' => esc_html__( 'You\'re using enough active voice. That\'s great!', 'js_composer' ),

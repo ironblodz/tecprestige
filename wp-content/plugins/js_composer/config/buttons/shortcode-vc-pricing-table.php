@@ -218,6 +218,20 @@ $params = array_merge(
 			'heading' => esc_html__( 'CSS box', 'js_composer' ),
 			'param_name' => 'css',
 			'group' => esc_html__( 'Design Options', 'js_composer' ),
+			'value' => array(
+				'padding-top' => '30px',
+				'padding-right' => '20px',
+				'padding-bottom' => '30px',
+				'padding-left' => '20px',
+				'border-radius' => '5px',
+				'border-top-width' => '1px',
+				'border-right-width' => '1px',
+				'border-bottom-width' => '1px',
+				'border-left-width' => '1px',
+				'border-style' => 'solid',
+				'border-color' => 'rgba(0,0,0,0.01)',
+				'background-color' => '#ECECEC',
+			),
 		),
 	)
 );
@@ -226,6 +240,7 @@ return array(
 	'name' => esc_html__( 'Pricing Table', 'js_composer' ),
 	'base' => 'vc_pricing_table',
 	'icon' => 'icon-wpb-pricing-table',
+	'element_default_class' => 'vc_do_pricing_table',
 	'category' => esc_html__( 'Content', 'js_composer' ),
 	'description' => esc_html__( 'Output pricing table on your page', 'js_composer' ),
 	'since' => '7.0',

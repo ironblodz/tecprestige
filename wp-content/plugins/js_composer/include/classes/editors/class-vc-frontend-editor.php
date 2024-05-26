@@ -886,25 +886,10 @@ class Vc_Frontend_Editor extends Vc_Editor {
 	/**
 	 * @param $value
 	 */
-	/**
-	 * @param $value
-	 */
-	/**
-	 * @param $value
-	 */
-	/**
-	 * @param $value
-	 */
 	public function enqueueMappedShortcodeJs( $value ) {
 		wp_enqueue_script( 'front_enqueue_js_' . md5( $value ), $value, array( 'vc-frontend-editor-min-js' ), WPB_VC_VERSION, true );
 	}
 
-	/**
-	 * @param $value
-	 */
-	/**
-	 * @param $value
-	 */
 	/**
 	 * @param $value
 	 */

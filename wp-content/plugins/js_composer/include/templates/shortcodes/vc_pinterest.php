@@ -31,8 +31,9 @@ $excerpt = is_object( $post ) && isset( $post->post_excerpt ) ? $post->post_exce
 $description = ( '' !== $excerpt ) ? '&amp;description=' . rawurlencode( wp_strip_all_tags( $excerpt ) ) : '';
 
 $el_class = isset( $el_class ) ? $el_class : '';
+$element_class = empty( $this->settings['element_default_class'] ) ? '' : $this->settings['element_default_class'];
 $class_to_filter = 'wpb_pinterest wpb_content_element wpb_pinterest_type_' . $type;
-$class_to_filter .= vc_shortcode_custom_css_class( $css, ' ' ) . $this->getExtraClass( $el_class ) . $this->getCSSAnimation( $css_animation );
+$class_to_filter .= vc_shortcode_custom_css_class( $css, ' ' ) . ' ' . esc_attr( $element_class ) . $this->getExtraClass( $el_class ) . $this->getCSSAnimation( $css_animation );
 $css_class = apply_filters( VC_SHORTCODE_CUSTOM_CSS_FILTER_TAG, $class_to_filter, $this->settings['base'], $atts );
 $wrapper_attributes = array();
 if ( ! empty( $el_id ) ) {

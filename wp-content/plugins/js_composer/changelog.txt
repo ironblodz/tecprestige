@@ -1,5 +1,12 @@
 *** WPBakery Page Builder changelog ***
 
+2024-04-10 - version 7.6
+  - New: Design Option displayed default values as placeholders for better UX
+  - New: Element edit happens automatically without saving and can be reverted with Undo
+  - Fix: WP admin notifications work properly and can be disabled
+  - Fix: Security improvements for the plugin
+  - Fix: Masonry media grid element works properly in Firefox
+
 2024-02-21 - version 7.5
   - New: Editor scrolls to elements as they are added to the page
   - Update: Links from the editor to resources are updated

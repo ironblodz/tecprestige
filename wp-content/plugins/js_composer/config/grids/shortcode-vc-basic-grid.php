@@ -10,6 +10,7 @@ return array(
 	'name' => esc_html__( 'Post Grid', 'js_composer' ),
 	'base' => 'vc_basic_grid',
 	'icon' => 'icon-wpb-application-icon-large',
+	'element_default_class' => 'wpb_content_element',
 	'category' => esc_html__( 'Content', 'js_composer' ),
 	'description' => esc_html__( 'Posts, pages or custom posts in grid', 'js_composer' ),
 	'params' => $gridParams,

@@ -20,6 +20,20 @@ class Vc_Notice_Controller {
 	protected $notification_api_url = 'https://support.wpbakery.com/api/external/notifications';
 
 	/**
+	 * The slug of transient that stores notice list that we show to user.
+	 *
+	 * @var string
+	 */
+	public $transient_notice_list = 'wpb_notice_list';
+
+	/**
+	 * The slug of user meta that stores notice list that user close.
+	 *
+	 * @var string
+	 */
+	public $user_notice_close_list = 'wpb_notice_close_list';
+
+	/**
 	 * Vc_Notice_Controller constructor.
 	 *
 	 * @since 7.0
@@ -29,6 +43,7 @@ class Vc_Notice_Controller {
 			$this,
 			'init',
 		] );
+		add_action( 'wp_ajax_wpb_add_notice_to_close_list', [ $this, 'add_notice_to_close_list' ] );
 	}
 
 	/**
@@ -75,7 +90,7 @@ class Vc_Notice_Controller {
 		if ( $is_show_at_least_one_notice ) {
 			add_action(
 				'admin_notices',
-				function () use ( $notice ) {
+				function () {
 					vc_include_template( 'params/notice/notice-assets.php' );
 				}
 			);
@@ -120,7 +135,15 @@ class Vc_Notice_Controller {
 	 * @return bool
 	 */
 	public function is_show_notice( $notice_id ) {
-		return empty( $_COOKIE[ 'wpb-notice-' . $notice_id ] );
+		$notice_close_list = get_user_meta( get_current_user_id(), $this->user_notice_close_list, true );
+
+		if ( empty( $notice_close_list ) ) {
+			return true;
+		}
+
+		$notice_close_list = is_string( $notice_close_list ) ? json_decode( $notice_close_list ) : [];
+
+		return ! ( is_array( $notice_close_list ) && in_array( $notice_id, $notice_close_list ) );
 	}
 
 	/**
@@ -229,7 +252,7 @@ class Vc_Notice_Controller {
 	 * @return array
 	 */
 	public function get_notice_list() {
-		$notice_list = get_transient( 'wpb_notice_list' );
+		$notice_list = get_transient( $this->transient_notice_list );
 
 		if ( $this->is_api_response_empty( $notice_list ) ) {
 			return [];
@@ -261,11 +284,11 @@ class Vc_Notice_Controller {
 			// in case if we have invalid notice list we save false value
 			// to transient to prevent requests to our API more than 12 hours
 			$empty = [ 'empty_api_response' => true ];
-			set_transient( 'wpb_notice_list', $empty, 12 * HOUR_IN_SECONDS );
+			set_transient( $this->transient_notice_list, $empty, 12 * HOUR_IN_SECONDS );
 			return;
 		}
 
-		set_transient( 'wpb_notice_list', $notice_list, 12 * HOUR_IN_SECONDS );
+		set_transient( $this->transient_notice_list, $notice_list, 12 * HOUR_IN_SECONDS );
 	}
 
 	/**
@@ -317,6 +340,46 @@ class Vc_Notice_Controller {
 		}
 
 		return $notice_list;
+	}
+
+	/**
+	 * Add notice to close list.
+	 */
+	public function add_notice_to_close_list() {
+		vc_user_access()->checkAdminNonce()->validateDie();
+
+		$notice_id = vc_request_param( 'notice_id' );
+		if ( empty( $notice_id ) ) {
+			wp_send_json_error( false );
+		}
+
+		$is_set = $this->save_notice_to_close_list( $notice_id );
+
+		if ( $is_set ) {
+			wp_send_json_success( true );
+		} else {
+			wp_send_json_error( false );
+		}
+	}
+
+	/**
+	 * Save notice to close list.
+	 *
+	 * @param $notice_id
+	 * @return int|bool
+	 */
+	public function save_notice_to_close_list( $notice_id ) {
+		$user_id = get_current_user_id();
+		$notice_list = json_decode( get_user_meta( $user_id, $this->user_notice_close_list, true ) );
+		if ( ! is_array( $notice_list ) ) {
+			$notice_list = [];
+		}
+		$notice_id = (int) $notice_id;
+		if ( ! in_array( $notice_id, $notice_list ) ) {
+			$notice_list[] = $notice_id;
+		}
+
+		return update_user_meta( $user_id, $this->user_notice_close_list, wp_json_encode( $notice_list ) );
 	}
 }
 

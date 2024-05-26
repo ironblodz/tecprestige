@@ -10,6 +10,7 @@ return array(
 	'name' => esc_html__( 'Masonry Media Grid', 'js_composer' ),
 	'base' => 'vc_masonry_media_grid',
 	'icon' => 'vc_icon-vc-masonry-media-grid',
+	'element_default_class' => 'wpb_content_element',
 	'category' => esc_html__( 'Content', 'js_composer' ),
 	'description' => esc_html__( 'Masonry media grid from Media Library', 'js_composer' ),
 	'params' => $masonryMediaGridParams,

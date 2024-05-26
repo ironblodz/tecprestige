@@ -7,6 +7,7 @@ return array(
 	'name' => esc_html__( 'Facebook Like', 'js_composer' ),
 	'base' => 'vc_facebook',
 	'icon' => 'icon-wpb-balloon-facebook-left',
+	'element_default_class' => 'wpb_content_element',
 	'category' => esc_html__( 'Social', 'js_composer' ),
 	'description' => esc_html__( 'Facebook "Like" button', 'js_composer' ),
 	'params' => array(
@@ -40,6 +41,9 @@ return array(
 			'heading' => esc_html__( 'CSS box', 'js_composer' ),
 			'param_name' => 'css',
 			'group' => esc_html__( 'Design Options', 'js_composer' ),
+			'value' => array(
+				'margin-bottom' => '35px',
+			),
 		),
 	),
 );

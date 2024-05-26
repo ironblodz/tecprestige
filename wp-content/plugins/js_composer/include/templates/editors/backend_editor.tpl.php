@@ -26,6 +26,7 @@ if ( $is_gutenberg ) {
 		window.wpbGutenbergEditorSWitchUrl = '<?php echo esc_js( set_url_scheme( admin_url( 'post.php?post=' . get_the_ID() . '&action=edit&vcv-gutenberg-editor' ) ) ); ?>';
 		window.wpbGutenbergEditorClassicSWitchUrl = '<?php echo esc_js( set_url_scheme( admin_url( 'post.php?post=' . get_the_ID() . '&action=edit&classic-editor' ) ) ); ?>';
 		window.wpbIsGutenberg = <?php echo $is_gutenberg ? 'true' : 'false'; ?>;
+		window.vc_auto_save = <?php echo wp_json_encode( get_option( 'wpb_js_auto_save' ) ) ?>;
 	</<?php echo esc_attr( $custom_tag ); ?>>
 
 <?php

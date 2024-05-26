@@ -271,7 +271,7 @@ function vc_gitem_has_content( $content ) {
  * @since 4.5
  */
 function vc_gitem_add_submenu_page() {
-	if ( vc_user_access()->part( 'grid_builder' )->can()->get() ) {
+	if ( vc_user_access()->part( 'grid_builder' )->getState() ) {
 		$labels = Vc_Grid_Item_Editor::getPostTypesLabels();
 		add_submenu_page( VC_PAGE_MAIN_SLUG, $labels['name'], $labels['name'], 'edit_posts', 'edit.php?post_type=' . rawurlencode( Vc_Grid_Item_Editor::postType() ), '' );
 	}

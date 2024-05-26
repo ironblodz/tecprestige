@@ -691,6 +691,9 @@ if ( ! class_exists( 'VcGridsCommon' ) ) {
 					'heading' => esc_html__( 'CSS box', 'js_composer' ),
 					'param_name' => 'css',
 					'group' => esc_html__( 'Design Options', 'js_composer' ),
+					'value' => array(
+						'margin-bottom' => '35px',
+					),
 				),
 
 				// Load more btn
@@ -1051,6 +1054,9 @@ if ( ! class_exists( 'VcGridsCommon' ) ) {
 					'heading' => esc_html__( 'CSS box', 'js_composer' ),
 					'param_name' => 'css',
 					'group' => esc_html__( 'Design Options', 'js_composer' ),
+					'value' => array(
+						'margin-bottom' => '35px',
+					),
 				),
 			), self::$btn3Params, array(
 				// Load more btn bc

@@ -201,7 +201,8 @@ if ( $link ) {
 	$html = '<div class="' . $wrapperClass . '">' . $img['thumbnail'] . '</div>';
 }
 
-$class_to_filter = 'wpb_single_image wpb_content_element vc_align_' . $alignment . ' ' . $this->getCSSAnimation( $css_animation );
+$element_class = empty( $this->settings['element_default_class'] ) ? '' : $this->settings['element_default_class'];
+$class_to_filter = 'wpb_single_image wpb_content_element vc_align_' . $alignment . ' ' . esc_attr( $element_class ) . $this->getCSSAnimation( $css_animation );
 $class_to_filter .= vc_shortcode_custom_css_class( $css, ' ' ) . $this->getExtraClass( $el_class );
 $css_class = apply_filters( VC_SHORTCODE_CUSTOM_CSS_FILTER_TAG, $class_to_filter, $this->settings['base'], $atts );
 
