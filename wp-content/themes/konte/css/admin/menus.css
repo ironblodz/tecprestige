@@ -1,0 +1,255 @@
+.menu-item-settings .field-menu-settings {
+	padding: 10px 0;
+}
+
+.kmm-mega-menu {
+	position: relative;
+	display: none;
+}
+
+.kmm-modal-backdrop {
+	z-index: 159899;
+}
+
+.kmm-modal {
+	z-index: 159999;
+}
+
+.kmm-modal .kmm-modal-close {
+	color: #444;
+	text-decoration: none;
+	text-align: center;
+}
+
+.kmm-toolbar {
+	padding-top: 15px;
+}
+
+.kmm-toolbar .spinner {
+	margin-top: 22px;
+}
+
+.kmm-menu a:focus,
+.kmm-menu a:active {
+	outline: none;
+}
+
+.kmm-menu a.active {
+	box-shadow: none;
+}
+
+.kmm-content {
+	position: relative;
+	width: 100%;
+	height: 100%;
+	overflow: auto;
+}
+
+.kmm-content > .kmm-panel {
+	padding: 20px;
+	display: none;
+}
+
+.kmm-content > .kmm-panel.active {
+	display: block;
+}
+
+.kmm-content > .spinner {
+	position: absolute;
+	top: 50%;
+	left: 50%;
+	margin: -10px 0 0 -10px;
+	opacity: 1;
+	visibility: visible;
+}
+
+/** Title */
+.kmm-mega-menu .kmm-frame-title .button-link {
+	text-decoration: none;
+	margin-left: 16px;
+}
+
+.kmm-mega-menu .kmm-frame-title .button-link .dashicons {
+	width: 1em;
+	height: 1em;
+	font-size: 14px;
+}
+
+/**
+ * Mega Menu Content Fields
+ */
+.mega-settings {
+	overflow: hidden;
+}
+
+.mega-settings .setting-field {
+	float: left;
+	padding-right: 30px;
+}
+
+.mega-settings .setting-field select {
+	width: 100%;
+}
+
+.kmm-mega-content {
+	position: relative;
+	padding: 10px;
+	overflow: hidden;
+	background-color: #f5f5f5;
+	display: flex;
+	flex-wrap: wrap;
+}
+
+.kmm-submenu-column {
+	box-sizing: border-box;
+	-webkit-transition: width 0.7s;
+	transition: width 0.7s;
+	float: left;
+	position: relative;
+	padding: 10px;
+}
+
+.kmm-submenu-column ul {
+	margin: 0;
+	padding: 10px;
+	border: 1px solid #eee;
+	background: #fff;
+}
+
+.kmm-submenu-column li.menu-item-depth-0 {
+	text-transform: uppercase;
+	position: relative;
+	padding: 0 60px 0 0;
+	margin-bottom: 0;
+	min-height: 18px;
+}
+
+.kmm-submenu-column .kmm-column-handle {
+	position: absolute;
+	top: 0;
+	right: 0;
+	width: 20px;
+	cursor: pointer;
+}
+
+.kmm-submenu-column .kmm-resizable-e {
+	right: 40px;
+}
+
+.kmm-submenu-column .kmm-resizable-w {
+	text-align: right;
+}
+
+.kmm-submenu-column .kmm-column-width-label {
+	position: absolute;
+	top: 0;
+	right: 20px;
+	width: 20px;
+	text-align: center;
+}
+
+.kmm-submenu-column .kmm-open-submenu-settings {
+	display: none;
+	margin-left: 20px;
+}
+
+.kmm-submenu-column:hover .kmm-open-submenu-settings {
+	display: inline-block;
+}
+
+/**
+ * Background Fields
+ */
+.kmm-panel-design {
+	box-sizing: border-box;
+	position: relative;
+	height: 100%;
+}
+
+.kmm-panel-design label {
+	display: inline-block;
+	margin-bottom: 5px;
+}
+
+.kmm-panel-design .setting-fieldset {
+	width: 33%;
+	position: relative;
+	height: 100%;
+	float: left;
+	margin: 0;
+	box-sizing: border-box;
+}
+
+.kmm-panel-design .spacing-fieldset,
+.kmm-panel-design .background-image-fieldset {
+	padding-right: 30px;
+}
+
+.kmm-panel-design .background-image-preview {
+	display: block;
+	padding: 10px;
+	margin: 0 0 10px 0;
+	min-height: 250px;
+	border: 1px dashed #ccc;
+}
+
+.kmm-panel-design .background-image-preview.has-image {
+	min-height: 0;
+}
+
+.kmm-panel-design .background-image-preview img {
+	max-width: 100%;
+}
+
+/**
+ * Icon fields
+ */
+.kmm-icon-selector {
+	position: relative;
+	width: 100%;
+	height: 100%;
+}
+
+.kmm-icon-selector .kmm-icon-search {
+	height: 50px;
+	line-height: 50px;
+	margin: 0;
+	padding: 10px;
+}
+
+.kmm-icon-selector .icons i {
+	cursor: pointer;
+	display: inline-block;
+	width: 50px;
+	height: 50px;
+	margin-bottom: 4px;
+	font-size: 20px;
+	text-align: center;
+	line-height: 50px;
+	border: 1px solid #eee;
+}
+
+.kmm-icon-selector .icons .active {
+	background-color: #eee;
+}
+
+#kmm-selected-icon {
+	width: 48px;
+	height: 48px;
+	text-align: center;
+	border: 1px solid #ccc;
+	float: left;
+	margin-right: 10px;
+	cursor: pointer;
+}
+
+#kmm-selected-icon:hover {
+	border-color: #fe2f2f;
+}
+
+#kmm-selected-icon i {
+	font-size: 20px;
+	line-height: 48px;
+	cursor: pointer;
+}
+

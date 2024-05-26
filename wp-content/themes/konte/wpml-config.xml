@@ -1,0 +1,59 @@
+<wpml-config>
+	<custom-fields>
+		<custom-field action="translate" style="line" label="Subtitle">_subtitle</custom-field>
+		<custom-field action="copy">flex_posts_per_page</custom-field>
+		<custom-field action="copy">flex_posts_content_as_title</custom-field>
+		<custom-field action="copy">header_layout</custom-field>
+		<custom-field action="copy">header_background</custom-field>
+		<custom-field action="copy">header_background_color</custom-field>
+		<custom-field action="copy">header_textcolor</custom-field>
+		<custom-field action="copy">page_title_display</custom-field>
+		<custom-field action="copy">page_title_color</custom-field>
+		<custom-field action="copy">page_header_height</custom-field>
+		<custom-field action="copy">page_header_manual_height</custom-field>
+		<custom-field action="copy">page_featured_content</custom-field>
+		<custom-field action="copy">page_featured_video</custom-field>
+		<custom-field action="copy">page_featured_video_mute</custom-field>
+		<custom-field action="copy">page_featured_map_address</custom-field>
+		<custom-field action="copy">page_featured_map_coordinates</custom-field>
+		<custom-field action="copy">page_featured_map_zoom</custom-field>
+		<custom-field action="copy">footer_background</custom-field>
+		<custom-field action="copy">footer_background_color</custom-field>
+		<custom-field action="copy">footer_textcolor</custom-field>
+		<custom-field action="copy">top_spacing</custom-field>
+		<custom-field action="copy">top_padding</custom-field>
+		<custom-field action="copy">bottom_spacing</custom-field>
+		<custom-field action="copy">bottom_padding</custom-field>
+		<custom-field action="copy">content_container_width</custom-field>
+		<custom-field action="copy">split_content_position</custom-field>
+		<custom-field action="copy">split_content_custom_footer</custom-field>
+		<custom-field action="copy">split_content_footer_left</custom-field>
+		<custom-field action="copy">split_content_footer_right</custom-field>
+		<custom-field action="copy">project_header_textcolor</custom-field>
+		<custom-field action="copy">background_color</custom-field>
+		<custom-field action="copy">_is_new</custom-field>
+	</custom-fields>
+
+	<admin-texts>
+		<key name="theme_mods_konte">
+			<key name="popup_content" />
+			<key name="topbar_text" />
+			<key name="header_main_text" />
+			<key name="header_bottom_text" />
+			<key name="header_search_quick_links" />
+			<key name="blog_header_content" />
+			<key name="portfolio_page_header_custom" />
+			<key name="portfolio_filter_cats" />
+			<key name="shop_badge_sale_text" />
+			<key name="shop_badge_new_text" />
+			<key name="shop_badge_featured_text" />
+			<key name="shop_badge_soldout_text" />
+			<key name="product_quickview_detail_link_text" />
+			<key name="product_added_to_cart_message" />
+			<key name="product_added_to_wishlist_message" />
+			<key name="footer_extra_content" />
+			<key name="footer_copyright" />
+			<key name="footer_main_text" />
+		</key>
+	</admin-texts>
+</wpml-config>
