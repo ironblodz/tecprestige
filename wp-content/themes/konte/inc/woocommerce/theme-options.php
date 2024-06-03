@@ -1179,7 +1179,7 @@ function konte_woocommerce_customize_settings( $settings ) {
 		'shop_badge_new_text'      => array(
 			'type'            => 'text',
 			'label'           => esc_html__( 'New Badge Text', 'konte' ),
-			'default'         => esc_attr__( 'New', 'konte' ),
+			'default'         => esc_attr__( 'Novo', 'konte' ),
 			'active_callback' => array(
 				array(
 					'setting'  => 'shop_badge_new',
