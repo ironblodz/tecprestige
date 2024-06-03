@@ -95,7 +95,7 @@ do_action( 'woocommerce_before_mini_cart' ); ?>
 
 <?php else : ?>
 
-	<p class="woocommerce-mini-cart__empty-message"><?php esc_html_e( 'No products in the cart.', 'woocommerce' ); ?></p>
+	<p class="woocommerce-mini-cart__empty-message"><?php esc_html_e( 'Nenhum produto no carrinho.', 'woocommerce' ); ?></p>
 
 <?php endif; ?>
 

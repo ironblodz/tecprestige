@@ -112,8 +112,8 @@ do_action( 'woocommerce_before_mini_cart' ); ?>
 <?php else : ?>
 
 	<p class="woocommerce-mini-cart__empty-message">
-		<img src="<?php echo esc_url( get_theme_file_uri( 'images/empty-bag.svg' ) ); ?>" alt="<?php esc_attr_e( 'No products in the cart.', 'woocommerce' ); ?>">
-		<?php esc_html_e( 'No products in the cart.', 'woocommerce' ); ?>
+		<img src="<?php echo esc_url( get_theme_file_uri( 'images/empty-bag.svg' ) ); ?>" alt="<?php esc_attr_e( 'Nenhum produto no carrinho.', 'woocommerce' ); ?>">
+		<?php esc_html_e( 'Nenhum produto no carrinho.', 'woocommerce' ); ?>
 	</p>
 
 <?php endif; ?>
