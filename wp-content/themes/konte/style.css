@@ -6736,7 +6736,7 @@ hr.divider {
 }
 
 .header-vertical .main-navigation .nav-menu>li {
-    padding: 8px 0;
+    padding: 3px 0;
     display: block
 }
 
@@ -6791,7 +6791,7 @@ hr.divider {
     position: static
 } */
 
-#menu-menu li:nth-child(odd)  {
+#menu-menu>li:nth-child(odd)  {
     background-color: #dddddd;
     width: 100%;
     text-align: center;
@@ -6799,13 +6799,25 @@ hr.divider {
 
 #menu-menu li a{
     font-weight: 600;
-font-size: 1.2rem;
+    font-size: 1.1rem;
+}
+
+#menu-menu>li:hover{
+    background-color:#0077b5;
+}
+
+#menu-menu>li:hover a{
+    color: white;
+}
+
+#menu-menu>li{
+    width: 100%;
+    text-align: center;
 }
 
 
 
-
-.header-vertical > .main-navigation .nav-menu--submenu-flyout li ul {
+.header-vertical .main-navigation .nav-menu--submenu-flyout li ul {
     top: 0;
     min-height: 100%;
     left: 100%;
