@@ -29,6 +29,9 @@ else:
 	$height    = ( 0 < intval( $dimension['width'] ) ) ? ' height="' . intval( $dimension['height'] ) . '"' : '';
 endif;
 ?>
+
+
+
 <div class="site-branding">
 	<a href="<?php echo esc_url( apply_filters( 'konte_header_logo_link', home_url() ) ) ?>" class="logo">
 		<?php if ( 'text' == $logo_type ) : ?>
@@ -41,6 +44,8 @@ endif;
 		<?php endif; ?>
 	</a>
 
-	<?php konte_site_branding_title(); ?>
-	<?php konte_site_branding_description(); ?>
+	<?php menu_top_navs(); ?>
+	
+	<?php //konte_site_branding_title(); ?>
+	<?php //konte_site_branding_description(); ?>
 </div>

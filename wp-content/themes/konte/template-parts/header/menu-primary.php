@@ -83,10 +83,40 @@
 			text-align: center;
 		}
 
-		.legal-menu p, .legal-menu a {
+		.legal-menu p,
+		.legal-menu a {
 			font-size: 12px;
 			font-weight: 600;
 			margin: 0px 0px 2px 0px;
+		}
+
+		.action-menu-btn {
+			padding: 4px 8px;
+			background-color: #0077b5;
+			border-radius: 15px;
+			color: white !important;
+			text-decoration: none;
+			color: white !important;
+			margin: 0px 6px;
+			font-size: 1rem;
+			display: flex;
+			align-items: center;
+		}
+
+		.action-menu-btn img {
+			height: 20px;
+			margin-right: 4px;
+		}
+
+
+		.action-menu-wrap {
+			width: 100%;
+			display: flex;
+			justify-content: center;
+		}
+
+		.site-branding {
+			width: 100%;
 		}
 	</style>
 

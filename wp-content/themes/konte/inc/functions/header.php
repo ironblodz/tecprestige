@@ -791,3 +791,26 @@ if ( ! function_exists( 'konte_get_header_layout' ) ) :
 		return apply_filters( 'konte_get_header_layout', $header_layout );
 	}
 endif;
+
+
+if ( ! function_exists( 'menu_top_navs' ) ) :
+	/**
+	 * Display the site branding title.
+	 *
+	 * @return string
+	 */
+	function menu_top_navs( $args = array() ) {
+		if ( is_user_logged_in() ) {
+			echo '<div class="action-menu-wrap"> 
+					<a href="/cart" class="action-menu-btn"><img src="/wp-content/themes/konte/images/cart.png"> Carrinho</a>
+					<a href="/my-account" class="action-menu-btn"><img src="/wp-content/themes/konte/images/account.png"> Perfil</a>
+				</div>';
+		} else {
+			echo '<div class="action-menu-wrap"> 
+					<a href="/cart" class="action-menu-btn"><img src="/wp-content/themes/konte/images/cart.png"> Carrinho</a>
+					<a href="/login" class="action-menu-btn"><img src="/wp-content/themes/konte/images/account.png"> Entrar</a>
+				</div>';
+		}
+	}
+	
+endif;
