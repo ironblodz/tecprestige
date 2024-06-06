@@ -371,8 +371,8 @@ if ( ! function_exists( 'konte_get_inline_style' ) ) :
 		$logo_dimension = array_map( 'intval', (array) $logo_dimension );
 
 		if ( $logo_dimension['width'] > 0 || $logo_dimension['height'] > 0 ) {
-			$width = 0 < $logo_dimension['width'] ? 'width: ' . $logo_dimension['width'] . 'px;' : '';
-			$height = 0 < $logo_dimension['height'] ? 'height: ' . $logo_dimension['height'] . 'px;' : '';
+			$width = 0 < $logo_dimension['width'] ? 'max-width: ' . $logo_dimension['width'] . 'px;' : '';
+			$height = 0 < $logo_dimension['height'] ? 'max-height: ' . $logo_dimension['height'] . 'px;' : '';
 			$css .= '.logo img {' . $width . $height . '}';
 
 			$width = $width ? $width : 'width: auto;';

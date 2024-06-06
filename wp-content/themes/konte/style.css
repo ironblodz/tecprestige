@@ -6736,7 +6736,7 @@ hr.divider {
 }
 
 .header-vertical .main-navigation .nav-menu>li {
-    padding: 20px 0;
+    padding: 8px 0;
     display: block
 }
 
@@ -6787,7 +6787,25 @@ hr.divider {
     position: static
 }
 
-.header-vertical .main-navigation .nav-menu--submenu-flyout li ul {
+/* .header-vertical .main-navigation .nav-menu--submenu-flyout li:nth-child(even) {
+    position: static
+} */
+
+#menu-menu li:nth-child(odd)  {
+    background-color: #dddddd;
+    width: 100%;
+    text-align: center;
+}
+
+#menu-menu li a{
+    font-weight: 600;
+font-size: 1.2rem;
+}
+
+
+
+
+.header-vertical > .main-navigation .nav-menu--submenu-flyout li ul {
     top: 0;
     min-height: 100%;
     left: 100%;
@@ -8558,13 +8576,19 @@ body.mobile-bottom-bar-enabled {
     display: block
 }
 
+#menu-menu{
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+}
+
 .header-v10 .header-main .header-left-items {
     position: fixed;
     left: 0;
     top: 0;
     bottom: 0;
     width: 360px;
-    padding-left: 60px;
+    /* padding-left: 60px; */
     z-index: 1000;
     flex-direction: column;
     justify-content: center;
@@ -8572,7 +8596,7 @@ body.mobile-bottom-bar-enabled {
 }
 
 .header-v10.light .header-main .header-left-items {
-    background-color: #fff
+    background-color: #e5e5e5
 }
 
 .header-v10.dark .header-main .header-left-items {
@@ -8623,12 +8647,12 @@ body.mobile-bottom-bar-enabled {
 }
 
 .header-v10 .header-main .site-branding {
-    position: absolute;
+  /*   position: absolute;
     top: 0;
     left: 0;
-    margin: 0 0 0 60px;
+    margin: 0 0 0 60px; 
     display: flex;
-    align-items: center
+    align-items: center */
 }
 
 .header-v10 .header-main .logo {
@@ -8931,6 +8955,7 @@ body.mobile-bottom-bar-enabled {
     position: relative;
     display: block;
     line-height: 1
+
 }
 
 .site-branding .logo:hover {
@@ -8939,7 +8964,10 @@ body.mobile-bottom-bar-enabled {
 
 .site-branding .logo img {
     display: inline-block;
-    vertical-align: middle
+    vertical-align: middle;
+    position: fixed;
+    left: 15px;
+    top: 0px;
 }
 
 .site-branding .logo svg {
