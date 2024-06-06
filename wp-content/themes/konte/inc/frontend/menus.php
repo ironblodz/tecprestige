@@ -95,7 +95,7 @@ function konte_menu_item_caret( $title, $menu_item, $args ) {
 			break;
 
 		default:
-			$caret = '<i class="fa fa-' . esc_attr( $caret ) . '-down"></i>';
+			$caret = '<i class="fa fa-' . esc_attr( $caret ) . '-right"></i>';
 			break;
 	}
 
