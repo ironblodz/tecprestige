@@ -108,6 +108,17 @@
 			margin-right: 4px;
 		}
 
+		@media screen and (max-width: 1200px) {
+			.action-menu-wrap {
+				display: none !important;
+			}
+
+			.site-branding .logo img {
+				left: 60px;
+				max-width: 180px;
+			}
+		}
+
 
 		.action-menu-wrap {
 			width: 100%;
