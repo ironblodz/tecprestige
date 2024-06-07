@@ -13,7 +13,7 @@ if ( ! function_exists( 'konte_posts_navigation' ) ) :
 		$type = $type ? $type : konte_get_option( 'blog_nav_type' );
 
 		if ( is_home() && 'loadmore' == $type ) {
-			$link = get_next_posts_link( esc_html__( 'Carregar mais', 'konte' ) );
+			$link = get_next_posts_link( esc_html__( 'Load More', 'konte' ) );
 
 			if ( $link ) {
 				$template = '
