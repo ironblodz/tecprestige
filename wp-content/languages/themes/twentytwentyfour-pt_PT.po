@@ -1,0 +1,818 @@
+# Translation of Themes - Twenty Twenty-Four in Portuguese (Portugal)
+# This file is distributed under the same license as the Themes - Twenty Twenty-Four package.
+msgid ""
+msgstr ""
+"PO-Revision-Date: 2024-04-18 08:24:35+0000\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=n != 1;\n"
+"X-Generator: GlotPress/4.0.1\n"
+"Language: pt\n"
+"Project-Id-Version: Themes - Twenty Twenty-Four\n"
+
+#. Theme Name of the theme
+#: style.css
+#, gp-priority: high
+msgid "Twenty Twenty-Four"
+msgstr "Twenty Twenty-Four"
+
+#. Description of the theme
+#: style.css
+#, gp-priority: high
+msgid "Twenty Twenty-Four is designed to be flexible, versatile and applicable to any website. Its collection of templates and patterns tailor to different needs, such as presenting a business, blogging and writing or showcasing work. A multitude of possibilities open up with just a few adjustments to color and typography. Twenty Twenty-Four comes with style variations and full page designs to help speed up the site building process, is fully compatible with the site editor, and takes advantage of new design tools introduced in WordPress 6.4."
+msgstr "O tema Twenty Twenty-Four foi desenhado para ser flexível, versátil, e aplicável a qualquer site. A sua colecção de modelos e padrões está à medida das diferentes necessidades, como apresentar um negócio, blogging e escrever, ou mostrar um portfólio de trabalho. Uma multitude de possibilidades abrem-se com apenas alguns ajustes à cor e tipografia. O Twenty Twenty-Four vem com variações de estilo e full page designs para ajudar a acelerar o processo de construção de um site, é inteiramente compatível com o editor do site, e toma partido das novas ferramentas de design introduzidas no WordPress 6.4."
+
+#: patterns/footer.php:95
+msgid "Twitter/X"
+msgstr "Twitter/X"
+
+#: patterns/footer.php:73
+msgid "Contact Us"
+msgstr "Contacte-nos"
+
+#: patterns/footer.php:72
+msgid "Terms and Conditions"
+msgstr "Termos e condições"
+
+#: patterns/footer.php:71
+msgid "Privacy Policy"
+msgstr "Política de privacidade"
+
+#: patterns/footer.php:50
+msgid "Careers"
+msgstr "Carreiras"
+
+#: patterns/footer.php:49
+msgid "History"
+msgstr "História"
+
+#: patterns/footer.php:48
+msgid "Team"
+msgstr "Equipa"
+
+#: functions.php:199
+msgctxt "Block pattern category"
+msgid "Pages"
+msgstr "Páginas"
+
+#: patterns/posts-list.php
+msgctxt "Pattern title"
+msgid "List of posts without images, 1 column"
+msgstr "Lista de artigos sem imagens, 1 coluna"
+
+#: patterns/hidden-portfolio-hero.php:16
+msgid "I’m <em>Leia Acosta</em>, a passionate photographer who finds inspiration in capturing the fleeting beauty of life."
+msgstr "Chamo-me <em>Leia Acosta</em>, sou uma fotógrafa apaixonada que encontra inspiração em captar a beleza fugaz da vida."
+
+#: functions.php:200
+msgid "A collection of full page layouts."
+msgstr "Uma colecção de layouts de página inteira."
+
+#. Author URI of the theme
+#. Translators: WordPress link.
+#: style.css patterns/footer-centered-logo-nav.php:21
+#: patterns/footer-colophon-3-col.php:90 patterns/footer.php:116
+msgid "https://wordpress.org"
+msgstr "https://pt.wordpress.org"
+
+#: theme.json
+msgctxt "Template part name"
+msgid "Footer"
+msgstr "Rodapé"
+
+#: theme.json
+msgctxt "Template part name"
+msgid "Header"
+msgstr "Cabeçalho"
+
+#: styles/fossil.json styles/ice.json theme.json
+msgctxt "Font family name"
+msgid "Inter"
+msgstr "Inter"
+
+#: theme.json
+msgctxt "Space size name"
+msgid "6"
+msgstr "6"
+
+#: theme.json
+msgctxt "Space size name"
+msgid "5"
+msgstr "5"
+
+#: theme.json
+msgctxt "Space size name"
+msgid "4"
+msgstr "4"
+
+#: theme.json
+msgctxt "Space size name"
+msgid "3"
+msgstr "3"
+
+#: theme.json
+msgctxt "Space size name"
+msgid "2"
+msgstr "2"
+
+#: theme.json
+msgctxt "Space size name"
+msgid "1"
+msgstr "1"
+
+#: theme.json
+msgctxt "Template part name"
+msgid "Post Meta"
+msgstr "Metadados de artigo"
+
+#: styles/fossil.json styles/ice.json styles/maelstrom.json theme.json
+msgctxt "Font size name"
+msgid "Extra Large"
+msgstr "Extra grande"
+
+#: styles/fossil.json styles/ice.json styles/maelstrom.json theme.json
+msgctxt "Font size name"
+msgid "Large"
+msgstr "Grande"
+
+#: styles/fossil.json styles/ice.json styles/maelstrom.json theme.json
+msgctxt "Font size name"
+msgid "Medium"
+msgstr "Médio"
+
+#: styles/ember.json styles/fossil.json styles/ice.json styles/maelstrom.json
+#: styles/mint.json styles/onyx.json styles/rust.json theme.json
+msgctxt "Color name"
+msgid "Contrast"
+msgstr "Contraste"
+
+#: styles/ember.json styles/fossil.json styles/ice.json styles/maelstrom.json
+#: styles/mint.json styles/onyx.json styles/rust.json theme.json
+msgctxt "Color name"
+msgid "Base"
+msgstr "Base"
+
+#: theme.json
+msgctxt "Custom template name"
+msgid "Single with Sidebar"
+msgstr "Conteúdo com barra lateral"
+
+#: theme.json
+msgctxt "Custom template name"
+msgid "Page with Wide Image"
+msgstr "Página com imagem larga"
+
+#: theme.json
+msgctxt "Custom template name"
+msgid "Page with Sidebar"
+msgstr "Página com barra lateral"
+
+#: theme.json
+msgctxt "Custom template name"
+msgid "Page No Title"
+msgstr "Página sem título"
+
+#: theme.json
+msgctxt "Template part name"
+msgid "Sidebar"
+msgstr "Barra lateral"
+
+#: theme.json
+msgctxt "Duotone name"
+msgid "Black and pastel blue"
+msgstr "Preto e azul pastel"
+
+#: theme.json
+msgctxt "Duotone name"
+msgid "Black and rust"
+msgstr "Preto e ferrugem"
+
+#: theme.json
+msgctxt "Duotone name"
+msgid "Black and white"
+msgstr "Preto e branco"
+
+#: styles/rust.json
+msgctxt "Color name"
+msgid "Base / 2"
+msgstr "Base/2"
+
+#: styles/rust.json
+msgctxt "Duotone name"
+msgid "Dark rust to beige"
+msgstr "Ferrugem escuro a bege"
+
+#: styles/onyx.json theme.json
+msgctxt "Color name"
+msgid "Accent / Five"
+msgstr "Realce/Cinco"
+
+#: styles/onyx.json theme.json
+msgctxt "Color name"
+msgid "Accent / Four"
+msgstr "Realce/Quatro"
+
+#: styles/onyx.json theme.json
+msgctxt "Color name"
+msgid "Accent / Three"
+msgstr "Realce/Três"
+
+#: styles/onyx.json theme.json
+msgctxt "Color name"
+msgid "Accent / Two"
+msgstr "Realce/Dois"
+
+#: styles/onyx.json theme.json
+msgctxt "Color name"
+msgid "Accent"
+msgstr "Realce"
+
+#: styles/onyx.json
+msgctxt "Duotone name"
+msgid "Dark gray and olive"
+msgstr "Cinzento escuro e oliva"
+
+#: styles/onyx.json
+msgctxt "Duotone name"
+msgid "Dark gray and cinnamon"
+msgstr "Cinzento escuro e canela"
+
+#: styles/onyx.json
+msgctxt "Duotone name"
+msgid "Dark gray and white"
+msgstr "Cinzento escuro e branco"
+
+#: styles/maelstrom.json
+msgctxt "Color name"
+msgid "Contrast / 3"
+msgstr "Contraste/3"
+
+#: styles/ice.json
+msgctxt "Style variation name"
+msgid "Ice"
+msgstr "Gelo"
+
+#: styles/fossil.json styles/ice.json styles/maelstrom.json theme.json
+msgctxt "Font size name"
+msgid "Small"
+msgstr "Pequeno"
+
+#: styles/fossil.json styles/ice.json styles/mint.json styles/onyx.json
+#: theme.json
+msgctxt "Color name"
+msgid "Contrast / Three"
+msgstr "Contraste/Três"
+
+#: styles/fossil.json styles/ice.json styles/mint.json styles/onyx.json
+#: theme.json
+msgctxt "Color name"
+msgid "Contrast / Two"
+msgstr "Contraste/Dois"
+
+#: styles/ember.json styles/fossil.json styles/ice.json styles/maelstrom.json
+#: styles/mint.json theme.json
+msgctxt "Font family name"
+msgid "System Serif"
+msgstr "System Serif"
+
+#: styles/ember.json styles/mint.json
+msgctxt "Font family name"
+msgid "Instrument Sans"
+msgstr "Instrument Sans"
+
+#: styles/ember.json styles/fossil.json styles/ice.json styles/maelstrom.json
+#: styles/mint.json styles/onyx.json theme.json
+msgctxt "Color name"
+msgid "Base / Two"
+msgstr "Base/Dois"
+
+#: styles/ember.json styles/maelstrom.json
+msgctxt "Color name"
+msgid "Contrast / 2"
+msgstr "Contraste/2"
+
+#: styles/ember.json
+msgctxt "Duotone name"
+msgid "Orange and white"
+msgstr "Laranja e branco"
+
+#: patterns/text-title-left-image-right.php:34
+msgctxt "Call to Action button text"
+msgid "About us"
+msgstr "Sobre nós"
+
+#: patterns/text-project-details.php
+msgctxt "Pattern title"
+msgid "Project details"
+msgstr "Detalhes do projecto"
+
+#: patterns/text-faq.php:14
+msgctxt "Heading of the FAQs"
+msgid "FAQs"
+msgstr "Perguntas frequentes"
+
+#: patterns/text-faq.php:11
+msgctxt "Name of the FAQ pattern"
+msgid "FAQs"
+msgstr "Perguntas frequentes"
+
+#: patterns/text-faq.php
+msgctxt "Pattern title"
+msgid "FAQ"
+msgstr "Perguntas frequentes"
+
+#: patterns/testimonial-centered.php:25
+msgctxt "Name of testimonial citation group"
+msgid "Testimonial source"
+msgstr "Origem do testemunho"
+
+#: patterns/testimonial-centered.php:11
+msgctxt "Name of testimonal pattern"
+msgid "Testimonial"
+msgstr "Testemunho"
+
+#: patterns/testimonial-centered.php
+msgctxt "Pattern title"
+msgid "Centered testimonial"
+msgstr "Testemunho centrado"
+
+#: patterns/team-4-col.php:120
+msgctxt "Sample role of a team member"
+msgid "Project Manager"
+msgstr "Gestor de projectos"
+
+#: patterns/team-4-col.php:96
+msgctxt "Sample role of a team member"
+msgid "Architect"
+msgstr "Arquitecto"
+
+#: patterns/team-4-col.php:48
+msgctxt "Sample role of a team member"
+msgid "Founder, CEO & Architect"
+msgstr "Fundador, Director executivo e Arquitecto"
+
+#: patterns/team-4-col.php:15
+msgctxt "Sample heading for the team pattern"
+msgid "Meet our team"
+msgstr "A nossa equipa"
+
+#: patterns/team-4-col.php:10
+msgctxt "Name of team pattern"
+msgid "Team members"
+msgstr "Membros da equipa"
+
+#: patterns/page-newsletter-landing.php:39
+msgctxt "Sample content for newsletter subscribe button"
+msgid "Sign up"
+msgstr "Registar"
+
+#: patterns/page-about-business.php
+msgctxt "Pattern title"
+msgid "About"
+msgstr "Sobre"
+
+#: patterns/hidden-sidebar.php:75
+msgctxt "search form placeholder"
+msgid "Search..."
+msgstr "Pesquisar..."
+
+#: patterns/hidden-sidebar.php:49
+msgid "Useful Links"
+msgstr "Ligações úteis"
+
+#: patterns/hidden-sidebar.php:33
+msgid "Popular Categories"
+msgstr "Categorias populares"
+
+#: patterns/hidden-sidebar.php:17
+msgid "About the author"
+msgstr "Sobre o autor"
+
+#: patterns/hidden-sidebar.php
+msgctxt "Pattern title"
+msgid "Sidebar"
+msgstr "Barra lateral"
+
+#: patterns/hidden-search.php:9
+msgctxt "search button text"
+msgid "Search"
+msgstr "Pesquisar"
+
+#: patterns/hidden-search.php:9 patterns/hidden-sidebar.php:75
+msgctxt "search form label"
+msgid "Search"
+msgstr "Pesquisar"
+
+#: patterns/hidden-search.php
+msgctxt "Pattern title"
+msgid "Search"
+msgstr "Pesquisa"
+
+#: patterns/hidden-post-navigation.php:12
+msgctxt "Label before the title of the next post. There is a space after the colon."
+msgid "Next: "
+msgstr "Seguinte: "
+
+#: patterns/hidden-post-navigation.php:11
+msgctxt "Label before the title of the previous post. There is a space after the colon."
+msgid "Previous: "
+msgstr "Anterior: "
+
+#: patterns/hidden-post-navigation.php:9 patterns/hidden-post-navigation.php:10
+#: patterns/template-index-portfolio.php:16
+msgid "Posts"
+msgstr "Conteúdos"
+
+#: patterns/hidden-post-navigation.php
+msgctxt "Pattern title"
+msgid "Post navigation"
+msgstr "Navegação de artigos"
+
+#: patterns/hidden-post-meta.php
+msgctxt "Pattern title"
+msgid "Post meta"
+msgstr "Metadados do artigo"
+
+#: patterns/hidden-no-results.php:9
+msgctxt "Message explaining that there are no results returned from a search"
+msgid "No posts were found."
+msgstr "Nenhum conteúdo encontrado."
+
+#: patterns/hidden-no-results.php
+msgctxt "Pattern title"
+msgid "No results"
+msgstr "Sem resultados"
+
+#: patterns/hidden-comments.php:12
+msgid "Comments"
+msgstr "Comentários"
+
+#: patterns/hidden-comments.php
+msgctxt "Pattern title"
+msgid "Comments"
+msgstr "Comentários"
+
+#: patterns/hidden-404.php:10
+msgctxt "Heading for a webpage that is not found"
+msgid "Page Not Found"
+msgstr "Página não encontrada"
+
+#: patterns/hidden-404.php
+msgctxt "Pattern title"
+msgid "404"
+msgstr "404"
+
+#: patterns/footer.php:91
+msgid "Social Media"
+msgstr "Redes sociais"
+
+#: patterns/footer.php:85
+msgid "Social"
+msgstr "Redes sociais"
+
+#: patterns/footer.php:63 patterns/footer.php:69
+msgid "Privacy"
+msgstr "Privacidade"
+
+#: patterns/footer.php:40 patterns/footer.php:46
+msgid "About"
+msgstr "Sobre"
+
+#: patterns/footer-colophon-3-col.php:81
+msgid "&copy;"
+msgstr "&copy;"
+
+#: patterns/footer-colophon-3-col.php:59 patterns/footer.php:93
+msgid "Facebook"
+msgstr "Facebook"
+
+#: patterns/footer-colophon-3-col.php:59 patterns/footer.php:94
+msgid "Instagram"
+msgstr "Instagram"
+
+#: patterns/footer-colophon-3-col.php:56
+msgid "Follow"
+msgstr "Seguir"
+
+#: patterns/footer-colophon-3-col.php:38
+msgid "Contact"
+msgstr "Contacto"
+
+#: patterns/footer-colophon-3-col.php:29
+msgid "Keep up, get in touch."
+msgstr "Mantenha-se em contacto."
+
+#: patterns/cta-subscribe-centered.php:30
+msgctxt "Sample text for Sign Up Button"
+msgid "Sign up"
+msgstr "Registar"
+
+#: patterns/cta-subscribe-centered.php
+msgctxt "Pattern title"
+msgid "Centered call to action"
+msgstr "Chamada para acção centrada"
+
+#: patterns/cta-services-image-left.php:38
+msgctxt "Sample button text to view the services"
+msgid "Our services"
+msgstr "Os nossos serviços"
+
+#: patterns/cta-rsvp.php:20 patterns/page-rsvp-landing.php:22
+msgctxt "Initials for ´please respond´"
+msgid "RSVP"
+msgstr "RSVP"
+
+#: patterns/cta-rsvp.php:10
+msgctxt "Name of RSVP pattern"
+msgid "RSVP"
+msgstr "RSVP"
+
+#: patterns/cta-rsvp.php
+msgctxt "Pattern title"
+msgid "RSVP"
+msgstr "RSVP"
+
+#: patterns/cta-pricing.php:202
+msgctxt "Button text for the third pricing level"
+msgid "Subscribe"
+msgstr "Subscrever"
+
+#: patterns/cta-pricing.php:161
+msgctxt "Sample price for the third pricing level"
+msgid "$28"
+msgstr "$28"
+
+#: patterns/cta-pricing.php:156
+msgctxt "Sample heading for the third pricing level"
+msgid "Expert"
+msgstr "Avançado"
+
+#: patterns/cta-pricing.php:144
+msgctxt "Button text for the second pricing level"
+msgid "Subscribe"
+msgstr "Subscrever"
+
+#: patterns/cta-pricing.php:103
+msgctxt "Sample price for the second pricing level"
+msgid "$12"
+msgstr "$12"
+
+#: patterns/cta-pricing.php:98
+msgctxt "Sample heading for the second pricing level"
+msgid "Connoisseur"
+msgstr "Intermédio"
+
+#: patterns/cta-pricing.php:86
+msgctxt "Button text for the first pricing level"
+msgid "Subscribe"
+msgstr "Subscrever"
+
+#: patterns/cta-pricing.php:41
+msgctxt "Sample price for the first pricing level"
+msgid "$0"
+msgstr "$0"
+
+#: patterns/cta-pricing.php:36
+msgctxt "Sample heading for the first pricing level"
+msgid "Free"
+msgstr "Gratuito"
+
+#: patterns/cta-pricing.php:17
+msgctxt "Sample heading for pricing pattern"
+msgid "Our Services"
+msgstr "Os nossos serviços"
+
+#: patterns/cta-pricing.php:10
+msgctxt "Name for the pricing pattern"
+msgid "Pricing Table"
+msgstr "Tabela de preços"
+
+#: patterns/cta-pricing.php
+msgctxt "Pattern title"
+msgid "Pricing"
+msgstr "Preços"
+
+#: patterns/cta-content-image-on-right.php:46
+msgctxt "Button text of this section"
+msgid "How it works"
+msgstr "Como funciona"
+
+#: patterns/cta-content-image-on-right.php:40
+msgctxt "Button text of this section"
+msgid "Download app"
+msgstr "Descarregar aplicação"
+
+#: patterns/cta-content-image-on-right.php:27
+#: patterns/text-alternating-images.php:47
+msgctxt "Sample list item"
+msgid "Showcase your projects."
+msgstr "Mostre os seus projectos."
+
+#: patterns/cta-content-image-on-right.php
+msgctxt "Pattern title"
+msgid "Call to action with image on right"
+msgstr "Chamada para acção com imagem à direita"
+
+#: patterns/banner-project-description.php:16
+msgctxt "Sample title for a project or post"
+msgid "Art Gallery — Overview"
+msgstr "Galeria de arte — Visão geral"
+
+#: patterns/banner-project-description.php
+msgctxt "Pattern title"
+msgid "Project description"
+msgstr "Descrição do projecto"
+
+#: patterns/banner-hero.php:36
+msgctxt "Button text of the hero section"
+msgid "About us"
+msgstr "Sobre nós"
+
+#: patterns/banner-hero.php
+msgctxt "Pattern title"
+msgid "Hero"
+msgstr "Hero"
+
+#: functions.php:111
+msgid "With asterisk"
+msgstr "Com asterisco"
+
+#: functions.php:93
+msgid "With arrow"
+msgstr "Com seta"
+
+#: functions.php:28
+msgid "Arrow icon"
+msgstr "Ícone de seta"
+
+#: patterns/hidden-post-meta.php:25
+msgctxt "Prefix for the post category block: in category name"
+msgid "in "
+msgstr "em "
+
+#: patterns/hidden-post-meta.php:20
+msgctxt "Prefix for the post author block: By author name"
+msgid "by"
+msgstr "por"
+
+#: patterns/hidden-sidebar.php:72
+msgid "Search the website"
+msgstr "Pesquisar no site"
+
+#: styles/rust.json
+msgctxt "Style variation name"
+msgid "Rust"
+msgstr "Ferrugem"
+
+#: patterns/text-feature-grid-3-col.php:107
+msgctxt "Sample heading"
+msgid "Architectural Solutions"
+msgstr "Soluções de arquitectura"
+
+#: patterns/text-feature-grid-3-col.php:95
+msgctxt "Sample feature heading"
+msgid "Project Management"
+msgstr "Gestão de projectos"
+
+#: patterns/text-feature-grid-3-col.php:83
+msgctxt "Sample feature heading"
+msgid "Consulting"
+msgstr "Consultoria"
+
+#: patterns/text-feature-grid-3-col.php:62
+msgctxt "Sample feature heading"
+msgid "App Access"
+msgstr "Acesso à aplicação"
+
+#: patterns/text-feature-grid-3-col.php:50
+msgctxt "Sample feature heading"
+msgid "Continuous Support"
+msgstr "Suporte permanente"
+
+#: patterns/template-single-portfolio.php
+msgctxt "Pattern title"
+msgid "Portfolio single post template"
+msgstr "Modelo de conteúdo de portefólio"
+
+#: patterns/testimonial-centered.php:34
+msgctxt "Name of Person Provided the Testimonial"
+msgid "Annie Steiner"
+msgstr "Annie Steiner"
+
+#: patterns/text-alternating-images.php
+msgctxt "Pattern title"
+msgid "Text with alternating images"
+msgstr "Texto com imagens alternadas"
+
+#: patterns/testimonial-centered.php:38
+msgctxt "Designation of Person Provided Testimonial"
+msgid "CEO, Greenprint"
+msgstr "CEO, Greenprint"
+
+#: patterns/template-search-blogging.php
+msgctxt "Pattern title"
+msgid "Blogging search template"
+msgstr "Modelo de pesquisa de blog"
+
+#: patterns/template-search-portfolio.php
+msgctxt "Pattern title"
+msgid "Portfolio search template"
+msgstr "Modelo de pesquisa de portefólio"
+
+#: patterns/template-index-portfolio.php
+msgctxt "Pattern title"
+msgid "Portfolio index template"
+msgstr "Modelo de índice de portefólio"
+
+#: patterns/template-index-blogging.php
+msgctxt "Pattern title"
+msgid "Blogging index template"
+msgstr "Modelo de índice de blog"
+
+#: patterns/template-home-portfolio.php
+msgctxt "Pattern title"
+msgid "Portfolio home template with post featured images"
+msgstr "Modelo de página inicial de portefólio com imagens de destaque dos conteúdos"
+
+#: patterns/posts-images-only-3-col.php
+msgctxt "Pattern title"
+msgid "Posts with featured images only, 3 columns"
+msgstr "Conteúdos apenas com imagens de destaque, 3 colunas"
+
+#: patterns/page-home-portfolio.php
+msgctxt "Pattern title"
+msgid "Portfolio home with post featured images"
+msgstr "Página inicial do portefólio com imagens de destaque dos conteúdos"
+
+#: patterns/team-4-col.php
+msgctxt "Pattern title"
+msgid "Team members, 4 columns"
+msgstr "Membros da equipa, 4 colunas"
+
+#: patterns/posts-grid-2-col.php:13 patterns/posts-list.php:13
+#: patterns/template-index-blogging.php:16
+msgid "Watch, Read, Listen"
+msgstr "Veja, leia, ouça"
+
+#: patterns/posts-grid-2-col.php
+msgctxt "Pattern title"
+msgid "Grid of posts featuring the first post, 2 columns"
+msgstr "Grelha de conteúdos com o primeiro em destaque, 2 colunas"
+
+#: patterns/posts-3-col.php
+msgctxt "Pattern title"
+msgid "List of posts, 3 columns"
+msgstr "Lista de conteúdos, 3 colunas"
+
+#: patterns/posts-1-col.php
+msgctxt "Pattern title"
+msgid "List of posts, 1 column"
+msgstr "Lista de conteúdos, 1 coluna"
+
+#: patterns/page-rsvp-landing.php:48
+msgid "Green staircase at Western University, London, Canada"
+msgstr "Escadaria verde na Western University, Londres, Canadá"
+
+#: patterns/gallery-project-layout.php
+msgctxt "Pattern title"
+msgid "Project layout"
+msgstr "Layout de projecto"
+
+#. Translators: Designed with WordPress
+#: patterns/footer-centered-logo-nav.php:24
+#: patterns/footer-colophon-3-col.php:93 patterns/footer.php:119
+msgid "Designed with %1$s"
+msgstr "Criado com %1$s"
+
+#: patterns/footer-centered-logo-nav.php
+msgctxt "Pattern title"
+msgid "Footer with centered logo and navigation"
+msgstr "Rodapé com logótipo centrado e navegação"
+
+#: patterns/cta-subscribe-centered.php:23
+msgctxt "Sample text for Subscriber Description"
+msgid "Stay in the loop with everything you need to know."
+msgstr "Fique a par de tudo o que precisa de saber."
+
+#: patterns/cta-subscribe-centered.php:19
+msgctxt "Sample text for Subscriber Heading with numbers"
+msgid "Join 900+ subscribers"
+msgstr "Junte-se a mais de 900 subscritores"
+
+#: patterns/cta-rsvp.php:33 patterns/page-rsvp-landing.php:33
+msgctxt "Call to action button text for the reservation button"
+msgid "Reserve your spot"
+msgstr "Reserve o seu lugar"
+
+#. Author of the theme
+#: style.css
+#, gp-priority: low
+msgid "the WordPress team"
+msgstr "a equipa do WordPress"
+
+#. Theme URI of the theme
+#: style.css
+#, gp-priority: low
+msgid "https://wordpress.org/themes/twentytwentyfour/"
+msgstr "https://pt.wordpress.org/themes/twentytwentyfour/"

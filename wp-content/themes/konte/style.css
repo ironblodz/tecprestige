@@ -14997,3 +14997,16 @@ ul.products li.product .product-thumbnail img {
         position: relative;
         top: -180px;
     }
+
+    .select2-results__option--highlighted{
+        color: white !important;
+    }
+
+    .select2-container .products-ordering .select2-results .select2-results__option {
+        color: #0077b5;
+    }
+
+    .select2-container--default .select2-selection--single .select2-selection__rendered {
+        color: #0077b5 !important;
+        font-size: 1rem !important;
+    }
