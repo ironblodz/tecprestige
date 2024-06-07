@@ -15,6 +15,11 @@
 	));
 	?>
 
+	<form method="get" action="/" class="input-search-wrap">
+		<input name="s" type="text" class="input-search" placeholder="Procurar...">
+		<input type="text" value="product" name="post_type" hidden>
+	</form>
+
 	<div class="social-menu-legal">
 		<img src="/wp-content/themes/konte/images/facebook.svg" alt="facebook">
 		<img src="/wp-content/themes/konte/images/instagram.svg" alt="instagram">
