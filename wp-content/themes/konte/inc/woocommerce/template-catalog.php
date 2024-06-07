@@ -648,7 +648,7 @@ class Konte_WooCommerce_Template_Catalog {
 
 			echo '<nav class="' . esc_attr( implode( ' ', $classes ) ) . '">';
 			echo '<div class="nav-links">';
-			next_posts_link( esc_html__( 'Load more', 'konte' ) );
+			next_posts_link( esc_html__( 'Carregar mais', 'konte' ) );
 			echo '</div>';
 			echo '</nav>';
 		}
