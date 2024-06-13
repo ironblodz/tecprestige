@@ -102,7 +102,7 @@
 			color: white !important;
 			text-decoration: none;
 			color: white !important;
-			margin: 0px 6px;
+			margin: 20px 6px;
 			font-size: 1rem;
 			display: flex;
 			align-items: center;
@@ -133,6 +133,30 @@
 
 		.site-branding {
 			width: 100%;
+		}
+
+
+		/** REMAKE MENU */
+
+		.header-left-items.header-items.has-menu{
+			display: block !important;
+		}
+
+		.site-branding .logo img {
+			position: unset !important;
+		}
+
+		.header-main, .header-v10 .site-branding, .header-v10 .header-main .header-right-items {
+    		height: auto !important;
+		}
+
+		.site-branding .logo-light {
+			display: none !important;
+		}
+
+		.header-v10 .header-main .logo {
+		display: flex;
+    	justify-content: center;
 		}
 	</style>
 
