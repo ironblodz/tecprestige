@@ -15,9 +15,9 @@
 	));
 	?>
 
-	<form method="get" action="/" class="input-search-wrap">
+	<form id="searchForm" method="get" action="/" class="input-search-wrap">
 		<input name="s" type="text" class="input-search" placeholder="Procurar...">
-		<input type="text" value="product" name="post_type" hidden>
+		<input type="hidden" value="product" name="post_type">
 	</form>
 
 	<div class="social-menu-legal">
@@ -155,9 +155,20 @@
 		}
 
 		.header-v10 .header-main .logo {
-		display: flex;
-    	justify-content: center;
+			display: flex;
+    		justify-content: center;
+		}
+		
+		.header-vertical .main-navigation {
+		height: 100% !important;
+		}
+
+		@media screen and (max-width: 1200px) {
+			.site-branding .logo img {
+				margin-left: 20px;
+			}
 		}
 	</style>
+
 
 </nav>
