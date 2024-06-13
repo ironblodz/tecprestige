@@ -155,22 +155,16 @@
 		}
 
 		.header-v10 .header-main .logo {
-		display: flex;
-    	justify-content: center;
+			display: flex;
+    		justify-content: center;
+		}
+
+		@media screen and (max-width: 1200px) {
+			.site-branding .logo img {
+				margin-left: 20px;
+			}
 		}
 	</style>
 
-
-<script>
-       /*  document.getElementById('searchForm').addEventListener('submit', function(event) {
-            event.preventDefault();
-
-        
-            const searchQuery = document.querySelector('input[name="s"]').value;
-            const postType = document.querySelector('input[name="post_type"]').value;
-
-            window.location.href = `/?s=${encodeURIComponent(searchQuery)}&post_type=${encodeURIComponent(postType)}`;
-        }); */
-    </script>
 
 </nav>
