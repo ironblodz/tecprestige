@@ -158,6 +158,10 @@
 			display: flex;
     		justify-content: center;
 		}
+		
+		.header-vertical .main-navigation {
+		height: 100% !important;
+		}
 
 		@media screen and (max-width: 1200px) {
 			.site-branding .logo img {
