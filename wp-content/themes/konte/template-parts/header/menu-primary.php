@@ -15,9 +15,9 @@
 	));
 	?>
 
-	<form method="get" action="/" class="input-search-wrap">
+	<form id="searchForm" method="get" action="/" class="input-search-wrap">
 		<input name="s" type="text" class="input-search" placeholder="Procurar...">
-		<input type="text" value="product" name="post_type" hidden>
+		<input type="hidden" value="product" name="post_type">
 	</form>
 
 	<div class="social-menu-legal">
@@ -159,5 +159,18 @@
     	justify-content: center;
 		}
 	</style>
+
+
+<script>
+       /*  document.getElementById('searchForm').addEventListener('submit', function(event) {
+            event.preventDefault();
+
+        
+            const searchQuery = document.querySelector('input[name="s"]').value;
+            const postType = document.querySelector('input[name="post_type"]').value;
+
+            window.location.href = `/?s=${encodeURIComponent(searchQuery)}&post_type=${encodeURIComponent(postType)}`;
+        }); */
+    </script>
 
 </nav>
