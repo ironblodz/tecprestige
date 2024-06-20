@@ -993,6 +993,74 @@ class Konte_WooCommerce_Template_Catalog {
 					'selected'        => get_query_var( 'product_cat' ),
 					'hierarchical'    => true,
 				) );
+				
+				/* ->get( 'WP_Post' ) */
+				
+				// GET products from query
+				//var_dump($GLOBALS['wp_query']->posts);
+
+				foreach ($GLOBALS['wp_query']->posts as $post) {
+					// Setup the global product object
+					$product = wc_get_product($post->ID);
+					
+					if (is_a($product, 'WC_Product')) {
+						$attributes = $product->get_attributes();
+						
+						foreach ($attributes as $attribute) {
+							$name = wc_attribute_label($attribute->get_name());
+							$options = $attribute->get_options();
+							
+							if (!isset($product_attributes[$name])) {
+								$product_attributes[$name] = array();
+							}
+							
+							foreach ($options as $option) {
+								if (is_numeric($option)) {
+									$term = get_term_by('id', $option, $attribute->get_name());
+									if ($term) {
+										$product_attributes[$name][] = $term->name;
+									}
+								} else {
+									$product_attributes[$name][] = $option;
+								}
+							}
+						}
+					}
+				}
+		
+				// Remove duplicate values and sort attributes
+				foreach ($product_attributes as &$options) {
+					$options = array_unique($options);
+					sort($options);
+				}
+				unset($options);
+		
+				// Display the attributes
+				if (!empty($product_attributes)) {
+					echo '<div class="product-attributes">';
+					echo '<h2>Filter by Attributes</h2>';
+					echo '<ul>';
+		
+					foreach ($product_attributes as $name => $options) {
+						echo '<li>';
+						echo '<h3>' . esc_html($name) . '</h3>';
+						echo '<ul>';
+						
+						foreach ($options as $option) {
+							echo '<li>' . esc_html($option) . '</li>';
+						}
+		
+						echo '</ul>';
+						echo '</li>';
+					}
+		
+					echo '</ul>';
+					echo '</div>';
+				} else {
+					echo '<p>No attributes found for the current search results.</p>';
+				}
+		
+
 
 				printf(
 					'<span class="products-quick-search__intro-text">%s</span> %s %s %s',

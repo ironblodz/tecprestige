@@ -14989,15 +14989,8 @@ ul.products li.product .product-thumbnail img {
     color: white;
     }
 
-    ul.products li.product {
-        height: 450px;
-    }
-
-    ul.products li.product .product-thumbnail img {
-        position: relative;
-        top: -180px;
-    }
-
+  
+  
     .select2-results__option--highlighted{
         color: white !important;
     }
