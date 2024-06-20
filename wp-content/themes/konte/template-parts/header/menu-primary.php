@@ -21,9 +21,15 @@
 	</form>
 
 	<div class="social-menu-legal">
-		<img src="/wp-content/themes/konte/images/facebook.svg" alt="facebook">
-		<img src="/wp-content/themes/konte/images/instagram.svg" alt="instagram">
-		<img src="/wp-content/themes/konte/images/youtube.svg" alt="youtube">
+		<a href="https://www.facebook.com/tecprestige/" target="_blank">
+			<img src="/wp-content/themes/konte/images/facebook.svg" alt="facebook">
+		</a>
+		<a href="https://www.instagram.com/tecprestige/" target="_blank">
+			<img src="/wp-content/themes/konte/images/instagram.svg" alt="instagram">
+		</a>
+		<a href="https://www.youtube.com/channel/UCUt7J-ZurSI-gvMEqpWt3kA/featured" target="_blank">
+			<img src="/wp-content/themes/konte/images/youtube.svg" alt="youtube">
+		</a>
 
 	</div>
 
@@ -138,7 +144,7 @@
 
 		/** REMAKE MENU */
 
-		.header-left-items.header-items.has-menu{
+		.header-left-items.header-items.has-menu {
 			display: block !important;
 		}
 
@@ -146,8 +152,10 @@
 			position: unset !important;
 		}
 
-		.header-main, .header-v10 .site-branding, .header-v10 .header-main .header-right-items {
-    		height: auto !important;
+		.header-main,
+		.header-v10 .site-branding,
+		.header-v10 .header-main .header-right-items {
+			height: auto !important;
 		}
 
 		.site-branding .logo-light {
@@ -156,11 +164,11 @@
 
 		.header-v10 .header-main .logo {
 			display: flex;
-    		justify-content: center;
+			justify-content: center;
 		}
-		
+
 		.header-vertical .main-navigation {
-		height: 100% !important;
+			height: 100% !important;
 		}
 
 		@media screen and (max-width: 1200px) {
