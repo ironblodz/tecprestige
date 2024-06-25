@@ -142,8 +142,8 @@ class Konte_WooCommerce_Template_Catalog {
 			case 'v1':
 				add_action( 'konte_woocommerce_before_products_toolbar', array( __CLASS__, 'products_quick_search' ) );
 				add_action( 'konte_woocommerce_products_toolbar', 'woocommerce_catalog_ordering' );
-				add_action( 'konte_woocommerce_products_toolbar', array( __CLASS__, 'columns_switcher' ), 20 );
-				add_action( 'konte_woocommerce_products_toolbar', array( __CLASS__, 'result_count' ), 30 );
+				//add_action( 'konte_woocommerce_products_toolbar', array( __CLASS__, 'columns_switcher' ), 20 );
+				//add_action( 'konte_woocommerce_products_toolbar', array( __CLASS__, 'result_count' ), 30 );
 				break;
 
 			case 'v2':
@@ -154,21 +154,21 @@ class Konte_WooCommerce_Template_Catalog {
 			case 'v3':
 				add_action( 'konte_woocommerce_products_toolbar', array( __CLASS__, 'products_filter' ), 10 );
 				add_action( 'konte_woocommerce_products_toolbar', 'woocommerce_catalog_ordering', 20 );
-				add_action( 'konte_woocommerce_products_toolbar', array( __CLASS__, 'result_count' ), 30 );
+				//add_action( 'konte_woocommerce_products_toolbar', array( __CLASS__, 'result_count' ), 30 );
 				break;
 
 			case 'v4':
 				add_action( 'konte_woocommerce_products_toolbar', array( __CLASS__, 'products_tabs' ), 10 );
 				add_action( 'konte_woocommerce_products_toolbar', 'woocommerce_catalog_ordering', 10 );
 				add_action( 'konte_woocommerce_products_toolbar', array( __CLASS__, 'products_filter' ), 20 );
-				add_action( 'konte_woocommerce_products_toolbar', array( __CLASS__, 'columns_switcher' ), 30 );
+				//add_action( 'konte_woocommerce_products_toolbar', array( __CLASS__, 'columns_switcher' ), 30 );
 				break;
 
 			case 'v5':
 				add_action( 'konte_woocommerce_products_toolbar', array( __CLASS__, 'products_tabs' ), 10 );
 				add_action( 'konte_woocommerce_products_toolbar', 'woocommerce_catalog_ordering', 10 );
 				add_action( 'konte_woocommerce_products_toolbar', array( __CLASS__, 'products_filter' ), 20 );
-				add_action( 'konte_woocommerce_products_toolbar', array( __CLASS__, 'result_count' ), 30 );
+				//add_action( 'konte_woocommerce_products_toolbar', array( __CLASS__, 'result_count' ), 30 );
 				break;
 
 			case 'v6':
@@ -937,20 +937,20 @@ class Konte_WooCommerce_Template_Catalog {
 			do_action( 'konte_woocommerce_before_products_toolbar' );
 			?>
 
-			<div class="products-tools clearfix">
+			<!-- <div class="products-tools clearfix">
 				<?php
 				/**
 				 * Hook: konte_woocommerce_products_toolbar
 				 */
-				do_action( 'konte_woocommerce_products_toolbar' );
+				//do_action( 'konte_woocommerce_products_toolbar' );
 				?>
-			</div>
+			</div> -->
 
 			<?php
 			/**
 			 * Hook: konte_woocommerce_after_products_toolbar
 			 */
-			do_action( 'konte_woocommerce_after_products_toolbar' );
+			//do_action( 'konte_woocommerce_after_products_toolbar' );
 			?>
 		</div>
 
@@ -1037,43 +1037,122 @@ class Konte_WooCommerce_Template_Catalog {
 		
 				// Display the attributes
 				if (!empty($product_attributes)) {
-					echo '<div class="product-attributes">';
-					echo '<h2>Filter by Attributes</h2>';
-					echo '<ul>';
-		
+					echo '<div class="product-attributes filters-selects">';
+					//echo '<h2 class="filter-title">Filter by Attributes</h2>';
+					echo '<ul class="filter-list">';
+
+					echo '<li class="filter-item" id="order-by-select">';
+					echo '<h3 class="filter-subtitle">Ordenar por:</h3>';
+					do_action( 'konte_woocommerce_products_toolbar' );
+					echo '</li>';
+					
 					foreach ($product_attributes as $name => $options) {
-						echo '<li>';
-						echo '<h3>' . esc_html($name) . '</h3>';
-						echo '<ul>';
+						echo '<li class="filter-item">';
+						echo '<h3 class="filter-subtitle">' . esc_html($name) . ':</h3>';
+						echo '<select class="filter-select">';
+						echo '<option>SELECIONAR</option>';
 						
 						foreach ($options as $option) {
-							echo '<li>' . esc_html($option) . '</li>';
+							echo '<option>' . esc_html($option) . '</option>';
 						}
-		
-						echo '</ul>';
+						
+						echo '</select>';
 						echo '</li>';
 					}
-		
+					
 					echo '</ul>';
+
+					
+
 					echo '</div>';
 				} else {
 					echo '<p>No attributes found for the current search results.</p>';
 				}
-		
+				
 
 
-				printf(
+				/* printf(
 					'<span class="products-quick-search__intro-text">%s</span> %s %s %s',
 					esc_html__( "You're looking for", 'konte' ),
 					$tags ? $tags : esc_html__( 'everything', 'konte' ),
 					esc_html__( 'in', 'konte' ),
 					$categories
-				);
+				); */
 				?>
 
-				<button type="submit" value="<?php esc_attr_e( 'search', 'konte' ) ?>" class="filter-submit"><?php esc_html_e( 'search', 'konte' ); ?></button>
 
-				<?php
+				<script>
+					document.addEventListener('DOMContentLoaded', function () {
+						// Get all filter selects
+						const filterSelects = document.querySelectorAll('.filter-select');
+						const orderBySelect = document.querySelector('#order-by-select select');
+
+						// Add event listener for each filter select
+						filterSelects.forEach(function (select) {
+							select.addEventListener('change', function () {
+								updateFilters();
+							});
+						});
+
+						// Add event listener for order by select
+						orderBySelect.addEventListener('change', function () {
+							updateFilters();
+						});
+
+						// Function to update filters
+						function updateFilters() {
+							console.log(444);
+							const params = new URLSearchParams(window.location.search);
+
+							// Set filter parameters
+							filterSelects.forEach(function (select) {
+								const name = select.getAttribute('name');
+								const value = select.value;
+								if (value) {
+									params.set(name, value);
+								} else {
+									params.delete(name);
+								}
+							});
+
+							// Set order by parameter
+							const orderBy = orderBySelect.value;
+							if (orderBy) {
+								params.set('order_by', orderBy);
+							} else {
+								params.delete('order_by');
+							}
+
+							// Reload the page with new parameters
+							window.location.search = params.toString();
+						}
+
+						// Function to set selected values on page load
+						function setSelectedValues() {
+							const params = new URLSearchParams(window.location.search);
+
+							// Set selected values for filter selects
+							filterSelects.forEach(function (select) {
+								const name = select.getAttribute('name');
+								const value = params.get(name);
+								if (value) {
+									select.value = value;
+								}
+							});
+
+							// Set selected value for order by select
+							const orderBy = params.get('order_by');
+							if (orderBy) {
+								orderBySelect.value = orderBy;
+							}
+						}
+
+						// Set selected values on page load
+						setSelectedValues();
+					});
+				</script>
+
+					<?php
 				foreach ( $_GET as $key => $value ) {
 					if ( in_array( $key, array( 'product_tag', 'product_cat', 'filter' ) ) ) {
 						continue;
