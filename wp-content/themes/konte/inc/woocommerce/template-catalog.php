@@ -1036,39 +1036,40 @@ class Konte_WooCommerce_Template_Catalog {
 				unset($options);
 		
 				// Display the attributes
-				if (!empty($product_attributes)) {
-					echo '<div class="product-attributes filters-selects">';
-					//echo '<h2 class="filter-title">Filter by Attributes</h2>';
-					echo '<ul class="filter-list">';
+					if (!empty($product_attributes)) {
+						echo '<div class="product-attributes filters-selects">';
+						//echo '<h2 class="filter-title">Filter by Attributes</h2>';
+						echo '<ul class="filter-list">';
 
-					echo '<li class="filter-item" id="order-by-select">';
-					echo '<h3 class="filter-subtitle">Ordenar por:</h3>';
-					do_action( 'konte_woocommerce_products_toolbar' );
-					echo '</li>';
-					
-					foreach ($product_attributes as $name => $options) {
-						echo '<li class="filter-item">';
-						echo '<h3 class="filter-subtitle">' . esc_html($name) . ':</h3>';
-						echo '<select class="filter-select">';
-						echo '<option>SELECIONAR</option>';
-						
-						foreach ($options as $option) {
-							echo '<option>' . esc_html($option) . '</option>';
-						}
-						
-						echo '</select>';
+						echo '<li class="filter-item" id="order-by-select">';
+						echo '<h3 class="filter-subtitle">Ordenar por:</h3>';
+						do_action( 'konte_woocommerce_products_toolbar' );
 						echo '</li>';
+						
+						foreach ( $product_attributes as $name => $options ) {
+							echo '<li class="filter-item">';
+							echo '<h3 class="filter-subtitle">' . esc_html( $name ) . ':</h3>';
+							echo '<select name="' . esc_attr( sanitize_title( $name ) ) . '" class="filter-select">';
+							echo '<option value="">SELECIONAR</option>';
+					
+							foreach ( $options as $option ) {
+								$selected = $_GET[strtolower($name)] == strtolower($option) ? 'selected' : '';
+								echo '<option '. $selected .' value="' . esc_attr( sanitize_title( $option ) ) . '">' . esc_html( $option ) . '</option>';
+							}
+					
+							echo '</select>';
+							echo '</li>';
+						}
+							
+						echo '</ul>';
+
+						
+
+						echo '</div>';
+					} else {
+						echo '<p>No attributes found for the current search results.</p>';
 					}
 					
-					echo '</ul>';
-
-					
-
-					echo '</div>';
-				} else {
-					echo '<p>No attributes found for the current search results.</p>';
-				}
-				
 
 
 				/* printf(
@@ -1079,78 +1080,6 @@ class Konte_WooCommerce_Template_Catalog {
 					$categories
 				); */
 				?>
-
-
-				<script>
-					document.addEventListener('DOMContentLoaded', function () {
-						// Get all filter selects
-						const filterSelects = document.querySelectorAll('.filter-select');
-						const orderBySelect = document.querySelector('#order-by-select select');
-
-						// Add event listener for each filter select
-						filterSelects.forEach(function (select) {
-							select.addEventListener('change', function () {
-								updateFilters();
-							});
-						});
-
-						// Add event listener for order by select
-						orderBySelect.addEventListener('change', function () {
-							updateFilters();
-						});
-
-						// Function to update filters
-						function updateFilters() {
-							console.log(444);
-							const params = new URLSearchParams(window.location.search);
-
-							// Set filter parameters
-							filterSelects.forEach(function (select) {
-								const name = select.getAttribute('name');
-								const value = select.value;
-								if (value) {
-									params.set(name, value);
-								} else {
-									params.delete(name);
-								}
-							});
-
-							// Set order by parameter
-							const orderBy = orderBySelect.value;
-							if (orderBy) {
-								params.set('order_by', orderBy);
-							} else {
-								params.delete('order_by');
-							}
-
-							// Reload the page with new parameters
-							window.location.search = params.toString();
-						}
-
-						// Function to set selected values on page load
-						function setSelectedValues() {
-							const params = new URLSearchParams(window.location.search);
-
-							// Set selected values for filter selects
-							filterSelects.forEach(function (select) {
-								const name = select.getAttribute('name');
-								const value = params.get(name);
-								if (value) {
-									select.value = value;
-								}
-							});
-
-							// Set selected value for order by select
-							const orderBy = params.get('order_by');
-							if (orderBy) {
-								orderBySelect.value = orderBy;
-							}
-						}
-
-						// Set selected values on page load
-						setSelectedValues();
-					});
-				</script>
 
 					<?php
 				foreach ( $_GET as $key => $value ) {
