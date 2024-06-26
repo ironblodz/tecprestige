@@ -1037,6 +1037,7 @@ class Konte_WooCommerce_Template_Catalog {
 		
 				// Display the attributes
 					if (!empty($product_attributes)) {
+						echo '<form method="GET" action="">';
 						echo '<div class="product-attributes filters-selects">';
 						//echo '<h2 class="filter-title">Filter by Attributes</h2>';
 						echo '<ul class="filter-list">';
@@ -1049,7 +1050,7 @@ class Konte_WooCommerce_Template_Catalog {
 						foreach ( $product_attributes as $name => $options ) {
 							echo '<li class="filter-item">';
 							echo '<h3 class="filter-subtitle">' . esc_html( $name ) . ':</h3>';
-							echo '<select name="' . esc_attr( sanitize_title( $name ) ) . '" class="filter-select">';
+							echo '<select onchange="this.form.submit()" name="' . esc_attr( sanitize_title( $name ) ) . '" class="filter-select">';
 							echo '<option value="">SELECIONAR</option>';
 					
 							foreach ( $options as $option ) {
@@ -1062,7 +1063,7 @@ class Konte_WooCommerce_Template_Catalog {
 						}
 							
 						echo '</ul>';
-
+						echo '</form>';
 						
 
 						echo '</div>';
