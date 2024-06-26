@@ -24,7 +24,7 @@ class Konte_WooCommerce_Template_Product {
 	/**
 	 * Initialize.
 	 */
-	public static function init() {
+	public static function init() { 
 		// Change header background.
 		add_filter( 'konte_header_class', array( __CLASS__, 'header_class' ), 20 );
 		add_filter( 'konte_footer_class', array( __CLASS__, 'footer_class' ), 20 );
@@ -89,7 +89,7 @@ class Konte_WooCommerce_Template_Product {
 				add_action( 'woocommerce_after_add_to_cart_button', array( __CLASS__, 'product_share' ), 15 );
 
 				// Move product tabs into the summary.
-				remove_action( 'woocommerce_after_single_product_summary', 'woocommerce_output_product_data_tabs', 10 );
+				//remove_action( 'woocommerce_after_single_product_summary', 'woocommerce_output_product_data_tabs', 10 );
 				add_action( 'woocommerce_single_product_summary', array( __CLASS__, 'product_data_tabs' ), 100 );
 
 				// Place related products outside product container.
@@ -265,6 +265,11 @@ class Konte_WooCommerce_Template_Product {
 
 				add_action( 'woocommerce_after_single_product', 'woocommerce_upsell_display', 10 );
 				add_action( 'woocommerce_after_single_product', 'woocommerce_output_related_products', 20 );
+
+				/** FODA-SE FINALMENTE WP DE MERDA */
+				remove_action( 'woocommerce_after_single_product_summary', 'woocommerce_output_product_data_tabs', 10 );
+				add_action( 'woocommerce_single_product_summary', array( __CLASS__, 'product_data_tabs' ), 900 );
+				/** */
 
 				// Support bundle products.
 				if ( class_exists( 'WC_Bundles' ) ) {
@@ -745,6 +750,7 @@ class Konte_WooCommerce_Template_Product {
 				<div class="panels">
 					<div class="backdrop"></div>
 					<?php foreach ( $tabs as $key => $tab ) : ?>
+						
 						<div class="woocommerce-Tabs-panel woocommerce-Tabs-panel--<?php echo esc_attr( $key ); ?> panel entry-content wc-tab" id="tab-<?php echo esc_attr( $key ); ?>" role="tabpanel" aria-labelledby="tab-title-<?php echo esc_attr( $key ); ?>">
 							<div class="hamburger-menu button-close active">
 								<span class="menu-text"><?php esc_html_e( 'Close', 'konte' ) ?></span>

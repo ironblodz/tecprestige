@@ -14,7 +14,7 @@ class Konte_WooCommerce_Template {
 	 */
 	public static function init() {
 		// Disable the default WooCommerce stylesheet.
-		add_filter( 'woocommerce_enqueue_styles', '__return_empty_array' );
+		add_filter( 'woocommerce_enqueue_styles', '__return_empty_array' ); 
 		add_action( 'wp_enqueue_scripts', array( __CLASS__, 'scripts' ), 20 );
 		add_action( 'enqueue_block_assets', array( __CLASS__, 'block_assets' ) );
 

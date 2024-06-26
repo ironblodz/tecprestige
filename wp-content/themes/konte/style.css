@@ -15107,4 +15107,13 @@ ul.products li.product .product-thumbnail img {
     .select2-container .products-quick-search-options .select2-results .select2-results__option:first-letter {
         text-transform: capitalize !important;
     }
+
+    /*product show */
+
+    .product_title.entry-title{
+        color: #0077b5 !important;
+        font-weight: 600 !important;
+        font-size: 25px !important;
+        text-align: center !important;
+    }
     
