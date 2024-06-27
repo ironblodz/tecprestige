@@ -409,6 +409,7 @@ function konte_woocommerce_customize_settings( $settings ) {
 				'v5' => esc_html__( 'Layout 5', 'konte' ),
 				'v6' => esc_html__( 'Layout 6', 'konte' ),
 				'v7' => esc_html__( 'Layout 7', 'konte' ),
+				'vt' => esc_html__( 'Layout TecPrestige', 'konte' ),
 			),
 		),
 		'product_side_products'       => array(

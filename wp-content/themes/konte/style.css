@@ -15116,4 +15116,15 @@ ul.products li.product .product-thumbnail img {
         font-size: 25px !important;
         text-align: center !important;
     }
+
+
+    .product-desc-title{
+    color: #bfbfbf;
+    font-size: 1.7rem;
+    padding-bottom: 10px;
+    }
+
+    .product-attributes{
+        color: black;
+    }
     

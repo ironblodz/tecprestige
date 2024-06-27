@@ -252,14 +252,10 @@ class Konte_WooCommerce_Template_Product {
 				break;
 
 			case 'v6':
+				return;
 				// Place breadcrumb into product toolbar then place product toolbar inside product summary.
 				remove_action( 'woocommerce_before_main_content', 'woocommerce_breadcrumb', 20 );
 				add_action( 'woocommerce_single_product_summary', array( __CLASS__, 'product_toolbar' ), 2 );
-
-				/** FODA-SE FINALMENTE WP DE MERDA */
-				remove_action( 'woocommerce_after_single_product_summary', 'woocommerce_output_product_data_tabs', 10 );
-				add_action( 'woocommerce_single_product_summary', array( __CLASS__, 'product_data_tabs' ), 900 );
-				/** */
 
 				// Product sharing.
 				add_action( 'woocommerce_single_product_summary', array( __CLASS__, 'product_share' ), 35 );
@@ -302,6 +298,33 @@ class Konte_WooCommerce_Template_Product {
 					add_filter( 'woocommerce_bundled_items_grid_layout_columns', array( __CLASS__, 'bundled_product_grid_columns' ) );
 				}
 				break;
+
+				case 'vt':
+					// Place breadcrumb into product toolbar then place product toolbar inside product summary.
+					remove_action( 'woocommerce_before_main_content', 'woocommerce_breadcrumb', 20 );
+					add_action( 'woocommerce_single_product_summary', array( __CLASS__, 'product_toolbar' ), 2 );
+	
+					/** FODA-SE FINALMENTE WP DE MERDA */
+					remove_action( 'woocommerce_after_single_product_summary', 'woocommerce_output_product_data_tabs', 10 );
+					add_action( 'woocommerce_single_product_summary', array( __CLASS__, 'productCustomTecPrestige' ), 900 );
+					/** */
+					
+	
+					// Product sharing.
+					//add_action( 'woocommerce_single_product_summary', array( __CLASS__, 'product_share' ), 35 );
+	
+					// Place related products outside product container.
+					remove_action( 'woocommerce_after_single_product_summary', 'woocommerce_upsell_display', 15 );
+					remove_action( 'woocommerce_after_single_product_summary', 'woocommerce_output_related_products', 20 );
+	
+					add_action( 'woocommerce_after_single_product', 'woocommerce_upsell_display', 10 );
+					add_action( 'woocommerce_after_single_product', 'woocommerce_output_related_products', 20 );
+	
+					// Support bundle products.
+					if ( class_exists( 'WC_Bundles' ) ) {
+						add_filter( 'woocommerce_bundled_items_grid_layout_columns', array( __CLASS__, 'bundled_product_grid_columns' ) );
+					}
+					break;
 		}
 	}
 
@@ -721,6 +744,91 @@ class Konte_WooCommerce_Template_Product {
 			</span>
 		</div>
 		<?php
+	}
+
+	public static function productCustomTecPrestige() {
+		global $product;
+		?>
+		<h2 class="product-desc-title">Informações adicionais</h2>
+		<?php
+		$attributes = $product->get_attributes();
+
+		if ( $attributes ) {
+			echo '<div class="product-attributes">';
+			foreach ( $attributes as $attribute ) {
+				if ( $attribute->is_taxonomy() ) {
+					
+					// This is a taxonomy-based attribute
+					$taxonomy = $attribute->get_taxonomy_object();
+					
+					$terms = wp_get_post_terms( $product->get_id(), $attribute->get_name(), 'all' );
+					$tax_label = $taxonomy->attribute_name;
+					
+					echo '<h3>' . esc_html( $tax_label ) . '</h3>';
+					
+					foreach ( $terms as $term ) {
+						echo '<p>' . esc_html( $term->name ) . '</p>';
+					}
+				} else {
+					// This is a custom product attribute
+					$name = $attribute->get_name();
+					$value = $attribute->get_options();
+					
+					echo '<h3>' . esc_html( $name ) . '</h3>';
+					echo '<p>' . esc_html( implode( ', ', $value ) ) . '</p>';
+				}
+			}
+			echo '</div>';
+		}
+		/**
+		 * Filter tabs and allow third parties to add their own.
+		 *
+		 * Each tab is an array containing title, callback and priority.
+		 *
+		 * @see woocommerce_default_product_tabs()
+		 */
+
+		 return;
+		$tabs = apply_filters( 'woocommerce_product_tabs', array() );
+
+		if ( ! empty( $tabs ) ) :
+			?>
+
+			<div class="woocommerce-tabs wc-tabs-wrapper panels-offscreen">
+				<ul class="tabs wc-tabs" role="tablist">
+					<?php foreach ( $tabs as $key => $tab ) : ?>
+						<li class="<?php echo esc_attr( $key ); ?>_tab" id="tab-title-<?php echo esc_attr( $key ); ?>" role="tab" aria-controls="tab-<?php echo esc_attr( $key ); ?>">
+							<a href="#tab-<?php echo esc_attr( $key ); ?>"><?php echo apply_filters( 'woocommerce_product_' . $key . '_tab_title', esc_html( $tab['title'] ), $key ); ?></a>
+						</li>
+					<?php endforeach; ?>
+				</ul>
+				<div class="panels">
+					<div class="backdrop"></div>
+					<?php foreach ( $tabs as $key => $tab ) : ?>
+						
+						<div class="woocommerce-Tabs-panel woocommerce-Tabs-panel--<?php echo esc_attr( $key ); ?> panel entry-content wc-tab" id="tab-<?php echo esc_attr( $key ); ?>" role="tabpanel" aria-labelledby="tab-title-<?php echo esc_attr( $key ); ?>">
+							<div class="hamburger-menu button-close active">
+								<span class="menu-text"><?php esc_html_e( 'Close', 'konte' ) ?></span>
+
+								<div class="hamburger-box">
+									<div class="hamburger-inner"></div>
+								</div>
+							</div>
+							<div class="panel-header">
+								<div class="panel__title"><?php echo apply_filters( 'woocommerce_product_' . $key . '_tab_title', esc_html( $tab['title'] ), $key ); ?></div>
+							</div>
+							<div class="panel-content">
+								<?php if ( isset( $tab['callback'] ) ) {
+									call_user_func( $tab['callback'], $key, $tab );
+								} ?>
+							</div>
+						</div>
+					<?php endforeach; ?>
+				</div>
+			</div>
+
+		<?php
+		endif;
 	}
 
 	/**

@@ -3008,6 +3008,10 @@ msgid "Layout 6"
 msgstr ""
 
 #: inc/woocommerce/theme-options.php:411
+msgid "Layout TecPrestige"
+msgstr ""
+
+#: inc/woocommerce/theme-options.php:412
 msgid "Layout 7"
 msgstr ""
 
