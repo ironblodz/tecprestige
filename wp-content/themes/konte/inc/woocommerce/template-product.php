@@ -795,11 +795,11 @@ class Konte_WooCommerce_Template_Product {
 		echo '<h3 class="product-desc-title tecprestige-product-description-title">Descrição</h3>';
 		// Full Description
 		$full_description = $product->get_description();
-		echo '<div class="product-description tecprestige-product-description">' . $full_description . '</div>';
+		echo '<div class="product-description tecprestige-product-description">' . wpautop($full_description) . '</div>';
 	
 		// Short Description
 		$short_description = $product->get_short_description();
-		echo '<div class="product-short-description">' . $short_description . '</div>';
+		echo '<div class="product-short-description">' . wpautop($short_description) . '</div>';
 		echo '</div>';
 
 		$attributes = $product->get_attributes();
