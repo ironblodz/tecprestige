@@ -256,6 +256,11 @@ class Konte_WooCommerce_Template_Product {
 				remove_action( 'woocommerce_before_main_content', 'woocommerce_breadcrumb', 20 );
 				add_action( 'woocommerce_single_product_summary', array( __CLASS__, 'product_toolbar' ), 2 );
 
+				/** FODA-SE FINALMENTE WP DE MERDA */
+				remove_action( 'woocommerce_after_single_product_summary', 'woocommerce_output_product_data_tabs', 10 );
+				add_action( 'woocommerce_single_product_summary', array( __CLASS__, 'product_data_tabs' ), 900 );
+				/** */
+
 				// Product sharing.
 				add_action( 'woocommerce_single_product_summary', array( __CLASS__, 'product_share' ), 35 );
 
@@ -265,11 +270,6 @@ class Konte_WooCommerce_Template_Product {
 
 				add_action( 'woocommerce_after_single_product', 'woocommerce_upsell_display', 10 );
 				add_action( 'woocommerce_after_single_product', 'woocommerce_output_related_products', 20 );
-
-				/** FODA-SE FINALMENTE WP DE MERDA */
-				remove_action( 'woocommerce_after_single_product_summary', 'woocommerce_output_product_data_tabs', 10 );
-				add_action( 'woocommerce_single_product_summary', array( __CLASS__, 'product_data_tabs' ), 900 );
-				/** */
 
 				// Support bundle products.
 				if ( class_exists( 'WC_Bundles' ) ) {
@@ -727,6 +727,7 @@ class Konte_WooCommerce_Template_Product {
 	 * Product data tabs.
 	 */
 	public static function product_data_tabs() {
+		
 		/**
 		 * Filter tabs and allow third parties to add their own.
 		 *
