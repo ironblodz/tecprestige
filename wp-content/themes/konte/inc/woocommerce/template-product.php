@@ -300,15 +300,29 @@ class Konte_WooCommerce_Template_Product {
 				break;
 
 				case 'vt':
-					// Place breadcrumb into product toolbar then place product toolbar inside product summary.
+
 					remove_action( 'woocommerce_before_main_content', 'woocommerce_breadcrumb', 20 );
-					add_action( 'woocommerce_single_product_summary', array( __CLASS__, 'product_toolbar' ), 2 );
-	
+					remove_action( 'woocommerce_single_product_summary', 'woocommerce_template_single_title', 5 );
+
+					//remove product meta
+					//remove_action('woocommerce_single_product_summary', 'woocommerce_template_single_meta', 40);
+
+					//toolbar
+					add_action( 'woocommerce_before_main_content', array( __CLASS__, 'product_toolbar_tecprestige' ), 900 );
+						
 					/** FODA-SE FINALMENTE WP DE MERDA */
 					remove_action( 'woocommerce_after_single_product_summary', 'woocommerce_output_product_data_tabs', 10 );
 					add_action( 'woocommerce_single_product_summary', array( __CLASS__, 'productCustomTecPrestige' ), 900 );
 					/** */
+						
 					
+					// Place breadcrumb into product toolbar then place product toolbar inside product summary.
+					
+					// product title
+					add_action( 'woocommerce_single_product_summary', array( __CLASS__, 'product_title_with_badges_tec_prestige' ), 5 );
+
+					//add_action( 'woocommerce_single_product_summary', array( __CLASS__, 'product_toolbar_tecprestige' ), 2 );
+				
 	
 					// Product sharing.
 					//add_action( 'woocommerce_single_product_summary', array( __CLASS__, 'product_share' ), 35 );
@@ -604,6 +618,29 @@ class Konte_WooCommerce_Template_Product {
 	/**
 	 * Displays product toolbar
 	 */
+	public static function product_toolbar_tecprestige() {
+		$breadcrumb = konte_get_option( 'product_breadcrumb' );
+
+		if ( ! $breadcrumb  ) {
+			return;
+		}
+		
+		?>
+		<div class="tecprestige-product-toolbar product-toolbar clearfix">
+			<?php
+			if ( $breadcrumb ) {
+				Konte_Breadcrumbs::breadcrumbs();
+			}
+
+			?>
+		</div>
+		<?php
+	}
+	
+
+	/**
+	 * Displays product toolbar
+	 */
 	public static function product_toolbar() {
 		$breadcrumb = konte_get_option( 'product_breadcrumb' );
 		$navigation = konte_get_option( 'product_navigation' );
@@ -748,13 +785,30 @@ class Konte_WooCommerce_Template_Product {
 
 	public static function productCustomTecPrestige() {
 		global $product;
-		?>
-		<h2 class="product-desc-title">Informações adicionais</h2>
-		<?php
+
+		if ( ! $product ) {
+			$product = wc_get_product( get_the_ID() );
+		}
+	
+		echo '<div>';
+
+		echo '<h3 class="product-desc-title tecprestige-product-description-title">Descrição</h3>';
+		// Full Description
+		$full_description = $product->get_description();
+		echo '<div class="product-description tecprestige-product-description">' . $full_description . '</div>';
+	
+		// Short Description
+		$short_description = $product->get_short_description();
+		echo '<div class="product-short-description">' . $short_description . '</div>';
+		echo '</div>';
+
 		$attributes = $product->get_attributes();
 
 		if ( $attributes ) {
 			echo '<div class="product-attributes">';
+			echo '<h3 class="product-desc-title">Informações adicionais</h3>';
+			echo '<table>';
+
 			foreach ( $attributes as $attribute ) {
 				if ( $attribute->is_taxonomy() ) {
 					
@@ -764,20 +818,25 @@ class Konte_WooCommerce_Template_Product {
 					$terms = wp_get_post_terms( $product->get_id(), $attribute->get_name(), 'all' );
 					$tax_label = $taxonomy->attribute_name;
 					
-					echo '<h3>' . esc_html( $tax_label ) . '</h3>';
+					echo '<tr>';
+					echo '<th>' . esc_html( ucfirst($tax_label) ) . '</th>';
 					
 					foreach ( $terms as $term ) {
-						echo '<p>' . esc_html( $term->name ) . '</p>';
+						echo '<td>' . esc_html( ucfirst($term->name) ) . '</td>';
 					}
+					echo '</tr>';
 				} else {
 					// This is a custom product attribute
 					$name = $attribute->get_name();
 					$value = $attribute->get_options();
 					
-					echo '<h3>' . esc_html( $name ) . '</h3>';
-					echo '<p>' . esc_html( implode( ', ', $value ) ) . '</p>';
+					echo '<tr>';
+					echo '<th>' . esc_html( ucfirst($name) ) . '</th>';
+					echo '<td>' . esc_html(  ucfirst(implode( ', ',$value)) ) . '</td>';
+					echo '</tr>';
 				}
 			}
+			echo '</table>';
 			echo '</div>';
 		}
 		/**
@@ -919,6 +978,13 @@ class Konte_WooCommerce_Template_Product {
 	 * Display product title with the badges.
 	 */
 	public static function product_title_with_badges() {
+		echo '<h1 class="product_title entry-title">';
+		the_title();
+		echo implode( '', self::get_badges() );
+		echo '</h1>';
+	}
+
+	public static function product_title_with_badges_tec_prestige() {
 		echo '<h1 class="product_title entry-title">';
 		the_title();
 		echo implode( '', self::get_badges() );

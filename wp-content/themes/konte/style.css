@@ -15124,7 +15124,65 @@ ul.products li.product .product-thumbnail img {
     padding-bottom: 10px;
     }
 
-    .product-attributes{
+ /*    .product-attributes{
         color: black;
     }
+      */
+
+     .product-attributes {
+        width: 300px;
+        margin: 20px auto;
+        padding: 10px;
+    }
     
+    .product-attributes h3 {
+        text-align: center;
+        font-size: 1.2em;
+        color: #555;
+        border-bottom: 1px solid #ddd;
+        padding-bottom: 5px;
+        margin-bottom: 10px;
+    }
+    
+    .product-attributes table {
+        width: 100%;
+        border-collapse: collapse;
+    }
+    
+    .product-attributes th,
+    .product-attributes td {
+        padding: 8px;
+        text-align: left;
+        border-bottom: none;
+
+    }
+    
+    .product-attributes th {
+        width: 50%;
+        font-weight: normal;
+        color: #333;
+    }
+    
+    .product-attributes td {
+        width: 50%;
+        color: #555;
+    }
+
+    .tecprestige-product-toolbar, .tecprestige-product-toolbar a, .tecprestige-product-toolbar nav{
+        color: #0077b5;
+        font-size: 1.5rem !important;
+        font-weight: 600 !important;
+    }
+
+    .tecprestige-product-toolbar nav span{
+        color: #838889 !important;
+    }
+
+
+    .tecprestige-product-description-title{
+        color: black;
+    }
+
+    .tecprestige-product-description{
+        color: black;
+    }
