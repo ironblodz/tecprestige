@@ -339,6 +339,7 @@ class Konte_WooCommerce_Template_Product {
 						add_filter( 'woocommerce_bundled_items_grid_layout_columns', array( __CLASS__, 'bundled_product_grid_columns' ) );
 					}
 					break;
+					
 		}
 	}
 
