@@ -15243,3 +15243,8 @@ ul.products li.product .product-thumbnail img {
         width: 100%;
         justify-content: center;
     }
+
+    .products.related h2, .products.upsells h2 {
+        text-align: center;
+        color: #bfbfbf;
+    }
