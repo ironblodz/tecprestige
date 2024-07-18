@@ -15186,3 +15186,7 @@ ul.products li.product .product-thumbnail img {
     .tecprestige-product-description{
         color: black;
     }
+
+    .site-footer{
+        display: none;
+    }
