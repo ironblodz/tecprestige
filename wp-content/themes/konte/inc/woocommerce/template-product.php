@@ -336,11 +336,14 @@ class Konte_WooCommerce_Template_Product {
 						$whatsapp_message = urlencode("Olá, estou interessado no produto: " . $product_name);
 						$whatsapp_url = 'https://wa.me/' . $whatsapp_number . '?text=' . $whatsapp_message;
 					
+						echo '<div>';
 						// HTML do botão
 						echo '<a href="' . esc_url( $whatsapp_url ) . '" class="button whatsapp-button" target="_blank">
 						<small>APOIO COMERCIAL - ONLINE</small>
-						<p>PRECISA DE AJUDA?</p>
+						<br>
+						<span>PRECISA DE AJUDA?</span>
 						</a>';
+						echo '</div>';
 					}
 
 					// Product sharing.

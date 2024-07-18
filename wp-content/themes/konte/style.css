@@ -15199,6 +15199,7 @@ ul.products li.product .product-thumbnail img {
         line-height: 40px !important;
         font-weight: 600 !important;
         font-size: 18px !important;
+        margin-top: 15px !important;
     }
 
     .quantity {
@@ -15209,14 +15210,24 @@ ul.products li.product .product-thumbnail img {
     }
 
     .whatsapp-button{
+        line-height: 20px;
         background-color: #2db742;
-    border-radius: 30px;
-    padding: 0px 30px 20px 30px;
+        border-radius: 30px;
+        padding: 10px 30px 10px 30px;
+        margin-top:15px;
     }
 
     .whatsapp-button small, .whatsapp-button span{
         line-height: 0px;
         text-align: left;
+    }
+
+    .whatsapp-button span{
+        font-size: 17px;
+    }
+
+    .whatsapp-button small{
+        font-size: 11px;
     }
 
 
@@ -15227,12 +15238,6 @@ ul.products li.product .product-thumbnail img {
         margin-bottom: 40px;
     }
     
-    .custom-two-columns .minha-descricao-customizada,
-    .custom-two-columns .produto-atributos {
-        flex: 1;
-        min-width: 300px;
-    }
-
     .product-description-table{
         display: flex;
         justify-content: space-between;
