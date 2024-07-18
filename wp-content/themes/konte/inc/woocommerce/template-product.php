@@ -312,10 +312,10 @@ class Konte_WooCommerce_Template_Product {
 						
 					/** FODA-SE FINALMENTE WP DE MERDA */
 					remove_action( 'woocommerce_after_single_product_summary', 'woocommerce_output_product_data_tabs', 10 );
-					add_action( 'woocommerce_single_product_summary', array( __CLASS__, 'productCustomTecPrestige' ), 900 );
+					add_action( 'woocommerce_after_single_product_summary', array( __CLASS__, 'productCustomTecPrestige' ), 900 );
 					/** */
 						
-					
+
 					// Place breadcrumb into product toolbar then place product toolbar inside product summary.
 					
 					// product title
@@ -323,15 +323,77 @@ class Konte_WooCommerce_Template_Product {
 
 					//add_action( 'woocommerce_single_product_summary', array( __CLASS__, 'product_toolbar_tecprestige' ), 2 );
 				
+
+					//wwp button
+					add_action( 'woocommerce_after_add_to_cart_button', 'custom_wpp_button', 15 );
 	
+					function custom_wpp_button() {
+						global $product;
+					
+						// Link para WhatsApp
+						$whatsapp_number = '+351 932639539';
+						$product_name = $product->get_name();
+						$whatsapp_message = urlencode("Olá, estou interessado no produto: " . $product_name);
+						$whatsapp_url = 'https://wa.me/' . $whatsapp_number . '?text=' . $whatsapp_message;
+					
+						// HTML do botão
+						echo '<a href="' . esc_url( $whatsapp_url ) . '" class="button whatsapp-button" target="_blank">
+						<small>APOIO COMERCIAL - ONLINE</small>
+						<p>PRECISA DE AJUDA?</p>
+						</a>';
+					}
+
 					// Product sharing.
 					//add_action( 'woocommerce_single_product_summary', array( __CLASS__, 'product_share' ), 35 );
 	
+
+					// Remover a descrição padrão do produto
+					remove_action('woocommerce_single_product_summary', 'woocommerce_template_single_excerpt', 20);
+
+
 					// Place related products outside product container.
-					remove_action( 'woocommerce_after_single_product_summary', 'woocommerce_upsell_display', 15 );
+					//remove_action( 'woocommerce_after_single_product_summary', 'woocommerce_upsell_display', 15 );
 					remove_action( 'woocommerce_after_single_product_summary', 'woocommerce_output_related_products', 20 );
 	
 					add_action( 'woocommerce_after_single_product', 'woocommerce_upsell_display', 10 );
+					
+					
+						// Adicionar a descrição customizada
+						//add_action('woocommerce_after_single_product_summary', 'custom_tp_description', 70);
+						function custom_tp_description() {
+						global $product;
+
+						// Obter os atributos do produto
+						$attributes = $product->get_attributes();
+					
+						echo '<div class="custom-two-columns" style="display: flex; flex-wrap: wrap; gap: 20px; margin-bottom: 40px;">';
+					
+						// Coluna da esquerda - Descrição personalizada
+						echo '<div class="minha-descricao-customizada" style="flex: 1; min-width: 300px;">';
+						echo '<h2>Descrição Personalizada</h2>';
+						echo '<p>Esta é a minha descrição personalizada para este produto.</p>';
+						echo '</div>';
+					
+						// Coluna da direita - Atributos do produto
+						echo '<div class="produto-atributos" style="flex: 1; min-width: 300px;">';
+						echo '<h2>Atributos do Produto</h2>';
+						if ( ! empty( $attributes ) ) {
+							foreach ( $attributes as $attribute ) {
+								if ( $attribute->get_variation() ) {
+									continue;
+								}
+								$name = wc_attribute_label( $attribute->get_name() );
+								$value = wc_display_product_attribute( $attribute );
+								echo '<p><strong>' . $name . ':</strong> ' . $value . '</p>';
+							}
+						} else {
+							echo '<p>Este produto não possui atributos adicionais.</p>';
+						}
+						echo '</div>';
+					
+						echo '</div>';
+					}
+
 					add_action( 'woocommerce_after_single_product', 'woocommerce_output_related_products', 20 );
 	
 					// Support bundle products.
@@ -790,19 +852,26 @@ class Konte_WooCommerce_Template_Product {
 		if ( ! $product ) {
 			$product = wc_get_product( get_the_ID() );
 		}
-	
+		
+		echo '</div>';
+		echo '<div class="product-description-table">';
+		echo '<div class="description-card">';
 		echo '<div>';
-
 		echo '<h3 class="product-desc-title tecprestige-product-description-title">Descrição</h3>';
 		// Full Description
 		$full_description = $product->get_description();
+
 		echo '<div class="product-description tecprestige-product-description">' . wpautop($full_description) . '</div>';
 	
 		// Short Description
 		$short_description = $product->get_short_description();
 		echo '<div class="product-short-description">' . wpautop($short_description) . '</div>';
 		echo '</div>';
+		echo '</div>';
 
+
+		echo '<div class="description-card">';
+		echo '<div>';
 		$attributes = $product->get_attributes();
 
 		if ( $attributes ) {
@@ -838,6 +907,9 @@ class Konte_WooCommerce_Template_Product {
 				}
 			}
 			echo '</table>';
+			echo '</div>';
+			echo '</div>';
+			echo '</div>';
 			echo '</div>';
 		}
 		/**
