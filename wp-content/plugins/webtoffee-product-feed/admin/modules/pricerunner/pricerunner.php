@@ -123,7 +123,7 @@ if (!class_exists('Webtoffee_Product_Feed_Sync_PriceRunner')) {
 		 */
 		public function wt_pf_exporter_post_types_basic($arr) {
 
-			$arr['pricerunner'] = __('PriceRunner Shop', 'webtoffee-product-feed');
+			$arr['pricerunner'] = __('PriceRunner', 'webtoffee-product-feed');
 			return $arr;
 		}
                 

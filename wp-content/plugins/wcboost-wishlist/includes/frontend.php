@@ -1,30 +1,12 @@
 <?php
 namespace WCBoost\Wishlist;
 
+use WCBoost\Packages\Utilities\Singleton_Trait;
+
 defined( 'ABSPATH' ) || exit;
 
 class Frontend {
-
-	/**
-	 * The single instance of the class.
-	 * @var Frontend
-	 */
-	protected static $_instance = null;
-
-	/**
-	 * Main instance.
-	 * Ensures only one instance of the class is loaded or can be loaded.
-	 *
-	 * @static
-	 * @return Frontend
-	 */
-	public static function instance() {
-		if ( is_null( self::$_instance ) ) {
-			self::$_instance = new self();
-		}
-
-		return self::$_instance;
-	}
+	use Singleton_Trait;
 
 	/**
 	 * Class constructor
@@ -33,6 +15,8 @@ class Frontend {
 		add_action( 'wp', [ $this, 'template_hooks' ] );
 		add_action( 'wp', [ $this, 'add_nocache_headers' ] );
 		add_filter( 'wp_robots', [ $this, 'add_noindex_robots' ], 20 );
+
+		add_action( 'init', [ $this, 'register_scripts' ] );
 		add_action( 'wp_enqueue_scripts', [ $this, 'enqueue_scripts' ] );
 	}
 
@@ -117,21 +101,34 @@ class Frontend {
 	}
 
 	/**
-	 * Enqueue wishlist style and scripts
+	 * Register scripts
+	 *
+	 * @since 1.1.0
+	 *
+	 * @return void
 	 */
-	public function enqueue_scripts() {
+	public function register_scripts() {
 		$plugin = Plugin::instance();
 		$suffix = defined( 'SCRIPT_DEBUG' ) && SCRIPT_DEBUG ? '' : '.min';
 
+		wp_register_style( 'wcboost-wishlist', $plugin->plugin_url( '/assets/css/wishlist.css' ), [], $plugin->version );
+		wp_register_script( 'wcboost-wishlist', $plugin->plugin_url( '/assets/js/wishlist' . $suffix . '.js' ), [ 'jquery' ], $plugin->version, true );
+		wp_register_script( 'wcboost-wishlist-fragments', $plugin->plugin_url( '/assets/js/wishlist-fragments' . $suffix . '.js' ), [ 'jquery' ], $plugin->version, true );
+	}
+
+	/**
+	 * Enqueue wishlist style and scripts
+	 */
+	public function enqueue_scripts() {
 		if ( apply_filters( 'wcboost_wishlist_enqueue_frontend_style', true ) ) {
-			wp_enqueue_style( 'wcboost-wishlist', $plugin->plugin_url( '/assets/css/wishlist.css' ), [], $plugin->version );
+			wp_enqueue_style( 'wcboost-wishlist' );
 		}
 
 		if ( 'custom' == get_option( 'wcboost_wishlist_button_type' ) ) {
 			wp_add_inline_style( 'wcboost-wishlist', $this->get_custom_button_css() );
 		}
 
-		wp_enqueue_script( 'wcboost-wishlist', $plugin->plugin_url( '/assets/js/wishlist' . $suffix . '.js' ), [ 'jquery' ], $plugin->version, true );
+		wp_enqueue_script( 'wcboost-wishlist' );
 		wp_localize_script( 'wcboost-wishlist', 'wcboost_wishlist_params', [
 			'allow_adding_variations'     => get_option( 'wcboost_wishlist_allow_adding_variations' ),
 			'wishlist_redirect_after_add' => get_option( 'wcboost_wishlist_redirect_after_add' ),
@@ -147,9 +144,10 @@ class Frontend {
 			'icon_loading'                => Helper::get_icon( 'spinner' ),
 		] );
 
-		wp_enqueue_script( 'wcboost-wishlist-fragments', $plugin->plugin_url( '/assets/js/wishlist-fragments' . $suffix . '.js' ), [ 'jquery' ], $plugin->version, true );
+		wp_enqueue_script( 'wcboost-wishlist-fragments' );
 		wp_localize_script( 'wcboost-wishlist-fragments', 'wcboost_wishlist_fragments_params', [
-			'refresh_on_load' => get_option( 'wcboost_wishlist_ajax_bypass_cache', defined( 'WP_CACHE' ) && WP_CACHE ? 'yes' : 'no' ),
+			'refresh_on_load' => get_option( 'wcboost_wishlist_ajax_bypass_cache', 'no' ),
+			'hash_name'       => 'wcboost_wishlist_hash_' . md5( get_current_blog_id() . '_' . get_site_url( get_current_blog_id(), '/' ) . get_template() ),
 			'timeout'         => apply_filters( 'wcboost_wishlist_ajax_timeout', 5000 ),
 		] );
 	}

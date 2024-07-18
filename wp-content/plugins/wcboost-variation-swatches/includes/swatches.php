@@ -33,19 +33,32 @@ class Swatches {
 	 * Class constructor.
 	 */
 	public function __construct() {
+		add_action( 'init', [ $this, 'register_scripts' ] );
 		add_action( 'wp_enqueue_scripts', [ $this, 'enqueue_scripts' ] );
 
 		add_filter( 'woocommerce_dropdown_variation_attribute_options_html', [ $this, 'swatches_html' ], 100, 2 );
 	}
 
 	/**
-	 * Enqueue scripts and stylesheets
+	 * Register scripts
+	 *
+	 * @since 1.0.17
+	 *
+	 * @return void
 	 */
-	public function enqueue_scripts() {
+	public function register_scripts() {
 		$version = Plugin::instance()->version;
 		$suffix  = defined( 'SCRIPT_DEBUG' ) && SCRIPT_DEBUG ? '' : '.min';
 
-		wp_enqueue_style( 'wcboost-variation-swatches', plugins_url( 'assets/css/frontend.css', WCBOOST_VARIATION_SWATCHES_FILE ), [], $version );
+		wp_register_style( 'wcboost-variation-swatches', plugins_url( 'assets/css/frontend.css', WCBOOST_VARIATION_SWATCHES_FILE ), [], $version );
+		wp_register_script( 'wcboost-variation-swatches', plugins_url( 'assets/js/frontend' . $suffix . '.js', WCBOOST_VARIATION_SWATCHES_FILE ), [ 'jquery' ], $version, true );
+	}
+
+	/**
+	 * Enqueue scripts and stylesheets
+	 */
+	public function enqueue_scripts() {
+		wp_enqueue_style( 'wcboost-variation-swatches' );
 
 		$inline_css = $this->inline_style();
 
@@ -53,7 +66,7 @@ class Swatches {
 			wp_add_inline_style( 'wcboost-variation-swatches', $this->inline_style() );
 		}
 
-		wp_enqueue_script( 'wcboost-variation-swatches', plugins_url( 'assets/js/frontend' . $suffix . '.js', WCBOOST_VARIATION_SWATCHES_FILE ), [ 'jquery' ], $version, true );
+		wp_enqueue_script( 'wcboost-variation-swatches' );
 
 		$params = apply_filters( 'wcboost_variation_swatches_js_params', [
 			'show_selected_label' => wc_string_to_bool( Helper::get_settings( 'show_selected_label' ) ),
@@ -91,7 +104,7 @@ class Swatches {
 		$options   = $args['options'];
 		$product   = $args['product'];
 		$attribute = $args['attribute'];
-		$name      = $args['name'] ? $args['name'] : 'attribute_' . sanitize_title( $attribute );
+		$name      = $args['name'] ? $args['name'] : wc_variation_attribute_name( $attribute );
 
 		if ( empty( $options ) && ! empty( $product ) && ! empty( $attribute ) ) {
 			$attributes = $product->get_variation_attributes();
@@ -118,13 +131,14 @@ class Swatches {
 			$terms = wc_get_product_terms(
 				$product->get_id(),
 				$attribute,
-				[ 'fields' => 'all' ]
+				[
+					'fields' => 'all',
+					'slug'   => $options,
+				]
 			);
 
 			foreach ( $terms as $term ) {
-				if ( in_array( $term->slug, $options, true ) ) {
-					$swatches_html .= $this->get_term_swatches( $term, $swatches_args );
-				}
+				$swatches_html .= $this->get_term_swatches( $term, $swatches_args );
 			}
 		} else {
 			foreach ( $options as $option ) {
@@ -158,12 +172,13 @@ class Swatches {
 	 * @return string
 	 */
 	public function get_term_swatches( $term, $args ) {
-		$type  = $args['swatches_type'];
-		$value = is_object( $term ) ? $term->slug : $term;
-		$name  = is_object( $term ) ? $term->name : $term;
-		$name  = apply_filters( 'woocommerce_variation_option_name', $name );
-		$size  = ! empty( $args['swatches_size'] ) ? sprintf( '--wcboost-swatches-item-width: %1$dpx; --wcboost-swatches-item-height: %2$dpx;', absint( $args['swatches_size']['width'] ), absint( $args['swatches_size']['height'] ) ) : '';
-		$html  = '';
+		$type        = $args['swatches_type'];
+		$term_object = is_object( $term ) ? $term : null;
+		$value       = is_object( $term ) ? $term->slug : $term;
+		$name        = is_object( $term ) ? $term->name : $term;
+		$name        = apply_filters( 'woocommerce_variation_option_name', $name, $term_object, $args['attribute'], $args['product'] );
+		$size        = ! empty( $args['swatches_size'] ) ? sprintf( '--wcboost-swatches-item-width: %1$dpx; --wcboost-swatches-item-height: %2$dpx;', absint( $args['swatches_size']['width'] ), absint( $args['swatches_size']['height'] ) ) : '';
+		$html        = '';
 
 		if ( is_object( $term ) ) {
 			$selected = sanitize_title( $args['selected'] ) == $value;

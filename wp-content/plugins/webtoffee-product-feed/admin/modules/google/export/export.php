@@ -137,8 +137,11 @@ class Webtoffee_Product_Feed_Sync_Google_Export extends Webtoffee_Product_Feed_P
             if ( function_exists('icl_object_id') && isset( $_SERVER["HTTP_REFERER"] ) && strpos($_SERVER["HTTP_REFERER"], 'lang=all') !== false ) {
                      $args['suppress_filters'] = true;
             }
+            
+            $args['exclude_discarded'] = '_wt_feed_discard'; // To exclude individual excluded from product fetching.
 			
             $args = apply_filters("woocommerce_csv_product_export_args", $args);
+
             $products = wc_get_products($args); 
 
             $total_products=0;
@@ -189,6 +192,13 @@ class Webtoffee_Product_Feed_Sync_Google_Export extends Webtoffee_Product_Feed_P
                     }
                 }
 
+                if( $product->is_type( 'variation' ) ){
+                    $to_exclude = get_post_meta( $product_id, '_wt_feed_discard', true);
+                    if('yes' === $to_exclude ){
+                        continue;
+                    }
+                }
+                
                 $this->parent_product = $product;
                 $this->current_product_id = $product->get_id();
                 $this->product = $product;
@@ -506,33 +516,47 @@ class Webtoffee_Product_Feed_Sync_Google_Export extends Webtoffee_Product_Feed_P
 	public function google_product_category($catalog_attr, $product_attr, $export_columns){
 		
 		
-		
-			$category_path = wp_get_post_terms( $this->product->get_id(), 'product_cat', array( 'fields' => 'all' ) );
+            $custom_google_category = get_post_meta($this->current_product_id, '_wt_google_google_product_category', true);
 
-			$fb_product_category = [];
+            if ( !$custom_google_category ) {
+                        $product_id = ( $this->product->is_type( 'variation' ) ? $this->product->get_parent_id() : $this->product->get_id() );
+			$category_path = wp_get_post_terms( $product_id, 'product_cat', array( 'fields' => 'all' ) );
+
+			$google_product_category = [];
 			foreach ( $category_path as $category ) {
-				$fb_category_id = get_term_meta( $category->term_id, 'wt_google_category', true );
-				if ( $fb_category_id ) {
+				$google_category_id = get_term_meta( $category->term_id, 'wt_google_category', true );
+				if ( $google_category_id ) {
 					
-					$fb_category_list = wp_cache_get( 'wt_fbfeed_google_product_categories_array' );
+					$google_category_list = wp_cache_get( 'wt_fbfeed_google_product_categories_array' );
 					
-					if ( false === $fb_category_list ) {
-						$fb_category_list			 = Webtoffee_Product_Feed_Sync_Google::get_category_array( );
-						wp_cache_set( 'wt_fbfeed_google_product_categories_array', $fb_category_list, '', WEEK_IN_SECONDS );
+					if ( false === $google_category_list ) {
+						$google_category_list			 = Webtoffee_Product_Feed_Sync_Google::get_category_array( );
+						wp_cache_set( 'wt_fbfeed_google_product_categories_array', $google_category_list, '', WEEK_IN_SECONDS );
 					}
 					
 					
-					$fb_category = isset($fb_category_list[$fb_category_id]) ? $fb_category_list[$fb_category_id] : '';
-					if('' !== $fb_category){
-						$fb_product_category[]	 = $fb_category;
+					$google_category = isset($google_category_list[$google_category_id]) ? $google_category_list[$google_category_id] : '';
+					if('' !== $google_category){
+						$google_product_category[]	 = $google_category;
 					}
 				}
 			}
 
 			
-                        $fb_product_category = empty($fb_product_category) ? '' : $fb_product_category[0];			
+                        $google_product_category = empty($google_product_category) ? '' : $google_product_category[0];			
 
-			return $fb_product_category;
+			 } else {
+
+                $google_category_list = wp_cache_get('wt_fbfeed_fb_product_categories_array');
+
+                if (false === $google_category_list) {
+                    $google_category_list = Webtoffee_Product_Feed_Sync_Google::get_category_array();
+                    wp_cache_set('wt_fbfeed_fb_product_categories_array', $google_category_list, '', WEEK_IN_SECONDS);
+                }
+
+                $google_product_category = $google_category_list[$custom_google_category];
+            }
+            return apply_filters('wt_feed_filter_product_google_category', $google_product_category, $this->product);
 			
 		
 		

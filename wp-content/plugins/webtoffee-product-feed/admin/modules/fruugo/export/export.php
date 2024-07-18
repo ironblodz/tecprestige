@@ -14,6 +14,7 @@ if (!class_exists('Webtoffee_Product_Feed_Sync_Fruugo_Export')) {
         public $form_data;
         
         public $fruugo_feed_keys = array();
+        public $fruugo_xml_skipfeed_keys = array();
         public $max_variation_count = 0;
 
         public function __construct($parent_object) {
@@ -400,6 +401,11 @@ if (!class_exists('Webtoffee_Product_Feed_Sync_Fruugo_Export')) {
             $export_columns = $this->parent_module->get_selected_column_names();
 
             if (isset($this->form_data['advanced_form_data']['wt_pf_file_as']) && 'xml' === $this->form_data['advanced_form_data']['wt_pf_file_as']) {
+                $this->fruugo_xml_skipfeed_keys['title'] = $export_columns['title'];
+                $this->fruugo_xml_skipfeed_keys['language'] = $export_columns['language'];
+                $this->fruugo_xml_skipfeed_keys['currency'] = $export_columns['currency'];
+                $this->fruugo_xml_skipfeed_keys['price_without_vat'] = $export_columns['price_without_vat'];
+                $this->fruugo_xml_skipfeed_keys['vat_rate'] = $export_columns['vat_rate'];                 
                 unset($export_columns['title'], $export_columns['language'], $export_columns['currency'], $export_columns['price_without_vat'], $export_columns['vat_rate'] , $export_columns['AttributeColor'], $export_columns['AttributeSize'] );
                 $export_columns['Price'] = 'Price';
                 if($this->max_variation_count > 0 ){
@@ -411,10 +417,6 @@ if (!class_exists('Webtoffee_Product_Feed_Sync_Fruugo_Export')) {
             
             $product_id = $product_object->get_id();
             $product = get_post($product_id);
-
-            $csv_columns = $export_columns;
-
-            $export_columns = !empty($csv_columns) ? $csv_columns : array();
 
             $row = array();
 
@@ -653,7 +655,7 @@ if (!class_exists('Webtoffee_Product_Feed_Sync_Fruugo_Export')) {
                $description = array(
                    'Language' => apply_filters('wt_feed_filter_product_language', 'en', $this->product),
                    'Title' => $this->title($catalog_attr, $product_attr, $export_columns),
-                   'Description' => $description
+                   'Description' => $this->wt_remove_emoji( $description )
                    
                );
                if($this->product->is_type('variation')){
@@ -689,6 +691,45 @@ if (!class_exists('Webtoffee_Product_Feed_Sync_Fruugo_Export')) {
             return apply_filters('wt_feed_filter_product_description', $description, $this->product);
         }
 
+        /**
+         * Remove emoji from string.
+         * https://stackoverflow.com/a/68155491/1117368
+         * @param type $string
+         * @return type
+         */
+        public function wt_remove_emoji($string)
+        {
+            // Match Enclosed Alphanumeric Supplement
+            $regex_alphanumeric = '/[\x{1F100}-\x{1F1FF}]/u';
+            $clear_string = preg_replace($regex_alphanumeric, '', $string);
+
+            // Match Miscellaneous Symbols and Pictographs
+            $regex_symbols = '/[\x{1F300}-\x{1F5FF}]/u';
+            $clear_string = preg_replace($regex_symbols, '', $clear_string);
+
+            // Match Emoticons
+            $regex_emoticons = '/[\x{1F600}-\x{1F64F}]/u';
+            $clear_string = preg_replace($regex_emoticons, '', $clear_string);
+
+            // Match Transport And Map Symbols
+            $regex_transport = '/[\x{1F680}-\x{1F6FF}]/u';
+            $clear_string = preg_replace($regex_transport, '', $clear_string);
+
+            // Match Supplemental Symbols and Pictographs
+            $regex_supplemental = '/[\x{1F900}-\x{1F9FF}]/u';
+            $clear_string = preg_replace($regex_supplemental, '', $clear_string);
+
+            // Match Miscellaneous Symbols
+            $regex_misc = '/[\x{2600}-\x{26FF}]/u';
+            $clear_string = preg_replace($regex_misc, '', $clear_string);
+
+            // Match Dingbats
+            $regex_dingbats = '/[\x{2700}-\x{27BF}]/u';
+            $clear_string = preg_replace($regex_dingbats, '', $clear_string);
+
+            return $clear_string;
+        }        
+        
         /**
          * Get product description with HTML tags.
          *
@@ -1662,9 +1703,13 @@ if (!class_exists('Webtoffee_Product_Feed_Sync_Fruugo_Export')) {
             if (isset($this->form_data['advanced_form_data']['wt_pf_file_as']) && 'xml' === $this->form_data['advanced_form_data']['wt_pf_file_as']) {
                 $price = array(
                     'Currency' => $this->currency($catalog_attr, $product_attr, $export_columns),
-                    'NormalPriceWithoutVAT' => $this->price_without_vat($catalog_attr, $product_attr, $export_columns),
-                    'VATRate' => $this->vat_rate($catalog_attr, $product_attr, $export_columns)
+                    'NormalPriceWithoutVAT' => $this->price_without_vat($catalog_attr, $product_attr, $export_columns)
                 );
+                if( strpos($this->fruugo_xml_skipfeed_keys['vat_rate'], 'wt_static_map_vl:') !== false) {
+                    $price['VATRate'] = str_replace('wt_static_map_vl:', '', $this->fruugo_xml_skipfeed_keys['vat_rate']);
+                }else{
+                    $price['VATRate'] = $this->vat_rate($catalog_attr, $product_attr, $export_columns);
+                }
             }else{ 
             
                 $price = $this->product->get_regular_price();

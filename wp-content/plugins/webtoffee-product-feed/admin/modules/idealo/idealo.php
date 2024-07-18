@@ -124,7 +124,7 @@ if (!class_exists('Webtoffee_Product_Feed_Sync_Idealo')) {
 		 */
 		public function wt_pf_exporter_post_types_basic($arr) {
 
-			$arr['idealo'] = __('Idealo Shop', 'webtoffee-product-feed');
+			$arr['idealo'] = __('Idealo', 'webtoffee-product-feed');
 			return $arr;
 		}
 

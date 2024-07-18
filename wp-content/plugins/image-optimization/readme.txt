@@ -4,7 +4,7 @@ Tags: image optimization, image compression, convert webp, resize images, perfor
 Requires at least: 6.2
 Tested up to: 6.4
 Requires PHP: 7.4
-Stable tag: 1.3.0
+Stable tag: 1.4.1
 License: GPL-3
 License URI: https://www.gnu.org/licenses/gpl-3.0.en.html
 
@@ -114,6 +114,16 @@ Yes, the Elementor team offers full support for image optimization questions. Yo
 3. Image Optimizer - Bulk Actions and Individual Actions in the Media Library
 
 == Changelog ==
+= 1.4.1 - 2024-07-08 =
+* Fix: API error message displayed when trying to reconnect
+
+= 1.4.0 - 2024-06-26 =
+* New: Implement to "One Step" connect & activate
+* Tweak: New error message for JPEG/Lossless not converted to WebP
+* Tweak: Description string of convert to webP
+* Fix: Image not resizing when height and width are equal
+* Fix: Pointer is displayed for non-admin users
+* Fix: Overall savings for optimized images is not correct
 
 = 1.3.0 - 2024-03-05 =
 * Tweak: Updated reoptimization option when changing settings

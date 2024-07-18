@@ -78,7 +78,7 @@ class Settings extends \WC_Settings_Page {
 				'desc'    => __( 'Loads wishlist items via AJAX to bypass the cache', 'wcboost-wishlist' ),
 				'type'    => 'checkbox',
 				'id'      => 'wcboost_wishlist_ajax_bypass_cache',
-				'default' => defined( 'WP_CACHE' ) && WP_CACHE ? 'yes' : 'no',
+				'default' => 'no',
 			],
 			[
 				'name'    => __( 'Auto removal', 'wcboost-wishlist' ),

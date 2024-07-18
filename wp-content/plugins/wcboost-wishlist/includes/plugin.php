@@ -3,17 +3,21 @@ namespace WCBoost\Wishlist;
 
 defined( 'ABSPATH' ) || exit;
 
+use WCBoost\Packages\Manager as Packages_Manager;
+
 /**
  * Plugin main class
  */
 final class Plugin {
 
 	/**
-	 * Plugin version.
+	 * Plugin properties
 	 *
-	 * @var string
+	 * @since 1.0.14
+	 *
+	 * @var array
 	 */
-	public $version = '1.0.11';
+	private $props = [];
 
 	/**
 	 * Query instance.
@@ -21,6 +25,13 @@ final class Plugin {
 	 * @var \WCBoost\Wishlist\Query
 	 */
 	public $query;
+
+	/**
+	 * Packages manager
+	 *
+	 * @var \WCBoost\Packages\Manager
+	 */
+	protected $packages_manager;
 
 	/**
 	 * The single instance of the class.
@@ -58,9 +69,35 @@ final class Plugin {
 	}
 
 	/**
+	 * Magic method to load in-accessible properties on demand
+	 *
+	 * @since 1.0.13
+	 *
+	 * @param  string $prop
+	 *
+	 * @return mixed
+	 */
+	public function __get( $prop ) {
+		switch ( $prop ) {
+			case 'version':
+				if ( empty( $this->props['version'] ) ) {
+					$plugin = get_plugin_data( WCBOOST_WISHLIST_FILE );
+					$this->props['version'] = $plugin['Version'];
+				}
+				return  $this->props['version'];
+				break;
+
+			case 'packages':
+				return $this->packages_manager;
+				break;
+		}
+	}
+
+	/**
 	 * Constructor
 	 */
 	public function __construct() {
+		$this->load_packages();
 		$this->includes();
 		$this->init();
 		$this->init_hooks();
@@ -72,7 +109,7 @@ final class Plugin {
 	 * @return string
 	 */
 	public function plugin_url( $path = '/' ) {
-		return untrailingslashit( plugins_url( $path, dirname( __FILE__ ) ) );
+		return untrailingslashit( plugins_url( $path, WCBOOST_WISHLIST_FILE ) );
 
 	}
 
@@ -82,7 +119,7 @@ final class Plugin {
 	 * @return string
 	 */
 	public function plugin_path() {
-		return untrailingslashit( plugin_dir_path( dirname( __FILE__ ) ) );
+		return untrailingslashit( plugin_dir_path( WCBOOST_WISHLIST_FILE ) );
 	}
 
 	/**
@@ -115,6 +152,10 @@ final class Plugin {
 		include_once __DIR__ . '/data-stores/wishlist-item.php';
 		include_once __DIR__ . '/customizer/customizer.php';
 		include_once __DIR__ . '/widgets/wishlist.php';
+
+		if ( is_admin() ) {
+			include_once __DIR__ . '/admin/templates-notice.php';
+		}
 	}
 
 	/**
@@ -133,6 +174,10 @@ final class Plugin {
 
 		Customize\Customizer::instance();
 		Frontend::instance();
+
+		if ( is_admin() ) {
+			new Admin\Templates_Notice();
+		}
 	}
 
 	/**
@@ -140,7 +185,6 @@ final class Plugin {
 	 */
 	protected function init_hooks() {
 		add_action( 'init', [ $this, 'load_translation' ] );
-		add_action( 'switch_blog', [ $this, 'define_tables' ], 0 );
 
 		add_filter( 'woocommerce_data_stores', [ $this, 'register_data_stores' ] );
 		add_filter( 'woocommerce_get_wishlist_page_id', [ $this, 'wishlist_page_id' ] );
@@ -154,25 +198,18 @@ final class Plugin {
 	 * Load textdomain.
 	 */
 	public function load_translation() {
-		load_plugin_textdomain( 'wcboost-wishlist', false, dirname( plugin_basename( __FILE__ ), 2 ) . '/languages/' );
+		load_plugin_textdomain( 'wcboost-wishlist', false, dirname( plugin_basename( WCBOOST_WISHLIST_FILE ) ) . '/languages/' );
 	}
 
 	/**
 	 * Register custom tables within $wpdb object.
+	 *
+	 * @deprecated 1.1.0
 	 */
 	public function define_tables() {
-		global $wpdb;
+		_deprecated_function( __METHOD__, '1.1.0', 'WCBoost\Wishlist\Install::define_tables' );
 
-		// List of tables without prefixes.
-		$tables = [
-			'wishlists'      => 'wcboost_wishlists',
-			'wishlist_items' => 'wcboost_wishlist_items',
-		];
-
-		foreach ( $tables as $name => $table ) {
-			$wpdb->$name    = $wpdb->prefix . $table;
-			$wpdb->tables[] = $table;
-		}
+		Install::define_tables();
 	}
 
 	/**
@@ -220,5 +257,27 @@ final class Plugin {
 	 */
 	public function register_widgets() {
 		register_widget( '\WCBoost\Wishlist\Widget\Wishlist' );
+	}
+
+	/**
+	 * Load packages
+	 *
+	 * @since 1.0.13
+	 *
+	 * @return void
+	 */
+	protected function load_packages() {
+		if ( ! class_exists( 'WCBoost\Packages\Manager' ) ) {
+			include_once $this->plugin_path() . '/packages/manager.php';
+		}
+
+		$this->packages_manager = new Packages_Manager( $this->plugin_path() . '/packages' );
+
+		if ( is_admin() ) {
+			$this->packages_manager->load_package( 'templates-status' );
+
+			$templates_status = Packages_Manager::package( 'templates-status' );
+			$templates_status->add_templates_path( 'WCBoost - Wishlist', $this->plugin_path() . '/templates/' );
+		}
 	}
 }

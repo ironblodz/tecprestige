@@ -13,7 +13,7 @@ use ImageOptimization\Classes\Image\{
 use ImageOptimization\Classes\Async_Operation\Exceptions\Async_Operation_Exception;
 use ImageOptimization\Classes\Logger;
 use ImageOptimization\Classes\Utils;
-use ImageOptimization\Modules\Oauth\Classes\Exceptions\Quota_Exceeded_Error;
+use ImageOptimization\Classes\Exceptions\Quota_Exceeded_Error;
 use ImageOptimization\Modules\Optimization\{
 	Classes\Exceptions\Bulk_Token_Expired_Error,
 	Classes\Exceptions\Image_File_Already_Exists_Error,

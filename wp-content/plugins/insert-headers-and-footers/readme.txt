@@ -2,9 +2,9 @@
 Contributors: WPbeginner, smub, gripgrip, wpcodeteam
 Tags: code, css, php, header, code snippets
 Requires at least: 4.6
-Tested up to: 6.5
+Tested up to: 6.6
 Requires PHP: 5.5
-Stable tag: 2.1.12
+Stable tag: 2.2.0
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -231,6 +231,21 @@ WPCode comes with a ready-made code snippets library that allows you to replace 
 ... and basically any plugin that adds a functionality which can be added via custom code snippets.
 
 == Changelog ==
+
+= 2.2.0 =
+* New: We updated the conditional logic rules picker for more clarity and ease of use.
+* New: We expanded our automatic cache clearing to include the Swift Performance plugin.
+* Tweak: The Page URL conditional logic option now supports query params and wp-admin URLs.
+
+= 2.1.14 =
+* New: When making changes to the Global Header & Footer WPCode will attempt to automatically clear page cache for popular caching plugins.
+* New: Save your snippet with a keyboard shortcut by pressing CTRL+S (Windows) or CMD+S (Mac) in the snippet editor.
+* Tweak: Prevent error when TinyMCE is disabled by other plugins.
+
+= 2.1.13 =
+* New: We added admin-specific locations for header and footer to streamline customizations in the wp-admin area.
+* New: The code editor height can now be adjusted directly from the snippet editor screen. Auto-height is still available as an option on the settings page.
+* Fix: When making changes to a snippet, the function to prevent you from navigating away was no longer working.
 
 = 2.1.12 =
 * New: We added a new way to execute PHP snippets "On Demand" - look for the "On Demand" location in the Auto Insert settings.

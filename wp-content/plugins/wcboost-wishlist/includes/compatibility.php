@@ -4,32 +4,15 @@
  */
 namespace WCBoost\Wishlist;
 
+use WCBoost\Packages\Utilities\Singleton_Trait;
+
 defined( 'ABSPATH' ) || exit;
 
 /**
  * Compatibility class
  */
 class Compatibility {
-
-	/**
-	 * The single instance of the class
-	 *
-	 * @var WCBoost\Wishlist\Compatibility
-	 */
-	protected static $_instance = null;
-
-	/**
-	 * Main instance
-	 *
-	 * @return WCBoost\Wishlist\Compatibility
-	 */
-	public static function instance() {
-		if ( null == self::$_instance ) {
-			self::$_instance = new self();
-		}
-
-		return self::$_instance;
-	}
+	use Singleton_Trait;
 
 	/**
 	 * Class constructor

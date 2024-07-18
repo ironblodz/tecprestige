@@ -4,7 +4,7 @@
  * Description: Our WooCommerce Wishlist plugin enables customers to create personalized collections of products that they like but aren't ready to purchase immediately. Enhance the shopping experience by saving products for further consideration, making decisions easier than ever.
  * Plugin URI: https://wcboost.com/plugin/woocommerce-wishlist/?utm_source=wp-plugins&utm_campaign=plugin-uri&utm_medium=wp-dash
  * Author: WCBoost
- * Version: 1.0.12
+ * Version: 1.1.0
  * Author URI: https://wcboost.com/?utm_source=wp-plugins&utm_campaign=author-uri&utm_medium=wp-dash
  *
  * Text Domain: wcboost-wishlist
@@ -14,7 +14,7 @@
  * Requires at least: 4.5
  * Tested up to: 6.5
  * WC requires at least: 3.0.0
- * WC tested up to: 8.8
+ * WC tested up to: 9.0
  *
  * @package WCBoost
  * @category Wishlist
@@ -26,6 +26,14 @@ if ( ! defined( 'ABSPATH' ) ) {
 
 define( 'WCBOOST_WISHLIST_FREE', plugin_basename( __FILE__ ) );
 
+if ( ! defined( 'WCBOOST_WISHLIST_FILE' ) ) {
+	define( 'WCBOOST_WISHLIST_FILE', __FILE__ );
+}
+
+if ( ! class_exists( '\WCBoost\Wishlist\Plugin' ) ) {
+	require_once plugin_dir_path( __FILE__ ) . 'includes/plugin.php';
+}
+
 // Declare compatibility with WooCommerce features.
 add_action( 'before_woocommerce_init', function() {
 	if ( class_exists( \Automattic\WooCommerce\Utilities\FeaturesUtil::class ) ) {
@@ -34,17 +42,28 @@ add_action( 'before_woocommerce_init', function() {
 } );
 
 // Auto-deactivate the free version.
-add_action( 'plugins_loaded', function() {
-	if ( defined( 'WCBOOST_WISHLIST_PRO' ) ) {
-		if ( ! function_exists( 'deactivate_plugins' ) ) {
-			require_once ABSPATH . 'wp-admin/includes/plugin.php';
+if ( ! function_exists( 'wcboost_wishlist_installation_check' ) ) {
+	/**
+	 * Check condtions for plugin installation and perform additional actions
+	 *
+	 * @since 1.1.0
+	 *
+	 * @return void
+	 */
+	function wcboost_wishlist_installation_check() {
+		if ( defined( 'WCBOOST_WISHLIST_PRO' ) && defined( 'WCBOOST_WISHLIST_FREE' ) ) {
+			if ( ! function_exists( 'deactivate_plugins' ) ) {
+				require_once ABSPATH . 'wp-admin/includes/plugin.php';
+			}
+
+			deactivate_plugins( WCBOOST_WISHLIST_FREE );
+
+			set_transient( 'wcboost_wishlist_auto_deactivate_free_version', time(), DAY_IN_SECONDS );
 		}
-
-		deactivate_plugins( WCBOOST_WISHLIST_FREE );
-
-		set_transient( 'wcboost_wishlist_auto_deactivate_free_version', 5 * MINUTE_IN_SECONDS );
 	}
-} );
+
+	add_action( 'plugins_loaded', 'wcboost_wishlist_installation_check' );
+}
 
 if ( ! function_exists( 'wcboost_wishlist' ) ) {
 
@@ -54,10 +73,6 @@ if ( ! function_exists( 'wcboost_wishlist' ) ) {
 	function wcboost_wishlist() {
 		if ( ! class_exists( 'WooCommerce' ) ) {
 			return;
-		}
-
-		if ( ! class_exists( '\WCBoost\Wishlist\Plugin' ) ) {
-			require_once plugin_dir_path( __FILE__ ) . 'includes/plugin.php';
 		}
 
 		return \WCBoost\Wishlist\Plugin::instance();

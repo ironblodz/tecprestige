@@ -107,7 +107,7 @@ if (!class_exists('Webtoffee_Product_Feed_Sync_Pinterest_Rss')) {
 		 */
 		public function wt_pf_exporter_post_types_basic($arr) {
 
-			$arr['pinterest_rss'] = __('Pinterest RSS', 'webtoffee-product-feed-pro');
+			$arr['pinterest_rss'] = __('Pinterest RSS', 'webtoffee-product-feed');
 			return $arr;
 		}
 

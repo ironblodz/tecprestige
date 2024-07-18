@@ -13,12 +13,13 @@ use ImageOptimization\Classes\Image\{
 	Image_Status
 };
 use ImageOptimization\Classes\Logger;
-use ImageOptimization\Modules\Oauth\Classes\Exceptions\Quota_Exceeded_Error;
+use ImageOptimization\Classes\Exceptions\Quota_Exceeded_Error;
 use ImageOptimization\Modules\Oauth\Components\Connect;
 use ImageOptimization\Modules\Optimization\Classes\Exceptions\Image_File_Already_Exists_Error;
 use ImageOptimization\Modules\Optimization\Classes\Optimize_Image;
 use ImageOptimization\Modules\Settings\Classes\Settings;
 use Throwable;
+use ImageOptimization\Plugin;
 
 if ( ! defined( 'ABSPATH' ) ) {
 	exit; // Exit if accessed directly.
@@ -30,7 +31,10 @@ class Upload_Optimization {
 			return;
 		}
 
-		if ( ! Connect::is_connected() || ! Connect::is_activated() ) {
+		// @var ImageOptimizer/Modules/ConnectManager/Module
+		$module = Plugin::instance()->modules_manager->get_modules( 'connect-manager' );
+
+		if ( ! $module->connect_instance->is_connected() || ! $module->connect_instance->is_activated() ) {
 			return;
 		}
 

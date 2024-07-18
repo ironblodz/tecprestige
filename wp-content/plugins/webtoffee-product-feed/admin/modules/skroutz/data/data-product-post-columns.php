@@ -11,9 +11,9 @@ $post_columns = array(
             'description'                  => 'Product Description[description]',
             'link'                         => 'Product URL[link]',
             'mobile_link'                  => 'Product URL[mobile_link]',
-            'product_type'                 => 'Product Categories[product_type] ',
-            'image_link'                   => 'Main Image[image_link]',
-            'additional_image_link'        => 'Additional Images [additional_image_link]',
+            'category'                     => 'Product Categories[category] ',
+            'image'                        => 'Main Image[image]',
+            'additionalimage'              => 'Additional Images [additionalimage]',
             'condition'                    => 'Condition[condition]',
 );
 

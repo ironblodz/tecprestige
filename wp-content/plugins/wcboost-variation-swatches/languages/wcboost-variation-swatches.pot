@@ -2,14 +2,14 @@
 # This file is distributed under the same license as the WCBoost - Variation Swatches plugin.
 msgid ""
 msgstr ""
-"Project-Id-Version: WCBoost - Variation Swatches 1.0.15\n"
+"Project-Id-Version: WCBoost - Variation Swatches 1.0.17\n"
 "Report-Msgid-Bugs-To: https://wordpress.org/support/plugin/wcboost-variation-swatches\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"POT-Creation-Date: 2024-03-18T01:48:21+00:00\n"
+"POT-Creation-Date: 2024-06-24T01:05:13+00:00\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "X-Generator: WP-CLI 2.9.0\n"
 "X-Domain: wcboost-variation-swatches\n"
@@ -19,7 +19,7 @@ msgid "WCBoost - Variation Swatches"
 msgstr ""
 
 #. Plugin URI of the plugin
-msgid "https://wcboost.com/plugin/woocommerce-variation-swatches/?utm_source=wp-plugins&utm_campaign=plugin-uri&utm_medium=wp-dash"
+msgid "https://wcboost.com/plugin/woocommerce-variation-swatches/"
 msgstr ""
 
 #. Description of the plugin
@@ -31,7 +31,7 @@ msgid "WCBoost"
 msgstr ""
 
 #. Author URI of the plugin
-msgid "https://wcboost.com/?utm_source=wp-plugins&utm_campaign=author-uri&utm_medium=wp-dash"
+msgid "https://wcboost.com/"
 msgstr ""
 
 #. translators: %s is a datetime
@@ -291,6 +291,22 @@ msgstr ""
 msgid "Show the selected attribute's label"
 msgstr ""
 
-#: includes/plugin.php:143
+#: includes/plugin.php:172
 msgid "Go Pro"
+msgstr ""
+
+#: includes/plugin.php:196
+msgid "View plugin documentation"
+msgstr ""
+
+#: includes/plugin.php:196
+msgid "Docs"
+msgstr ""
+
+#: includes/plugin.php:197
+msgid "Visit community support forums"
+msgstr ""
+
+#: includes/plugin.php:197
+msgid "Community support"
 msgstr ""

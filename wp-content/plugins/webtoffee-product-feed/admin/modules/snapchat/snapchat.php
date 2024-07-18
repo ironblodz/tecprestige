@@ -121,7 +121,7 @@ if (!class_exists('Webtoffee_Product_Feed_Sync_Snapchat')) {
 		 */
 		public function wt_pf_exporter_post_types_basic($arr) {
 
-			$arr['snapchat'] = __('Snapchat Shop', 'webtoffee-product-feed');
+			$arr['snapchat'] = __('Snapchat', 'webtoffee-product-feed');
 			return $arr;
 		}
 

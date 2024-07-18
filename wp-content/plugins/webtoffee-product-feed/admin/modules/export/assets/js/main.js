@@ -16,6 +16,7 @@ var wt_pf_basic_export=(function( $ ) {
 		only_enabled_data:false,
 		on_rerun:false,
 		rerun_id:0,
+                export_finished:false,
 		Set:function()
 		{
 			this.step_keys=Object.keys(wt_pf_export_basic_params.steps);
@@ -253,6 +254,12 @@ var wt_pf_basic_export=(function( $ ) {
 		{
 			this.page_overlay=true;
 			this.set_ajax_page_loader();
+
+                        if(this.rerun_id <= 0 && action == 'export'){
+                            $('.pf_export_btn').attr("disabled", true);
+                            $('.wt_pf_export_action_btn').attr("disabled", true);
+                        }
+
 			wt_pf_basic_export.export_ajax_xhr =  $.ajax({
 				type: 'POST',
 				url:wt_pf_basic_params.ajax_url,
@@ -281,6 +288,7 @@ var wt_pf_basic_export=(function( $ ) {
                                                                 $('.wt_pf_loader_info_box').css({'background': 'white', 'color': 'black', 'box-shadow': '2px 2px 4px 2px #ccc'});
 								wt_pf_basic_export.set_export_progress_info(data.msg);
                                                                 wt_pf_basic_export.reg_copy_action();
+                                                                wt_pf_basic_export.export_finished = true;
 								//wt_pf_notify_msg.success(wt_pf_basic_params.msgs.success);
                                                             }
 			
@@ -327,6 +335,10 @@ var wt_pf_basic_export=(function( $ ) {
 						{
 							wt_pf_notify_msg.error(wt_pf_basic_params.msgs.error);
 						}
+                                                if(this.rerun_id <= 0){
+                                                    $('.pf_export_btn').attr("disabled", true);
+                                                    $('.wt_pf_export_action_btn').attr("disabled", true);
+                                                }
 					}
 				},
 				error:function()
@@ -351,7 +363,19 @@ var wt_pf_basic_export=(function( $ ) {
 
 				if(action_type=='step')
 				{
-                                        if(action=='category_mapping'){                                            
+                                        if(action=='category_mapping'){   
+                                            
+                                            
+                                            // When proceeding to the category mapping page eliminate the need for users to scroll up
+                                            const section = $('.wt_pf_step_head_post_type_name');       
+                                            if (section) {
+                                                const sectionTop = section.offset();				
+                                                window.scrollTo({
+                                                    top: sectionTop.top,
+                                                    behavior: "smooth"
+                                                });
+                                            }
+                                                                                    
                                             $('.wc-enhanced-select').select2();
                                             $( document.body ).trigger( 'wc-enhanced-select-init' );
                                             $('.wt-wc-enhanced-search').css('width', '300px');
@@ -369,6 +393,7 @@ var wt_pf_basic_export=(function( $ ) {
                                 var temp_err_message = wt_pf_basic_params.msgs.error;
                                 wt_pf_basic_params.msgs.error = wt_pf_basic_params.msgs.export_canceled;
                                 wt_pf_basic_export.export_ajax_xhr.abort();
+                                wt_pf_basic_export.export_finished = true;
                                 wt_pf_basic_params.msgs.error = temp_err_message;
                                 var progressval = 1;
                                 var elm = document.getElementsByClassName('progressab')[0];
@@ -1155,7 +1180,9 @@ var wt_pf_basic_export=(function( $ ) {
                 warn_on_refresh: function () {
                     window.onbeforeunload = function (event)
                     {
-                        return confirm("Changes that you made may not be saved.");
+                        if(!wt_pf_basic_export.export_finished){
+                            return confirm("Changes that you made may not be saved.");
+                        }
                     };
                 },
                 capitalizeFirstLetter: function(string) {

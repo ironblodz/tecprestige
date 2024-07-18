@@ -28,6 +28,7 @@ if ( ! defined( 'WPINC' ) ) {
 	<?php
 	if(isset($history_list) && is_array($history_list) && count($history_list)>0)
 	{
+
 		?>
 		<table class="wp-list-table widefat fixed striped history_list_tb">
 		<thead>
@@ -60,7 +61,13 @@ if ( ! defined( 'WPINC' ) ) {
 					<?php echo absint($i);?></td>
 				<?php $form_data=maybe_unserialize($history_item['data']); ?>
 				<td><?php echo esc_html( pathinfo($history_item['file_name'], PATHINFO_FILENAME) ); ?></td>
-				<td><?php echo esc_html( ucfirst( $history_item['item_type'] ) ); ?></td>
+                                <?php                                 
+                                $catalog_type = isset( $form_data['post_type_form_data']['item_type'] ) ? $form_data['post_type_form_data']['item_type'] : '';
+                                if('' === $catalog_type ){
+                                    $catalog_type = isset( $form_data['post_type_form_data']['wt_pf_export_catalog_name'] ) ? esc_html( $form_data['post_type_form_data']['wt_pf_export_catalog_name'] ) : '';
+                                }
+                                ?>
+				<td><?php echo isset( $catalog_type ) ? esc_html( $catalog_type ) : ''; ?></td>
 				<td><?php echo esc_html( strtoupper(pathinfo($history_item['file_name'], PATHINFO_EXTENSION)) ); ?></td>
 				<td>
 					<?php echo esc_url( content_url().'/uploads/webtoffee_product_feed/'.($history_item['file_name']) ); ?><br/>
@@ -100,6 +107,7 @@ if ( ! defined( 'WPINC' ) ) {
                                         <?php if( isset($form_data['post_type_form_data']['item_gen_interval']) && 'manual' !== $form_data['post_type_form_data']['item_gen_interval'] ) { ?>
                                             <a class="wt_manage_feed_icons wt_pf_export_refresh_btn" href="javascript:void(0);" data-cron_id="<?php echo absint( $history_item['id'] ); ?>"><img src="<?php echo esc_url( WT_PRODUCT_FEED_PLUGIN_URL.'/assets/images/wt_fi_refresh.svg' );?>" alt="<?php esc_html_e('Refresh'); ?>" title="<?php esc_html_e('Refresh'); ?>"/></a>
                                         <?php } ?>
+                                        <a class="wt_pf_export_duplicate_btn wt_manage_feed_icons" href="javascript:void(0);" data-cron_id="<?php echo esc_attr( $history_item['id'] ); ?>"><img src="<?php echo esc_url( WT_PRODUCT_FEED_PLUGIN_URL.'/assets/images/wt_fi_duplicate.svg' );?>" alt="<?php esc_html_e('Duplicate'); ?>" title="<?php esc_html_e('Duplicate'); ?>"/></a>    
 				</td>
 			</tr>
 			<?php	

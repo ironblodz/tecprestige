@@ -82,7 +82,7 @@ class Webtoffee_Product_Feed_Sync {
 		if ( defined( 'WEBTOFFEE_PRODUCT_FEED_SYNC_VERSION' ) ) {
 			$this->version = WEBTOFFEE_PRODUCT_FEED_SYNC_VERSION;
 		} else {
-			$this->version = '2.2.0';
+			$this->version = '2.2.1';
 		}
 		$this->plugin_name = 'webtoffee-product-feed';
 		$this->plugin_base_name	 = WT_PRODUCT_FEED_BASE_NAME;
@@ -211,6 +211,7 @@ class Webtoffee_Product_Feed_Sync {
 		$this->loader->add_action('admin_menu',$plugin_admin, 'admin_menu',11);
 		
 		$this->loader->add_action('wp_ajax_wt_pf_save_settings_basic',$plugin_admin,'save_settings');
+                $this->loader->add_action('wp_ajax_wt_pf_save_settings_custom_fields',$plugin_admin,'save_settings_custom_fields');
 		
 		$this->loader->add_action( 'admin_action_' . WT_Fb_Catalog_Manager_Settings::DISCONNECT_ACTION, $plugin_admin, 'handle_disconnect' );
 		$this->loader->add_action( 'wp_ajax_wt_fbfeed_ajax_upload', $plugin_admin, 'wt_fbfeed_ajax_upload' );

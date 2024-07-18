@@ -67,6 +67,8 @@ if (!class_exists('Webtoffee_Product_Feed_Sync_Skroutz')) {
 			add_filter('wt_pf_feed_category_mapping', array($this, 'map_fb_category'), 10, 1);
 	
                         add_filter('wt_pf_exporter_alter_advanced_fields_basic', array($this, 'wt_exporter_set_default_formats'), 10, 3);
+                        
+                        add_filter('wt_feed_product_attributes_dropdown', array($this, 'product_attributes_dropdown'), 10, 3);
 			
 		}
 					
@@ -112,6 +114,27 @@ if (!class_exists('Webtoffee_Product_Feed_Sync_Skroutz')) {
 			return $steps;
 		}
                 
+                public function product_attributes_dropdown($attribute_dropdown, $export_channel, $selected=''){
+                    
+                    
+                    if( 'skroutz' === $export_channel ){
+                        
+                        $attribute_dropdown .= sprintf( '<option value="%s">%s</option>', 'category', 'Category' );
+                        $attribute_dropdown .= sprintf( '<option value="%s">%s</option>', 'image', 'Image' );
+                        $attribute_dropdown .= sprintf( '<option value="%s">%s</option>', 'additionalimage', 'Additionalimage' );
+                        
+                        if( $selected && strpos($selected, 'wt_static_map_vl:') !== false ){
+                            $selected = 'wt-static-map-vl';
+                        }
+                        if ( $selected && strpos( $attribute_dropdown, 'value="' . $selected . '"' ) !== false ) {
+                                $attribute_dropdown = str_replace( 'value="' . $selected . '"', 'value="' . $selected . '"' . ' selected', $attribute_dropdown );
+                        }
+                    }
+
+                        
+                    return $attribute_dropdown;
+                }                
+                
 		public function exporter_do_export($export_data, $base, $step, $form_data, $selected_template_data, $method_export, $batch_offset) {
 			if ($this->module_base != $base) {
 				return $export_data;
@@ -148,7 +171,7 @@ if (!class_exists('Webtoffee_Product_Feed_Sync_Skroutz')) {
 		public function wt_pf_exporter_post_types_basic($arr) {
 
 
-			$arr['skroutz'] = __('Skroutz Shop', 'webtoffee-product-feed');
+			$arr['skroutz'] = __('Skroutz', 'webtoffee-product-feed');
 			return $arr;
 		}
 

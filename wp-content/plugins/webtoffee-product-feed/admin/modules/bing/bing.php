@@ -168,7 +168,7 @@ if (!class_exists('Webtoffee_Product_Feed_Sync_Bing')) {
 		 */
 		public function wt_pf_exporter_post_types_basic($arr) {
 
-			$arr['bing'] = __('Bing Shop', 'webtoffee-product-feed');
+			$arr['bing'] = __('Bing Shopping', 'webtoffee-product-feed');
 			return $arr;
 		}
 

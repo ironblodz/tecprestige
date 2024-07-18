@@ -35,10 +35,7 @@ if (!defined('ABSPATH')) {
 		
 			<?php 
 			$wt_time_zone = Webtoffee_Product_Feed_Sync_Common_Helper::get_advanced_settings('default_time_zone'); 
-			if(!$wt_time_zone){
 			?>
-			<data><?php	esc_html_e( 'To switch to your website timezone'); ?> <a href="<?php echo esc_url( admin_url('admin.php?page=wt_import_export_for_woo') );?>" target="_blank" style="text-decoration:none;"> <?php esc_html_e( 'click here' ); ?> <em class="dashicons dashicons-external"></em></a></data>
-			<?php } ?>
 		
 		</div>
 

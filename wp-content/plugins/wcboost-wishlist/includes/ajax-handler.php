@@ -70,10 +70,12 @@ class Ajax_Handler {
 			}
 
 			wp_send_json_success( [
-				'fragments'    => self::get_refreshed_fragments(),
-				'wishlist_url' => $wishlist->get_public_url(),
-				'remove_url'   => $item->get_remove_url(),
-				'product_id'   => $product_id,
+				'fragments'      => self::get_refreshed_fragments(),
+				'wishlist_hash'  => $wishlist->get_id() ? md5( get_current_blog_id() . '_' . $wishlist->get_id() . '_' . $wishlist->get_wishlist_token() ) : '',
+				'wishlist_url'   => $wishlist->get_public_url(),
+				'wishlist_items' => self::get_wishlist_items( $wishlist_id ),
+				'remove_url'     => $item->get_remove_url(),
+				'product_id'     => $product_id,
 			] );
 		} else {
 			wp_send_json_error();
@@ -93,11 +95,13 @@ class Ajax_Handler {
 
 		if ( $was_removed && ! is_wp_error( $was_removed ) ) {
 			wp_send_json_success( [
-				'fragments'    => self::get_refreshed_fragments(),
-				'wishlist_url' => $wishlist->get_public_url(),
-				'restore_url'  => $item->get_restore_url(),
-				'add_url'      => $item->get_add_url(),
-				'product_id'   => $item->get_product()->get_id(),
+				'fragments'      => self::get_refreshed_fragments(),
+				'wishlist_hash'  => $wishlist->get_id() ? md5( get_current_blog_id() . '_' . $wishlist->get_id() . '_' . $wishlist->get_wishlist_token() ) : '',
+				'wishlist_url'   => $wishlist->get_public_url(),
+				'wishlist_items' => self::get_wishlist_items( $wishlist_id ),
+				'restore_url'    => $item->get_restore_url(),
+				'add_url'        => $item->get_add_url(),
+				'product_id'     => $item->get_product()->get_id(),
 			] );
 		} else {
 			wp_send_json_error();
@@ -124,10 +128,13 @@ class Ajax_Handler {
 			}
 		}
 
-		wp_send_json_success( [
-			'fragments' => $fragments,
-		] );
+		$wishlist = Helper::get_wishlist();
 
+		wp_send_json_success( [
+			'fragments'      => $fragments,
+			'wishlist_hash'  => $wishlist->get_id() ? md5( get_current_blog_id() . '_' . $wishlist->get_id() . '_' . $wishlist->get_wishlist_token() ) : '',
+			'wishlist_items' => self::get_wishlist_items(),
+		] );
 	}
 
 	/**
@@ -145,5 +152,28 @@ class Ajax_Handler {
 		];
 
 		return apply_filters( 'wcboost_wishlist_add_to_wishlist_fragments', $data );
+	}
+
+	/**
+	 * Get product ids of the wishlist
+	 *
+	 * @param  string|bool $wishlist_id
+	 *
+	 * @return void
+	 */
+	public static function get_wishlist_items( $wishlist_id = false ) {
+		$wishlist = Helper::get_wishlist( $wishlist_id );
+		$items    = $wishlist->get_items();
+		$data     = [];
+
+		foreach ( $items as $item ) {
+			$id = $item->get_variation_id() ? $item->get_variation_id() : $item->get_product_id();
+			$data[ $id ] = [
+				'quantity'   => $item->get_quantity(),
+				'remove_url' => $item->get_remove_url(),
+			];
+		}
+
+		return $data;
 	}
 }

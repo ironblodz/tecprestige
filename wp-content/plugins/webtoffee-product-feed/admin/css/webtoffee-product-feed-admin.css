@@ -17,7 +17,8 @@
 }
 
 .wt_fbfeed_view_log{  }
-.wt_fbfeed_log_loader{ width:100%; height:200px; text-align:center; line-height:150px; font-size:14px; font-style:italic; }
+.wt_fbfeed_view_log_btn{cursor: pointer;}
+.wt_fbfeed_log_loader{ width:100%; height:200px; text-align:center; line-height:30px; font-size:14px; font-style:italic; }
 .wt_fbfeed_log_container{ padding:25px; }
 .wt_fbfeed_raw_log{ text-align:left; font-size:14px; }
 .log_view_tb th, .log_view_tb td{ text-align:center; }

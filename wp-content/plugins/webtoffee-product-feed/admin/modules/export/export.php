@@ -49,11 +49,12 @@ class Webtoffee_Product_Feed_Sync_Export
                         'txt'=>__('TXT')
 		);
 
+                $feed_page_heading = isset( $_GET['wt_pf_rerun'] ) ? __('Edit feed') : __('Create new feed');
 		/* default step list */
 		$this->steps=array
 		(
 			'post_type'=>array(
-				'title'=>__('Create new feed'),
+				'title'=> $feed_page_heading,
 				'description'=>__('Fill the basic feed settings to proceed.'),
 			),
 			/*
@@ -266,7 +267,7 @@ class Webtoffee_Product_Feed_Sync_Export
 			$this->module_base.'-sub'=>array(
 				'submenu',
 				$this->module_id,
-				__('Create new feed'),
+				isset( $_GET['wt_pf_rerun'] ) ? __('Edit feed') : __('Create new feed'),
 				__('Create new feed'), 
 				apply_filters('wt_import_export_allowed_capability', 'export'),
 				$this->module_id,
@@ -846,20 +847,34 @@ class Webtoffee_Product_Feed_Sync_Export
 				$out['finished']=1; //finished
 
                                 $history_page_url = '#';
+                                $export_page_url = '#';
                                 if(Webtoffee_Product_Feed_Sync_Admin::module_exists('history'))
                                 {
                                         $history_module_id= Webtoffee_Product_Feed_Sync::get_module_id('history');
-                                        $history_page_url=admin_url('admin.php?page='.$history_module_id);                                        
+                                        $history_page_url= esc_url( admin_url('admin.php?page='.$history_module_id) );
+                                        $export_module_id= Webtoffee_Product_Feed_Sync::get_module_id('export');
+                                        $export_page_url= esc_url( admin_url( 'admin.php?page='.$export_module_id ) );
                                 }
                                 
-                                $raw_file_url = content_url().'/uploads/webtoffee_product_feed/'.($file_name);                                
+                                $raw_file_url = esc_url( content_url().'/uploads/webtoffee_product_feed/'.($file_name) ); 
+                                $is_edit = ( !empty( $_REQUEST['rerun_id'] ) and $_REQUEST['rerun_id'] > 0 ) ? true : false;
+                                
+                                if($is_edit){
+                                    $success_message =  __('Feed updated successfully!');
+                                    $edit_link = '';
+                                }else{
+                                    $success_message = __('Feed generated successfully!');
+                                    $edit_link = '<a class="button media-butto" style="margin-top:10px;margin-right:10px;font-weight:bold;padding:5px 15px" onclick="wt_pf_basic_export.hide_export_info_box();" href="'.esc_attr( $export_page_url ).'&wt_pf_rerun='.$export_id.'" >'.__('Edit').'</a>';
+                                }
+                                                                
                                 
 				$msg = '<span class="wt_pf_popup_close dashicons dashicons-dismiss" style="line-height:10px;width:auto" onclick="wt_pf_basic_export.hide_export_info_box();"></span>'; 
-                                $msg.= '<h2><span class="dashicons dashicons-yes" style="background:#20B93E;color:#fff;border-radius:15px; margin-right:10px;padding:5px;"></span><br/><p></p><span style="font-weight:400">' . __('Feed generated successfully!') . '</span></h2>';                                
+                                $msg.= '<h2><span class="dashicons dashicons-yes" style="background:#20B93E;color:#fff;border-radius:15px; margin-right:10px;padding:5px;"></span><br/><p></p><span style="font-weight:400">' . esc_html( $success_message ) . '</span></h2>';                                
                                 $msg.='<span class="wt_pf_info_box_finished_text" style="font-size: 10px; display:block">';                                
-                                $msg.='<a class="button media-button" style="margin-top:10px;margin-right:10px;font-weight:bold;padding:5px 15px" onclick="wt_pf_basic_export.hide_export_info_box();" target="_blank" href="'.$out['file_url'].'" ><span style="margin-top: 7px;margin-right: 4px;" class="dashicons dashicons-download"></span>'.__('Download').'</a>'
-                                        .'<a class="button media-butto" style="margin-top:10px;margin-right:10px;font-weight:bold;padding:5px 15px" onclick="wt_pf_basic_export.hide_export_info_box();" target="_blank" href="'.$history_page_url.'" >'.__('Manage feeds').'</a>'
-                                        .'<button class="button button-primary wt_pf_copy" style="margin-top:10px;font-weight:bold;padding:5px 15px" data-uri="'.$raw_file_url.'" >'.__('Copy URL').'</a>'
+                                $msg.='<a class="button media-button" style="margin-top:10px;margin-right:10px;font-weight:bold;padding:5px 15px" onclick="wt_pf_basic_export.hide_export_info_box();" target="_blank" href="'.esc_attr( $out['file_url'] ).'" ><span style="margin-top: 7px;margin-right: 4px;" class="dashicons dashicons-download"></span>'.__('Download').'</a>'
+                                        .$edit_link
+                                        .'<a class="button media-butto" style="margin-top:10px;margin-right:10px;font-weight:bold;padding:5px 15px" onclick="wt_pf_basic_export.hide_export_info_box();" target="_blank" href="'.esc_attr( $history_page_url ).'" >'.__('Manage feeds').'</a>'
+                                        .'<button class="button button-primary wt_pf_copy" style="margin-top:10px;font-weight:bold;padding:5px 15px" data-uri="'.esc_attr( $raw_file_url ).'" >'.__('Copy URL').'</a>'
                                         . '</span>';
                                
                                                                
@@ -1049,11 +1064,15 @@ class Webtoffee_Product_Feed_Sync_Export
 	}
         public function product_data_panels() {
 
+            $addional_feed_fields = apply_filters('wt_feed_additional_product_fields', true);
+            if( $addional_feed_fields ){
 		include 'views/html-product-data-feed.php';
+            }
 	}
         public function save_product_data( $post_id ) {
 		
-		// Save product properties.
+
+            // Save product properties.
 		$props = apply_filters( 'wt_feed_product_additional_data_fields', array( 
 			'discard',
 			'brand',
@@ -1084,7 +1103,11 @@ class Webtoffee_Product_Feed_Sync_Export
 			'google_product_category'		
 			) );
 
-		foreach ( $props as $prop ) {
+                $current_product = wc_get_product($post_id);
+                if(is_object($current_product) && $current_product->is_type('variable') && ! empty( $_POST[ '_wt_feed_discard' ] ) ){
+                    unset($_POST['_wt_feed_discard']);
+                }
+                foreach ( $props as $prop ) {
 			$key   = "_wt_feed_{$prop}";
 			$value = ( ! empty( $_POST[ $key ] ) ? wc_clean( wp_unslash( $_POST[ $key ] ) ) : '' ); // phpcs:ignore WordPress.Security.NonceVerification
 
@@ -1112,7 +1135,10 @@ class Webtoffee_Product_Feed_Sync_Export
 	}
         public function wt_feed_variable_custom_meta_fields( $variation_count, $variation_id, $variation_prod ) {
 		
+            $addional_product_feed_fields = apply_filters('wt_feed_additional_variation_product_fields', true);
+            if( $addional_product_feed_fields ){
 		include 'views/html-product-variation-data-feed.php';
+            }
 				
 	}
         public function wt_feed_save_variable_metas($id) {

@@ -122,7 +122,7 @@ if (!class_exists('Webtoffee_Product_Feed_Sync_Pinterest')) {
 		 */
 		public function wt_pf_exporter_post_types_basic($arr) {
 
-			$arr['pinterest'] = __('Pinterest Shop', 'webtoffee-product-feed');
+			$arr['pinterest'] = __('Pinterest', 'webtoffee-product-feed');
 			return $arr;
 		}
 

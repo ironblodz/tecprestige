@@ -108,11 +108,13 @@
 
 				self.updateButton( $button, 'added', response.data );
 
-				if ( $button.data( 'variations' ) ) {
-					self.updateButton( $button, 'update_variations', { variation_id: response.data.product_id, added: 'yes' } );
-				}
+				// if ( $button.data( 'variations' ) ) {
+				// 	self.updateButton( $button, 'update_variations', { variation_id: response.data.product_id, added: 'yes' } );
+				// }
 
-				$( document.body ).trigger( 'added_to_wishlist', [ $button, fragments ] );
+				$( document.body )
+					.trigger( 'added_to_wishlist', [ $button, fragments ] )
+					.trigger( 'wishlist_item_added', [ response.data ] );
 
 				if ( 'yes' === wcboost_wishlist_params.wishlist_redirect_after_add ) {
 					window.location = wcboost_wishlist_params.wishlist_url;
@@ -153,11 +155,13 @@
 
 				self.updateButton( $button, 'removed', response.data );
 
-				if ( $button.data( 'variations' ) ) {
-					self.updateButton( $button, 'update_variations', { variation_id: response.data.product_id, added: 'no' } );
-				}
+				// if ( $button.data( 'variations' ) ) {
+				// 	self.updateButton( $button, 'update_variations', { variation_id: response.data.product_id, added: 'no' } );
+				// }
 
-				$( document.body ).trigger( 'removed_from_wishlist', [ $button, fragments ] );
+				$( document.body )
+					.trigger( 'removed_from_wishlist', [ $button, fragments ] )
+					.trigger( 'wishlist_item_removed', [ response.data ] );
 			},
 			complete: function() {
 				$button.removeClass( 'loading' );
@@ -254,17 +258,17 @@
 				$button.data( 'product_id', data.product_id ).attr( 'data-product_id', data.product_id );
 				break;
 
-			case 'update_variations':
-				var variations = $button.data( 'variations' );
+			// case 'update_variations':
+			// 	var variations = $button.data( 'variations' );
 
-				if ( variations && data.variation_id ) {
-					var index = variations.findIndex( function( variation ) { return variation.variation_id === data.variation_id; } );
+			// 	if ( variations && data.variation_id ) {
+			// 		var index = variations.findIndex( function( variation ) { return variation.variation_id === data.variation_id; } );
 
-					variations[ index ] = $.extend( {}, variations[ index ], data );
+			// 		variations[ index ] = $.extend( {}, variations[ index ], data );
 
-					$button.data( 'variations', variations );
-				}
-				break;
+			// 		$button.data( 'variations', variations );
+			// 	}
+			// 	break;
 		}
 	}
 

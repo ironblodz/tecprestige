@@ -3,30 +3,11 @@ namespace WCBoost\Wishlist\Customize;
 
 defined( 'ABSPATH' ) || exit;
 
+use WCBoost\Packages\Utilities\Singleton_Trait;
 use WCBoost\Wishlist\Plugin;
 
 class Customizer {
-
-	/**
-	 * The single instance of the class.
-	 * @var Frontend
-	 */
-	protected static $_instance = null;
-
-	/**
-	 * Main instance.
-	 * Ensures only one instance of the class is loaded or can be loaded.
-	 *
-	 * @static
-	 * @return Frontend
-	 */
-	public static function instance() {
-		if ( is_null( self::$_instance ) ) {
-			self::$_instance = new self();
-		}
-
-		return self::$_instance;
-	}
+	use Singleton_Trait;
 
 	/**
 	 * Constructor.

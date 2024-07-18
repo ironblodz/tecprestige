@@ -75,6 +75,25 @@ if (!class_exists('Webtoffee_Product_Feed_Product')) {
         }
 
         /**
+         * Get parent product description for variation.
+         *
+         * @return mixed|void
+         */
+        public function parent_description($catalog_attr, $product_attr, $export_columns) {
+            $description = '';
+            if ($this->product->is_type('variation')) {
+                $parent_product = wc_get_product($this->product->get_parent_id());
+                if (is_object($parent_product)) {
+                    $description = $parent_product->get_description();
+                }
+            } else {
+                $description = $this->product->get_name();
+            }
+
+            return apply_filters("wt_feed_{$this->parent_module->module_base}_product_parent_description", $description, $this->product);
+        }        
+        
+        /**
          * Get product description.
          *
          * @return mixed|void

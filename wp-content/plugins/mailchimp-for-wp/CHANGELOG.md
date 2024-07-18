@@ -1,6 +1,13 @@
 Changelog
 =========
 
+#### 4.9.14 - Jul 17, 2024
+
+- Very minor code-size improvements to public forms related JavaScript.
+- Update third-party JS dependencies.
+- Bump tested WordPress version to 6.6.
+
+
 #### 4.9.13 - Apr 25, 2024
 
 - Fix issue with Composer classmap throwing a fatal error when an older version of Composer is already loaded.

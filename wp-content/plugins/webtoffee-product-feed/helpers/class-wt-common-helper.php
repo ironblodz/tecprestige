@@ -74,7 +74,7 @@ class Webtoffee_Product_Feed_Sync_Common_Helper
 	 */
 	public static function attribute_dropdown( $export_channel, $selected = '' ) {
 		
-		$attribute_dropdown = wp_cache_get( 'wt_feed_dropdown_product_attributes_v10' );
+		$attribute_dropdown = wp_cache_get( 'wt_feed_dropdown_product_attributes_v11' );
 
 		if ( false === $attribute_dropdown ) {
 			$attributes = array(
@@ -83,6 +83,7 @@ class Webtoffee_Product_Feed_Sync_Common_Helper
                                 'parent_title'              => esc_attr__( 'Parent Title' ),
 				'description'               => esc_attr__( 'Product Description' ),
 				'short_description'         => esc_attr__( 'Product Short Description' ),
+                                'parent_description'        => esc_attr__( 'Parent Description' ),
 				'product_type'              => esc_attr__( 'Product Local Category' ),
 				'link'                      => esc_attr__( 'Product URL' ),
 				'ex_link'                   => esc_attr__( 'External Product URL' ),
@@ -221,7 +222,7 @@ class Webtoffee_Product_Feed_Sync_Common_Helper
 				$attribute_dropdown .= '</optgroup>';
 			}                        
                         
-			wp_cache_add( 'wt_feed_dropdown_product_attributes_v10', $attribute_dropdown, '', WEEK_IN_SECONDS );
+			wp_cache_add( 'wt_feed_dropdown_product_attributes_v11', $attribute_dropdown, '', WEEK_IN_SECONDS );
 		}
 		
 		if( $selected && strpos($selected, 'wt_static_map_vl:') !== false ){
@@ -264,6 +265,7 @@ class Webtoffee_Product_Feed_Sync_Common_Helper
 			$attribute_dropdown['min_energy_efficiency_class'] = __( 'Min energy efficiencycclass', 'webtoffee-product-feed' );
 			$attribute_dropdown['max_energy_efficiency_class'] = __( 'Max energy efficiency class', 'webtoffee-product-feed' );                        
 			$attribute_dropdown['shipping_data'] = __('Shipping', 'webtoffee-product-feed');						
+                        $attribute_dropdown['quantity_to_sell_on_facebook'] = __( 'Quantity to sell on facebook', 'webtoffee-product-feed' );
                         
 			$attribute_dropdown['pickup_method'] = __( 'Pickup Method', 'webtoffee-product-feed' );
 			$attribute_dropdown['pickup_sla'] = __( 'Pickup SLA', 'webtoffee-product-feed' );

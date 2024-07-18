@@ -14,8 +14,9 @@ class Webtoffee_Product_Feed_Sync_Basic_Xmlwriter extends XMLWriter
 	public $file_path='';
 	public $data_ar='';
 	public $to_export='item';
-        public $to_export_channel='google';
-
+        public $export_data=array();
+        public $head_data=array();
+        public $to_export_channel = 'google';
 
 	public function __construct($file_path)
 	{
@@ -23,21 +24,26 @@ class Webtoffee_Product_Feed_Sync_Basic_Xmlwriter extends XMLWriter
 	}
     public function write_to_file($export_data, $offset, $is_last_offset, $to_export)
     {       
+
         $to_export = apply_filters('wt_feed_xml_writer_items_node',$to_export);
         
         $item_key = 'item';
+        
+        if( 'google_product_reviews' === $to_export ){
+            $item_key = 'review';
+        }
         if( 'skroutz' === $to_export ){
-            $item_key = 'product';
-        }   
+            $item_key = 'product'; // skroutz
+        } 
         if( 'fruugo' === $to_export ){
             $item_key = 'Product';
-        }
+        } 
         if( 'heureka' === $to_export ){
             $item_key = 'SHOPITEM';
-        }
+        }        
         
+        $this->to_export_channel = $to_export;        
 	$this->to_export = $item_key;
-        $this->to_export_channel = $to_export;
         $this->export_data=$export_data;
         $this->head_data=$export_data['head_data'];
         $file_path=$this->file_path;
@@ -49,24 +55,24 @@ class Webtoffee_Product_Feed_Sync_Basic_Xmlwriter extends XMLWriter
         //$xml_standalone = 'no';
 
         /* write array data to xml */
-        $this->array_to_xml($this, $this->to_export, $export_data['body_data'], null);
+        if(!empty($export_data['body_data'])){
+            $this->array_to_xml($this, $this->to_export, $export_data['body_data'], null);
+        }
 
         if($is_last_offset)
         {
-			$prev_body_xml_data = '';
+            $prev_body_xml_data = '';
             $body_xml_data=$this->outputMemory(); //taking current offset data
             $this->endDocument();
             
             /* need this checking because, if only single batch exists */
-            if(file_exists($file_path))
+            if(file_exists($file_path) && $offset!=0)
             {
-                $fpr=fopen($file_path, 'r');
-                $prev_body_xml_data=fread($fpr,filesize($file_path)); //reading previous offset data
+                $fpr = fopen($file_path, 'r');
+		$fsize = filesize($file_path) ? filesize($file_path) : 1;
+                $prev_body_xml_data = fread($fpr,filesize($file_path)); //reading previous offset data
             }
-			if($offset==0)
-            {
-				$prev_body_xml_data = '';
-			}
+            
 
             /* create xml starting tag */
             $this->startDocument($xml_version, $xml_encoding /*, $xml_standalone*/);
@@ -86,6 +92,33 @@ class Webtoffee_Product_Feed_Sync_Basic_Xmlwriter extends XMLWriter
 ';
 			$xml_end_data = '</channel></rss>';
                         
+if ('review' === $this->to_export) {
+    $fav_icon_url = get_site_icon_url();
+                $xml_start_data = '<feed xmlns:vc="http://www.w3.org/2007/XMLSchema-versioning"
+ xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+ xsi:noNamespaceSchemaLocation=
+ "http://www.google.com/shopping/reviews/schema/product/2.3/product_reviews.xsd">
+ <version>2.3</version>
+    <aggregator>
+        <name>Reviews Aggregator</name>
+    </aggregator>
+    <publisher>
+        <name><![CDATA[ '.$site_name.' ]]></name>
+        <favicon><![CDATA[ '.$fav_icon_url.'  ]]></favicon>
+    </publisher>
+<reviews>';
+                $xml_end_data = '</reviews></feed>';
+}
+
+
+if ('product' === $this->to_export) {
+    $fav_icon_url = get_site_icon_url();
+                $xml_start_data = '<mywebstore>
+   <created_at>'.date('Y-m-d H:i').'</created_at>
+<products>';
+                $xml_end_data = '</products></mywebstore>';
+}
+
             if ('fruugo' === $this->to_export_channel) {
                 $xml_start_data = '<Products>';
                 $xml_end_data = '</Products>';
@@ -95,17 +128,6 @@ class Webtoffee_Product_Feed_Sync_Basic_Xmlwriter extends XMLWriter
                 $xml_end_data = '</SHOP>';
             }            
 
-            if ('pinterest_rss' === $this->to_export_channel) {
-                $xml_start_data = '<rss version="2.0">
-<channel>
-<title>
-<![CDATA[ '.$site_name.' ]]>
-</title>
-<description><![CDATA[ WebToffee Product Feed - This product feed is generated with the WebToffee Product Feed.]]></description>
-';
-			$xml_end_data = '</channel></rss>';
-            }            
-            
 
             /* creating xml doc data */
             $xml_data=$doc_xml_data.$xml_start_data.$prev_body_xml_data.$body_xml_data.$xml_end_data;
@@ -136,11 +158,12 @@ class Webtoffee_Product_Feed_Sync_Basic_Xmlwriter extends XMLWriter
     }
 
     public function start_elm(&$xml_writer, $key)
-    {        
-		if('item' !== $key && 'label' !== $key && 'value' !== $key && 'fruugo' !== $this->to_export_channel && 'heureka' !== $this->to_export_channel && 'pinterest_rss'!== $this->to_export_channel ){
+    {   
+		if('item' !== $key && 'review' !== $this->to_export && 'product' !== $this->to_export && 'label' !== $key && 'value' !== $key  && 'fruugo' !== $this->to_export_channel  && 'heureka' !== $this->to_export_channel  ){
 			$key = 'g:'.sanitize_title($key);
 		}
-                $xml_writer->startElement($key);
+
+        $xml_writer->startElement($key);
     }
 
     public function write_elm(&$xml_writer, $key, $value)
@@ -149,14 +172,15 @@ class Webtoffee_Product_Feed_Sync_Basic_Xmlwriter extends XMLWriter
 		if (strpos($key, 'wtimages_') !== false) {
 			$key = 'additional_image_link';
 		}
-		$gkey = 'g:'.sanitize_title($key);
-                 if( 'label' === $key || 'value' === $key ){
-                     $gkey = sanitize_title($key);
-                 }
-                 if('fruugo' === $this->to_export_channel || 'heureka' === $this->to_export_channel || 'pinterest_rss'=== $this->to_export_channel ){
-                     $gkey = $key;
-                 }
-                $xml_writer->writeElement($gkey, $value);
+                if('review' === $this->to_export || 'product' === $this->to_export || 'label' === $key || 'value' === $key ){
+                    $gkey = sanitize_title($key);
+                }else{
+                    $gkey = 'g:'.sanitize_title($key);
+                }
+                if( 'fruugo' === $this->to_export_channel || 'heureka' === $this->to_export_channel || 'pinterest_rss' === $this->to_export_channel ){
+                    $gkey = $key;
+                }                
+        $xml_writer->writeElement($gkey, $value);
     }
 
 	public function array_to_xml($xml_writer, $element_key, $element_value = array(), $xmlnsurl = NULL)
@@ -221,7 +245,7 @@ class Webtoffee_Product_Feed_Sync_Basic_Xmlwriter extends XMLWriter
             }else
             {
                 //wrap element in CDATA tag if it contain illegal characters
-                if(false !== strpos($element_value, '<') || false !== strpos($element_value, '>') || apply_filters('wt_iew_xml_node_wrap_cdata', false, $element_value))
+                if( ( false !== strpos($element_value, '<') || false !== strpos($element_value, '>') || apply_filters('wt_iew_xml_node_wrap_cdata', false, $element_value) ) &&  'ratings' !== $element_key )
                 { 
                     $arr = explode(':', $element_key); 
                     if(isset($arr[1]))

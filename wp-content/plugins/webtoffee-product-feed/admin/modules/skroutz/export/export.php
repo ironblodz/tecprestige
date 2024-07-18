@@ -586,7 +586,7 @@ if (!class_exists('Webtoffee_Product_Feed_Sync_Skroutz_Export')) {
          *
          * @return mixed|void
          */
-        public function product_type($catalog_attr, $product_attr, $export_columns) {
+        public function product_type() {
             $id = $this->product->get_id();
             if ($this->product->is_type('variation')) {
                 $id = $this->product->get_parent_id();
@@ -625,6 +625,52 @@ if (!class_exists('Webtoffee_Product_Feed_Sync_Skroutz_Export')) {
 
             return apply_filters('wt_feed_filter_product_local_category', $product_type, $this->product);
         }
+        
+        /**
+         * Get product type.
+         *
+         * @return mixed|void
+         */
+        public function category($catalog_attr, $product_attr, $export_columns) {
+            $id = $this->product->get_id();
+            if ($this->product->is_type('variation')) {
+                $id = $this->product->get_parent_id();
+            }
+            $item_post_lang = !empty($this->form_data['post_type_form_data']['wt_pf_export_post_language']) ? $this->form_data['post_type_form_data']['wt_pf_export_post_language'] : '';
+
+            
+            /*
+             * WPML - Swicth language to selected language for temparory export
+             */
+            if (class_exists('SitePress') && !empty($item_post_lang)) {
+                //$args['suppress_filters'] = true;
+                global $sitepress;
+                $current_lang = $sitepress->get_current_language(); // Take the current language to a variable to swicthback later.
+                $default_language = $sitepress->get_default_language();
+                $sitepress->switch_lang($item_post_lang);
+            }
+                      
+            
+            $separator = apply_filters('wt_feed_product_type_separator', ' > ');
+            $product_categories = '';
+            $term_list = get_the_terms($id, 'product_cat');
+
+            if (is_array($term_list)) {
+                $col = array_column($term_list, "term_id");
+                array_multisort($col, SORT_ASC, $term_list);
+                $term_list = array_column($term_list, "name");                
+                $product_categories = implode($separator, $term_list);
+            }
+            /*
+             * WPML - Swicth language back to the previous site language after the DB reading.
+             */
+            if (class_exists('SitePress') && !empty($item_post_lang)) {
+                global $sitepress;
+                $sitepress->switch_lang($current_lang); // Current language is previously stored
+            }
+
+            return apply_filters("wt_feed_filter_product_local_category", $product_categories, $this->product);
+        }        
 
         /**
          * Get product URL.
@@ -706,7 +752,7 @@ if (!class_exists('Webtoffee_Product_Feed_Sync_Skroutz_Export')) {
          *
          * @return mixed|void
          */
-        public function image_link($catalog_attr, $product_attr, $export_columns) {
+        public function image($catalog_attr, $product_attr, $export_columns) {
             $image = '';
             if ($this->product->is_type('variation')) {
                 // Variation product type
@@ -783,7 +829,7 @@ if (!class_exists('Webtoffee_Product_Feed_Sync_Skroutz_Export')) {
          *
          * @return mixed|void
          */
-        public function additional_image_link($catalog_attr, $product_attr, $export_columns, $additionalImg = '') {
+        public function additionalimage($catalog_attr, $product_attr, $export_columns, $additionalImg = '') {
             $imgUrls = self::get_product_gallery($this->product);
             $separator = apply_filters('wt_feed_filter_category_separator', ' | ', $this->product);
 

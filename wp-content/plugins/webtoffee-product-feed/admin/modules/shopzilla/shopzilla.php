@@ -125,10 +125,10 @@ if (!class_exists('Webtoffee_Product_Feed_Sync_Shopzilla')) {
 		 */
 		public function wt_pf_exporter_post_types_basic($arr) {
 
-			$arr['shopzilla'] = __('Shopzilla Shop', 'webtoffee-product-feed');
-                        $arr['bizrate'] = __('Bizrate Shop', 'webtoffee-product-feed');
-                        $arr['become'] = __('Become Shop', 'webtoffee-product-feed');
-                        $arr['price_grabber'] = __('Price grabber Shop', 'webtoffee-product-feed');
+			$arr['shopzilla'] = __('Shopzilla', 'webtoffee-product-feed');
+                        $arr['bizrate'] = __('Bizrate', 'webtoffee-product-feed');
+                        $arr['become'] = __('Become', 'webtoffee-product-feed');
+                        $arr['price_grabber'] = __('Price grabber', 'webtoffee-product-feed');
 			return $arr;
 		}
 

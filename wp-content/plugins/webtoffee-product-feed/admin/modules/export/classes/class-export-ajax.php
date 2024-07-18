@@ -364,6 +364,8 @@ class Webtoffee_Product_Feed_Sync_Export_Ajax
 
 		$post_types=(!is_array($post_types) ? array() : $post_types);
 		$this->step='post_type';
+                $feed_page_heading = isset( $_REQUEST['rerun_id'] ) ? __('Edit feed') : __('Create new feed');
+                $this->steps[$this->step]['title'] = $feed_page_heading;
 		$step_info=$this->steps[$this->step];
 		$item_type=$this->to_export;
 		
@@ -788,13 +790,13 @@ class Webtoffee_Product_Feed_Sync_Export_Ajax
 			if($this->export_method=='quick' || $this->export_method=='template' || $last_page) //template method, or last page, or quick export
 			{
 				
-
+                                $page_button_text = isset( $_REQUEST['rerun_id'] ) ? __( 'Update' ) : __( 'Generate' );
 				$out['export']=array(
 					'key'=>'export',
 					'class'=>'pf_export_btn',
 					'icon'=>'',
 					'type'=>'button',
-					'text'=>__('Generate'),
+					'text'=>$page_button_text,
 				);
 			}
 		}		

@@ -571,7 +571,7 @@ class Wishlist extends \WC_Data {
 	/**
 	 * Get the list of items
 	 *
-	 * @return array
+	 * @return Wishlist_Item[]
 	 */
 	public function get_items() {
 		return $this->items;

@@ -1,12 +1,12 @@
 === WCBoost - Variation Swatches ===
 Contributors: wcboost
 Tags: woocommerce, product attribute, product color, variation swatches, variable products
-Tested up to: 6.5
-Stable tag: 1.0.16
+Tested up to: 6.6
+Stable tag: 1.0.17
 Requires PHP: 7.0
 Requires at least: 4.5
 WC requires at least: 3.0.0
-WC tested up to: 8.6
+WC tested up to: 8.9
 License: GPLv3
 License URI: https://www.gnu.org/licenses/gpl-3.0.html
 
@@ -181,6 +181,10 @@ WooCommerce has an option to hide out-of-stock products from the catalog, it wor
 1. Manage attribute swatches in each variable product
 
 == Changelog ==
+
+= 1.0.17 =
+- Fix a CSS issue with Divi builder.
+* Ensured compatibility with WooCommerce 8.9
 
 = 1.0.16 =
 * Improve compatibility with themes and other plugins.

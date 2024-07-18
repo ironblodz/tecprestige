@@ -121,7 +121,48 @@ var wt_pf_settings_form_basic=
 			});
 		});
 	}
-}
+};
+
+var wt_pf_settings_custom_fields=
+{
+	Set:function(prnt_selector)
+	{ 
+		var wf_prnt_obj=jQuery(prnt_selector);
+		wf_prnt_obj.find('.wt_pf_settings_custom_fields_form').submit(function(e){
+			e.preventDefault();
+			var data=jQuery(this).serialize();
+
+			var submit_btn=jQuery(this).find('input[type="submit"]');
+			var spinner=submit_btn.siblings('.spinner');
+			spinner.css({'visibility':'visible'});
+			submit_btn.css({'opacity':'.5','cursor':'default'}).prop('disabled',true);
+			jQuery.ajax({
+				url:wt_pf_basic_params.ajax_url,
+				type:'POST',
+				dataType:'json',
+				data:data+'&action=wt_pf_save_settings_custom_fields',
+				success:function(data)
+				{
+					spinner.css({'visibility':'hidden'});
+					submit_btn.css({'opacity':'1','cursor':'pointer'}).prop('disabled',false);
+					if(data.status==true)
+					{
+						wt_pf_notify_msg.success(data.msg);
+					}else
+					{
+						wt_pf_notify_msg.error(data.msg);
+					}
+				},
+				error:function () 
+				{
+					spinner.css({'visibility':'hidden'});
+					submit_btn.css({'opacity':'1','cursor':'pointer'}).prop('disabled',false);
+					wt_pf_notify_msg.error(wt_pf_basic_params.msgs.settings_error);
+				}
+			});
+		});
+	}
+};
 
 
 var wt_saved_templates = {
@@ -787,5 +828,6 @@ jQuery(document).ready(function(){
 	wt_pf_file_attacher.Set();
 	wt_pf_form_toggler.Set();
 	wt_field_group.Set();
-        wt_saved_templates.Set();           
+        wt_saved_templates.Set();    
+        wt_pf_settings_custom_fields.Set('#'+wt_pf_basic_params.plugin_id);
 });

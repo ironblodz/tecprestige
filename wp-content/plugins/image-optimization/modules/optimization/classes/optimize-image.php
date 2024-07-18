@@ -19,7 +19,7 @@ use ImageOptimization\Classes\Image\{
 };
 use ImageOptimization\Classes\Logger;
 use ImageOptimization\Classes\Utils;
-use ImageOptimization\Modules\Oauth\Classes\Exceptions\Quota_Exceeded_Error;
+use ImageOptimization\Classes\Exceptions\Quota_Exceeded_Error;
 use ImageOptimization\Modules\Oauth\Components\Connect;
 use ImageOptimization\Modules\Optimization\Classes\{
 	Exceptions\Image_File_Already_Exists_Error,
@@ -29,6 +29,8 @@ use ImageOptimization\Modules\Optimization\Classes\{
 };
 use ImageOptimization\Modules\Settings\Classes\Settings;
 use Throwable;
+
+use ImageOptimization\Plugin;
 
 if ( ! defined( 'ABSPATH' ) ) {
 	exit; // Exit if accessed directly.
@@ -157,7 +159,7 @@ class Optimize_Image {
 	}
 
 	private function send_file() {
-		$connect_status = Connect::get_connect_status();
+		$connect_status = Plugin::instance()->modules_manager->get_modules( 'connect-manager' )->connect_instance->get_connect_status();
 		$headers = [
 			'access_token' => $connect_status->access_token ?? '',
 		];
@@ -196,7 +198,7 @@ class Optimize_Image {
 		);
 
 		if ( isset( $response->stats ) ) {
-			Connect::update_usage_data( $response->stats );
+			Plugin::instance()->modules_manager->get_modules( 'connect-manager' )->connect_instance->update_usage_data( $response->stats );
 		}
 
 		if ( ! isset( $response->imageKey ) || $image_key !== $response->imageKey ) { // phpcs:ignore WordPress.NamingConventions.ValidVariableName.UsedPropertyNotSnakeCase

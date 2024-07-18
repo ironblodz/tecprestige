@@ -1403,7 +1403,7 @@ class Webtoffee_Product_Feed_Sync_Admin {
 		);
 		$menus=apply_filters('wt_pf_admin_menu_basic',$menus);
 
-		$menu_order=array("export","export-sub","import","history","history_log");
+		$menu_order=array("export","export-sub","import","history","history_log", "cron");
 		$this->wt_menu_order_changer($menus,$menu_order);                                            
 
 		$main_menu = reset($menus); //main menu must be first one
@@ -1508,6 +1508,63 @@ class Webtoffee_Product_Feed_Sync_Admin {
 		exit();
 	}
 
+        
+        /**
+         * 	Save admin settings and module settings ajax hook
+         */
+        public function save_settings_custom_fields() {
+            $out = array(
+                'status' => false,
+                'msg' => __('Error'),
+            );
+
+            if (Wt_Pf_Sh::check_write_access(WEBTOFFEE_PRODUCT_FEED_ID)) {
+
+                $checkbox_items = array(
+                                    'discard',
+                                    'brand',
+                                    'gtin',
+                                    'mpn',
+                                    'han',
+                                    'ean',
+                                    'condition',
+                                    'agegroup',
+                                    'gender',
+                                    'size',
+                                    'color',
+                                    'material',
+                                    'pattern',
+                                    'unit_pricing_measure',
+                                    'unit_pricing_base_measure',
+                                    'energy_efficiency_class',
+                                    'min_energy_efficiency_class',
+                                    'max_energy_efficiency_class',
+                                    'glpi_pickup_method',
+                                    'glpi_pickup_sla',
+                                    'custom_label_0',
+                                    'custom_label_1',
+                                    'custom_label_2',
+                                    'custom_label_3',
+                                    'custom_label_4',
+                                    'availability_date',
+                                    '_wt_google_google_product_category',
+                                    '_wt_facebook_fb_product_category'
+                                    );
+
+                $new_advanced_settings = array();
+                foreach ($checkbox_items as $checkbox_item) {
+                    $new_advanced_settings[$checkbox_item] = isset($_POST['_wt_feed_'.$checkbox_item]) ? absint( $_POST['_wt_feed_'.$checkbox_item] ) : 0;
+                }
+
+                update_option('wt_pf_enabled_product_fields', $new_advanced_settings);
+                $out['status'] = true;
+                $out['msg'] = __('Settings Updated', 'webtoffee-product-feed');
+                do_action('wt_pf_after_custom_fields_setting_update_basic', $new_advanced_settings);
+            }
+            echo json_encode($out);
+            exit();
+        }                    
+        
 
         /**
 	* 	Delete pre-saved temaplates entry from DB - ajax hook
@@ -1618,6 +1675,8 @@ class Webtoffee_Product_Feed_Sync_Admin {
                     'shopzilla' => 'webtoffee-product-feed',
                     'fruugo' => 'webtoffee-product-feed',
                     'heureka' => 'webtoffee-product-feed',
+                    'google_product_reviews' => 'webtoffee-product-feed',
+                    'leguide' => 'webtoffee-product-feed'
                 );
 
                 foreach ($addon_modules_basic as $module_key => $module_path)

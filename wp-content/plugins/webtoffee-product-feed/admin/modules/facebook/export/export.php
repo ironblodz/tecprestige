@@ -136,6 +136,8 @@ class Webtoffee_Product_Feed_Sync_Facebook_Export extends Webtoffee_Product_Feed
                      $args['suppress_filters'] = true;
             }
 			
+            $args['exclude_discarded'] = '_wt_feed_discard'; // To exclude individual excluded from product fetching.
+            
             $args = apply_filters("woocommerce_csv_product_export_args", $args);
 
             $products = wc_get_products($args); 
@@ -832,7 +834,8 @@ class Webtoffee_Product_Feed_Sync_Facebook_Export extends Webtoffee_Product_Feed
 
             if ( !$custom_fb_category ) {
 
-                $category_path = wp_get_post_terms($this->current_product_id, 'product_cat', array('fields' => 'all'));
+                $product_id = ( $this->product->is_type( 'variation' ) ? $this->product->get_parent_id() : $this->product->get_id() );
+                $category_path = wp_get_post_terms($product_id, 'product_cat', array('fields' => 'all'));
 
                 $fb_product_category = [];
                 foreach ($category_path as $category) {
@@ -1415,7 +1418,30 @@ class Webtoffee_Product_Feed_Sync_Facebook_Export extends Webtoffee_Product_Feed
 		
 		return apply_filters( 'wt_feed_filter_product_quantity', $quantity, $this->product );
 	}
-	
+	        
+        public function quantity_to_sell_on_facebook($catalog_attr, $product_attr, $export_columns) {
+            $quantity = $this->product->get_stock_quantity();
+            $status = $this->product->get_stock_status();
+
+            //when product is outofstock , and it's quantity is empty, set quantity to 0
+            if ('outofstock' === $status && $quantity === null) {
+                $quantity = 0;
+            }
+
+            if ($this->product->is_type('variable') && $this->product->has_child()) {
+
+                $visible_children = $this->product->get_visible_children();
+                $qty = array();
+                foreach ($visible_children as $child) {
+                    $childQty = get_post_meta($child, '_stock', true);
+                    $qty[] = (int) $childQty;
+                }
+
+                $quantity = array_sum($qty);
+            }
+
+            return apply_filters('wt_feed_filter_fb_product_quantity', $quantity, $this->product);
+        }
 	/**
 	 * Get Store Currency.
 	 *

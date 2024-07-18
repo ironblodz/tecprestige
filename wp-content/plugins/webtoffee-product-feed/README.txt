@@ -1,10 +1,10 @@
 === Product Feed for WooCommerce - Google Shopping Feed, Pinterest Feed, TikTok Ads & More ===
 Contributors: webtoffee
 Donate link: https://www.webtoffee.com
-Tags: WooCommerce product feed, google product feed, facebook product feed, google merchant center, google shopping, facebook shop, instagram feed, facebook catalog, pinterest product feed, bing shopping feed, snapchat product feed, facebook dynamic ads
+Tags: woocommerce product feed, google shopping, google merchant center, facebook catalog, instagram feed
 Requires at least: 4.0
-Tested up to: 6.5.3
-Stable tag: 2.2.0
+Tested up to: 6.6
+Stable tag: 2.2.1
 Requires PHP: 5.6
 License: GPLv3 or later
 License URI: http://www.gnu.org/licenses/gpl-3.0.html
@@ -50,7 +50,7 @@ For Google Shopping, the plugin lets you connect your WooCommerce store with the
 
 - **Manage generated feeds** - View and manage generated product feed data.
 
-- **Tested OK with WooCommerce 8.9.1**
+- **Tested OK with WooCommerce 8.9.3**
 
 == Why choose us? ==
 The most simple product feed plugin for WooCommerce. This plugin is made to eliminate any complexities in generating WooCommerce product feeds. We offer complete support and regular updates for our plugins. 
@@ -85,7 +85,7 @@ The premium version of the Product Feed for WooCommerce plugin gives you advance
 
 = Supported Sales Channels =
 - Google Shopping Feed
-- Meta feed for Facebook/Instagram 
+- Meta feed for Facebook/Instagram
 - Google Local Product Inventory
 - Google Local Inventory Ads
 - Google Merchant Promotions
@@ -96,18 +96,18 @@ The premium version of the Product Feed for WooCommerce plugin gives you advance
 - Snapchat Feed
 - Idealo Product Feed
 - Bing Shopping Feed
-- PriceSpy Feed 
+- PriceSpy Feed
 - PriceRunner Feed
 - Skroutz Data Feed
 - Shopzilla Feed
-- Bizrate Product Feed 
+- Bizrate Product Feed
 - Become Shop Feed
 - Price grabber Feed
-- LeGuide Feed (Premium)
-- Google Product Reviews (Premium)
-- Custom Feed (Premium)
+- LeGuide Feed
+- Google Product Reviews
 - Heureka
 - Fruugo
+- Custom Feed (Premium)
 
 Please visit <a rel="nofollow" href="https://www.webtoffee.com/product/woocommerce-product-feed/">WooCommerce Product Feed Plugin </a> for more details.
 
@@ -224,6 +224,16 @@ function wt_modify_product_description_mode( $mode ) {
 
 
 == Changelog ==
+
+= 2.2.1  2024-07-18 =
+*[Add] - Leguide product feed and Google product reviews feed support.
+*[Add] - Option to map 'Parent product description' in the attribute mapping drop-down.
+*[Add] - Option to duplicate generated feeds.
+*[Add] - Scheduled Actions page.
+*[Add] - Manage additional product fields under settings.
+*[Fix] - Exclude from feed option.
+*[Compatibility] - Tested OK with WooCommerce 9.1.2
+*[Compatibility] - Tested OK with WordPress 6.6
 
 = 2.2.0  2024-06-03 =
 *[Update] - Option to map parent_title in product attribute list.
@@ -432,9 +442,12 @@ function wt_modify_product_description_mode( $mode ) {
 
 == Upgrade Notice ==
 
-= 2.2.0 =
-*[Update] - Option to map parent_title in product attribute list.
-*[Update] - Fruugo specific category mapping instead of Google category.
-*[Update] - Type and select box within the attribute mapping drop-down list.
-*[Add] - Fruugo category update option in category add and edit pages
-*[Compatibility] - Tested OK with WooCommerce 8.9.1
+= 2.2.1 =
+*[Add] - Leguide product feed and Google product reviews feed support.
+*[Add] - Option to map 'Parent product description' in the attribute mapping drop-down.
+*[Add] - Option to duplicate generated feeds.
+*[Add] - Scheduled Actions page.
+*[Add] - Manage additional product fields under settings.
+*[Fix] - Exclude from feed option.
+*[Compatibility] - Tested OK with WooCommerce 9.1.2
+*[Compatibility] - Tested OK with WordPress 6.6

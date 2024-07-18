@@ -23,10 +23,12 @@ use ImageOptimization\Classes\File_System\File_System;
 use ImageOptimization\Classes\Logger;
 use ImageOptimization\Classes\Utils;
 use ImageOptimization\Modules\Oauth\Classes\Data;
-use ImageOptimization\Modules\Oauth\Classes\Exceptions\Quota_Exceeded_Error;
+use ImageOptimization\Classes\Exceptions\Quota_Exceeded_Error;
 use ImageOptimization\Modules\Optimization\Classes\Exceptions\Bulk_Token_Obtaining_Error;
 use ImageOptimization\Modules\Optimization\Components\Exceptions\Bulk_Optimization_Token_Not_Found_Error;
 use ImageOptimization\Modules\Stats\Classes\Optimization_Stats;
+
+use ImageOptimization\Plugin;
 
 use Throwable;
 
@@ -241,7 +243,8 @@ class Bulk_Optimization_Controller {
 			'attachments_in_quota' => [],
 			'attachments_out_of_quota' => [],
 		];
-		$images_left = Data::images_left();
+
+		$images_left = Plugin::instance()->modules_manager->get_modules( 'connect-manager' )->connect_instance->images_left();
 
 		if ( ! $images_left ) {
 			throw new Quota_Exceeded_Error( __( 'Images quota exceeded', 'image-optimization' ) );

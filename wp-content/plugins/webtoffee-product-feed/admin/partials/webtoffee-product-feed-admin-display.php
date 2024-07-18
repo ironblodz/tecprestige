@@ -13,8 +13,9 @@ $wf_img_path=WT_PRODUCT_FEED_PLUGIN_URL.'images/';
         <?php
         $tab_head_arr=array(
             'wt-advanced'=>__('General'),
-			'wt-pro-upgrade'=>__('Free vs Premium'),
-			'wt-other-solutions' => __('Other Solutions')
+            'wt-custom-fields' => __('Custom Fields'),             
+            'wt-pro-upgrade'=>__('Free vs Premium'),           
+            'wt-other-solutions' => __('Other Solutions')
         );
         if(isset($_GET['debug']))
         {
@@ -28,13 +29,14 @@ $wf_img_path=WT_PRODUCT_FEED_PLUGIN_URL.'images/';
         //inside the settings form
         $setting_views_a=array(
             'wt-advanced'=>'admin-settings-advanced.php',
-            'wt-pro-upgrade'=>'freevspro.php',
             //'wt-feed-channels'=>'feed-channels.php',
         );
 
         //outside the settings form
-        $setting_views_b=array(          
-			'wt-other-solutions'=>'admin-settings-other-solutions.php'              
+        $setting_views_b = array(
+            'wt-custom-fields' => 'admin-settings-custom-fields.php',
+            'wt-pro-upgrade' => 'freevspro.php',
+            'wt-other-solutions' => 'admin-settings-other-solutions.php'
         );
 
         if(isset($_GET['debug']))

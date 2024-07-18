@@ -101,30 +101,18 @@
 
 		setTimeout( function() {
 			// Disable invalid swatches.
-			self.$form.find( '.wcboost-variation-swatches' ).each( function( index, row ) {
-				var $swatches = $( row ),
-					$options = $swatches.find( 'select' ).find( 'option' ),
-					$selected = $options.filter( ':selected' ),
-					values = [];
+			self.$attributeFields.each( function() {
+				var $select = $( this ),
+					$items = $select.siblings( '.wcboost-variation-swatches__wrapper' ).find( '.wcboost-variation-swatches__item' );
 
-				$options.each( function( index, option ) {
-					if ( option.value !== '' && ! option.disabled ) {
-						values.push( option.value );
-					}
-				} );
+				$items.each( function() {
+					var $item = $( this ),
+						$option = $select.find( 'option[value="' + $item.data( 'value' ) + '"]' );
 
-				$swatches.find( '.wcboost-variation-swatches__item' ).each( function( index, item ) {
-					var $item = $( item ),
-						value = $item.attr( 'data-value' );
-
-					if ( values.indexOf( value ) > -1 ) {
-						$item.removeClass( 'disabled' ).data( 'disabled', false ).attr( 'tabindex', 0 );
+					if ( ! $option.length || $option.prop( 'disabled' ) ) {
+						$item.addClass( 'disabled' ).removeClass( 'selected' ).data( 'disabled', true ).attr( 'tabindex', -1 );
 					} else {
-						$item.addClass( 'disabled' ).data( 'disabled', true ).attr( 'tabindex', -1 );
-
-						if ( $selected.length && value === $selected.val() ) {
-							$item.removeClass( 'selected' );
-						}
+						$item.removeClass( 'disabled' ).data( 'disabled', false ).attr( 'tabindex', 0 );
 					}
 				} );
 			} );

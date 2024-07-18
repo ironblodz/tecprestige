@@ -11,22 +11,12 @@ if(isset($cron_list) && is_array($cron_list) && count($cron_list)>0)
 	<thead>
 		<tr>
 			<th width="50"><?php esc_html_e("No.", 'webtoffee-product-feed'); ?></th>
-			<th width="100"><?php esc_html_e("Action type", 'webtoffee-product-feed'); ?></th>
-			<th width="100"><?php esc_html_e("Post type", 'webtoffee-product-feed'); ?></th>
-			<th width="100"><?php esc_html_e("Cron type", 'webtoffee-product-feed'); ?></th>
-			<th width="100">
+			<th width="250"><?php esc_html_e("Feed name", 'webtoffee-product-feed'); ?></th>
+			<th width="150"><?php esc_html_e("Channel", 'webtoffee-product-feed'); ?></th>			
+			<th width="150">
 				<?php esc_html_e("Status", 'webtoffee-product-feed'); ?>
-				<span class="dashicons dashicons-editor-help wt-pfd-tips" 
-					data-wt-pfd-tip="
-					<span class='wt_productfeed_tooltip_span'><?php echo sprintf(esc_html__('%sFinished%s - Process completed'), '<b>', '</b>');?></span><br />
-					<span class='wt_productfeed_tooltip_span'><?php echo sprintf(esc_html__('%sDisabled%s - The process has been disabled temporarily'), '<b>', '</b>');?> </span><br />
-					<span class='wt_productfeed_tooltip_span'><?php echo sprintf(esc_html__('%sRunning%s - Process currently active and running'), '<b>', '</b>');?> </span><br />
-					<span class='wt_productfeed_tooltip_span'><?php echo sprintf(esc_html__('%sUploading%s - Processed records are being uploaded to the specified location, finalizing export.'), '<b>', '</b>');?> </span><br />
-					<span class='wt_productfeed_tooltip_span'><?php echo sprintf(esc_html__('%sDownloading%s - Input records are being downloaded from the specified location prior to import process.'), '<b>', '</b>');?> </span>">			
-				</span>
 			</th>
-			<th><?php esc_html_e("Time", 'webtoffee-product-feed'); ?></th>
-			<th width="150"><?php esc_html_e("History", 'webtoffee-product-feed'); ?></th>
+			<th><?php esc_html_e("Time", 'webtoffee-product-feed'); ?></th>			
 			<th width="200"><?php esc_html_e("Actions", 'webtoffee-product-feed'); ?></th>
 		</tr>
 	</thead>
@@ -35,16 +25,23 @@ if(isset($cron_list) && is_array($cron_list) && count($cron_list)>0)
 	$i=0;
 	foreach($cron_list as $key =>$cron_item)
 	{
+                $feed_data = maybe_unserialize($cron_item['data']);
+                $filename = isset( $feed_data['post_type_form_data']['wt_pf_export_catalog_name'] ) ? $feed_data['post_type_form_data']['wt_pf_export_catalog_name'] : '' ;
+                if( ''=== $filename ){
+                    $filename = isset( $feed_data['post_type_form_data']['item_filename'] ) ? $feed_data['post_type_form_data']['item_filename'] : '' ;
+                }            
+                $filetype = isset( $feed_data['advanced_form_data']['wt_pf_file_as'] ) ? $feed_data['advanced_form_data']['wt_pf_file_as'] : '';
+                
 		$i++;
+                
                 $item_type = ucfirst($cron_item['item_type']);
 		?>
 		<tr>
                     <td><?php echo absint( $i );?></td>
-			<td><?php echo esc_html( ucfirst( $cron_item['action_type'] ) ); ?></td>
-			<td><?php echo esc_html( $item_type ); ?></td>
-			<td><?php echo ($cron_item['schedule_type']=='server_cron' ? __('Server cron', 'webtoffee-product-feed') : __('WordPress cron', 'webtoffee-product-feed')); ?></td>
+			<td><?php echo esc_html($filename.'.'.$filetype); ?></td>
+			<td><?php echo esc_html($item_type); ?></td>		
 			<td>
-				<span class="wt_productfeed_badge" style="<?php echo (isset(self::$status_color_arr[$cron_item['status']]) ? 'background:'.self::$status_color_arr[$cron_item['status']] : ''); ?>">
+				<span class="wt_productfeed_badge" style="padding:5px;color:white;<?php echo (isset(self::$status_color_arr[$cron_item['status']]) ? 'background:'.self::$status_color_arr[$cron_item['status']] : ''); ?>">
 					<?php
 					echo (isset(self::$status_label_arr[$cron_item['status']]) ? self::$status_label_arr[$cron_item['status']] : __('Unknown'));
 					?>
@@ -101,34 +98,7 @@ if(isset($cron_list) && is_array($cron_list) && count($cron_list)>0)
 						echo __('Will start at: ').date_i18n('Y-m-d h:i:s A', $cron_item['start_time']).'<br />';
 					}
 				?>
-			</td>
-			<td>
-				<?php
-				$history_arr=($cron_item['history_id_list']!="" ? maybe_unserialize($cron_item['history_id_list']) : array());
-				$history_arr=(is_array($history_arr) ? $history_arr : array());
-				if(count($history_arr)>0)
-				{
-					$history_module_obj=Webtoffee_Product_Feed_Sync::load_modules('history');
-					if(!is_null($history_module_obj))
-					{
-						$history_entry=$history_module_obj->get_history_entry_by_id($history_arr);
-						if($history_entry)
-						{
-							esc_html_e(sprintf('Total %d entries found.', count($history_entry)));
-					?>
-						<br />
-						<a target="_blank" href="<?php echo esc_url( admin_url('admin.php?page='.Webtoffee_Product_Feed_Sync::get_module_id('history').'&wt_productfeed_cron_id='.$cron_item['id']) );?>">
-							<?php esc_html_e('View');?> <span class="dashicons dashicons-external"></span>
-						</a>
-					<?php
-						}
-					}
-				}else
-				{
-					esc_html_e('No entries found.', 'webtoffee-product-feed');
-				}
-				?>
-			</td>
+			</td>			
 			<td>
 				<?php
 				$page_id=(isset($_GET['page']) ? sanitize_text_field($_GET['page']) : '');
@@ -141,24 +111,13 @@ if(isset($cron_list) && is_array($cron_list) && count($cron_list)>0)
 					$action='enable';
 					$action_label=__('Enable');
 				}
-				$action_url=wp_nonce_url(admin_url('admin.php?page='.$page_id.'&wt_productfeed_change_schedule_status='.$action.'&wt_productfeed_cron_id='.$cron_item['id']), WT_IEW_PLUGIN_ID);
+				$action_url=wp_nonce_url(admin_url('admin.php?page='.$page_id.'&wt_productfeed_change_schedule_status='.$action.'&wt_productfeed_cron_id='.$cron_item['id']), WEBTOFFEE_PRODUCT_FEED_ID);
 				
 				/* delete section */
-				$delete_url=wp_nonce_url(admin_url('admin.php?page='.$page_id.'&wt_productfeed_delete_schedule=1&wt_productfeed_cron_id='.$cron_item['id']), WT_IEW_PLUGIN_ID);
-				
-                                /* edit action */
-                                if($cron_item['action_type'] == 'import'){
-                                    $edit_url = admin_url('admin.php?page=wt_import_export_for_woo_import&wt_productfeed_cron_edit_id='.$cron_item['id']);
-                                }else{
-                                    $edit_url = admin_url('admin.php?page=wt_import_export_for_woo_export&wt_productfeed_cron_edit_id='.$cron_item['id']);
-                                }
-                                
-                                if(!class_exists("Webtoffee_Product_Feed_Sync_$item_type")){
-                                    $edit_url = '#';
-                                }
+				$delete_url=wp_nonce_url(admin_url('admin.php?page='.$page_id.'&wt_productfeed_delete_schedule=1&wt_productfeed_cron_id='.$cron_item['id']), WEBTOFFEE_PRODUCT_FEED_ID);				
                                 
 				?>
-                            <a class="wt_productfeed_cron_edit wt_productfeed_action_btn" href="<?php echo esc_url( $edit_url ); ?>" ><?php esc_html_e('Edit');?></a> | <a href="<?php echo esc_url( $action_url );?>"><?php echo esc_html_e( $action_label );?></a> | <a class="wt_productfeed_delete_cron" data-href="<?php echo esc_url( $delete_url );?>"><?php esc_html_e('Delete'); ?></a>
+                                <a href="<?php echo esc_url( $action_url );?>"><?php echo esc_html_e( $action_label );?></a> | <a class="wt_productfeed_delete_cron" data-href="<?php echo esc_url( $delete_url );?>"><?php esc_html_e('Delete'); ?></a>
 				<?php
 				if($cron_item['schedule_type']=='server_cron')
 				{

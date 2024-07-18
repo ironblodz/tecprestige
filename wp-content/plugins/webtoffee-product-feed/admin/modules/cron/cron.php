@@ -82,6 +82,7 @@ class Webtoffee_Product_Feed_Sync_Cron
 		add_action('wp_ajax_pf_schedule_ajax', array($this, 'ajax_main'));
 		
 		add_action('wp_ajax_pf_schedule_refresh', array($this, 'refresh_catalog'));
+                add_action('wp_ajax_pf_feed_duplicate', array($this, 'duplicate_feed'));        
 
 
 		/* add interval time for cron */
@@ -99,7 +100,7 @@ class Webtoffee_Product_Feed_Sync_Cron
 		add_action('init', array($this, 'do_url_cron'));
 
 		/* Admin menu for cron listing */
-		add_filter('wt_productfeed_admin_menu', array($this, 'add_admin_pages'), 10, 1);
+		add_filter('wt_pf_admin_menu_basic', array($this, 'add_admin_pages'), 10, 1);
 
 
 		add_action('init', array($this, 'test_cron'));
@@ -120,6 +121,32 @@ class Webtoffee_Product_Feed_Sync_Cron
 			exit();
 		}
 	}
+        
+	public function duplicate_feed() {
+		// The process is based on history_id
+		$cron_id = (isset($_POST['cron_id']) ? absint($_POST['cron_id']) : 0);
+		if ($cron_id > 0) {			
+
+                        $history_row = Webtoffee_Product_Feed_Sync_History::get_history_entry_by_id($cron_id);
+                        
+                        $form_data = maybe_unserialize( $history_row['data'] );
+                        
+                        $file_name = $form_data['post_type_form_data']['item_filename'].'-copy.'.$form_data['advanced_form_data']['wt_pf_file_as'];
+                        $action = $history_row['template_type'];
+                        $to_process = $history_row['item_type'];                       
+                        
+                        $form_data['post_type_form_data']['item_filename'] = $form_data['post_type_form_data']['item_filename'].'-copy';
+                                                
+                        Webtoffee_Product_Feed_Sync_History::create_history_entry($file_name, $form_data, $to_process, $action);
+                        
+                        $out = array(
+				'status' => 1,
+				'msg' => __('Feed duplicated', 'webtoffee-product-feed'),
+			);
+			echo json_encode($out);
+			exit();
+		}
+	}                
 
 	public function test_cron()
 	{
@@ -192,7 +219,8 @@ class Webtoffee_Product_Feed_Sync_Cron
 	*/
 	public function add_admin_pages($menus)
 	{
-		$menus[$this->module_base]=array(
+ 
+            $menus[$this->module_base]=array(
 			'submenu',
 			WEBTOFFEE_PRODUCT_FEED_ID,
 			__('Scheduled Actions', 'webtoffee-product-feed'),
@@ -200,7 +228,8 @@ class Webtoffee_Product_Feed_Sync_Cron
 			apply_filters('wt_import_export_allowed_capability', 'import'),
 			$this->module_id,
 			array($this, 'admin_settings_page')
-		);
+		);            
+            
 		return $menus;
 	}
 
@@ -222,9 +251,10 @@ class Webtoffee_Product_Feed_Sync_Cron
 	*/
 	public function admin_settings_page($args)
 	{
-		if(isset($_GET['wt_productfeed_change_schedule_status']) || isset($_GET['wt_productfeed_delete_schedule'])) 
+
+            if(isset($_GET['wt_productfeed_change_schedule_status']) || isset($_GET['wt_productfeed_delete_schedule'])) 
 		{
-			if(Wt_Pf_Sh::check_write_access(WT_IEW_PLUGIN_ID))
+			if(Wt_Pf_Sh::check_write_access(WEBTOFFEE_PRODUCT_FEED_ID))
 			{
 				$cron_id=absint($_GET['wt_productfeed_cron_id']);
 				if($cron_id>0)
@@ -458,7 +488,7 @@ class Webtoffee_Product_Feed_Sync_Cron
                                 $cron_data=maybe_unserialize($cron_data['cron_data']);
                                 include plugin_dir_path(__FILE__).'views/_schedule_update.php';
                             }
-                    wp_enqueue_script($this->module_id.'_js', plugin_dir_url(__FILE__).'assets/js/main.js', array('jquery'), WT_IEW_VERSION, false);                            
+                    wp_enqueue_script($this->module_id.'_js', plugin_dir_url(__FILE__).'assets/js/main.js', array('jquery'), WEBTOFFEE_PRODUCT_FEED_SYNC_VERSION, false);                            
             }else{
 		include plugin_dir_path(__FILE__).'views/_schedule_now.php';
             }
@@ -494,7 +524,7 @@ class Webtoffee_Product_Feed_Sync_Cron
 
 			if($_GET['page']==$this->module_id)
 			{
-				wp_enqueue_script($this->module_id.'_js', plugin_dir_url(__FILE__).'assets/js/main.js', array('jquery'), WT_IEW_VERSION, false);
+				wp_enqueue_script($this->module_id.'_js', plugin_dir_url(__FILE__).'assets/js/main.js', array('jquery'), WEBTOFFEE_PRODUCT_FEED_SYNC_VERSION, false);
 			}
 		}			
 	}

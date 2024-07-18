@@ -4,8 +4,8 @@ Donate link: https://metabox.io/pricing/
 Tags: custom fields, custom post types, post type, custom taxonomies, meta box
 Requires at least: 5.9
 Requires PHP: 7.0
-Tested up to: 6.5.4
-Stable tag: 5.9.9
+Tested up to: 6.6
+Stable tag: 5.9.11
 License: GPLv2 or later
 
 Meta Box plugin is a powerful, professional developer toolkit to create custom meta boxes and custom fields for your custom post types in WordPress.
@@ -14,7 +14,7 @@ Meta Box plugin is a powerful, professional developer toolkit to create custom m
 
 **Meta Box is a powerful, professional, and lightweight toolkit for developers to create custom meta boxes and custom fields for any custom post type in WordPress.**
 
-Meta Box helps you add [https://metabox.io/what-is-custom-fields-in-wordpress/](https://metabox.io) and details on your website such as pages, posts, custom post types, forms and anywhere you want using over 40 different field types such as text, images, file upload, checkboxes, and more.
+Meta Box helps you add [custom fields](https://metabox.io/what-is-custom-fields-in-wordpress/) and details on your website such as pages, posts, custom post types, forms and anywhere you want using over 40 different field types such as text, images, file upload, checkboxes, and more.
 
 On top of that, each WordPress custom field type has extensive internal options for unlimited content possibilities. Complete customization and control is just a few clicks away.
 
@@ -159,6 +159,16 @@ If you like this plugin, you might also like our other WordPress products:
 1. Post Taxonomy Fields
 
 == Changelog ==
+
+= 5.9.11 - 2024-07-17 =
+- Make validation work for blocks
+- Fix JavaScript validation error in site editor
+- Set default minute step = 5 for datetime/time pickers
+- Security fix for ajax getting posts
+
+= 5.9.10 - 2024-07-02 =
+- Fix modal not updating URL (when add new)
+- Security fix for ajax get posts/users
 
 = 5.9.9 - 2024-06-20 =
 - Fix show hide checkbox tree

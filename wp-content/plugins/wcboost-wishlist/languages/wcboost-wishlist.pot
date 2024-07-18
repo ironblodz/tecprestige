@@ -2,14 +2,14 @@
 # This file is distributed under the same license as the WCBoost - Wishlist plugin.
 msgid ""
 msgstr ""
-"Project-Id-Version: WCBoost - Wishlist 1.0.11\n"
+"Project-Id-Version: WCBoost - Wishlist 1.1.0\n"
 "Report-Msgid-Bugs-To: https://wordpress.org/support/plugin/wcboost-wishlist\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"POT-Creation-Date: 2024-05-17T02:38:25+00:00\n"
+"POT-Creation-Date: 2024-07-06T11:55:38+00:00\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "X-Generator: WP-CLI 2.9.0\n"
 "X-Domain: wcboost-wishlist\n"
@@ -148,26 +148,26 @@ msgid "Hide button"
 msgstr ""
 
 #: includes/admin/settings.php:130
-#: includes/customizer/customizer.php:345
+#: includes/customizer/customizer.php:326
 #: includes/form-handler.php:96
-#: includes/frontend.php:646
+#: includes/frontend.php:644
 #: includes/helper.php:213
 msgid "View wishlist"
 msgstr ""
 
 #: includes/admin/settings.php:131
-#: includes/customizer/customizer.php:336
+#: includes/customizer/customizer.php:317
 #: includes/helper.php:212
 msgid "Remove from wishlist"
 msgstr ""
 
 #: includes/admin/settings.php:135
-#: includes/customizer/customizer.php:214
+#: includes/customizer/customizer.php:195
 msgid "Button position"
 msgstr ""
 
 #: includes/admin/settings.php:136
-#: includes/customizer/customizer.php:215
+#: includes/customizer/customizer.php:196
 msgid "Choose where to show \"Add to wishlist\" button on the product page."
 msgstr ""
 
@@ -178,52 +178,52 @@ msgstr ""
 
 #: includes/admin/settings.php:142
 #: includes/admin/settings.php:158
-#: includes/customizer/customizer.php:219
-#: includes/customizer/customizer.php:248
+#: includes/customizer/customizer.php:200
+#: includes/customizer/customizer.php:229
 msgid "Before \"Add to cart\" button"
 msgstr ""
 
 #: includes/admin/settings.php:143
 #: includes/admin/settings.php:159
-#: includes/customizer/customizer.php:220
-#: includes/customizer/customizer.php:249
+#: includes/customizer/customizer.php:201
+#: includes/customizer/customizer.php:230
 msgid "After \"Add to cart\" button"
 msgstr ""
 
 #: includes/admin/settings.php:144
-#: includes/customizer/customizer.php:221
+#: includes/customizer/customizer.php:202
 msgid "After product name"
 msgstr ""
 
 #: includes/admin/settings.php:145
-#: includes/customizer/customizer.php:222
+#: includes/customizer/customizer.php:203
 msgid "After product short description"
 msgstr ""
 
 #: includes/admin/settings.php:146
 #: includes/admin/settings.php:160
-#: includes/customizer/customizer.php:223
-#: includes/customizer/customizer.php:250
+#: includes/customizer/customizer.php:204
+#: includes/customizer/customizer.php:231
 msgid "Manually use shortcode"
 msgstr ""
 
 #: includes/admin/settings.php:150
-#: includes/customizer/customizer.php:242
+#: includes/customizer/customizer.php:223
 msgid "Button in loop"
 msgstr ""
 
 #: includes/admin/settings.php:151
-#: includes/customizer/customizer.php:243
+#: includes/customizer/customizer.php:224
 msgid "Choose where to show \"Add to wishlist\" button on the product catalog pages."
 msgstr ""
 
 #: includes/admin/settings.php:157
-#: includes/customizer/customizer.php:247
+#: includes/customizer/customizer.php:228
 msgid "Hide the button"
 msgstr ""
 
 #: includes/admin/settings.php:170
-#: includes/customizer/customizer.php:68
+#: includes/customizer/customizer.php:49
 msgid "Wishlist Page"
 msgstr ""
 
@@ -250,24 +250,24 @@ msgid "My Wishlist"
 msgstr ""
 
 #: includes/admin/settings.php:195
-#: includes/customizer/customizer.php:151
+#: includes/customizer/customizer.php:132
 msgid "Table columns"
 msgstr ""
 
 #: includes/admin/settings.php:196
-#: includes/customizer/customizer.php:131
+#: includes/customizer/customizer.php:112
 msgid "Product price"
 msgstr ""
 
 #: includes/admin/settings.php:204
-#: includes/customizer/customizer.php:132
+#: includes/customizer/customizer.php:113
 #: templates/wishlist/wishlist-table.php:36
 #: templates/wishlist/wishlist-table.php:132
 msgid "Stock status"
 msgstr ""
 
 #: includes/admin/settings.php:212
-#: includes/customizer/customizer.php:133
+#: includes/customizer/customizer.php:114
 #: templates/wishlist/wishlist-table.php:33
 #: templates/wishlist/wishlist-table.php:111
 msgid "Quantity"
@@ -278,7 +278,7 @@ msgid "Added date"
 msgstr ""
 
 #: includes/admin/settings.php:228
-#: includes/customizer/customizer.php:135
+#: includes/customizer/customizer.php:116
 msgid "Add to cart"
 msgstr ""
 
@@ -360,12 +360,17 @@ msgid "Endpoints are appended to the page URL to handle specific actions on the 
 msgstr ""
 
 #: includes/admin/settings.php:380
-#: includes/frontend.php:359
+#: includes/frontend.php:357
 msgid "Edit wishlist"
 msgstr ""
 
 #: includes/admin/settings.php:381
 msgid "Endpoint for the \"Wishlist &rarr; Edit wishlist\" page."
+msgstr ""
+
+#. translators: %s Theme name
+#: includes/admin/templates-notice.php:58
+msgid "<strong>Your theme (%s) contains outdated copies of some template files from the WBoost - Wishlist plugin.</strong> These files may need updating to ensure they are compatible with the current version of WCBoost - Wishlist."
 msgstr ""
 
 #. translators: %s: product name
@@ -374,118 +379,118 @@ msgstr ""
 msgid "%s has been added to your wishlist"
 msgstr ""
 
-#: includes/customizer/customizer.php:75
+#: includes/customizer/customizer.php:56
 msgid "Wishlist Button"
 msgstr ""
 
-#: includes/customizer/customizer.php:104
+#: includes/customizer/customizer.php:85
 msgid "Show the wishlist title"
 msgstr ""
 
-#: includes/customizer/customizer.php:124
+#: includes/customizer/customizer.php:105
 msgid "Show the wishlist description"
 msgstr ""
 
-#: includes/customizer/customizer.php:134
+#: includes/customizer/customizer.php:115
 msgid "Date added"
 msgstr ""
 
-#: includes/customizer/customizer.php:152
+#: includes/customizer/customizer.php:133
 msgid "Choose wishlist table columns"
 msgstr ""
 
-#: includes/customizer/customizer.php:268
+#: includes/customizer/customizer.php:249
 msgid "Button icon"
 msgstr ""
 
-#: includes/customizer/customizer.php:272
+#: includes/customizer/customizer.php:253
 msgid "No icon"
 msgstr ""
 
-#: includes/customizer/customizer.php:273
+#: includes/customizer/customizer.php:254
 msgid "Heart"
 msgstr ""
 
-#: includes/customizer/customizer.php:274
+#: includes/customizer/customizer.php:255
 msgid "Star"
 msgstr ""
 
-#: includes/customizer/customizer.php:275
+#: includes/customizer/customizer.php:256
 msgid "Bookmark"
 msgstr ""
 
-#: includes/customizer/customizer.php:276
-#: includes/customizer/customizer.php:304
+#: includes/customizer/customizer.php:257
+#: includes/customizer/customizer.php:285
 msgid "Custom icon"
 msgstr ""
 
-#: includes/customizer/customizer.php:305
+#: includes/customizer/customizer.php:286
 msgid "Default icon."
 msgstr ""
 
-#: includes/customizer/customizer.php:317
+#: includes/customizer/customizer.php:298
 msgid "Added icon."
 msgstr ""
 
-#: includes/customizer/customizer.php:327
+#: includes/customizer/customizer.php:308
 #: includes/helper.php:211
 #: templates/loop/add-to-wishlist.php:26
 #: templates/single-product/add-to-wishlist.php:26
 msgid "Add to wishlist"
 msgstr ""
 
-#: includes/customizer/customizer.php:354
+#: includes/customizer/customizer.php:335
 msgid "Button text"
 msgstr ""
 
-#: includes/customizer/customizer.php:355
+#: includes/customizer/customizer.php:336
 msgid "Button add"
 msgstr ""
 
-#: includes/customizer/customizer.php:364
+#: includes/customizer/customizer.php:345
 msgid "Button remove"
 msgstr ""
 
-#: includes/customizer/customizer.php:373
+#: includes/customizer/customizer.php:354
 msgid "Button view"
 msgstr ""
 
-#: includes/customizer/customizer.php:393
+#: includes/customizer/customizer.php:374
 msgid "Button type"
 msgstr ""
 
-#: includes/customizer/customizer.php:397
+#: includes/customizer/customizer.php:378
 msgid "Normal button"
 msgstr ""
 
-#: includes/customizer/customizer.php:398
+#: includes/customizer/customizer.php:379
 msgid "Text button"
 msgstr ""
 
-#: includes/customizer/customizer.php:399
+#: includes/customizer/customizer.php:380
 msgid "Custom button"
 msgstr ""
 
-#: includes/customizer/customizer.php:442
+#: includes/customizer/customizer.php:423
 msgid "Button"
 msgstr ""
 
-#: includes/customizer/customizer.php:443
-#: includes/customizer/customizer.php:505
+#: includes/customizer/customizer.php:424
+#: includes/customizer/customizer.php:486
 msgid "Background color"
 msgstr ""
 
-#: includes/customizer/customizer.php:452
-#: includes/customizer/customizer.php:514
+#: includes/customizer/customizer.php:433
+#: includes/customizer/customizer.php:495
 msgid "Border color"
 msgstr ""
 
-#: includes/customizer/customizer.php:461
-#: includes/customizer/customizer.php:523
+#: includes/customizer/customizer.php:442
+#: includes/customizer/customizer.php:504
 msgid "Text color"
 msgstr ""
 
-#: includes/customizer/customizer.php:504
+#: includes/customizer/customizer.php:485
 msgid "Button Hover"
 msgstr ""
 
@@ -559,41 +564,41 @@ msgstr ""
 msgid "Wishlist deleted"
 msgstr ""
 
-#: includes/frontend.php:140
+#: includes/frontend.php:137
 msgid "The wishlist link is copied to clipboard"
 msgstr ""
 
-#: includes/frontend.php:141
+#: includes/frontend.php:138
 msgid "Close"
 msgstr ""
 
-#: includes/frontend.php:337
+#: includes/frontend.php:335
 msgid "Share"
 msgstr ""
 
-#: includes/frontend.php:395
+#: includes/frontend.php:393
 msgid "You cannot delete your default wishlist. You have to set another list as default to delete this one."
 msgstr ""
 
-#: includes/frontend.php:397
+#: includes/frontend.php:395
 msgid "This action moves the wishlist to Trash. It will be kept in Trash for 30 days."
 msgstr ""
 
-#: includes/frontend.php:401
+#: includes/frontend.php:399
 msgid "Delete this wishlist"
 msgstr ""
 
 #. translators: %s product name
-#: includes/frontend.php:506
+#: includes/frontend.php:504
 msgid "Add %s to the wishlist"
 msgstr ""
 
 #. translators: %s product name
-#: includes/frontend.php:542
+#: includes/frontend.php:540
 msgid "Remove %s from the wishlist"
 msgstr ""
 
-#: includes/frontend.php:548
+#: includes/frontend.php:546
 msgid "Open the wishlist"
 msgstr ""
 
@@ -601,43 +606,43 @@ msgstr ""
 msgid "I have some thing to share with you"
 msgstr ""
 
-#. translators: %s sharing social channel
-#: includes/helper.php:318
+#. translators: %s social name
+#: includes/helper.php:317
 msgid "Share on %s"
 msgstr ""
 
-#: includes/install.php:147
+#: includes/install.php:169
 msgctxt "Page slug"
 msgid "wishlist"
 msgstr ""
 
-#: includes/install.php:149
+#: includes/install.php:171
 msgctxt "Page title"
 msgid "Wishlist"
 msgstr ""
 
-#: includes/install.php:175
+#: includes/install.php:197
 msgid "View wishlist documentation"
 msgstr ""
 
-#: includes/install.php:175
+#: includes/install.php:197
 msgid "Docs"
 msgstr ""
 
-#: includes/install.php:176
+#: includes/install.php:198
 msgid "Visit community forums"
 msgstr ""
 
-#: includes/install.php:176
+#: includes/install.php:198
 msgid "Community support"
 msgstr ""
 
-#: includes/install.php:197
-msgid "WCBoost - Wishlist (Free) has been automatically deactivated because you have installed the Pro version."
+#: includes/install.php:223
+msgid "WCBoost - Wishlist (Free) has been automatically deactivated as you now have the Pro version installed."
 msgstr ""
 
-#: includes/plugin.php:50
-#: includes/plugin.php:57
+#: includes/plugin.php:61
+#: includes/plugin.php:68
 msgid "Foul!"
 msgstr ""
 

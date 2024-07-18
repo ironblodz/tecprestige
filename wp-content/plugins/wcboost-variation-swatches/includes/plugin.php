@@ -7,12 +7,15 @@ defined( 'ABSPATH' ) || exit;
  * Main plugin class
  */
 final class Plugin {
+
 	/**
-	 * Plugin version
+	 * Plugin read-only properties
 	 *
-	 * @var string
+	 * @since 1.0.17
+	 *
+	 * @var array
 	 */
-	public $version = '1.0.16';
+	private $props = [];
 
 	/**
 	 * Options mapping object.
@@ -33,6 +36,31 @@ final class Plugin {
 	 * @var Plugin
 	 */
 	protected static $_instance = null;
+
+	/**
+	 * Magic method to load in-accessible properties on demand
+	 *
+	 * @since 1.0.17
+	 *
+	 * @param  string $prop
+	 *
+	 * @return mixed
+	 */
+	public function __get( $prop ) {
+		$value = null;
+
+		switch ( $prop ) {
+			case 'version':
+				if ( empty( $this->props['version'] ) ) {
+					$plugin = get_plugin_data( WCBOOST_VARIATION_SWATCHES_FILE );
+					$this->props['version'] = $plugin['Version'];
+				}
+				$value = $this->props['version'];
+				break;
+		}
+
+		return $value;
+	}
 
 	/**
 	 * Instance.
@@ -90,6 +118,7 @@ final class Plugin {
 
 		if ( is_admin() ) {
 			add_filter( 'plugin_action_links_' . plugin_basename( WCBOOST_VARIATION_SWATCHES_FILE ), [ $this, 'add_action_links' ] );
+			add_filter( 'plugin_row_meta', [ $this, 'plugin_row_meta' ], 10, 2 );
 		}
 	}
 
@@ -146,5 +175,28 @@ final class Plugin {
 		}
 
 		return $links;
+	}
+
+	/**
+	 * Show row meta on the plugin screen.
+	 *
+	 * @since 1.0.17
+	 *
+	 * @param array $links Plugin Row Meta.
+	 * @param string $file  Plugin Base file.
+	 *
+	 * @return array
+	 */
+	public function plugin_row_meta( $links, $file ) {
+		if ( plugin_basename( WCBOOST_VARIATION_SWATCHES_FILE ) !== $file ) {
+			return $links;
+		}
+
+		$row_meta = [
+			'docs'    => '<a href="https://wcboost.com/docs-category/wcboost-variation-swatches/?utm_source=docs-link&utm_campaign=wp-dash&utm_medium=plugin-meta" aria-label="' . esc_attr__( 'View plugin documentation', 'wcboost-variation-swatches' ) . '" target="_blank">' . esc_html__( 'Docs', 'wcboost-variation-swatches' ) . '</a>',
+			'support' => '<a href="https://wordpress.org/support/plugin/wcboost-variation-swatches/" aria-label="' . esc_attr__( 'Visit community support forums', 'wcboost-variation-swatches' ) . '" target="_blank">' . esc_html__( 'Community support', 'wcboost-variation-swatches' ) . '</a>',
+		];
+
+		return array_merge( $links, $row_meta );
 	}
 }

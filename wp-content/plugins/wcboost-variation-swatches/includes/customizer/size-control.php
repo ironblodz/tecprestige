@@ -29,7 +29,7 @@ class Size_Control extends \WP_Customize_Control {
 
 		<span class="customize-control-inside">
 			<input type="text" size="3" pattern="\d*" value="<?php echo esc_attr( $size['width'] ) ?>" data-name="width"/>
-			x
+			&times;
 			<input type="text" size="3" pattern="\d*" value="<?php echo esc_attr( $size['height'] ) ?>" data-name="height"/>
 		</span>
 		<?php

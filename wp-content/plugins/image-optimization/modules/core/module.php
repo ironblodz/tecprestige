@@ -1,6 +1,7 @@
 <?php
 namespace ImageOptimization\Modules\Core;
 
+// TODO: Remove imports that are not used.
 use ImageOptimization\Modules\Oauth\{
 	Classes\Data,
 	Components\Connect,
@@ -10,6 +11,7 @@ use ImageOptimization\Modules\Oauth\{
 	Rest\Disconnect,
 	Rest\Get_Subscriptions,
 };
+
 use ImageOptimization\Modules\Optimization\{
 	Rest\Cancel_Bulk_Optimization,
 	Rest\Optimize_Bulk,
@@ -22,6 +24,8 @@ use ImageOptimization\Classes\{
 	Module_Base,
 	Utils,
 };
+
+use ImageOptimization\Plugin;
 
 if ( ! defined( 'ABSPATH' ) ) {
 	exit; // Exit if accessed directly.
@@ -37,6 +41,7 @@ class Module extends Module_Base {
 			'Pointers',
 			'Conflicts',
 			'User_Feedback',
+			'Not_Connected',
 		];
 	}
 
@@ -54,7 +59,11 @@ class Module extends Module_Base {
 	}
 
 	public function maybe_add_quota_reached_notice() {
-		if ( ! Connect::is_activated() || Data::images_left() > 0 ) {
+
+		// @var ImageOptimizer/Modules/ConnectManager/Module
+		$module = Plugin::instance()->modules_manager->get_modules( 'connect-manager' );
+
+		if ( ! $module->connect_instance->is_activated() || $module->connect_instance->images_left() > 0 ) {
 			return;
 		}
 
@@ -151,27 +160,34 @@ class Module extends Module_Base {
 			]
 		);
 
-		$connect_data = Data::get_connect_data();
+		/**
+		 * @var ImageOptimizer\Modules\ConnectManager\Module $module
+		 */
+		$module = Plugin::instance()->modules_manager->get_modules( 'connect-manager' );
+		$is_connect_on_fly = $module->connect_instance->get_is_connect_on_fly();
+		$connect_email = $module->connect_instance->get_connect_data()['user']['email'] ?? null;
 
 		wp_localize_script(
 			'image-optimization-admin',
 			'imageOptimizerUserData',
 			[
-				'isConnected' => Connect::is_connected(),
-				'isActivated' => Connect::is_activated(),
-				'planData' => Connect::is_activated() ? Connect::get_connect_status() : null,
-				'licenseKey' => Connect::is_activated() ? Data::get_activation_state() : null,
-				'imagesLeft' => Connect::is_activated() ? Data::images_left() : null,
-				'isOwner' => Connect::is_connected() ? Data::user_is_subscription_owner() : null,
-				'subscriptionEmail' => $connect_data['user']['email'] ?? null,
+				'isConnectOnFly' => $is_connect_on_fly,
+				'isConnected' => $module->connect_instance->is_connected(),
+				'isActivated' => $module->connect_instance->is_activated(),
+				'planData' => $module->connect_instance->is_activated() ? $module->connect_instance->get_connect_status() : null,
+				'licenseKey' => $module->connect_instance->is_activated() ? $module->connect_instance->get_activation_state() : null,
+				'imagesLeft' => $module->connect_instance->is_activated() ? $module->connect_instance->images_left() : null,
+				'isOwner' => $module->connect_instance->is_connected() ? $module->connect_instance->user_is_subscription_owner() : null,
+				'subscriptionEmail' => $connect_email ? $connect_email : null,
 
 				'wpRestNonce' => wp_create_nonce( 'wp_rest' ),
 				'disconnect' => wp_create_nonce( 'wp_rest' ),
-				'authInitNonce' => wp_create_nonce( Connect_Init::NONCE_NAME ),
-				'authDisconnectNonce' => wp_create_nonce( Disconnect::NONCE_NAME ),
-				'authDeactivateNonce' => wp_create_nonce( Deactivate::NONCE_NAME ),
-				'authGetSubscriptionsNonce' => wp_create_nonce( Get_Subscriptions::NONCE_NAME ),
-				'authActivateNonce' => wp_create_nonce( Activate::NONCE_NAME ),
+				'authInitNonce' => wp_create_nonce( $module->connect_instance->connect_init_nonce() ),
+				'authDisconnectNonce' => wp_create_nonce( $module->connect_instance->disconnect_nonce() ),
+				'authDeactivateNonce' => wp_create_nonce( $module->connect_instance->deactivate_nonce() ),
+				'authGetSubscriptionsNonce' => wp_create_nonce( $module->connect_instance->get_subscriptions_nonce() ),
+				'authActivateNonce' => wp_create_nonce( $module->connect_instance->activate_nonce() ),
+				'versionNonce' => wp_create_nonce( $module->connect_instance->version_nonce() ),
 				'removeBackupsNonce' => wp_create_nonce( Remove_Backups::NONCE_NAME ),
 				'restoreAllImagesNonce' => wp_create_nonce( Restore_All::NONCE_NAME ),
 				'optimizeBulkNonce' => wp_create_nonce( Optimize_Bulk::NONCE_NAME ),

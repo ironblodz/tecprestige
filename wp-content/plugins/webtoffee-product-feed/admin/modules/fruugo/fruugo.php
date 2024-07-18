@@ -218,7 +218,7 @@ public function wt_fbfeed_category_form_fields_pro( $category ) {
 		 */
 		public function wt_pf_exporter_post_types_basic($arr) {
 
-			$arr['fruugo'] = __('Fruugo Shop', 'webtoffee-product-feed');
+			$arr['fruugo'] = __('Fruugo', 'webtoffee-product-feed');
 			return $arr;
 		}
 

@@ -11,6 +11,8 @@ use WCBoost\VariationSwatches\Plugin;
  */
 class Customizer {
 
+	const SECTION = 'wcboost_variation_swatches';
+
 	/**
 	 * The setting API
 	 *
@@ -36,10 +38,8 @@ class Customizer {
 	 * @param WP_Customize_Manager $wp_customize Theme Customizer object.
 	 */
 	public function add_sections( $wp_customize ) {
-		$section_name = 'wcboost_variation_swatches';
-
 		$wp_customize->add_section(
-			$section_name,
+			static::SECTION,
 			[
 				'title'    => esc_html__( 'Variation Swatches', 'wcboost-variation-swatches' ),
 				'description' => esc_html__( 'Some of these options can be overidden in product data settings.', 'wcboost-variation-swatches' ),
@@ -63,7 +63,7 @@ class Customizer {
 			[
 				'label'       => esc_html__( 'Swatches Shape', 'wcboost-variation-swatches' ),
 				'description' => esc_html__( 'Choose the shape style of variation swatches', 'wcboost-variation-swatches' ),
-				'section'     => $section_name,
+				'section'     => static::SECTION,
 				'type'        => 'select',
 				'choices'     => $this->settings_api->get_shape_options(),
 			]
@@ -88,7 +88,7 @@ class Customizer {
 				[
 					'label'       => esc_html__( 'Swatches Size', 'wcboost-variation-swatches' ),
 					'description' => esc_html__( 'Set the default size of variation swatches.', 'wcboost-variation-swatches' ),
-					'section'     => $section_name,
+					'section'     => static::SECTION,
 				]
 			)
 		);
@@ -108,7 +108,7 @@ class Customizer {
 			$this->settings_api->get_option_name( 'tooltip' ),
 			[
 				'label'    => esc_html__( 'Enable tooltip', 'wcboost-variation-swatches' ),
-				'section'  => $section_name,
+				'section'  => static::SECTION,
 				'type'     => 'checkbox',
 			]
 		);
@@ -128,7 +128,7 @@ class Customizer {
 			$this->settings_api->get_option_name( 'auto_button' ),
 			[
 				'label'    => esc_html__( 'Convert default dropdowns to buttons', 'wcboost-variation-swatches' ),
-				'section'  => $section_name,
+				'section'  => static::SECTION,
 				'type'     => 'checkbox',
 			]
 		);
@@ -148,7 +148,7 @@ class Customizer {
 			$this->settings_api->get_option_name( 'show_selected_label' ),
 			[
 				'label'    => esc_html__( "Show the selected attribute's label", 'wcboost-variation-swatches' ),
-				'section'  => $section_name,
+				'section'  => static::SECTION,
 				'type'     => 'checkbox',
 			]
 		);
