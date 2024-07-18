@@ -21,7 +21,7 @@ $cache_max_time = 1800;
 //$use_flock = true; // Set it true or false if you know what to use
 $cache_path = WP_CONTENT_DIR . '/cache/';
 $file_prefix = 'wp-cache-';
-$ossdlcdn = 0;
+$ossdlcdn = 1;
 
 // Array of files that have 'wp-' but should still be cached
 $cache_acceptable_files = array( 'wp-comments-popup.php', 'wp-links-opml.php', 'wp-locations.php' );
@@ -101,7 +101,7 @@ $wp_cache_preload_taxonomies = 0;
 $wp_cache_preload_email_me = 0;
 $wp_cache_preload_email_volume = 'none';
 $wp_cache_mobile_prefixes = '';
-$cached_direct_pages = array();
+$cached_direct_pages = array(  );
 $wpsc_served_header = false;
 $cache_gc_email_me = 0;
 $wpsc_save_headers = 0;
