@@ -14981,6 +14981,7 @@ ul.products li.product .product-thumbnail img {
 
 
 .product-inner:hover .woocommerce-loop-product__title a{
+    font-weight: 500;
     color: white;
     }
 
@@ -15279,7 +15280,7 @@ ul.products li.product .product-thumbnail img {
 
 
     .product-inner .product-summary{
-        background-color: #dddddd;
+        background-color: #e5e5e5;
         border-radius: 30px;
         margin: 10px;
         padding-top: 120px !important;
