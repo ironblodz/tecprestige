@@ -1443,13 +1443,30 @@ class Konte_WooCommerce_Template_Product {
 
 	public static function custom_woocommerce_product_gallery() {
 		global $product;
+	
+		// Obtém a ID da imagem destacada (thumbnail)
+		$thumbnail_id = $product->get_image_id();
+		// Obtém as IDs das imagens da galeria
 		$attachment_ids = $product->get_gallery_image_ids();
-		var_dump($attachment_ids);
-			echo '<div class="fotorama" data-nav="thumbs" data-allowfullscreen="true" data-loop="true" data-autoplay="true">';
-			// Adiciona as imagens da galeria
-			foreach ( $attachment_ids as $attachment_id ) {
-				echo wp_get_attachment_image( $attachment_id, 'full' );
-			}
-			echo '</div>';
+	
+		// Cria uma lista para armazenar as IDs das imagens
+		$image_ids = array();
+	
+		// Adiciona a imagem destacada à lista de IDs das imagens
+		if ($thumbnail_id) {
+			$image_ids[] = $thumbnail_id;
+		}
+	
+		// Adiciona as imagens da galeria à lista de IDs das imagens
+		if ($attachment_ids) {
+			$image_ids = array_merge($image_ids, $attachment_ids);
+		}
+	
+		// Gera o HTML para a galeria de imagens
+		echo '<div class="fotorama"  data-width="450" data-nav="dots" data-allowfullscreen="true" data-loop="true" data-autoplay="true">';
+		foreach ($image_ids as $image_id) {
+			echo wp_get_attachment_image($image_id, 'full');
+		}
+		echo '</div>';
 	}
 }
