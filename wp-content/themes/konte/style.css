@@ -15253,3 +15253,14 @@ ul.products li.product .product-thumbnail img {
         text-align: center;
         color: #bfbfbf;
     }
+
+    .tecprestige-product-description p{
+        font-weight: 600;
+    }
+
+    .tecprestige-product-description-title{
+        color:#cccbc2;
+        font-weight: 500;
+        text-decoration: underline;
+    }
+    
