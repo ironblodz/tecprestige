@@ -15255,6 +15255,7 @@ ul.products li.product .product-thumbnail img {
     }
 
     .tecprestige-product-description p{
+        font-size: 1rem;
         font-weight: 600;
     }
 
@@ -15262,5 +15263,13 @@ ul.products li.product .product-thumbnail img {
         color:#cccbc2;
         font-weight: 500;
         text-decoration: underline;
+    }
+
+    .woocommerce-breadcrumb.breadcrumbs a:first-of-type {
+        display: none;
+    }
+    
+    .woocommerce-breadcrumb.breadcrumbs span:first-of-type {
+        display: none;
     }
     
