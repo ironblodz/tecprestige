@@ -301,6 +301,8 @@ class Konte_WooCommerce_Template_Product {
 
 				case 'vt':
 
+					add_action( 'wp_enqueue_scripts', array(__CLASS__, 'enqueue_fotorama_scripts'));
+
 					remove_action( 'woocommerce_before_main_content', 'woocommerce_breadcrumb', 20 );
 					remove_action( 'woocommerce_single_product_summary', 'woocommerce_template_single_title', 5 );
 
@@ -314,7 +316,11 @@ class Konte_WooCommerce_Template_Product {
 					remove_action( 'woocommerce_after_single_product_summary', 'woocommerce_output_product_data_tabs', 10 );
 					add_action( 'woocommerce_after_single_product_summary', array( __CLASS__, 'productCustomTecPrestige' ), 900 );
 					/** */
-						
+					
+					/** CUSTOM GALLERY - FOTORAMA */
+					remove_action( 'woocommerce_before_single_product_summary', 'woocommerce_show_product_images', 20 );
+					add_action( 'woocommerce_before_single_product_summary', array( __CLASS__, 'custom_woocommerce_product_gallery' ), 20 );
+
 
 					// Place breadcrumb into product toolbar then place product toolbar inside product summary.
 					
@@ -322,8 +328,7 @@ class Konte_WooCommerce_Template_Product {
 					add_action( 'woocommerce_single_product_summary', array( __CLASS__, 'product_title_with_badges_tec_prestige' ), 5 );
 
 					//add_action( 'woocommerce_single_product_summary', array( __CLASS__, 'product_toolbar_tecprestige' ), 2 );
-				
-
+					
 					//wwp button
 					add_action( 'woocommerce_after_add_to_cart_button', 'custom_wpp_button', 15 );
 	
@@ -1429,5 +1434,39 @@ class Konte_WooCommerce_Template_Product {
 		}
 
 		return $classes;
+	}
+
+	public static function enqueue_fotorama_scripts() {
+		wp_enqueue_style( 'fotorama-css', 'https://cdnjs.cloudflare.com/ajax/libs/fotorama/4.6.4/fotorama.css' );
+		wp_enqueue_script( 'fotorama-js', 'https://cdnjs.cloudflare.com/ajax/libs/fotorama/4.6.4/fotorama.js', array('jquery'), '4.6.4', true );
+	}
+
+	public static function custom_woocommerce_product_gallery() {
+		global $product;
+	
+		// Obtém a ID da imagem destacada (thumbnail)
+		$thumbnail_id = $product->get_image_id();
+		// Obtém as IDs das imagens da galeria
+		$attachment_ids = $product->get_gallery_image_ids();
+	
+		// Cria uma lista para armazenar as IDs das imagens
+		$image_ids = array();
+	
+		// Adiciona a imagem destacada à lista de IDs das imagens
+		if ($thumbnail_id) {
+			$image_ids[] = $thumbnail_id;
+		}
+	
+		// Adiciona as imagens da galeria à lista de IDs das imagens
+		if ($attachment_ids) {
+			$image_ids = array_merge($image_ids, $attachment_ids);
+		}
+	
+		// Gera o HTML para a galeria de imagens
+		echo '<div class="fotorama"  data-width="450" data-nav="dots" data-allowfullscreen="true" data-loop="true" data-autoplay="true">';
+		foreach ($image_ids as $image_id) {
+			echo wp_get_attachment_image($image_id, 'full');
+		}
+		echo '</div>';
 	}
 }
