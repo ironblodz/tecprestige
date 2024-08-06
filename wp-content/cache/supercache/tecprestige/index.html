@@ -1,0 +1,1267 @@
+<!doctype html>
+<html lang="pt-PT" prefix="og: https://ogp.me/ns#">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<link rel="profile" href="http://gmpg.org/xfn/11">
+
+	<script data-cfasync="false" data-no-defer="1" data-no-minify="1" data-no-optimize="1">var ewww_webp_supported=!1;function check_webp_feature(A,e){var w;e=void 0!==e?e:function(){},ewww_webp_supported?e(ewww_webp_supported):((w=new Image).onload=function(){ewww_webp_supported=0<w.width&&0<w.height,e&&e(ewww_webp_supported)},w.onerror=function(){e&&e(!1)},w.src="data:image/webp;base64,"+{alpha:"UklGRkoAAABXRUJQVlA4WAoAAAAQAAAAAAAAAAAAQUxQSAwAAAARBxAR/Q9ERP8DAABWUDggGAAAABQBAJ0BKgEAAQAAAP4AAA3AAP7mtQAAAA=="}[A])}check_webp_feature("alpha");</script><script data-cfasync="false" data-no-defer="1" data-no-minify="1" data-no-optimize="1">var Arrive=function(c,w){"use strict";if(c.MutationObserver&&"undefined"!=typeof HTMLElement){var r,a=0,u=(r=HTMLElement.prototype.matches||HTMLElement.prototype.webkitMatchesSelector||HTMLElement.prototype.mozMatchesSelector||HTMLElement.prototype.msMatchesSelector,{matchesSelector:function(e,t){return e instanceof HTMLElement&&r.call(e,t)},addMethod:function(e,t,r){var a=e[t];e[t]=function(){return r.length==arguments.length?r.apply(this,arguments):"function"==typeof a?a.apply(this,arguments):void 0}},callCallbacks:function(e,t){t&&t.options.onceOnly&&1==t.firedElems.length&&(e=[e[0]]);for(var r,a=0;r=e[a];a++)r&&r.callback&&r.callback.call(r.elem,r.elem);t&&t.options.onceOnly&&1==t.firedElems.length&&t.me.unbindEventWithSelectorAndCallback.call(t.target,t.selector,t.callback)},checkChildNodesRecursively:function(e,t,r,a){for(var i,n=0;i=e[n];n++)r(i,t,a)&&a.push({callback:t.callback,elem:i}),0<i.childNodes.length&&u.checkChildNodesRecursively(i.childNodes,t,r,a)},mergeArrays:function(e,t){var r,a={};for(r in e)e.hasOwnProperty(r)&&(a[r]=e[r]);for(r in t)t.hasOwnProperty(r)&&(a[r]=t[r]);return a},toElementsArray:function(e){return e=void 0!==e&&("number"!=typeof e.length||e===c)?[e]:e}}),e=(l.prototype.addEvent=function(e,t,r,a){a={target:e,selector:t,options:r,callback:a,firedElems:[]};return this._beforeAdding&&this._beforeAdding(a),this._eventsBucket.push(a),a},l.prototype.removeEvent=function(e){for(var t,r=this._eventsBucket.length-1;t=this._eventsBucket[r];r--)e(t)&&(this._beforeRemoving&&this._beforeRemoving(t),(t=this._eventsBucket.splice(r,1))&&t.length&&(t[0].callback=null))},l.prototype.beforeAdding=function(e){this._beforeAdding=e},l.prototype.beforeRemoving=function(e){this._beforeRemoving=e},l),t=function(i,n){var o=new e,l=this,s={fireOnAttributesModification:!1};return o.beforeAdding(function(t){var e=t.target;e!==c.document&&e!==c||(e=document.getElementsByTagName("html")[0]);var r=new MutationObserver(function(e){n.call(this,e,t)}),a=i(t.options);r.observe(e,a),t.observer=r,t.me=l}),o.beforeRemoving(function(e){e.observer.disconnect()}),this.bindEvent=function(e,t,r){t=u.mergeArrays(s,t);for(var a=u.toElementsArray(this),i=0;i<a.length;i++)o.addEvent(a[i],e,t,r)},this.unbindEvent=function(){var r=u.toElementsArray(this);o.removeEvent(function(e){for(var t=0;t<r.length;t++)if(this===w||e.target===r[t])return!0;return!1})},this.unbindEventWithSelectorOrCallback=function(r){var a=u.toElementsArray(this),i=r,e="function"==typeof r?function(e){for(var t=0;t<a.length;t++)if((this===w||e.target===a[t])&&e.callback===i)return!0;return!1}:function(e){for(var t=0;t<a.length;t++)if((this===w||e.target===a[t])&&e.selector===r)return!0;return!1};o.removeEvent(e)},this.unbindEventWithSelectorAndCallback=function(r,a){var i=u.toElementsArray(this);o.removeEvent(function(e){for(var t=0;t<i.length;t++)if((this===w||e.target===i[t])&&e.selector===r&&e.callback===a)return!0;return!1})},this},i=new function(){var s={fireOnAttributesModification:!1,onceOnly:!1,existing:!1};function n(e,t,r){return!(!u.matchesSelector(e,t.selector)||(e._id===w&&(e._id=a++),-1!=t.firedElems.indexOf(e._id)))&&(t.firedElems.push(e._id),!0)}var c=(i=new t(function(e){var t={attributes:!1,childList:!0,subtree:!0};return e.fireOnAttributesModification&&(t.attributes=!0),t},function(e,i){e.forEach(function(e){var t=e.addedNodes,r=e.target,a=[];null!==t&&0<t.length?u.checkChildNodesRecursively(t,i,n,a):"attributes"===e.type&&n(r,i)&&a.push({callback:i.callback,elem:r}),u.callCallbacks(a,i)})})).bindEvent;return i.bindEvent=function(e,t,r){t=void 0===r?(r=t,s):u.mergeArrays(s,t);var a=u.toElementsArray(this);if(t.existing){for(var i=[],n=0;n<a.length;n++)for(var o=a[n].querySelectorAll(e),l=0;l<o.length;l++)i.push({callback:r,elem:o[l]});if(t.onceOnly&&i.length)return r.call(i[0].elem,i[0].elem);setTimeout(u.callCallbacks,1,i)}c.call(this,e,t,r)},i},o=new function(){var a={};function i(e,t){return u.matchesSelector(e,t.selector)}var n=(o=new t(function(){return{childList:!0,subtree:!0}},function(e,r){e.forEach(function(e){var t=e.removedNodes,e=[];null!==t&&0<t.length&&u.checkChildNodesRecursively(t,r,i,e),u.callCallbacks(e,r)})})).bindEvent;return o.bindEvent=function(e,t,r){t=void 0===r?(r=t,a):u.mergeArrays(a,t),n.call(this,e,t,r)},o};d(HTMLElement.prototype),d(NodeList.prototype),d(HTMLCollection.prototype),d(HTMLDocument.prototype),d(Window.prototype);var n={};return s(i,n,"unbindAllArrive"),s(o,n,"unbindAllLeave"),n}function l(){this._eventsBucket=[],this._beforeAdding=null,this._beforeRemoving=null}function s(e,t,r){u.addMethod(t,r,e.unbindEvent),u.addMethod(t,r,e.unbindEventWithSelectorOrCallback),u.addMethod(t,r,e.unbindEventWithSelectorAndCallback)}function d(e){e.arrive=i.bindEvent,s(i,e,"unbindArrive"),e.leave=o.bindEvent,s(o,e,"unbindLeave")}}(window,void 0),ewww_webp_supported=!1;function check_webp_feature(e,t){var r;ewww_webp_supported?t(ewww_webp_supported):((r=new Image).onload=function(){ewww_webp_supported=0<r.width&&0<r.height,t(ewww_webp_supported)},r.onerror=function(){t(!1)},r.src="data:image/webp;base64,"+{alpha:"UklGRkoAAABXRUJQVlA4WAoAAAAQAAAAAAAAAAAAQUxQSAwAAAARBxAR/Q9ERP8DAABWUDggGAAAABQBAJ0BKgEAAQAAAP4AAA3AAP7mtQAAAA==",animation:"UklGRlIAAABXRUJQVlA4WAoAAAASAAAAAAAAAAAAQU5JTQYAAAD/////AABBTk1GJgAAAAAAAAAAAAAAAAAAAGQAAABWUDhMDQAAAC8AAAAQBxAREYiI/gcA"}[e])}function ewwwLoadImages(e){if(e){for(var t=document.querySelectorAll(".batch-image img, .image-wrapper a, .ngg-pro-masonry-item a, .ngg-galleria-offscreen-seo-wrapper a"),r=0,a=t.length;r<a;r++)ewwwAttr(t[r],"data-src",t[r].getAttribute("data-webp")),ewwwAttr(t[r],"data-thumbnail",t[r].getAttribute("data-webp-thumbnail"));for(var i=document.querySelectorAll("div.woocommerce-product-gallery__image"),r=0,a=i.length;r<a;r++)ewwwAttr(i[r],"data-thumb",i[r].getAttribute("data-webp-thumb"))}for(var n=document.querySelectorAll("video"),r=0,a=n.length;r<a;r++)ewwwAttr(n[r],"poster",e?n[r].getAttribute("data-poster-webp"):n[r].getAttribute("data-poster-image"));for(var o,l=document.querySelectorAll("img.ewww_webp_lazy_load"),r=0,a=l.length;r<a;r++)e&&(ewwwAttr(l[r],"data-lazy-srcset",l[r].getAttribute("data-lazy-srcset-webp")),ewwwAttr(l[r],"data-srcset",l[r].getAttribute("data-srcset-webp")),ewwwAttr(l[r],"data-lazy-src",l[r].getAttribute("data-lazy-src-webp")),ewwwAttr(l[r],"data-src",l[r].getAttribute("data-src-webp")),ewwwAttr(l[r],"data-orig-file",l[r].getAttribute("data-webp-orig-file")),ewwwAttr(l[r],"data-medium-file",l[r].getAttribute("data-webp-medium-file")),ewwwAttr(l[r],"data-large-file",l[r].getAttribute("data-webp-large-file")),null!=(o=l[r].getAttribute("srcset"))&&!1!==o&&o.includes("R0lGOD")&&ewwwAttr(l[r],"src",l[r].getAttribute("data-lazy-src-webp"))),l[r].className=l[r].className.replace(/\bewww_webp_lazy_load\b/,"");for(var s=document.querySelectorAll(".ewww_webp"),r=0,a=s.length;r<a;r++)e?(ewwwAttr(s[r],"srcset",s[r].getAttribute("data-srcset-webp")),ewwwAttr(s[r],"src",s[r].getAttribute("data-src-webp")),ewwwAttr(s[r],"data-orig-file",s[r].getAttribute("data-webp-orig-file")),ewwwAttr(s[r],"data-medium-file",s[r].getAttribute("data-webp-medium-file")),ewwwAttr(s[r],"data-large-file",s[r].getAttribute("data-webp-large-file")),ewwwAttr(s[r],"data-large_image",s[r].getAttribute("data-webp-large_image")),ewwwAttr(s[r],"data-src",s[r].getAttribute("data-webp-src"))):(ewwwAttr(s[r],"srcset",s[r].getAttribute("data-srcset-img")),ewwwAttr(s[r],"src",s[r].getAttribute("data-src-img"))),s[r].className=s[r].className.replace(/\bewww_webp\b/,"ewww_webp_loaded");window.jQuery&&jQuery.fn.isotope&&jQuery.fn.imagesLoaded&&(jQuery(".fusion-posts-container-infinite").imagesLoaded(function(){jQuery(".fusion-posts-container-infinite").hasClass("isotope")&&jQuery(".fusion-posts-container-infinite").isotope()}),jQuery(".fusion-portfolio:not(.fusion-recent-works) .fusion-portfolio-wrapper").imagesLoaded(function(){jQuery(".fusion-portfolio:not(.fusion-recent-works) .fusion-portfolio-wrapper").isotope()}))}function ewwwWebPInit(e){ewwwLoadImages(e),ewwwNggLoadGalleries(e),document.arrive(".ewww_webp",function(){ewwwLoadImages(e)}),document.arrive(".ewww_webp_lazy_load",function(){ewwwLoadImages(e)}),document.arrive("videos",function(){ewwwLoadImages(e)}),"loading"==document.readyState?document.addEventListener("DOMContentLoaded",ewwwJSONParserInit):("undefined"!=typeof galleries&&ewwwNggParseGalleries(e),ewwwWooParseVariations(e))}function ewwwAttr(e,t,r){null!=r&&!1!==r&&e.setAttribute(t,r)}function ewwwJSONParserInit(){"undefined"!=typeof galleries&&check_webp_feature("alpha",ewwwNggParseGalleries),check_webp_feature("alpha",ewwwWooParseVariations)}function ewwwWooParseVariations(e){if(e)for(var t=document.querySelectorAll("form.variations_form"),r=0,a=t.length;r<a;r++){var i=t[r].getAttribute("data-product_variations"),n=!1;try{for(var o in i=JSON.parse(i))void 0!==i[o]&&void 0!==i[o].image&&(void 0!==i[o].image.src_webp&&(i[o].image.src=i[o].image.src_webp,n=!0),void 0!==i[o].image.srcset_webp&&(i[o].image.srcset=i[o].image.srcset_webp,n=!0),void 0!==i[o].image.full_src_webp&&(i[o].image.full_src=i[o].image.full_src_webp,n=!0),void 0!==i[o].image.gallery_thumbnail_src_webp&&(i[o].image.gallery_thumbnail_src=i[o].image.gallery_thumbnail_src_webp,n=!0),void 0!==i[o].image.thumb_src_webp&&(i[o].image.thumb_src=i[o].image.thumb_src_webp,n=!0));n&&ewwwAttr(t[r],"data-product_variations",JSON.stringify(i))}catch(e){}}}function ewwwNggParseGalleries(e){if(e)for(var t in galleries){var r=galleries[t];galleries[t].images_list=ewwwNggParseImageList(r.images_list)}}function ewwwNggLoadGalleries(e){e&&document.addEventListener("ngg.galleria.themeadded",function(e,t){window.ngg_galleria._create_backup=window.ngg_galleria.create,window.ngg_galleria.create=function(e,t){var r=$(e).data("id");return galleries["gallery_"+r].images_list=ewwwNggParseImageList(galleries["gallery_"+r].images_list),window.ngg_galleria._create_backup(e,t)}})}function ewwwNggParseImageList(e){for(var t in e){var r=e[t];if(void 0!==r["image-webp"]&&(e[t].image=r["image-webp"],delete e[t]["image-webp"]),void 0!==r["thumb-webp"]&&(e[t].thumb=r["thumb-webp"],delete e[t]["thumb-webp"]),void 0!==r.full_image_webp&&(e[t].full_image=r.full_image_webp,delete e[t].full_image_webp),void 0!==r.srcsets)for(var a in r.srcsets)nggSrcset=r.srcsets[a],void 0!==r.srcsets[a+"-webp"]&&(e[t].srcsets[a]=r.srcsets[a+"-webp"],delete e[t].srcsets[a+"-webp"]);if(void 0!==r.full_srcsets)for(var i in r.full_srcsets)nggFSrcset=r.full_srcsets[i],void 0!==r.full_srcsets[i+"-webp"]&&(e[t].full_srcsets[i]=r.full_srcsets[i+"-webp"],delete e[t].full_srcsets[i+"-webp"])}return e}check_webp_feature("alpha",ewwwWebPInit);</script><link rel="preload" href="http://tecprestige/wp-content/themes/konte/fonts/functionpro-light-webfont.woff2" as="font" type="font/woff2" crossorigin><link rel="preload" href="http://tecprestige/wp-content/themes/konte/fonts/functionpro-book-webfont.woff2" as="font" type="font/woff2" crossorigin><link rel="preload" href="http://tecprestige/wp-content/themes/konte/fonts/functionpro-medium-webfont.woff2" as="font" type="font/woff2" crossorigin><link rel="preload" href="http://tecprestige/wp-content/themes/konte/fonts/functionpro-demi-webfont.woff2" as="font" type="font/woff2" crossorigin><link rel="preload" href="http://tecprestige/wp-content/themes/konte/fonts/functionpro-bold-webfont.woff2" as="font" type="font/woff2" crossorigin>
+<!-- Search Engine Optimization by Rank Math - https://rankmath.com/ -->
+<title>- TecPrestige</title>
+<meta name="description" content="Título da Página body { margin: 0; padding: 0; font-family: Arial, sans-serif; overflow-x: hidden; background-color: black; color: white; } #particles-js {"/>
+<meta name="robots" content="index, follow, max-snippet:-1, max-video-preview:-1, max-image-preview:large"/>
+<link rel="canonical" href="http://tecprestige/" />
+<meta property="og:locale" content="pt_PT" />
+<meta property="og:type" content="website" />
+<meta property="og:title" content="- TecPrestige" />
+<meta property="og:description" content="Título da Página body { margin: 0; padding: 0; font-family: Arial, sans-serif; overflow-x: hidden; background-color: black; color: white; } #particles-js {" />
+<meta property="og:url" content="http://tecprestige/" />
+<meta property="og:site_name" content="TecPrestige" />
+<meta property="og:updated_time" content="2024-07-18T22:43:51+00:00" />
+<meta property="article:published_time" content="2024-05-26T15:07:55+00:00" />
+<meta property="article:modified_time" content="2024-07-18T22:43:51+00:00" />
+<meta name="twitter:card" content="summary_large_image" />
+<meta name="twitter:title" content="- TecPrestige" />
+<meta name="twitter:description" content="Título da Página body { margin: 0; padding: 0; font-family: Arial, sans-serif; overflow-x: hidden; background-color: black; color: white; } #particles-js {" />
+<meta name="twitter:label1" content="Written by" />
+<meta name="twitter:data1" content="tecprestige" />
+<meta name="twitter:label2" content="Time to read" />
+<meta name="twitter:data2" content="Less than a minute" />
+<script type="application/ld+json" class="rank-math-schema">{"@context":"https://schema.org","@graph":[{"@type":"Organization","@id":"http://tecprestige/#organization","name":"TecPrestige"},{"@type":"WebSite","@id":"http://tecprestige/#website","url":"http://tecprestige","name":"TecPrestige","publisher":{"@id":"http://tecprestige/#organization"},"inLanguage":"pt-PT","potentialAction":{"@type":"SearchAction","target":"http://tecprestige/?s={search_term_string}","query-input":"required name=search_term_string"}},{"@type":"ImageObject","@id":"http://tecprestige/wp-content/uploads/2024/05/logo_unox.png","url":"http://tecprestige/wp-content/uploads/2024/05/logo_unox.png","width":"200","height":"200","inLanguage":"pt-PT"},{"@type":"WebPage","@id":"http://tecprestige/#webpage","url":"http://tecprestige/","name":"- TecPrestige","datePublished":"2024-05-26T15:07:55+00:00","dateModified":"2024-07-18T22:43:51+00:00","about":{"@id":"http://tecprestige/#organization"},"isPartOf":{"@id":"http://tecprestige/#website"},"primaryImageOfPage":{"@id":"http://tecprestige/wp-content/uploads/2024/05/logo_unox.png"},"inLanguage":"pt-PT"},{"@type":"Person","@id":"http://tecprestige/author/tecprestige/","name":"tecprestige","url":"http://tecprestige/author/tecprestige/","image":{"@type":"ImageObject","@id":"http://0.gravatar.com/avatar/ff96bd00407e5311b49859ed91a9fe6a?s=96&amp;d=mm&amp;r=g","url":"http://0.gravatar.com/avatar/ff96bd00407e5311b49859ed91a9fe6a?s=96&amp;d=mm&amp;r=g","caption":"tecprestige","inLanguage":"pt-PT"},"sameAs":["http://tecprestige.test"],"worksFor":{"@id":"http://tecprestige/#organization"}},{"@type":"Article","headline":"- TecPrestige","datePublished":"2024-05-26T15:07:55+00:00","dateModified":"2024-07-18T22:43:51+00:00","author":{"@id":"http://tecprestige/author/tecprestige/","name":"tecprestige"},"publisher":{"@id":"http://tecprestige/#organization"},"description":"T\u00edtulo da P\u00e1gina body { margin: 0; padding: 0; font-family: Arial, sans-serif; overflow-x: hidden; background-color: black; color: white; } #particles-js {","name":"- TecPrestige","@id":"http://tecprestige/#richSnippet","isPartOf":{"@id":"http://tecprestige/#webpage"},"image":{"@id":"http://tecprestige/wp-content/uploads/2024/05/logo_unox.png"},"inLanguage":"pt-PT","mainEntityOfPage":{"@id":"http://tecprestige/#webpage"}}]}</script>
+<!-- /Rank Math WordPress SEO plugin -->
+
+<link rel="alternate" type="application/rss+xml" title="TecPrestige &raquo; Feed" href="http://tecprestige/feed/" />
+<link rel="alternate" type="application/rss+xml" title="TecPrestige &raquo; Feed de comentários" href="http://tecprestige/comments/feed/" />
+<script type="text/javascript">
+/* <![CDATA[ */
+window._wpemojiSettings = {"baseUrl":"https:\/\/s.w.org\/images\/core\/emoji\/15.0.3\/72x72\/","ext":".png","svgUrl":"https:\/\/s.w.org\/images\/core\/emoji\/15.0.3\/svg\/","svgExt":".svg","source":{"concatemoji":"http:\/\/tecprestige\/wp-includes\/js\/wp-emoji-release.min.js?ver=6.6"}};
+/*! This file is auto-generated */
+!function(i,n){var o,s,e;function c(e){try{var t={supportTests:e,timestamp:(new Date).valueOf()};sessionStorage.setItem(o,JSON.stringify(t))}catch(e){}}function p(e,t,n){e.clearRect(0,0,e.canvas.width,e.canvas.height),e.fillText(t,0,0);var t=new Uint32Array(e.getImageData(0,0,e.canvas.width,e.canvas.height).data),r=(e.clearRect(0,0,e.canvas.width,e.canvas.height),e.fillText(n,0,0),new Uint32Array(e.getImageData(0,0,e.canvas.width,e.canvas.height).data));return t.every(function(e,t){return e===r[t]})}function u(e,t,n){switch(t){case"flag":return n(e,"\ud83c\udff3\ufe0f\u200d\u26a7\ufe0f","\ud83c\udff3\ufe0f\u200b\u26a7\ufe0f")?!1:!n(e,"\ud83c\uddfa\ud83c\uddf3","\ud83c\uddfa\u200b\ud83c\uddf3")&&!n(e,"\ud83c\udff4\udb40\udc67\udb40\udc62\udb40\udc65\udb40\udc6e\udb40\udc67\udb40\udc7f","\ud83c\udff4\u200b\udb40\udc67\u200b\udb40\udc62\u200b\udb40\udc65\u200b\udb40\udc6e\u200b\udb40\udc67\u200b\udb40\udc7f");case"emoji":return!n(e,"\ud83d\udc26\u200d\u2b1b","\ud83d\udc26\u200b\u2b1b")}return!1}function f(e,t,n){var r="undefined"!=typeof WorkerGlobalScope&&self instanceof WorkerGlobalScope?new OffscreenCanvas(300,150):i.createElement("canvas"),a=r.getContext("2d",{willReadFrequently:!0}),o=(a.textBaseline="top",a.font="600 32px Arial",{});return e.forEach(function(e){o[e]=t(a,e,n)}),o}function t(e){var t=i.createElement("script");t.src=e,t.defer=!0,i.head.appendChild(t)}"undefined"!=typeof Promise&&(o="wpEmojiSettingsSupports",s=["flag","emoji"],n.supports={everything:!0,everythingExceptFlag:!0},e=new Promise(function(e){i.addEventListener("DOMContentLoaded",e,{once:!0})}),new Promise(function(t){var n=function(){try{var e=JSON.parse(sessionStorage.getItem(o));if("object"==typeof e&&"number"==typeof e.timestamp&&(new Date).valueOf()<e.timestamp+604800&&"object"==typeof e.supportTests)return e.supportTests}catch(e){}return null}();if(!n){if("undefined"!=typeof Worker&&"undefined"!=typeof OffscreenCanvas&&"undefined"!=typeof URL&&URL.createObjectURL&&"undefined"!=typeof Blob)try{var e="postMessage("+f.toString()+"("+[JSON.stringify(s),u.toString(),p.toString()].join(",")+"));",r=new Blob([e],{type:"text/javascript"}),a=new Worker(URL.createObjectURL(r),{name:"wpTestEmojiSupports"});return void(a.onmessage=function(e){c(n=e.data),a.terminate(),t(n)})}catch(e){}c(n=f(s,u,p))}t(n)}).then(function(e){for(var t in e)n.supports[t]=e[t],n.supports.everything=n.supports.everything&&n.supports[t],"flag"!==t&&(n.supports.everythingExceptFlag=n.supports.everythingExceptFlag&&n.supports[t]);n.supports.everythingExceptFlag=n.supports.everythingExceptFlag&&!n.supports.flag,n.DOMReady=!1,n.readyCallback=function(){n.DOMReady=!0}}).then(function(){return e}).then(function(){var e;n.supports.everything||(n.readyCallback(),(e=n.source||{}).concatemoji?t(e.concatemoji):e.wpemoji&&e.twemoji&&(t(e.twemoji),t(e.wpemoji)))}))}((window,document),window._wpemojiSettings);
+/* ]]> */
+</script>
+<style id='wp-emoji-styles-inline-css' type='text/css'>
+
+	img.wp-smiley, img.emoji {
+		display: inline !important;
+		border: none !important;
+		box-shadow: none !important;
+		height: 1em !important;
+		width: 1em !important;
+		margin: 0 0.07em !important;
+		vertical-align: -0.1em !important;
+		background: none !important;
+		padding: 0 !important;
+	}
+</style>
+<link rel='stylesheet' id='wp-block-library-css' href='http://tecprestige/wp-includes/css/dist/block-library/style.min.css?ver=6.6' type='text/css' media='all' />
+<style id='wp-block-library-theme-inline-css' type='text/css'>
+.wp-block-audio :where(figcaption){color:#555;font-size:13px;text-align:center}.is-dark-theme .wp-block-audio :where(figcaption){color:#ffffffa6}.wp-block-audio{margin:0 0 1em}.wp-block-code{border:1px solid #ccc;border-radius:4px;font-family:Menlo,Consolas,monaco,monospace;padding:.8em 1em}.wp-block-embed :where(figcaption){color:#555;font-size:13px;text-align:center}.is-dark-theme .wp-block-embed :where(figcaption){color:#ffffffa6}.wp-block-embed{margin:0 0 1em}.blocks-gallery-caption{color:#555;font-size:13px;text-align:center}.is-dark-theme .blocks-gallery-caption{color:#ffffffa6}:root :where(.wp-block-image figcaption){color:#555;font-size:13px;text-align:center}.is-dark-theme :root :where(.wp-block-image figcaption){color:#ffffffa6}.wp-block-image{margin:0 0 1em}.wp-block-pullquote{border-bottom:4px solid;border-top:4px solid;color:currentColor;margin-bottom:1.75em}.wp-block-pullquote cite,.wp-block-pullquote footer,.wp-block-pullquote__citation{color:currentColor;font-size:.8125em;font-style:normal;text-transform:uppercase}.wp-block-quote{border-left:.25em solid;margin:0 0 1.75em;padding-left:1em}.wp-block-quote cite,.wp-block-quote footer{color:currentColor;font-size:.8125em;font-style:normal;position:relative}.wp-block-quote.has-text-align-right{border-left:none;border-right:.25em solid;padding-left:0;padding-right:1em}.wp-block-quote.has-text-align-center{border:none;padding-left:0}.wp-block-quote.is-large,.wp-block-quote.is-style-large,.wp-block-quote.is-style-plain{border:none}.wp-block-search .wp-block-search__label{font-weight:700}.wp-block-search__button{border:1px solid #ccc;padding:.375em .625em}:where(.wp-block-group.has-background){padding:1.25em 2.375em}.wp-block-separator.has-css-opacity{opacity:.4}.wp-block-separator{border:none;border-bottom:2px solid;margin-left:auto;margin-right:auto}.wp-block-separator.has-alpha-channel-opacity{opacity:1}.wp-block-separator:not(.is-style-wide):not(.is-style-dots){width:100px}.wp-block-separator.has-background:not(.is-style-dots){border-bottom:none;height:1px}.wp-block-separator.has-background:not(.is-style-wide):not(.is-style-dots){height:2px}.wp-block-table{margin:0 0 1em}.wp-block-table td,.wp-block-table th{word-break:normal}.wp-block-table :where(figcaption){color:#555;font-size:13px;text-align:center}.is-dark-theme .wp-block-table :where(figcaption){color:#ffffffa6}.wp-block-video :where(figcaption){color:#555;font-size:13px;text-align:center}.is-dark-theme .wp-block-video :where(figcaption){color:#ffffffa6}.wp-block-video{margin:0 0 1em}:root :where(.wp-block-template-part.has-background){margin-bottom:0;margin-top:0;padding:1.25em 2.375em}
+</style>
+<style id='rank-math-toc-block-style-inline-css' type='text/css'>
+.wp-block-rank-math-toc-block nav ol{counter-reset:item}.wp-block-rank-math-toc-block nav ol li{display:block}.wp-block-rank-math-toc-block nav ol li:before{content:counters(item, ".") ". ";counter-increment:item}
+
+</style>
+<link rel='stylesheet' id='nta-css-popup-css' href='http://tecprestige/wp-content/plugins/wp-whatsapp/assets/dist/css/style.css?ver=6.6' type='text/css' media='all' />
+<link rel='stylesheet' id='konte-woocommerce-blocks-css' href='http://tecprestige/wp-content/themes/konte/css/woocommerce-blocks.css?ver=2.3.9' type='text/css' media='all' />
+<style id='classic-theme-styles-inline-css' type='text/css'>
+/*! This file is auto-generated */
+.wp-block-button__link{color:#fff;background-color:#32373c;border-radius:9999px;box-shadow:none;text-decoration:none;padding:calc(.667em + 2px) calc(1.333em + 2px);font-size:1.125em}.wp-block-file__button{background:#32373c;color:#fff;text-decoration:none}
+</style>
+<style id='global-styles-inline-css' type='text/css'>
+:root{--wp--preset--aspect-ratio--square: 1;--wp--preset--aspect-ratio--4-3: 4/3;--wp--preset--aspect-ratio--3-4: 3/4;--wp--preset--aspect-ratio--3-2: 3/2;--wp--preset--aspect-ratio--2-3: 2/3;--wp--preset--aspect-ratio--16-9: 16/9;--wp--preset--aspect-ratio--9-16: 9/16;--wp--preset--color--black: #000000;--wp--preset--color--cyan-bluish-gray: #abb8c3;--wp--preset--color--white: #ffffff;--wp--preset--color--pale-pink: #f78da7;--wp--preset--color--vivid-red: #cf2e2e;--wp--preset--color--luminous-vivid-orange: #ff6900;--wp--preset--color--luminous-vivid-amber: #fcb900;--wp--preset--color--light-green-cyan: #7bdcb5;--wp--preset--color--vivid-green-cyan: #00d084;--wp--preset--color--pale-cyan-blue: #8ed1fc;--wp--preset--color--vivid-cyan-blue: #0693e3;--wp--preset--color--vivid-purple: #9b51e0;--wp--preset--gradient--vivid-cyan-blue-to-vivid-purple: linear-gradient(135deg,rgba(6,147,227,1) 0%,rgb(155,81,224) 100%);--wp--preset--gradient--light-green-cyan-to-vivid-green-cyan: linear-gradient(135deg,rgb(122,220,180) 0%,rgb(0,208,130) 100%);--wp--preset--gradient--luminous-vivid-amber-to-luminous-vivid-orange: linear-gradient(135deg,rgba(252,185,0,1) 0%,rgba(255,105,0,1) 100%);--wp--preset--gradient--luminous-vivid-orange-to-vivid-red: linear-gradient(135deg,rgba(255,105,0,1) 0%,rgb(207,46,46) 100%);--wp--preset--gradient--very-light-gray-to-cyan-bluish-gray: linear-gradient(135deg,rgb(238,238,238) 0%,rgb(169,184,195) 100%);--wp--preset--gradient--cool-to-warm-spectrum: linear-gradient(135deg,rgb(74,234,220) 0%,rgb(151,120,209) 20%,rgb(207,42,186) 40%,rgb(238,44,130) 60%,rgb(251,105,98) 80%,rgb(254,248,76) 100%);--wp--preset--gradient--blush-light-purple: linear-gradient(135deg,rgb(255,206,236) 0%,rgb(152,150,240) 100%);--wp--preset--gradient--blush-bordeaux: linear-gradient(135deg,rgb(254,205,165) 0%,rgb(254,45,45) 50%,rgb(107,0,62) 100%);--wp--preset--gradient--luminous-dusk: linear-gradient(135deg,rgb(255,203,112) 0%,rgb(199,81,192) 50%,rgb(65,88,208) 100%);--wp--preset--gradient--pale-ocean: linear-gradient(135deg,rgb(255,245,203) 0%,rgb(182,227,212) 50%,rgb(51,167,181) 100%);--wp--preset--gradient--electric-grass: linear-gradient(135deg,rgb(202,248,128) 0%,rgb(113,206,126) 100%);--wp--preset--gradient--midnight: linear-gradient(135deg,rgb(2,3,129) 0%,rgb(40,116,252) 100%);--wp--preset--font-size--small: 12px;--wp--preset--font-size--medium: 24px;--wp--preset--font-size--large: 40px;--wp--preset--font-size--x-large: 42px;--wp--preset--font-size--normal: 18px;--wp--preset--font-size--huge: 64px;--wp--preset--font-family--inter: "Inter", sans-serif;--wp--preset--font-family--cardo: Cardo;--wp--preset--spacing--20: 0.44rem;--wp--preset--spacing--30: 0.67rem;--wp--preset--spacing--40: 1rem;--wp--preset--spacing--50: 1.5rem;--wp--preset--spacing--60: 2.25rem;--wp--preset--spacing--70: 3.38rem;--wp--preset--spacing--80: 5.06rem;--wp--preset--shadow--natural: 6px 6px 9px rgba(0, 0, 0, 0.2);--wp--preset--shadow--deep: 12px 12px 50px rgba(0, 0, 0, 0.4);--wp--preset--shadow--sharp: 6px 6px 0px rgba(0, 0, 0, 0.2);--wp--preset--shadow--outlined: 6px 6px 0px -3px rgba(255, 255, 255, 1), 6px 6px rgba(0, 0, 0, 1);--wp--preset--shadow--crisp: 6px 6px 0px rgba(0, 0, 0, 1);}:where(.is-layout-flex){gap: 0.5em;}:where(.is-layout-grid){gap: 0.5em;}body .is-layout-flex{display: flex;}.is-layout-flex{flex-wrap: wrap;align-items: center;}.is-layout-flex > :is(*, div){margin: 0;}body .is-layout-grid{display: grid;}.is-layout-grid > :is(*, div){margin: 0;}:where(.wp-block-columns.is-layout-flex){gap: 2em;}:where(.wp-block-columns.is-layout-grid){gap: 2em;}:where(.wp-block-post-template.is-layout-flex){gap: 1.25em;}:where(.wp-block-post-template.is-layout-grid){gap: 1.25em;}.has-black-color{color: var(--wp--preset--color--black) !important;}.has-cyan-bluish-gray-color{color: var(--wp--preset--color--cyan-bluish-gray) !important;}.has-white-color{color: var(--wp--preset--color--white) !important;}.has-pale-pink-color{color: var(--wp--preset--color--pale-pink) !important;}.has-vivid-red-color{color: var(--wp--preset--color--vivid-red) !important;}.has-luminous-vivid-orange-color{color: var(--wp--preset--color--luminous-vivid-orange) !important;}.has-luminous-vivid-amber-color{color: var(--wp--preset--color--luminous-vivid-amber) !important;}.has-light-green-cyan-color{color: var(--wp--preset--color--light-green-cyan) !important;}.has-vivid-green-cyan-color{color: var(--wp--preset--color--vivid-green-cyan) !important;}.has-pale-cyan-blue-color{color: var(--wp--preset--color--pale-cyan-blue) !important;}.has-vivid-cyan-blue-color{color: var(--wp--preset--color--vivid-cyan-blue) !important;}.has-vivid-purple-color{color: var(--wp--preset--color--vivid-purple) !important;}.has-black-background-color{background-color: var(--wp--preset--color--black) !important;}.has-cyan-bluish-gray-background-color{background-color: var(--wp--preset--color--cyan-bluish-gray) !important;}.has-white-background-color{background-color: var(--wp--preset--color--white) !important;}.has-pale-pink-background-color{background-color: var(--wp--preset--color--pale-pink) !important;}.has-vivid-red-background-color{background-color: var(--wp--preset--color--vivid-red) !important;}.has-luminous-vivid-orange-background-color{background-color: var(--wp--preset--color--luminous-vivid-orange) !important;}.has-luminous-vivid-amber-background-color{background-color: var(--wp--preset--color--luminous-vivid-amber) !important;}.has-light-green-cyan-background-color{background-color: var(--wp--preset--color--light-green-cyan) !important;}.has-vivid-green-cyan-background-color{background-color: var(--wp--preset--color--vivid-green-cyan) !important;}.has-pale-cyan-blue-background-color{background-color: var(--wp--preset--color--pale-cyan-blue) !important;}.has-vivid-cyan-blue-background-color{background-color: var(--wp--preset--color--vivid-cyan-blue) !important;}.has-vivid-purple-background-color{background-color: var(--wp--preset--color--vivid-purple) !important;}.has-black-border-color{border-color: var(--wp--preset--color--black) !important;}.has-cyan-bluish-gray-border-color{border-color: var(--wp--preset--color--cyan-bluish-gray) !important;}.has-white-border-color{border-color: var(--wp--preset--color--white) !important;}.has-pale-pink-border-color{border-color: var(--wp--preset--color--pale-pink) !important;}.has-vivid-red-border-color{border-color: var(--wp--preset--color--vivid-red) !important;}.has-luminous-vivid-orange-border-color{border-color: var(--wp--preset--color--luminous-vivid-orange) !important;}.has-luminous-vivid-amber-border-color{border-color: var(--wp--preset--color--luminous-vivid-amber) !important;}.has-light-green-cyan-border-color{border-color: var(--wp--preset--color--light-green-cyan) !important;}.has-vivid-green-cyan-border-color{border-color: var(--wp--preset--color--vivid-green-cyan) !important;}.has-pale-cyan-blue-border-color{border-color: var(--wp--preset--color--pale-cyan-blue) !important;}.has-vivid-cyan-blue-border-color{border-color: var(--wp--preset--color--vivid-cyan-blue) !important;}.has-vivid-purple-border-color{border-color: var(--wp--preset--color--vivid-purple) !important;}.has-vivid-cyan-blue-to-vivid-purple-gradient-background{background: var(--wp--preset--gradient--vivid-cyan-blue-to-vivid-purple) !important;}.has-light-green-cyan-to-vivid-green-cyan-gradient-background{background: var(--wp--preset--gradient--light-green-cyan-to-vivid-green-cyan) !important;}.has-luminous-vivid-amber-to-luminous-vivid-orange-gradient-background{background: var(--wp--preset--gradient--luminous-vivid-amber-to-luminous-vivid-orange) !important;}.has-luminous-vivid-orange-to-vivid-red-gradient-background{background: var(--wp--preset--gradient--luminous-vivid-orange-to-vivid-red) !important;}.has-very-light-gray-to-cyan-bluish-gray-gradient-background{background: var(--wp--preset--gradient--very-light-gray-to-cyan-bluish-gray) !important;}.has-cool-to-warm-spectrum-gradient-background{background: var(--wp--preset--gradient--cool-to-warm-spectrum) !important;}.has-blush-light-purple-gradient-background{background: var(--wp--preset--gradient--blush-light-purple) !important;}.has-blush-bordeaux-gradient-background{background: var(--wp--preset--gradient--blush-bordeaux) !important;}.has-luminous-dusk-gradient-background{background: var(--wp--preset--gradient--luminous-dusk) !important;}.has-pale-ocean-gradient-background{background: var(--wp--preset--gradient--pale-ocean) !important;}.has-electric-grass-gradient-background{background: var(--wp--preset--gradient--electric-grass) !important;}.has-midnight-gradient-background{background: var(--wp--preset--gradient--midnight) !important;}.has-small-font-size{font-size: var(--wp--preset--font-size--small) !important;}.has-medium-font-size{font-size: var(--wp--preset--font-size--medium) !important;}.has-large-font-size{font-size: var(--wp--preset--font-size--large) !important;}.has-x-large-font-size{font-size: var(--wp--preset--font-size--x-large) !important;}
+:where(.wp-block-post-template.is-layout-flex){gap: 1.25em;}:where(.wp-block-post-template.is-layout-grid){gap: 1.25em;}
+:where(.wp-block-columns.is-layout-flex){gap: 2em;}:where(.wp-block-columns.is-layout-grid){gap: 2em;}
+:root :where(.wp-block-pullquote){font-size: 1.5em;line-height: 1.6;}
+</style>
+<link rel='stylesheet' id='wapf-frontend-css-css' href='http://tecprestige/wp-content/plugins/advanced-product-fields-for-woocommerce/assets/css/frontend.min.css?ver=1.6.8' type='text/css' media='all' />
+<link rel='stylesheet' id='woof-css' href='http://tecprestige/wp-content/plugins/woocommerce-products-filter/css/front.css?ver=1.3.6.1' type='text/css' media='all' />
+<style id='woof-inline-css' type='text/css'>
+
+.woof_products_top_panel li span, .woof_products_top_panel2 li span{background: url(http://tecprestige/wp-content/plugins/woocommerce-products-filter/img/delete.png);background-size: 14px 14px;background-repeat: no-repeat;background-position: right;}
+.woof_edit_view{
+                    display: none;
+                }
+</style>
+<link rel='stylesheet' id='chosen-drop-down-css' href='http://tecprestige/wp-content/plugins/woocommerce-products-filter/js/chosen/chosen.min.css?ver=1.3.6.1' type='text/css' media='all' />
+<link rel='stylesheet' id='icheck-jquery-color-flat-css' href='http://tecprestige/wp-content/plugins/woocommerce-products-filter/js/icheck/skins/flat/_all.css?ver=1.3.6.1' type='text/css' media='all' />
+<link rel='stylesheet' id='icheck-jquery-color-square-css' href='http://tecprestige/wp-content/plugins/woocommerce-products-filter/js/icheck/skins/square/_all.css?ver=1.3.6.1' type='text/css' media='all' />
+<link rel='stylesheet' id='icheck-jquery-color-minimal-css' href='http://tecprestige/wp-content/plugins/woocommerce-products-filter/js/icheck/skins/minimal/_all.css?ver=1.3.6.1' type='text/css' media='all' />
+<link rel='stylesheet' id='woof_by_author_html_items-css' href='http://tecprestige/wp-content/plugins/woocommerce-products-filter/ext/by_author/css/by_author.css?ver=1.3.6.1' type='text/css' media='all' />
+<link rel='stylesheet' id='woof_by_instock_html_items-css' href='http://tecprestige/wp-content/plugins/woocommerce-products-filter/ext/by_instock/css/by_instock.css?ver=1.3.6.1' type='text/css' media='all' />
+<link rel='stylesheet' id='woof_by_onsales_html_items-css' href='http://tecprestige/wp-content/plugins/woocommerce-products-filter/ext/by_onsales/css/by_onsales.css?ver=1.3.6.1' type='text/css' media='all' />
+<link rel='stylesheet' id='woof_by_text_html_items-css' href='http://tecprestige/wp-content/plugins/woocommerce-products-filter/ext/by_text/assets/css/front.css?ver=1.3.6.1' type='text/css' media='all' />
+<link rel='stylesheet' id='woof_label_html_items-css' href='http://tecprestige/wp-content/plugins/woocommerce-products-filter/ext/label/css/html_types/label.css?ver=1.3.6.1' type='text/css' media='all' />
+<link rel='stylesheet' id='woof_select_radio_check_html_items-css' href='http://tecprestige/wp-content/plugins/woocommerce-products-filter/ext/select_radio_check/css/html_types/select_radio_check.css?ver=1.3.6.1' type='text/css' media='all' />
+<link rel='stylesheet' id='woof_sd_html_items_checkbox-css' href='http://tecprestige/wp-content/plugins/woocommerce-products-filter/ext/smart_designer/css/elements/checkbox.css?ver=1.3.6.1' type='text/css' media='all' />
+<link rel='stylesheet' id='woof_sd_html_items_radio-css' href='http://tecprestige/wp-content/plugins/woocommerce-products-filter/ext/smart_designer/css/elements/radio.css?ver=1.3.6.1' type='text/css' media='all' />
+<link rel='stylesheet' id='woof_sd_html_items_switcher-css' href='http://tecprestige/wp-content/plugins/woocommerce-products-filter/ext/smart_designer/css/elements/switcher.css?ver=1.3.6.1' type='text/css' media='all' />
+<link rel='stylesheet' id='woof_sd_html_items_color-css' href='http://tecprestige/wp-content/plugins/woocommerce-products-filter/ext/smart_designer/css/elements/color.css?ver=1.3.6.1' type='text/css' media='all' />
+<link rel='stylesheet' id='woof_sd_html_items_tooltip-css' href='http://tecprestige/wp-content/plugins/woocommerce-products-filter/ext/smart_designer/css/tooltip.css?ver=1.3.6.1' type='text/css' media='all' />
+<link rel='stylesheet' id='woof_sd_html_items_front-css' href='http://tecprestige/wp-content/plugins/woocommerce-products-filter/ext/smart_designer/css/front.css?ver=1.3.6.1' type='text/css' media='all' />
+<link rel='stylesheet' id='woof-switcher23-css' href='http://tecprestige/wp-content/plugins/woocommerce-products-filter/css/switcher.css?ver=1.3.6.1' type='text/css' media='all' />
+<style id='woocommerce-inline-inline-css' type='text/css'>
+.woocommerce form .form-row .required { visibility: visible; }
+</style>
+<link rel='stylesheet' id='wcboost-products-compare-css' href='http://tecprestige/wp-content/plugins/wcboost-products-compare/assets/css/compare.css?ver=1.0.5' type='text/css' media='all' />
+<link rel='stylesheet' id='wcboost-variation-swatches-css' href='http://tecprestige/wp-content/plugins/wcboost-variation-swatches/assets/css/frontend.css?ver=1.0.17' type='text/css' media='all' />
+<style id='wcboost-variation-swatches-inline-css' type='text/css'>
+:root { --wcboost-swatches-item-width: 30px; --wcboost-swatches-item-height: 30px; }
+</style>
+<link rel='stylesheet' id='wcboost-wishlist-css' href='http://tecprestige/wp-content/plugins/wcboost-wishlist/assets/css/wishlist.css?ver=1.1.0' type='text/css' media='all' />
+<link rel='stylesheet' id='animate-css' href='http://tecprestige/wp-content/themes/konte/css/animate.css?ver=3.5.2' type='text/css' media='all' />
+<link rel='stylesheet' id='font-awesome-css' href='http://tecprestige/wp-content/themes/konte/css/font-awesome.min.css?ver=4.7.0' type='text/css' media='all' />
+<link rel='stylesheet' id='bootstrap-grid-css' href='http://tecprestige/wp-content/themes/konte/css/bootstrap.css?ver=3.3.7' type='text/css' media='all' />
+<link rel='stylesheet' id='konte-css' href='http://tecprestige/wp-content/themes/konte/style.css?ver=2.3.9' type='text/css' media='all' />
+<style id='konte-inline-css' type='text/css'>
+.topbar {height: 40px}:root { --header-main-height: 86px}:root { --header-bottom-height: 86px}.header-main, .header-v10 .site-branding, .header-v10 .header-main .header-right-items { height: 86px; }.header-bottom { height: 86px; }.header-v10 .header-main .header-left-items { width: 275px; }.header-vertical .site, .header-vertical .sticky-cart-form { padding-left: 275px; }.header-vertical .site-footer.transparent { padding-left: 275px; }@media screen and (max-width: 1440px) { .header-v10 .header-main .header-left-items { width: 275px; } .header-vertical .site, .header-vertical .sticky-cart-form { padding-left: 275px; } }@media screen and (max-width: 1280px) { .header-v10 .header-main .header-left-items { width: 200px; } .header-vertical .site, .header-vertical .sticky-cart-form { padding-left: 200px; } }.header-mobile {height: 68px}.logo img {max-width: 230px;max-height: 100px;}.logo svg {max-width: 230px;max-height: 100px;}.page-header.title-front, .page-header .entry-thumbnail { height: 800px; }@media (max-width: 991px) { max.page-header.title-front, .page-header .entry-thumbnail { height: 400px; } }@media (max-width: 767px) { max.page-header.title-front, .page-header .entry-thumbnail { height: 300px; } }.preloader { position: fixed; top: 0; left: 0; width: 100%; height: 100%; z-index: 99999999;background-color: rgba(255,255,255,1); }
+</style>
+<link rel='stylesheet' id='select2-css' href='http://tecprestige/wp-content/plugins/woocommerce/assets/css/select2.css?ver=9.1.2' type='text/css' media='all' />
+<link rel='stylesheet' id='konte-woocommerce-css' href='http://tecprestige/wp-content/themes/konte/woocommerce.css?ver=2.3.9' type='text/css' media='all' />
+<style id='konte-woocommerce-inline-css' type='text/css'>
+.woocommerce-badge.onsale {background-color: #3ee590}.woocommerce-badge.new {background-color: #ffb453}.woocommerce-badge.featured {background-color: #ff736c}.woocommerce-badge.sold-out {background-color: #838889}
+
+			:root {
+				--wcboost-swatches-item-gap: 0;
+			}
+			.wcboost-variation-swatches--default {
+				--wcboost-swatches-item-padding: 0px;
+			}
+			.wcboost-variation-swatches--catalog {
+				--wcboost-swatches-item-gap: 16px;
+				--wcboost-swatches-button-font-size: 14px;
+				--wcboost-swatches-label-font-size: 14px;
+			}
+			.wcboost-variation-swatches--catalog .wcboost-variation-swatches__item {
+				margin: 0;
+			}
+			.woocommerce .wcboost-variation-swatches--button .wcboost-variation-swatches__item {
+				padding-top: 2px;
+				padding-bottom: 2px;
+				padding-left: calc(var(--wcboost-swatches-item-width) / 2);
+				padding-right: calc(var(--wcboost-swatches-item-width) / 2);
+			}
+		
+</style>
+<script type="text/template" id="tmpl-variation-template">
+	<div class="woocommerce-variation-description">{{{ data.variation.variation_description }}}</div>
+	<div class="woocommerce-variation-price">{{{ data.variation.price_html }}}</div>
+	<div class="woocommerce-variation-availability">{{{ data.variation.availability_html }}}</div>
+</script>
+<script type="text/template" id="tmpl-unavailable-variation-template">
+	<p>Sorry, this product is unavailable. Please choose a different combination.</p>
+</script>
+<script type="text/javascript">
+            window._nslDOMReady = function (callback) {
+                if ( document.readyState === "complete" || document.readyState === "interactive" ) {
+                    callback();
+                } else {
+                    document.addEventListener( "DOMContentLoaded", callback );
+                }
+            };
+            </script><script type="text/javascript" src="http://tecprestige/wp-includes/js/jquery/jquery.min.js?ver=3.7.1" id="jquery-core-js"></script>
+<script type="text/javascript" src="http://tecprestige/wp-includes/js/jquery/jquery-migrate.min.js?ver=3.4.1" id="jquery-migrate-js"></script>
+<script type="text/javascript" id="woof-husky-js-extra">
+/* <![CDATA[ */
+var woof_husky_txt = {"ajax_url":"http:\/\/tecprestige\/wp-admin\/admin-ajax.php","plugin_uri":"http:\/\/tecprestige\/wp-content\/plugins\/woocommerce-products-filter\/ext\/by_text\/","loader":"http:\/\/tecprestige\/wp-content\/plugins\/woocommerce-products-filter\/ext\/by_text\/assets\/img\/ajax-loader.gif","not_found":"Nothing found!","prev":"Prev","next":"Next","site_link":"http:\/\/tecprestige","default_data":{"placeholder":"","behavior":"title_or_content_or_excerpt","search_by_full_word":0,"autocomplete":1,"how_to_open_links":0,"taxonomy_compatibility":0,"sku_compatibility":1,"custom_fields":"","search_desc_variant":0,"view_text_length":10,"min_symbols":3,"max_posts":10,"image":"","notes_for_customer":"","template":"default","max_open_height":300,"page":0}};
+/* ]]> */
+</script>
+<script type="text/javascript" src="http://tecprestige/wp-content/plugins/woocommerce-products-filter/ext/by_text/assets/js/husky.js?ver=1.3.6.1" id="woof-husky-js"></script>
+<script type="text/javascript" src="http://tecprestige/wp-content/plugins/woocommerce/assets/js/jquery-blockui/jquery.blockUI.min.js?ver=2.7.0-wc.9.1.2" id="jquery-blockui-js" defer="defer" data-wp-strategy="defer"></script>
+<script type="text/javascript" id="wc-add-to-cart-js-extra">
+/* <![CDATA[ */
+var wc_add_to_cart_params = {"ajax_url":"\/wp-admin\/admin-ajax.php","wc_ajax_url":"\/?wc-ajax=%%endpoint%%","i18n_view_cart":"View cart","cart_url":"http:\/\/tecprestige\/cart\/","is_cart":"","cart_redirect_after_add":"no"};
+/* ]]> */
+</script>
+<script type="text/javascript" src="http://tecprestige/wp-content/plugins/woocommerce/assets/js/frontend/add-to-cart.min.js?ver=9.1.2" id="wc-add-to-cart-js" defer="defer" data-wp-strategy="defer"></script>
+<script type="text/javascript" src="http://tecprestige/wp-content/plugins/woocommerce/assets/js/js-cookie/js.cookie.min.js?ver=2.1.4-wc.9.1.2" id="js-cookie-js" defer="defer" data-wp-strategy="defer"></script>
+<script type="text/javascript" id="woocommerce-js-extra">
+/* <![CDATA[ */
+var woocommerce_params = {"ajax_url":"\/wp-admin\/admin-ajax.php","wc_ajax_url":"\/?wc-ajax=%%endpoint%%"};
+/* ]]> */
+</script>
+<script type="text/javascript" src="http://tecprestige/wp-content/plugins/woocommerce/assets/js/frontend/woocommerce.min.js?ver=9.1.2" id="woocommerce-js" defer="defer" data-wp-strategy="defer"></script>
+<script type="text/javascript" id="WCPAY_ASSETS-js-extra">
+/* <![CDATA[ */
+var wcpayAssets = {"url":"http:\/\/tecprestige\/wp-content\/plugins\/woocommerce-payments\/dist\/"};
+/* ]]> */
+</script>
+<script type="text/javascript" src="http://tecprestige/wp-content/plugins/woocommerce/assets/js/flexslider/jquery.flexslider.min.js?ver=2.7.2-wc.9.1.2" id="flexslider-js" defer="defer" data-wp-strategy="defer"></script>
+<script type="text/javascript" src="http://tecprestige/wp-content/plugins/woocommerce/assets/js/select2/select2.full.min.js?ver=4.0.3-wc.9.1.2" id="select2-js" defer="defer" data-wp-strategy="defer"></script>
+<script type="text/javascript" src="http://tecprestige/wp-includes/js/underscore.min.js?ver=1.13.4" id="underscore-js"></script>
+<script type="text/javascript" id="wp-util-js-extra">
+/* <![CDATA[ */
+var _wpUtilSettings = {"ajax":{"url":"\/wp-admin\/admin-ajax.php"}};
+/* ]]> */
+</script>
+<script type="text/javascript" src="http://tecprestige/wp-includes/js/wp-util.min.js?ver=6.6" id="wp-util-js"></script>
+<script type="text/javascript" id="wc-add-to-cart-variation-js-extra">
+/* <![CDATA[ */
+var wc_add_to_cart_variation_params = {"wc_ajax_url":"\/?wc-ajax=%%endpoint%%","i18n_no_matching_variations_text":"Sorry, no products matched your selection. Please choose a different combination.","i18n_make_a_selection_text":"Please select some product options before adding this product to your cart.","i18n_unavailable_text":"Sorry, this product is unavailable. Please choose a different combination."};
+/* ]]> */
+</script>
+<script type="text/javascript" src="http://tecprestige/wp-content/plugins/woocommerce/assets/js/frontend/add-to-cart-variation.min.js?ver=9.1.2" id="wc-add-to-cart-variation-js" defer="defer" data-wp-strategy="defer"></script>
+<script type="text/javascript" id="wc-cart-fragments-js-extra">
+/* <![CDATA[ */
+var wc_cart_fragments_params = {"ajax_url":"\/wp-admin\/admin-ajax.php","wc_ajax_url":"\/?wc-ajax=%%endpoint%%","cart_hash_key":"wc_cart_hash_f395ca2e44058f7c6c4e5ad96615c4ec","fragment_name":"wc_fragments_f395ca2e44058f7c6c4e5ad96615c4ec","request_timeout":"5000"};
+/* ]]> */
+</script>
+<script type="text/javascript" src="http://tecprestige/wp-content/plugins/woocommerce/assets/js/frontend/cart-fragments.min.js?ver=9.1.2" id="wc-cart-fragments-js" defer="defer" data-wp-strategy="defer"></script>
+<link rel="https://api.w.org/" href="http://tecprestige/wp-json/" /><link rel="alternate" title="JSON" type="application/json" href="http://tecprestige/wp-json/wp/v2/pages/94" /><link rel="EditURI" type="application/rsd+xml" title="RSD" href="http://tecprestige/xmlrpc.php?rsd" />
+<meta name="generator" content="WordPress 6.6" />
+<link rel='shortlink' href='http://tecprestige/' />
+<link rel="alternate" title="oEmbed (JSON)" type="application/json+oembed" href="http://tecprestige/wp-json/oembed/1.0/embed?url=http%3A%2F%2Ftecprestige%2F" />
+<link rel="alternate" title="oEmbed (XML)" type="text/xml+oembed" href="http://tecprestige/wp-json/oembed/1.0/embed?url=http%3A%2F%2Ftecprestige%2F&#038;format=xml" />
+	<noscript><style>.woocommerce-product-gallery{ opacity: 1 !important; }</style></noscript>
+	
+            <style>
+                .wp-block-uagb-post-carousel .uagb-post__image {
+                    position: relative;
+                }
+                .wp-block-uagb-post-carousel .awl-position-type-before-title {
+                    margin: 0 20px;
+                }
+            </style>
+
+        <noscript><style>.lazyload[data-src]{display:none !important;}</style></noscript><style>.lazyload{background-image:none !important;}.lazyload:before{background-image:none !important;}</style><style id='wp-fonts-local' type='text/css'>
+@font-face{font-family:Inter;font-style:normal;font-weight:300 900;font-display:fallback;src:url('http://tecprestige/wp-content/plugins/woocommerce/assets/fonts/Inter-VariableFont_slnt,wght.woff2') format('woff2');font-stretch:normal;}
+@font-face{font-family:Cardo;font-style:normal;font-weight:400;font-display:fallback;src:url('http://tecprestige/wp-content/plugins/woocommerce/assets/fonts/cardo_normal_400.woff2') format('woff2');}
+</style>
+<style id="uagb-style-conditional-extension">@media (min-width: 1025px){body .uag-hide-desktop.uagb-google-map__wrap,body .uag-hide-desktop{display:none !important}}@media (min-width: 768px) and (max-width: 1024px){body .uag-hide-tab.uagb-google-map__wrap,body .uag-hide-tab{display:none !important}}@media (max-width: 767px){body .uag-hide-mob.uagb-google-map__wrap,body .uag-hide-mob{display:none !important}}</style><style id="uagb-style-frontend-94">.uag-blocks-common-selector{z-index:var(--z-index-desktop) !important}@media (max-width: 976px){.uag-blocks-common-selector{z-index:var(--z-index-tablet) !important}}@media (max-width: 767px){.uag-blocks-common-selector{z-index:var(--z-index-mobile) !important}}
+</style><link rel="icon" href="http://tecprestige/wp-content/uploads/2024/05/cropped-original-32x32.png" sizes="32x32" />
+<link rel="icon" href="http://tecprestige/wp-content/uploads/2024/05/cropped-original-192x192.png" sizes="192x192" />
+<link rel="apple-touch-icon" href="http://tecprestige/wp-content/uploads/2024/05/cropped-original-180x180.png" />
+<meta name="msapplication-TileImage" content="http://tecprestige/wp-content/uploads/2024/05/cropped-original-270x270.png" />
+		<style type="text/css" id="wp-custom-css">
+			.sub-menu {
+	background-color: #0172A7!important;
+}
+
+.sub-menu li a{
+	color: white!important;
+	font-weight: bold!important;
+}		</style>
+		<style id="kirki-inline-styles">body{color:#ffffff;}h1, .h1{font-family:inherit;font-size:60px;font-weight:500;line-height:1.55556;text-transform:none;color:#161619;}h2, .h2{font-family:inherit;font-size:40px;font-weight:500;line-height:1.55556;text-transform:none;color:#161619;}h3, .h3{font-family:inherit;font-size:30px;font-weight:500;line-height:1.55556;text-transform:none;color:#161619;}h4, .h4{font-family:inherit;font-size:24px;font-weight:500;line-height:1.55556;text-transform:none;color:#161619;}h5, .h5{font-family:inherit;font-size:18px;font-weight:500;line-height:1.55556;text-transform:none;color:#161619;}h6, .h6{font-family:inherit;font-size:16px;font-weight:500;line-height:1.55556;text-transform:none;color:#161619;}.main-navigation a, .header-v8 .nav-menu > li > a, .header-v9 .nav-menu > li > a, .header-vertical .main-navigation .nav-menu > li > a{font-family:inherit;font-size:16px;font-weight:400;text-transform:none;}.main-navigation li li a, .header-vertical .main-navigation .sub-menu a{font-family:inherit;font-size:14px;font-weight:400;text-transform:none;}.single-page-header .entry-title, .page .page .entry-title{color:#000000;}.single-page-header .entry-subtitle{font-family:inherit;font-size:24px;font-weight:400;line-height:1.55556;text-transform:none;color:#161619;}.blog-header-content .header-title{font-family:Crimson Text;font-size:44px;font-weight:600;line-height:1.2;text-transform:uppercase;color:#161619;}.hfeed .hentry .entry-title{font-family:inherit;font-size:30px;font-weight:400;line-height:1.33333;text-transform:none;color:#161619;}.hfeed .hentry .entry-summary{font-family:inherit;font-size:16px;font-weight:400;line-height:1.375;text-transform:none;color:#838889;}.widget-title{font-family:inherit;font-size:16px;font-weight:600;text-transform:uppercase;color:#161619;}.footer-extra{font-family:inherit;font-size:16px;font-weight:400;text-transform:none;}.footer-widgets{font-family:inherit;font-size:14px;font-weight:400;text-transform:none;}.footer-main{font-family:inherit;font-size:14px;font-weight:400;text-transform:none;}</style></head>
+
+<body class="home page-template-default page page-id-94 wp-embed-responsive theme-konte woocommerce-no-js no-sidebar header-vertical woocommerce-active mobile-shop-columns-2 currency-usd">
+<script data-cfasync="false" data-no-defer="1" data-no-minify="1" data-no-optimize="1">if(typeof ewww_webp_supported==="undefined"){var ewww_webp_supported=!1}if(ewww_webp_supported){document.body.classList.add("webp-support")}</script>
+
+
+<div id="preloader" class="preloader preloader-image" aria-hidden="true">
+	<span class="preloader-icon"><img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAB4AAAAIsAQMAAAApiia3AAAAA1BMVEUAAACnej3aAAAAAXRSTlMAQObYZgAAAJhJREFUGBntwTEBAAAAwiD7p14KP2AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAADAVQuKAAELmyXKAAAAAElFTkSuQmCC" alt="Preloader" data-src="http://tecprestige/wp-content/uploads/2024/05/original.png" decoding="async" class="lazyload" data-eio-rwidth="3063" data-eio-rheight="887"><noscript><img src="http://tecprestige/wp-content/uploads/2024/05/original.png" alt="Preloader" data-eio="l"></noscript></span></div>
+<div id="svg-defs" class="svg-defs hidden" aria-hidden="true" tabindex="-1"><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"><symbol viewBox="0 0 24 24" id="account" xmlns="http://www.w3.org/2000/svg"><path d="M12 12c-2.5 0-4-1.5-4-4 0-2.39 1.61-4 4-4s4 1.61 4 4c0 2.5-1.5 4-4 4zm0-6c-.6 0-2 .19-2 2 0 1.42.58 2 2 2s2-.58 2-2c0-1.81-1.4-2-2-2zM18 20H6c-.55 0-1-.45-1-1 0-4.21 2.09-6 7-6s7 1.79 7 6c0 .55-.45 1-1 1zM7.04 18h9.92c-.17-1.76-1.04-3-4.96-3s-4.79 1.24-4.96 3z"/><path fill="none" d="M0 0h24v24H0z"/></symbol><symbol viewBox="2 2 10 10" id="arrow-breadcrumb" xmlns="http://www.w3.org/2000/svg"><path d="M9.156 7l-2.5 3.125-.669-.536L8.058 7 5.987 4.411l.669-.536z"/><path fill="none" d="M2 2h10v10H2z"/></symbol><symbol viewBox="0 0 32 32" id="arrow-down" xmlns="http://www.w3.org/2000/svg"><path fill="none" d="M0 0h32v32H0z"/><path d="M17 18V4h-2v14H9l7 10 7-10h-6zm-1.04 6.512L12.841 20H19.079l-3.119 4.512z"/></symbol><symbol viewBox="0 0 14 14" id="arrow-dropdown" xmlns="http://www.w3.org/2000/svg"><path d="M7 10.773L1.531 6.398l.938-1.171L7 8.851l4.531-3.624.938 1.171z"/><path fill="none" d="M0 0h14v14H0z"/></symbol><symbol viewBox="0 0 32 32" id="arrow-left" xmlns="http://www.w3.org/2000/svg"><path fill="none" d="M0 0h32v32H0z"/><path d="M14 17h14v-2H14V9L4 16l10 7v-6zm-6.512-1.04L12 12.841V19.079L7.488 15.96z"/></symbol><symbol viewBox="0 0 24 24" id="cart" xmlns="http://www.w3.org/2000/svg"><path fill="none" d="M0 0h24v24H0z"/><path d="M19 10h-3V7c0-2.206-1.794-4-4-4S8 4.794 8 7v3H5c-.55 0-.908.441-.797.979l1.879 9.042c.112.538.654.979 1.204.979h9.429c.55 0 1.092-.441 1.203-.979l1.879-9.042C19.908 10.441 19.55 10 19 10zm-9-3c0-1.103.897-2 2-2s2 .897 2 2v3h-4V7zm6.087 12H7.913l-1.455-7h11.313l-1.684 7z"/></symbol><symbol viewBox="0 0 12 12" id="check-checkbox" xmlns="http://www.w3.org/2000/svg"><path d="M4.177 10.543L.434 6.8l1.132-1.132 2.611 2.611 6.258-6.256 1.13 1.132z"/></symbol><symbol viewBox="0 0 24 24" id="close" xmlns="http://www.w3.org/2000/svg"><path fill="none" d="M0 0h24v24H0z"/><path d="M19.778 5.636l-1.414-1.414L12 10.586 5.636 4.222 4.222 5.636 10.586 12l-6.364 6.364 1.414 1.414L12 13.414l6.364 6.364 1.414-1.414L13.414 12z"/></symbol><symbol viewBox="0 0 18 18" id="close-mini" xmlns="http://www.w3.org/2000/svg"><path fill="none" d="M0 0h18v18H0z"/><path d="M11.576 5.576L9 8.152 6.424 5.576l-.848.848L8.152 9l-2.576 2.576.848.848L9 9.848l2.576 2.576.848-.848L9.848 9l2.576-2.576z"/><path d="M9 1a8 8 0 100 16A8 8 0 009 1zm0 15c-3.86 0-7-3.14-7-7s3.14-7 7-7 7 3.14 7 7-3.14 7-7 7z"/></symbol><symbol viewBox="0 0 16 16" id="comment" xmlns="http://www.w3.org/2000/svg"><path fill="none" d="M0 0h16v16H0z"/><path d="M13 3v8.826l-1.849-1.585L10.87 10H3V3h10m1-1H2v9h8.5l3.5 3V2z"/></symbol><symbol viewBox="0 0 40 40" id="error" xmlns="http://www.w3.org/2000/svg"><path d="M20 0C8.972 0 0 8.972 0 20s8.972 20 20 20 20-8.972 20-20S31.028 0 20 0zm0 38c-9.925 0-18-8.075-18-18S10.075 2 20 2s18 8.075 18 18-8.075 18-18 18z"/><path d="M25.293 13.293L20 18.586l-5.293-5.293-1.414 1.414L18.586 20l-5.293 5.293 1.414 1.414L20 21.414l5.293 5.293 1.414-1.414L21.414 20l5.293-5.293z"/></symbol><symbol viewBox="0 0 24 24" id="eye" xmlns="http://www.w3.org/2000/svg"><circle cx="12" cy="12" r="2"/><path d="M16.466 6.748C15.238 5.583 13.619 5 12 5s-3.238.583-4.466 1.748L2 12l5.534 5.252C8.762 18.417 10.381 19 12 19s3.238-.583 4.466-1.748L22 12l-5.534-5.252zm-1.377 9.053C14.274 16.574 13.177 17 12 17s-2.274-.426-3.089-1.199L4.905 12 8.91 8.199C9.726 7.426 10.823 7 12 7s2.274.426 3.089 1.199L19.095 12l-4.006 3.801z"/><path fill="none" d="M0 0h24v24H0z"/></symbol><symbol viewBox="0 0 24 24" id="filter" xmlns="http://www.w3.org/2000/svg"><path fill="none" d="M0 0h24v24H0z"/><path d="M9.859 7A3.991 3.991 0 006 4a4 4 0 000 8c1.862 0 3.412-1.278 3.859-3H22V7H9.859zM6 10a1.994 1.994 0 01-1.723-1C4.106 8.705 4 8.366 4 8s.106-.705.277-1c.347-.595.985-1 1.723-1s1.376.405 1.723 1c.171.295.277.634.277 1s-.106.705-.277 1c-.347.595-.985 1-1.723 1zM13 12a3.991 3.991 0 00-3.859 3H2v2h7.141c.446 1.722 1.997 3 3.859 3s3.412-1.278 3.859-3H22v-2h-5.141A3.991 3.991 0 0013 12zm0 6a1.994 1.994 0 01-1.723-1c-.171-.295-.277-.634-.277-1s.106-.705.277-1c.346-.595.984-1 1.723-1s1.376.405 1.723 1c.171.295.277.634.277 1s-.106.705-.277 1c-.347.595-.985 1-1.723 1z"/></symbol><symbol viewBox="0 0 20 20" id="gallery" xmlns="http://www.w3.org/2000/svg"><path d="M15 13H1V3h14v10zM3 11h10V5H3v6z"/><path d="M19 17H6v-2h11V8h2z"/><path fill="none" d="M0 0h20v20H0z"/></symbol><symbol viewBox="0 0 24 24" id="heart" xmlns="http://www.w3.org/2000/svg"><path d="M16.243 3.843c-1.28 0-2.559.488-3.536 1.464L12 6.015l-.707-.707c-.976-.976-2.256-1.464-3.536-1.464s-2.559.487-3.535 1.464a5 5 0 000 7.071L6.343 14.5l2.121 2.121L12 20.157l3.536-3.536 2.121-2.121 2.121-2.121a5 5 0 00-3.535-8.536z"/><path fill="none" d="M0 0h24v24H0z"/></symbol><symbol viewBox="0 0 24 24" id="heart-o" xmlns="http://www.w3.org/2000/svg"><path d="M16.243 5.843c.801 0 1.555.312 2.121.879a3.003 3.003 0 010 4.243l-2.121 2.121-2.121 2.121L12 17.328l-2.121-2.121-2.121-2.121-2.121-2.121a2.98 2.98 0 01-.879-2.121c0-.801.312-1.555.879-2.121a2.98 2.98 0 012.121-.879c.801 0 1.555.312 2.121.879l.707.707L12 8.843l1.414-1.414.707-.707a2.98 2.98 0 012.122-.879m0-2c-1.28 0-2.559.488-3.536 1.464L12 6.015l-.707-.707c-.976-.976-2.256-1.464-3.536-1.464s-2.559.487-3.535 1.464a5 5 0 000 7.071L6.343 14.5l2.121 2.121L12 20.157l3.536-3.536 2.121-2.121 2.121-2.121a5 5 0 00-3.535-8.536z"/><path fill="none" d="M0 0h24v24H0z"/></symbol><symbol viewBox="0 0 24 24" id="home" xmlns="http://www.w3.org/2000/svg"><g fill="none" fill-rule="evenodd"><path d="M0 0h24v24H0z"/><path d="M5 10v9a1 1 0 001 1h12a1 1 0 001-1v-9" stroke="currentColor" stroke-width="2" stroke-linecap="round"/><path d="M21 11l-8.693-6.761a.5.5 0 00-.614 0L3 11" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></g></symbol><symbol viewBox="0 0 40 40" id="information" xmlns="http://www.w3.org/2000/svg"><path d="M20 40C8.972 40 0 31.028 0 20S8.972 0 20 0s20 8.972 20 20-8.972 20-20 20zm0-38C10.075 2 2 10.075 2 20s8.075 18 18 18 18-8.075 18-18S29.925 2 20 2z"/><path d="M19 16h2v12h-2zM19 12h2v2h-2z"/></symbol><symbol viewBox="0 0 16 16" id="left" xmlns="http://www.w3.org/2000/svg"><path fill="none" d="M0 0h16v16H0z"/><path d="M8.394 13.941L4.073 8l4.321-5.941 1.212.882L5.927 8l3.679 5.059z"/></symbol><symbol viewBox="0 0 24 24" id="menu" xmlns="http://www.w3.org/2000/svg"><path fill="none" d="M0 0h24v24H0z"/><path d="M2 6h20v2H2zM2 16h20v2H2zM2 11h20v2H2z"/></symbol><symbol viewBox="0 0 16 16" id="minus" xmlns="http://www.w3.org/2000/svg"><path fill="none" d="M0 0h16v16H0z"/><path d="M3 7h10v2H3z"/></symbol><symbol viewBox="0 0 16 16" id="plus" xmlns="http://www.w3.org/2000/svg"><path fill="none" d="M0 0h16v16H0z"/><path d="M13 7H9V3H7v4H3v2h4v4h2V9h4z"/></symbol><symbol viewBox="3.5 4.5 16 16" id="plus-mini" xmlns="http://www.w3.org/2000/svg"><path fill="none" d="M3.5 4.5h16v16h-16z"/><path d="M15.5 11.5h-3v-3h-2v3h-3v2h3v3h2v-3h3z"/></symbol><symbol viewBox="0 0 24 24" id="plus-zoom" xmlns="http://www.w3.org/2000/svg"><path fill="none" d="M0 0h24v24H0z"/><path d="M20 11h-7V4h-2v7H4v2h7v7h2v-7h7z"/></symbol><symbol viewBox="0 0 16 16" id="right" xmlns="http://www.w3.org/2000/svg"><path fill="none" d="M0 0h16v16H0z"/><path d="M7.606 13.941L11.927 8 7.606 2.059l-1.212.882L10.073 8l-3.679 5.059z"/></symbol><symbol viewBox="0 0 24 24" id="search" xmlns="http://www.w3.org/2000/svg"><path fill="none" d="M0 0h24v24H0z"/><path d="M20 18.586l-3.402-3.402A6.953 6.953 0 0018 11c0-3.86-3.141-7-7-7-3.86 0-7 3.14-7 7 0 3.859 3.14 7 7 7 1.57 0 3.015-.526 4.184-1.402L18.586 20 20 18.586zM6 11c0-2.757 2.243-5 5-5s5 2.243 5 5-2.243 5-5 5-5-2.243-5-5z"/></symbol><symbol viewBox="0 0 16 16" id="share" xmlns="http://www.w3.org/2000/svg"><path d="M7 2.957V10h1V2.957l1.646 1.647.708-.708L7.5 1.043 4.646 3.896l.708.708z"/><path d="M10 6v1h1v6H4V7h1V6H3v8h9V6z"/><path fill="none" d="M0 0h16v16H0z"/></symbol><symbol viewBox="0 0 24 24" id="shop-bag" xmlns="http://www.w3.org/2000/svg"><path fill="none" d="M0 0h24v24H0z"/><path d="M20.958 19.465l-.906-14.969a1.613 1.613 0 00-1.59-1.492H5.507c-.835 0-1.541.668-1.592 1.492l-.913 14.969c-.05.821.58 1.492 1.408 1.492H19.55a1.39 1.39 0 001.41-1.492zm-15.926-.503L5.884 5h12.2l.845 13.963H5.032z"/><path d="M13.97 6.993v2.52c0 .146-.06.447-.232.734-.286.476-.801.763-1.763.763-.961 0-1.477-.286-1.762-.763a1.594 1.594 0 01-.232-.735V6.993H7.986v2.52c0 .475.127 1.11.516 1.76.649 1.083 1.817 1.732 3.473 1.732 1.657 0 2.825-.65 3.474-1.732a3.473 3.473 0 00.516-1.76v-2.52H13.97z"/></symbol><symbol viewBox="0 0 24 24" id="shop-bag-2" xmlns="http://www.w3.org/2000/svg"><path fill="none" d="M0 0h24v24H0z"/><path d="M18.395 3H4.87a.847.847 0 00-.847.847v16.27c0 .467.378.847.846.847h13.527c.469 0 .848-.38.848-.846V3.847A.848.848 0 0018.395 3zm-.847 16.27H5.715V4.694H17.55V19.27z"/><path d="M11.631 14.657a4.31 4.31 0 004.304-4.304V6.895a.847.847 0 10-1.693 0v3.458a2.615 2.615 0 01-2.611 2.61 2.614 2.614 0 01-2.611-2.61V6.895a.847.847 0 00-1.694 0v3.458a4.311 4.311 0 004.305 4.304z"/></symbol><symbol viewBox="0 0 24 24" id="shop-bag-3" xmlns="http://www.w3.org/2000/svg"><path fill="none" d="M0 0h24v24H0z"/><path d="M18.388 19.768l-.81-12.346a1.071 1.071 0 00-1.069-1.001h-1.384A3.432 3.432 0 0011.696 3a3.432 3.432 0 00-3.428 3.421H6.884c-.565 0-1.032.438-1.07 1.001l-.812 12.392a1.072 1.072 0 001.07 1.141h11.25a1.071 1.071 0 001.066-1.187zM11.696 5.143c.707 0 1.282.573 1.286 1.278h-2.571a1.287 1.287 0 011.285-1.278zm-4.48 13.67l.671-10.25h7.619l.672 10.25H7.215z"/></symbol><symbol viewBox="0 0 24 24" id="shop-bag-4" xmlns="http://www.w3.org/2000/svg"><path fill="none" d="M0 0h24v24H0z"/><path d="M18.633 20.101L18.09 8.143a.818.818 0 00-.817-.78h-2.455V6c0-1.654-1.346-3-3-3s-3 1.346-3 3v1.362H6.364a.818.818 0 00-.818.781l-.545 12.002a.818.818 0 00.817.855H17.82a.818.818 0 00.814-.899zm-8.179-14.1c0-.753.612-1.365 1.364-1.365.752 0 1.364.612 1.364 1.364v1.362h-2.728V6zm-3.78 13.363l.471-10.365h1.673v.818a.818.818 0 001.636 0v-.818h2.728v.818a.818.818 0 001.636 0v-.818h1.673l.47 10.365H6.675z"/></symbol><symbol viewBox="0 0 24 24" id="shop-bag-5" xmlns="http://www.w3.org/2000/svg"><path fill="none" d="M0 0h24v24H0z"/><path d="M19.311 20.091L18.256 8.486a.794.794 0 00-.79-.723h-2.383V5.912A2.915 2.915 0 0012.171 3 2.915 2.915 0 009.26 5.912v1.851H6.877a.794.794 0 00-.79.723l-1.06 11.648a.794.794 0 00.791.866H18.525a.794.794 0 00.786-.909zm-8.463-14.18c0-.729.594-1.323 1.323-1.323.73 0 1.324.594 1.324 1.324v1.851h-2.647V5.912zm-4.16 13.5l.914-10.06h9.138l.915 10.06H6.688z"/><path d="M10.615 10.643a.801.801 0 00-.561-.233.801.801 0 00-.562.233.8.8 0 00-.232.562.8.8 0 00.232.561.801.801 0 00.562.232.8.8 0 00.561-.232.799.799 0 00.233-.561.799.799 0 00-.233-.562zM14.85 10.643a.801.801 0 00-.561-.233.8.8 0 00-.562.233.8.8 0 00-.232.562.8.8 0 00.232.561.8.8 0 00.562.232.8.8 0 00.562-.232.8.8 0 00.232-.561.8.8 0 00-.232-.562z"/></symbol><symbol viewBox="0 0 24 24" id="shop-cart" xmlns="http://www.w3.org/2000/svg"><path fill="none" d="M0 0h24v24H0z"/><path d="M20.347 6.057a.818.818 0 00-.656-.33H7.09l-.222-2A.818.818 0 006.054 3H3.873a.818.818 0 000 1.636h1.45l.22 1.99.003.021.786 7.08a.818.818 0 00.813.728H17.57c.362 0 .68-.238.784-.584l2.122-7.091a.818.818 0 00-.128-.723zm-3.387 6.761H7.878l-.606-5.454h11.32l-1.632 5.454zM8.782 16.09a2.457 2.457 0 00-2.455 2.455A2.457 2.457 0 008.782 21a2.457 2.457 0 002.454-2.455 2.457 2.457 0 00-2.454-2.454zm0 3.274a.82.82 0 010-1.637.82.82 0 010 1.637zM15.273 16.09a2.457 2.457 0 00-2.455 2.455A2.457 2.457 0 0015.273 21a2.457 2.457 0 002.454-2.455 2.457 2.457 0 00-2.454-2.454zm0 3.274a.82.82 0 010-1.637.82.82 0 010 1.637z"/></symbol><symbol viewBox="0 0 24 24" id="socials" xmlns="http://www.w3.org/2000/svg"><path d="M17 13c-1.2 0-2.266.542-3 1.382l-3.091-1.546c.058-.27.091-.549.091-.836 0-.287-.033-.566-.091-.836L14 9.618c.734.84 1.8 1.382 3 1.382 2.206 0 4-1.794 4-4s-1.794-4-4-4-4 1.794-4 4c0 .287.033.566.091.836L10 9.382A3.975 3.975 0 007 8c-2.206 0-4 1.794-4 4s1.794 4 4 4c1.2 0 2.266-.542 3-1.382l3.091 1.546c-.058.27-.091.549-.091.836 0 2.206 1.794 4 4 4s4-1.794 4-4-1.794-4-4-4zm0-8c1.103 0 2 .897 2 2s-.897 2-2 2-2-.897-2-2 .897-2 2-2zM7 14c-1.103 0-2-.897-2-2s.897-2 2-2 2 .897 2 2-.897 2-2 2zm10 5c-1.103 0-2-.897-2-2s.897-2 2-2 2 .897 2 2-.897 2-2 2z"/><path fill="none" d="M0 0h24v24H0z"/></symbol><symbol viewBox="0 0 12 12" id="star" xmlns="http://www.w3.org/2000/svg"><path fill="none" d="M0 0h12v12H0z"/><path d="M6 1l1.18 3.82L11 5 7.91 7.18 9.09 11 6 8.639 2.91 11l1.18-3.82L1 5l3.82-.18z"/></symbol><symbol viewBox="0 0 40 40" id="success" xmlns="http://www.w3.org/2000/svg"><path d="M20 40C8.972 40 0 31.028 0 20S8.972 0 20 0s20 8.972 20 20-8.972 20-20 20zm0-38C10.075 2 2 10.075 2 20s8.075 18 18 18 18-8.075 18-18S29.925 2 20 2z"/><path d="M18 27.414l-6.707-6.707 1.414-1.414L18 24.586l11.293-11.293 1.414 1.414z"/></symbol><symbol viewBox="0 0 20 20" id="video" xmlns="http://www.w3.org/2000/svg"><path fill="none" d="M0 0h20v20H0z"/><path d="M5 4l10 6-10 6z"/></symbol><symbol viewBox="0 0 40 40" id="warning" xmlns="http://www.w3.org/2000/svg"><path d="M20 40C8.972 40 0 31.028 0 20S8.972 0 20 0s20 8.972 20 20-8.972 20-20 20zm0-38C10.075 2 2 10.075 2 20s8.075 18 18 18 18-8.075 18-18S29.925 2 20 2z"/><path d="M19 15h2v6h-2zM19 23h2v2h-2z"/><path d="M26 29H14c-1.673 0-3.016-.648-3.684-1.778s-.589-2.618.218-4.085l6.18-11.238c.825-1.5 1.992-2.325 3.286-2.325s2.461.825 3.285 2.325l6.182 11.238c.807 1.467.886 2.955.218 4.085S27.674 29 26 29zm-6-17.426c-.524 0-1.083.47-1.534 1.289l-6.18 11.238c-.457.831-.548 1.598-.249 2.104.299.505 1.015.795 1.963.795h12c.948 0 1.664-.29 1.963-.796s.209-1.272-.248-2.103l-6.182-11.239c-.451-.818-1.01-1.288-1.533-1.288z"/></symbol></svg></div>
+<div id="page" class="site">
+
+	
+			<header id="masthead" class="site-header light text-dark header-prebuild header-v10 transparent-hover">
+
+					<div class="header-main header-contents no-center">
+			<div class="konte-container-fluid site-header__container">
+									
+					<div class="header-left-items header-items has-menu">
+						
+
+
+<div class="site-branding">
+	<a href="http://tecprestige" class="logo">
+					<img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAB4AAAAIsAQMAAAApiia3AAAAA1BMVEUAAACnej3aAAAAAXRSTlMAQObYZgAAAJhJREFUGBntwTEBAAAAwiD7p14KP2AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAADAVQuKAAELmyXKAAAAAElFTkSuQmCC" alt="TecPrestige" class="logo-dark lazyload" width="230" height="100" data-src="http://tecprestige/wp-content/uploads/2024/05/original.png" decoding="async" data-eio-rwidth="3063" data-eio-rheight="887"><noscript><img src="http://tecprestige/wp-content/uploads/2024/05/original.png" alt="TecPrestige" class="logo-dark" width="230" height="100" data-eio="l"></noscript>
+			<img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAOYAAABkAQMAAACo3N4rAAAAA1BMVEUAAACnej3aAAAAAXRSTlMAQObYZgAAABpJREFUGBntwTEBAAAAwiD7p14ND2AAAMC9AAu4AAHGdJuwAAAAAElFTkSuQmCC" alt="TecPrestige" class="logo-light lazyload" width="230" height="100" data-src="http://tecprestige.test/wp-content/uploads/2024/05/original.png" decoding="async" data-eio-rwidth="230" data-eio-rheight="100"><noscript><img src="http://tecprestige.test/wp-content/uploads/2024/05/original.png" alt="TecPrestige" class="logo-light" width="230" height="100" data-eio="l"></noscript>
+			</a>
+
+	<div class="action-menu-wrap"> 
+					<a href="/cart" class="action-menu-btn"><img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACAAAAAgAQMAAABJtOi3AAAAA1BMVEUAAACnej3aAAAAAXRSTlMAQObYZgAAAAtJREFUCB1jGOQAAACgAAGXmq1SAAAAAElFTkSuQmCC" data-src="/wp-content/themes/konte/images/cart.png" decoding="async" class="lazyload" data-eio-rwidth="32" data-eio-rheight="32"><noscript><img src="/wp-content/themes/konte/images/cart.png" data-eio="l"></noscript> Carrinho</a>
+					<a href="/login" class="action-menu-btn"><img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACAAAAAgAQMAAABJtOi3AAAAA1BMVEUAAACnej3aAAAAAXRSTlMAQObYZgAAAAtJREFUCB1jGOQAAACgAAGXmq1SAAAAAElFTkSuQmCC" data-src="/wp-content/themes/konte/images/account.png" decoding="async" class="lazyload" data-eio-rwidth="32" data-eio-rheight="32"><noscript><img src="/wp-content/themes/konte/images/account.png" data-eio="l"></noscript> Entrar</a>
+				</div>	
+		</div>
+<nav id="primary-menu" class="main-navigation primary-navigation">
+	<ul id="menu-menu" class="menu nav-menu nav-menu--submenu-flyout"><li id="menu-item-26" class="menu-item menu-item-type-taxonomy menu-item-object-product_cat menu-item-26"><a href="http://tecprestige/product-category/cozinha/">Cozinha</a></li>
+<li id="menu-item-27" class="menu-item menu-item-type-taxonomy menu-item-object-product_cat menu-item-has-children menu-item-27"><a href="http://tecprestige/product-category/frio/">Frio<span class="caret"><i class="fa fa-chevron-circle-right"></i></span></a>
+<ul class="sub-menu">
+	<li id="menu-item-34" class="menu-item menu-item-type-taxonomy menu-item-object-product_cat menu-item-34"><a href="http://tecprestige/product-category/frio/abatedores-de-temperatura/">Abatedores de temperatura</a></li>
+	<li id="menu-item-35" class="menu-item menu-item-type-taxonomy menu-item-object-product_cat menu-item-35"><a href="http://tecprestige/product-category/frio/arcas/">Arcas</a></li>
+	<li id="menu-item-36" class="menu-item menu-item-type-taxonomy menu-item-object-product_cat menu-item-36"><a href="http://tecprestige/product-category/frio/armarios/">Armários</a></li>
+	<li id="menu-item-37" class="menu-item menu-item-type-taxonomy menu-item-object-product_cat menu-item-37"><a href="http://tecprestige/product-category/frio/bancadas/">Bancadas</a></li>
+	<li id="menu-item-38" class="menu-item menu-item-type-taxonomy menu-item-object-product_cat menu-item-38"><a href="http://tecprestige/product-category/frio/camaras-frigorificas/">Câmaras Frigorificas</a></li>
+	<li id="menu-item-39" class="menu-item menu-item-type-taxonomy menu-item-object-product_cat menu-item-39"><a href="http://tecprestige/product-category/frio/maquinas-de-gelo/">Máquinas de Gelo</a></li>
+	<li id="menu-item-40" class="menu-item menu-item-type-taxonomy menu-item-object-product_cat menu-item-40"><a href="http://tecprestige/product-category/frio/vitrines/">Vitrines</a></li>
+</ul>
+</li>
+<li id="menu-item-28" class="menu-item menu-item-type-taxonomy menu-item-object-product_cat menu-item-28"><a href="http://tecprestige/product-category/pos-pesagem/">Pos/Pesagem</a></li>
+<li id="menu-item-29" class="menu-item menu-item-type-taxonomy menu-item-object-product_cat menu-item-29"><a href="http://tecprestige/product-category/panificacao/">Panificação</a></li>
+<li id="menu-item-30" class="menu-item menu-item-type-taxonomy menu-item-object-product_cat menu-item-30"><a href="http://tecprestige/product-category/lavandaria/">Lavandaria</a></li>
+<li id="menu-item-31" class="menu-item menu-item-type-taxonomy menu-item-object-product_cat menu-item-31"><a href="http://tecprestige/product-category/mobilia/">Mobília</a></li>
+<li id="menu-item-32" class="menu-item menu-item-type-taxonomy menu-item-object-product_cat menu-item-has-children menu-item-32"><a href="http://tecprestige/product-category/acessorios/">Acessórios<span class="caret"><i class="fa fa-chevron-circle-right"></i></span></a>
+<ul class="sub-menu">
+	<li id="menu-item-41" class="menu-item menu-item-type-taxonomy menu-item-object-product_cat menu-item-41"><a href="http://tecprestige/product-category/acessorios/chavenas/">Chávenas</a></li>
+	<li id="menu-item-42" class="menu-item menu-item-type-taxonomy menu-item-object-product_cat menu-item-42"><a href="http://tecprestige/product-category/acessorios/copos/">Copos</a></li>
+	<li id="menu-item-43" class="menu-item menu-item-type-taxonomy menu-item-object-product_cat menu-item-43"><a href="http://tecprestige/product-category/acessorios/frigideiras/">Frigideiras</a></li>
+	<li id="menu-item-44" class="menu-item menu-item-type-taxonomy menu-item-object-product_cat menu-item-44"><a href="http://tecprestige/product-category/acessorios/panelas/">Panelas</a></li>
+	<li id="menu-item-45" class="menu-item menu-item-type-taxonomy menu-item-object-product_cat menu-item-45"><a href="http://tecprestige/product-category/acessorios/pratos/">Pratos</a></li>
+	<li id="menu-item-46" class="menu-item menu-item-type-taxonomy menu-item-object-product_cat menu-item-46"><a href="http://tecprestige/product-category/acessorios/tabuas-relene/">Tábuas Relene</a></li>
+	<li id="menu-item-47" class="menu-item menu-item-type-taxonomy menu-item-object-product_cat menu-item-47"><a href="http://tecprestige/product-category/acessorios/tabuleiros-em-inox/">Tabuleiros em inox</a></li>
+	<li id="menu-item-48" class="menu-item menu-item-type-taxonomy menu-item-object-product_cat menu-item-48"><a href="http://tecprestige/product-category/acessorios/talheres-de-mesa/">Talheres de mesa</a></li>
+	<li id="menu-item-49" class="menu-item menu-item-type-taxonomy menu-item-object-product_cat menu-item-49"><a href="http://tecprestige/product-category/acessorios/utensilios/">Utensílios</a></li>
+</ul>
+</li>
+<li id="menu-item-33" class="menu-item menu-item-type-taxonomy menu-item-object-product_cat menu-item-33"><a href="http://tecprestige/product-category/servicos/">Serviços</a></li>
+<li id="menu-item-114" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-114"><a href="http://tecprestige/sobre-nos/">TecPrestige</a></li>
+<li id="menu-item-113" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-113"><a href="http://tecprestige/contactos/">Contactos</a></li>
+</ul>
+	<form id="searchForm" method="get" action="/" class="input-search-wrap">
+		<input name="s" type="text" class="input-search" placeholder="Procurar...">
+		<input type="hidden" value="product" name="post_type">
+	</form>
+
+	<div class="social-menu-legal">
+		<a href="https://www.facebook.com/tecprestige/" target="_blank">
+			<img src="data:image/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw==" alt="facebook" data-src="/wp-content/themes/konte/images/facebook.svg" decoding="async" class="lazyload"><noscript><img src="/wp-content/themes/konte/images/facebook.svg" alt="facebook" data-eio="l"></noscript>
+		</a>
+		<a href="https://www.instagram.com/tecprestige/" target="_blank">
+			<img src="data:image/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw==" alt="instagram" data-src="/wp-content/themes/konte/images/instagram.svg" decoding="async" class="lazyload"><noscript><img src="/wp-content/themes/konte/images/instagram.svg" alt="instagram" data-eio="l"></noscript>
+		</a>
+		<a href="https://www.youtube.com/channel/UCUt7J-ZurSI-gvMEqpWt3kA/featured" target="_blank">
+			<img src="data:image/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw==" alt="youtube" data-src="/wp-content/themes/konte/images/youtube.svg" decoding="async" class="lazyload"><noscript><img src="/wp-content/themes/konte/images/youtube.svg" alt="youtube" data-eio="l"></noscript>
+		</a>
+
+	</div>
+
+
+	<div class="legal-menu"><p> <a class="" href="http://tecprestige/metodos-de-pagamento-2/">Métodos de Pagamento</a></p><p> <a class="" href="http://tecprestige/termos-politica-de-privacidade/">Termos / Política de privacidade</a></p><p> <a class="" href="https://www.livroreclamacoes.pt/Inicio/">Livro de Reclamaçoes</a></p></div>
+	<div class="legal-bottom-fixed">
+		<div class="centro2020">
+			<img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAABacAAACYAQMAAADKo8eVAAAAA1BMVEUAAACnej3aAAAAAXRSTlMAQObYZgAAADFJREFUGBntwTEBAAAAwiD7p14Hb2AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAMAtbBAAAUGt9J0AAAAASUVORK5CYII=" alt="Centro2020" data-src="/wp-content/themes/konte/images/centro2020.png" decoding="async" class="lazyload" data-eio-rwidth="1447" data-eio-rheight="152"><noscript><img src="/wp-content/themes/konte/images/centro2020.png" alt="Centro2020" data-eio="l"></noscript>
+		</div>
+
+		<p class="legal-copyright">2024 Tecprestige Lda. Todos os direitos reservados.</p>
+	</div>
+
+	<style>
+		.legal-bottom-fixed {
+			position: absolute;
+			bottom: 0;
+		}
+
+		.centro2020 {
+			width: 100%;
+			background-color: white;
+		}
+
+		.centro2020 img {
+			padding: 10px 20px;
+			display: flex;
+			justify-content: center;
+		}
+
+		.legal-copyright {
+			margin-top: 10px;
+			font-weight: 600;
+			font-size: 11px;
+			text-align: center;
+		}
+
+		.social-menu-legal {
+			margin-top: 15px;
+			display: flex;
+			justify-content: center;
+		}
+
+		.social-menu-legal img {
+			margin: 4px;
+			height: 36px;
+		}
+
+		.legal-menu {
+			padding-top: 15px;
+			text-align: center;
+		}
+
+		.legal-menu p,
+		.legal-menu a {
+			font-size: 12px;
+			font-weight: 600;
+			margin: 0px 0px 2px 0px;
+		}
+
+		.action-menu-btn {
+			padding: 4px 8px;
+			background-color: #0077b5;
+			border-radius: 15px;
+			color: white !important;
+			text-decoration: none;
+			color: white !important;
+			margin: 20px 6px;
+			font-size: 1rem;
+			display: flex;
+			align-items: center;
+		}
+
+		.action-menu-btn img {
+			height: 20px;
+			margin-right: 4px;
+		}
+
+		@media screen and (max-width: 1200px) {
+			.action-menu-wrap {
+				display: none !important;
+			}
+
+			.site-branding .logo img {
+				left: 60px;
+				max-width: 180px;
+			}
+		}
+
+
+		.action-menu-wrap {
+			width: 100%;
+			display: flex;
+			justify-content: center;
+		}
+
+		.site-branding {
+			width: 100%;
+		}
+
+
+		/** REMAKE MENU */
+
+		.header-left-items.header-items.has-menu {
+			display: block !important;
+		}
+
+		.site-branding .logo img {
+			position: unset !important;
+		}
+
+		.header-main,
+		.header-v10 .site-branding,
+		.header-v10 .header-main .header-right-items {
+			height: auto !important;
+		}
+
+		.site-branding .logo-light {
+			display: none !important;
+		}
+
+		.header-v10 .header-main .logo {
+			display: flex;
+			justify-content: center;
+		}
+
+		.header-vertical .main-navigation {
+			height: 100% !important;
+		}
+
+		@media screen and (max-width: 1200px) {
+			.site-branding .logo img {
+				margin-left: 20px;
+			}
+		}
+	</style>
+
+
+</nav>					</div>
+
+									
+					<div class="header-right-items header-items ">
+						<div class="header-account header-account--text">
+			<a href="http://tecprestige/my-account/" data-toggle="off-canvas" data-target="login-panel">
+			Sign in		</a>
+	</div>
+
+<div class="header-search form">
+			<form method="get" action="http://tecprestige/">
+			<label>
+				<span class="screen-reader-text">Search</span>
+				<span class="svg-icon icon-search size-normal search-icon"><svg> <use xlink:href="#search"></use> </svg></span>				<input type="text" name="s" class="search-field" value="" placeholder="Search" autocomplete="off">
+									<input type="hidden" name="post_type" value="product">
+							</label>
+		</form>
+
+			</div>
+
+<div class="header-cart">
+	<a href="http://tecprestige/cart/" data-toggle="off-canvas" data-target="cart-panel">
+		<span class="svg-icon icon-cart size-normal shopping-cart-icon"><svg> <use xlink:href="#cart"></use> </svg></span>		<span class="screen-reader-text">Cart</span>
+		<span class="counter cart-counter">0</span>
+	</a>
+</div>
+					</div>
+
+							</div>
+		</div>
+		
+	<div class="header-mobile custom logo-center">
+		<div class="konte-container-fluid">
+			
+<div class="mobile-menu-hamburger">
+	<button class="mobile-menu-toggle hamburger-menu" data-toggle="off-canvas" data-target="mobile-menu" aria-label="Toggle Menu">
+		<span class="hamburger-box">
+			<span class="hamburger-inner"></span>
+		</span>
+	</button>
+</div>
+
+	
+
+
+<div class="site-branding">
+	<a href="http://tecprestige" class="logo">
+					<img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAB4AAAAIsAQMAAAApiia3AAAAA1BMVEUAAACnej3aAAAAAXRSTlMAQObYZgAAAJhJREFUGBntwTEBAAAAwiD7p14KP2AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAADAVQuKAAELmyXKAAAAAElFTkSuQmCC" alt="TecPrestige" class="logo-dark lazyload" width="230" height="100" data-src="http://tecprestige/wp-content/uploads/2024/05/original.png" decoding="async" data-eio-rwidth="3063" data-eio-rheight="887"><noscript><img src="http://tecprestige/wp-content/uploads/2024/05/original.png" alt="TecPrestige" class="logo-dark" width="230" height="100" data-eio="l"></noscript>
+			<img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAOYAAABkAQMAAACo3N4rAAAAA1BMVEUAAACnej3aAAAAAXRSTlMAQObYZgAAABpJREFUGBntwTEBAAAAwiD7p14ND2AAAMC9AAu4AAHGdJuwAAAAAElFTkSuQmCC" alt="TecPrestige" class="logo-light lazyload" width="230" height="100" data-src="http://tecprestige.test/wp-content/uploads/2024/05/original.png" decoding="async" data-eio-rwidth="230" data-eio-rheight="100"><noscript><img src="http://tecprestige.test/wp-content/uploads/2024/05/original.png" alt="TecPrestige" class="logo-light" width="230" height="100" data-eio="l"></noscript>
+			</a>
+
+	<div class="action-menu-wrap"> 
+					<a href="/cart" class="action-menu-btn"><img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACAAAAAgAQMAAABJtOi3AAAAA1BMVEUAAACnej3aAAAAAXRSTlMAQObYZgAAAAtJREFUCB1jGOQAAACgAAGXmq1SAAAAAElFTkSuQmCC" data-src="/wp-content/themes/konte/images/cart.png" decoding="async" class="lazyload" data-eio-rwidth="32" data-eio-rheight="32"><noscript><img src="/wp-content/themes/konte/images/cart.png" data-eio="l"></noscript> Carrinho</a>
+					<a href="/login" class="action-menu-btn"><img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACAAAAAgAQMAAABJtOi3AAAAA1BMVEUAAACnej3aAAAAAXRSTlMAQObYZgAAAAtJREFUCB1jGOQAAACgAAGXmq1SAAAAAElFTkSuQmCC" data-src="/wp-content/themes/konte/images/account.png" decoding="async" class="lazyload" data-eio-rwidth="32" data-eio-rheight="32"><noscript><img src="/wp-content/themes/konte/images/account.png" data-eio="l"></noscript> Entrar</a>
+				</div>	
+		</div>
+
+<div class="mobile-header-icons">
+	
+<div class="header-cart">
+	<a href="http://tecprestige/cart/" data-toggle="off-canvas" data-target="cart-panel">
+		<span class="svg-icon icon-cart size-normal shopping-cart-icon"><svg> <use xlink:href="#cart"></use> </svg></span>		<span class="screen-reader-text">Cart</span>
+		<span class="counter cart-counter">0</span>
+	</a>
+</div>
+</div>
+		</div>
+	</div>
+
+	
+		</header><!-- #masthead -->
+	
+	
+	<div id="content" class="site-content">
+
+		
+		<div class="site-content-container container">
+
+	<div id="primary" class="content-area">
+		<main id="main" class="site-main">
+
+			
+<div id="post-94" class="post-94 page type-page status-publish hentry">
+			<header class="entry-header">
+			
+					</header><!-- .entry-header -->
+	
+	<div class="entry-content">
+		
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Título da Página</title>
+  <style>
+    body {
+      margin: 0;
+      padding: 0;
+      font-family: Arial, sans-serif;
+      overflow-x: hidden;
+      background-color: black;
+      color: white;
+    }
+    #particles-js {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      z-index: -1;
+    }
+    .content {
+      position: relative;
+      text-align: center;
+      padding: 50px;
+      box-sizing: border-box;
+    }
+    img {
+      max-width: 100%;
+      height: auto;
+    }
+    h1 {
+      margin-top: 20px;
+      font-size: 2em;
+      color: white;
+    }
+    button {
+      margin-top: 20px;
+      background-color: #007bff;
+      color: white;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+      transition: background-color 0.3s;
+      font-size: 1em;
+    }
+    button:hover {
+      background-color: #0056b3;
+    }
+    @media (max-width: 768px) {
+      .content {
+        padding: 20px;
+      }
+      h1 {
+        font-size: 1.5em;
+      }
+      button {
+        padding: 8px 16px;
+        font-size: 0.9em;
+      }
+    }
+    @media (max-width: 480px) {
+      h1 {
+        font-size: 1.2em;
+      }
+      button {
+        padding: 6px 12px;
+        font-size: 0.8em;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div id="particles-js"></div>
+  <div class="content">
+    <img fetchpriority="high" decoding="async" width="600" height="700" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAABWIAAAJvAQMAAADLPTr4AAAAA1BMVEUAAACnej3aAAAAAXRSTlMAQObYZgAAAIBJREFUGBntwYEAAAAAw6D7U0/hANUAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAABuAaeBAAEJ3GngAAAAAElFTkSuQmCC" alt="Logo" data-src="http://tecprestige/wp-content/uploads/2024/05/logo_unox.png" class="lazyload" data-eio-rwidth="1378" data-eio-rheight="623"><noscript><img fetchpriority="high" decoding="async" width="600" height="700" src="http://tecprestige/wp-content/uploads/2024/05/logo_unox.png" alt="Logo" data-eio="l"></noscript>
+    <h1>Fornos Convertores Tecnológicos</h1>
+    <button>Conhecer</button>
+    <img decoding="async" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAB3oAAAJSAQMAAAAfzFZWAAAAA1BMVEUAAACnej3aAAAAAXRSTlMAQObYZgAAAKFJREFUGBntwQENAAAAwiD7p34PBwwAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAACuBS9QAAGqo4XvAAAAAElFTkSuQmCC" alt="Imagem" data-src="http://tecprestige/wp-content/uploads/2024/05/Fornos-unox.png" class="lazyload" data-eio-rwidth="1914" data-eio-rheight="594"><noscript><img decoding="async" src="http://tecprestige/wp-content/uploads/2024/05/Fornos-unox.png" alt="Imagem" data-eio="l"></noscript>
+  </div>
+  <script src="https://cdn.jsdelivr.net/particles.js/2.0.0/particles.min.js"></script>
+  <script>
+    particlesJS("particles-js", {
+      "particles": {
+        "number": {
+          "value": 80,
+          "density": {
+            "enable": true,
+            "value_area": 800
+          }
+        },
+        "color": {
+          "value": "#ffffff"
+        },
+        "shape": {
+          "type": "circle",
+          "stroke": {
+            "width": 0,
+            "color": "#000000"
+          },
+          "polygon": {
+            "nb_sides": 5
+          },
+          "image": {
+            "src": "img/github.svg",
+            "width": 100,
+            "height": 100
+          }
+        },
+        "opacity": {
+          "value": 0.5,
+          "random": false,
+          "anim": {
+            "enable": false,
+            "speed": 1,
+            "opacity_min": 0.1,
+            "sync": false
+          }
+        },
+        "size": {
+          "value": 3,
+          "random": true,
+          "anim": {
+            "enable": false,
+            "speed": 40,
+            "size_min": 0.1,
+            "sync": false
+          }
+        },
+        "line_linked": {
+          "enable": true,
+          "distance": 150,
+          "color": "#ffffff",
+          "opacity": 0.4,
+          "width": 1
+        },
+        "move": {
+          "enable": true,
+          "speed": 6,
+          "direction": "none",
+          "random": false,
+          "straight": false,
+          "out_mode": "out",
+          "bounce": false,
+          "attract": {
+            "enable": false,
+            "rotateX": 600,
+            "rotateY": 1200
+          }
+        }
+      },
+      "interactivity": {
+        "detect_on": "canvas",
+        "events": {
+          "onhover": {
+            "enable": true,
+            "mode": "repulse"
+          },
+          "onclick": {
+            "enable": true,
+            "mode": "push"
+          },
+          "resize": true
+        },
+        "modes": {
+          "grab": {
+            "distance": 400,
+            "line_linked": {
+              "opacity": 1
+            }
+          },
+          "bubble": {
+            "distance": 400,
+            "size": 40,
+            "duration": 2,
+            "opacity": 8,
+            "speed": 3
+          },
+          "repulse": {
+            "distance": 200,
+            "duration": 0.4
+          },
+          "push": {
+            "particles_nb": 4
+          },
+          "remove": {
+            "particles_nb": 2
+          }
+        }
+      },
+      "retina_detect": true
+    });
+  </script>
+</body>
+</html>
+	</div><!-- .entry-content -->
+</div><!-- #post-94 -->
+
+		</main><!-- #main -->
+	</div><!-- #primary -->
+
+
+</div><!-- .site-content-container -->
+
+
+</div><!-- #content -->
+
+
+	<footer id="colophon" class="site-footer light text-dark">
+
+		
+	</footer><!-- #colophon -->
+
+
+</div><!-- #page -->
+
+	<div id="login-panel" class="login-panel offscreen-panel">
+		<div class="backdrop"></div>
+		<div class="panel">
+			<div class="hamburger-menu button-close active">
+				<span class="menu-text">Close</span>
+
+				<div class="hamburger-box">
+					<div class="hamburger-inner"></div>
+				</div>
+			</div>
+
+			<div class="panel-header">
+				<div class="panel__title">Sign in</div>
+			</div>
+
+			<div class="panel-content">
+				<form class="woocommerce-form woocommerce-form-login login" method="post" action="http://tecprestige/my-account/">
+
+					
+					<p class="form-row">
+						<label for="panel_username">Username</label>
+						<input type="text" class="input-text" name="username" id="panel_username" />
+					</p>
+					<p class="form-row">
+						<label for="panel_password">Password</label>
+						<input class="input-text" type="password" name="password" id="panel_password" autocomplete="off" />
+					</p>
+
+					
+					<p class="form-row">
+						<label class="woocommerce-form__label woocommerce-form__label-for-checkbox inline">
+							<input class="woocommerce-form__input woocommerce-form__input-checkbox" name="rememberme" type="checkbox" value="forever" />
+							<span>Remember me</span>
+						</label>
+					</p>
+
+					<p class="form-row">
+						<input type="hidden" id="woocommerce-login-nonce" name="woocommerce-login-nonce" value="882316bf61" /><input type="hidden" name="_wp_http_referer" value="/" />
+						<input type="hidden" name="login" value="Sign in">
+						<button type="submit" class="button large" value="Sign in" data-signing="Siging in..." data-signed="Signed In">Sign in</button>
+
+											</p>
+
+					
+					<p class="lost_password">
+						<a href="http://tecprestige/my-account/lost-password/">Lost your password?</a>
+					</p>
+
+				</form>
+
+							</div>
+		</div>
+	</div>
+		<div id="cart-panel" class="cart-panel offscreen-panel">
+		<div class="backdrop"></div>
+		<div class="panel">
+			<div class="hamburger-menu button-close active">
+				<span class="menu-text">Close</span>
+
+				<div class="hamburger-box">
+					<div class="hamburger-inner"></div>
+				</div>
+			</div>
+
+			<div class="panel-header">
+				<div class="panel__title">Cart					<span class="cart-panel-counter">(0)</span></div>
+			</div>
+
+			<div class="panel-content woocommerce">
+				<div class="widget_shopping_cart_content">
+					
+
+	<p class="woocommerce-mini-cart__empty-message">
+		<img src="data:image/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw==" alt="Nenhum produto no carrinho." data-src="http://tecprestige/wp-content/themes/konte/images/empty-bag.svg" decoding="async" class="lazyload"><noscript><img src="http://tecprestige/wp-content/themes/konte/images/empty-bag.svg" alt="Nenhum produto no carrinho." data-eio="l"></noscript>
+		Nenhum produto no carrinho.	</p>
+
+
+				</div>
+			</div>
+		</div>
+	</div>
+	<a href="#page" id="gotop" class="gotop"><span class="svg-icon icon-arrow-down size-normal "><svg role="img"> <use href="#arrow-down" xlink:href="#arrow-down"></use> </svg></span></a>
+	<div id="mobile-menu" class="mobile-menu-panel offscreen-panel">
+		<div class="backdrop"></div>
+		<div class="panel">
+			
+	<div class="header-mobile custom logo-center">
+		<div class="konte-container-fluid">
+			
+<div class="mobile-menu-hamburger">
+	<button class="mobile-menu-toggle hamburger-menu" data-toggle="off-canvas" data-target="mobile-menu" aria-label="Toggle Menu">
+		<span class="hamburger-box">
+			<span class="hamburger-inner"></span>
+		</span>
+	</button>
+</div>
+
+	
+
+
+<div class="site-branding">
+	<a href="http://tecprestige" class="logo">
+					<img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAB4AAAAIsAQMAAAApiia3AAAAA1BMVEUAAACnej3aAAAAAXRSTlMAQObYZgAAAJhJREFUGBntwTEBAAAAwiD7p14KP2AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAADAVQuKAAELmyXKAAAAAElFTkSuQmCC" alt="TecPrestige" class="logo-dark lazyload" width="230" height="100" data-src="http://tecprestige/wp-content/uploads/2024/05/original.png" decoding="async" data-eio-rwidth="3063" data-eio-rheight="887"><noscript><img src="http://tecprestige/wp-content/uploads/2024/05/original.png" alt="TecPrestige" class="logo-dark" width="230" height="100" data-eio="l"></noscript>
+			<img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAOYAAABkAQMAAACo3N4rAAAAA1BMVEUAAACnej3aAAAAAXRSTlMAQObYZgAAABpJREFUGBntwTEBAAAAwiD7p14ND2AAAMC9AAu4AAHGdJuwAAAAAElFTkSuQmCC" alt="TecPrestige" class="logo-light lazyload" width="230" height="100" data-src="http://tecprestige.test/wp-content/uploads/2024/05/original.png" decoding="async" data-eio-rwidth="230" data-eio-rheight="100"><noscript><img src="http://tecprestige.test/wp-content/uploads/2024/05/original.png" alt="TecPrestige" class="logo-light" width="230" height="100" data-eio="l"></noscript>
+			</a>
+
+	<div class="action-menu-wrap"> 
+					<a href="/cart" class="action-menu-btn"><img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACAAAAAgAQMAAABJtOi3AAAAA1BMVEUAAACnej3aAAAAAXRSTlMAQObYZgAAAAtJREFUCB1jGOQAAACgAAGXmq1SAAAAAElFTkSuQmCC" data-src="/wp-content/themes/konte/images/cart.png" decoding="async" class="lazyload" data-eio-rwidth="32" data-eio-rheight="32"><noscript><img src="/wp-content/themes/konte/images/cart.png" data-eio="l"></noscript> Carrinho</a>
+					<a href="/login" class="action-menu-btn"><img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACAAAAAgAQMAAABJtOi3AAAAA1BMVEUAAACnej3aAAAAAXRSTlMAQObYZgAAAAtJREFUCB1jGOQAAACgAAGXmq1SAAAAAElFTkSuQmCC" data-src="/wp-content/themes/konte/images/account.png" decoding="async" class="lazyload" data-eio-rwidth="32" data-eio-rheight="32"><noscript><img src="/wp-content/themes/konte/images/account.png" data-eio="l"></noscript> Entrar</a>
+				</div>	
+		</div>
+
+<div class="mobile-header-icons">
+	
+<div class="header-cart">
+	<a href="http://tecprestige/cart/" data-toggle="off-canvas" data-target="cart-panel">
+		<span class="svg-icon icon-cart size-normal shopping-cart-icon"><svg> <use xlink:href="#cart"></use> </svg></span>		<span class="screen-reader-text">Cart</span>
+		<span class="counter cart-counter">0</span>
+	</a>
+</div>
+</div>
+		</div>
+	</div>
+
+										<div class="mobile-menu__search-form">
+							<form method="get" action="http://tecprestige/">
+								<label>
+									<span class="screen-reader-text">Search</span>
+									<span class="svg-icon icon-search size-normal search-icon"><svg> <use xlink:href="#search"></use> </svg></span>									<input type="text" name="s" class="search-field" value="" placeholder="Search" autocomplete="off">
+																			<input type="hidden" name="post_type" value="product">
+																	</label>
+							</form>
+						</div>
+						<nav class="mobile-menu__nav"><ul id="menu-menu-1" class="menu nav-menu--submenu-flyout"><li class="menu-item menu-item-type-taxonomy menu-item-object-product_cat menu-item-26"><a href="http://tecprestige/product-category/cozinha/">Cozinha</a></li>
+<li class="menu-item menu-item-type-taxonomy menu-item-object-product_cat menu-item-has-children menu-item-27"><a href="http://tecprestige/product-category/frio/">Frio</a>
+<ul class="sub-menu">
+	<li class="menu-item menu-item-type-taxonomy menu-item-object-product_cat menu-item-34"><a href="http://tecprestige/product-category/frio/abatedores-de-temperatura/">Abatedores de temperatura</a></li>
+	<li class="menu-item menu-item-type-taxonomy menu-item-object-product_cat menu-item-35"><a href="http://tecprestige/product-category/frio/arcas/">Arcas</a></li>
+	<li class="menu-item menu-item-type-taxonomy menu-item-object-product_cat menu-item-36"><a href="http://tecprestige/product-category/frio/armarios/">Armários</a></li>
+	<li class="menu-item menu-item-type-taxonomy menu-item-object-product_cat menu-item-37"><a href="http://tecprestige/product-category/frio/bancadas/">Bancadas</a></li>
+	<li class="menu-item menu-item-type-taxonomy menu-item-object-product_cat menu-item-38"><a href="http://tecprestige/product-category/frio/camaras-frigorificas/">Câmaras Frigorificas</a></li>
+	<li class="menu-item menu-item-type-taxonomy menu-item-object-product_cat menu-item-39"><a href="http://tecprestige/product-category/frio/maquinas-de-gelo/">Máquinas de Gelo</a></li>
+	<li class="menu-item menu-item-type-taxonomy menu-item-object-product_cat menu-item-40"><a href="http://tecprestige/product-category/frio/vitrines/">Vitrines</a></li>
+</ul>
+</li>
+<li class="menu-item menu-item-type-taxonomy menu-item-object-product_cat menu-item-28"><a href="http://tecprestige/product-category/pos-pesagem/">Pos/Pesagem</a></li>
+<li class="menu-item menu-item-type-taxonomy menu-item-object-product_cat menu-item-29"><a href="http://tecprestige/product-category/panificacao/">Panificação</a></li>
+<li class="menu-item menu-item-type-taxonomy menu-item-object-product_cat menu-item-30"><a href="http://tecprestige/product-category/lavandaria/">Lavandaria</a></li>
+<li class="menu-item menu-item-type-taxonomy menu-item-object-product_cat menu-item-31"><a href="http://tecprestige/product-category/mobilia/">Mobília</a></li>
+<li class="menu-item menu-item-type-taxonomy menu-item-object-product_cat menu-item-has-children menu-item-32"><a href="http://tecprestige/product-category/acessorios/">Acessórios</a>
+<ul class="sub-menu">
+	<li class="menu-item menu-item-type-taxonomy menu-item-object-product_cat menu-item-41"><a href="http://tecprestige/product-category/acessorios/chavenas/">Chávenas</a></li>
+	<li class="menu-item menu-item-type-taxonomy menu-item-object-product_cat menu-item-42"><a href="http://tecprestige/product-category/acessorios/copos/">Copos</a></li>
+	<li class="menu-item menu-item-type-taxonomy menu-item-object-product_cat menu-item-43"><a href="http://tecprestige/product-category/acessorios/frigideiras/">Frigideiras</a></li>
+	<li class="menu-item menu-item-type-taxonomy menu-item-object-product_cat menu-item-44"><a href="http://tecprestige/product-category/acessorios/panelas/">Panelas</a></li>
+	<li class="menu-item menu-item-type-taxonomy menu-item-object-product_cat menu-item-45"><a href="http://tecprestige/product-category/acessorios/pratos/">Pratos</a></li>
+	<li class="menu-item menu-item-type-taxonomy menu-item-object-product_cat menu-item-46"><a href="http://tecprestige/product-category/acessorios/tabuas-relene/">Tábuas Relene</a></li>
+	<li class="menu-item menu-item-type-taxonomy menu-item-object-product_cat menu-item-47"><a href="http://tecprestige/product-category/acessorios/tabuleiros-em-inox/">Tabuleiros em inox</a></li>
+	<li class="menu-item menu-item-type-taxonomy menu-item-object-product_cat menu-item-48"><a href="http://tecprestige/product-category/acessorios/talheres-de-mesa/">Talheres de mesa</a></li>
+	<li class="menu-item menu-item-type-taxonomy menu-item-object-product_cat menu-item-49"><a href="http://tecprestige/product-category/acessorios/utensilios/">Utensílios</a></li>
+</ul>
+</li>
+<li class="menu-item menu-item-type-taxonomy menu-item-object-product_cat menu-item-33"><a href="http://tecprestige/product-category/servicos/">Serviços</a></li>
+<li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-114"><a href="http://tecprestige/sobre-nos/">TecPrestige</a></li>
+<li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-113"><a href="http://tecprestige/contactos/">Contactos</a></li>
+</ul></nav><hr class="mobile-menu__divider divider">						<div class="mobile-menu__cart">
+							<a href="http://tecprestige/cart/">
+								<span class="mobile-menu__cart-text">Shopping Cart</span>
+								<span class="mobile-menu__cart-icon">
+									<span class="svg-icon icon-cart size-normal shopping-cart-icon"><svg> <use xlink:href="#cart"></use> </svg></span>									<span class="counter cart-counter">0</span>
+								</span>
+							</a>
+						</div>
+						<div class="mobile-menu__wishlist">
+									<a href="http://tecprestige/wishlist/" class="wishlist-contents">
+										<span class="mobile-menu__wishlist-text">Wishlist</span>
+										<span class="mobile-menu__wishlist-icon">
+											<span class="svg-icon icon-heart-o size-normal "><svg role="img"> <use href="#heart-o" xlink:href="#heart-o"></use> </svg></span>
+											<span class="counter wishlist-counter">0</span>
+										</span>
+									</a>
+								</div><hr class="mobile-menu__divider divider">								<div class="currency list-dropdown up  list-dropdown--show-name">
+							<span class="label">Currency</span>
+						<div class="dropdown">
+				<span class="current">
+					<span class="selected">
+							
+							USD
+						</span>
+					<span class="svg-icon icon-arrow-dropdown size-smaller caret"><svg> <use xlink:href="#arrow-dropdown"></use> </svg></span>				</span>
+				<ul>
+					<li><a href="#" class="woocs_flag_view_item woocs_flag_view_item_current" data-currency="USD">
+							<img src="" alt="USD" class="currency-dropdown__flag">
+							<span class="name">USD</span>
+						</a></li>
+	<li><a href="#" class="woocs_flag_view_item" data-currency="EUR">
+							<img src="" alt="EUR" class="currency-dropdown__flag">
+							<span class="name">EUR</span>
+						</a></li>				</ul>
+			</div>
+		</div>
+																				<hr class="mobile-menu__divider divider"><div class="mobile-menu__account-login">
+									<a href="http://tecprestige/my-account/">Sign In</a>
+								</div><hr class="mobile-menu__divider divider">		</div>
+	</div>
+
+	
+		<div id="quick-view-modal" class="quick-view-modal modal">
+			<div class="backdrop"></div>
+			<div class="modal-content container woocommerce">
+				<div class="hamburger-menu button-close active">
+					<span class="menu-text">Close</span>
+					<div class="hamburger-box">
+						<div class="hamburger-inner"></div>
+					</div>
+				</div>
+				<div class="product"></div>
+				<span class="modal-loader"><span class="spinner"></span></span>
+			</div>
+		</div>
+
+		
+<div id="wa"></div>		<div id="wcboost-products-compare-popup" class="wcboost-products-compare-popup" aria-hidden="true">
+			<div class="wcboost-products-compare-popup__backdrop"></div>
+			<div class="wcboost-products-compare-popup__body">
+				<div class="wcboost-products-compare-popup__header">
+											<div class="wcboost-products-compare-popup__title">Compare products</div>
+										<a href="#" class="wcboost-products-compare-popup__close" role="button">
+						<span class="wcboost-products-compare-popup__close-icon">
+							<span class="svg-icon icon-close size-normal "><svg role="img"> <use href="#close" xlink:href="#close"></use> </svg></span>						</span>
+						<span class="screen-reader-text">Close</span>
+					</a>
+				</div>
+				<div class="wcboost-products-compare-popup__content"></div>
+			</div>
+		</div>
+			<script type='text/javascript'>
+		(function () {
+			var c = document.body.className;
+			c = c.replace(/woocommerce-no-js/, 'woocommerce-js');
+			document.body.className = c;
+		})();
+	</script>
+	<link rel='stylesheet' id='wc-blocks-style-css' href='http://tecprestige/wp-content/plugins/woocommerce/assets/client/blocks/wc-blocks.css?ver=wc-9.1.2' type='text/css' media='all' />
+<link rel='stylesheet' id='woof_sections_style-css' href='http://tecprestige/wp-content/plugins/woocommerce-products-filter/ext/sections/css/sections.css?ver=1.3.6.1' type='text/css' media='all' />
+<link rel='stylesheet' id='woocommerce-currency-switcher-css' href='http://tecprestige/wp-content/plugins/woocommerce-currency-switcher/css/front.css?ver=1.4.2' type='text/css' media='all' />
+<link rel='stylesheet' id='woof_tooltip-css-css' href='http://tecprestige/wp-content/plugins/woocommerce-products-filter/js/tooltip/css/tooltipster.bundle.min.css?ver=1.3.6.1' type='text/css' media='all' />
+<link rel='stylesheet' id='woof_tooltip-css-noir-css' href='http://tecprestige/wp-content/plugins/woocommerce-products-filter/js/tooltip/css/plugins/tooltipster/sideTip/themes/tooltipster-sideTip-noir.min.css?ver=1.3.6.1' type='text/css' media='all' />
+<link rel='stylesheet' id='ion.range-slider-css' href='http://tecprestige/wp-content/plugins/woocommerce-products-filter/js/ion.range-slider/css/ion.rangeSlider.css?ver=1.3.6.1' type='text/css' media='all' />
+<link rel='stylesheet' id='woof-front-builder-css-css' href='http://tecprestige/wp-content/plugins/woocommerce-products-filter/ext/front_builder/css/front-builder.css?ver=1.3.6.1' type='text/css' media='all' />
+<link rel='stylesheet' id='woof-slideout-tab-css-css' href='http://tecprestige/wp-content/plugins/woocommerce-products-filter/ext/slideout/css/jquery.tabSlideOut.css?ver=1.3.6.1' type='text/css' media='all' />
+<link rel='stylesheet' id='woof-slideout-css-css' href='http://tecprestige/wp-content/plugins/woocommerce-products-filter/ext/slideout/css/slideout.css?ver=1.3.6.1' type='text/css' media='all' />
+<script type="text/javascript" id="woof_front-js-extra">
+/* <![CDATA[ */
+var woof_filter_titles = {"by_price":"by_price","by_instock":"by_instock","by_onsales":"by_onsales","by_text":"by_text","product_cat":"Product categories","product_tag":"Product tags"};
+var woof_ext_filter_titles = {"woof_author":"By author","stock":"In stock","onsales":"On sale","byrating":"By rating","woof_text":"By text"};
+/* ]]> */
+</script>
+<script type="text/javascript" id="woof_front-js-before">
+/* <![CDATA[ */
+        const woof_front_nonce = "43418486ef";
+        var woof_is_permalink =1;
+        var woof_shop_page = "";
+                var woof_m_b_container =".woocommerce-products-header";
+        var woof_really_curr_tax = {};
+        var woof_current_page_link = location.protocol + '//' + location.host + location.pathname;
+        /*lets remove pagination from woof_current_page_link*/
+        woof_current_page_link = woof_current_page_link.replace(/\page\/[0-9]+/, "");
+                        woof_current_page_link = "http://tecprestige/shop/";
+                        var woof_link = 'http://tecprestige/wp-content/plugins/woocommerce-products-filter/';
+        
+        var woof_ajaxurl = "http://tecprestige/wp-admin/admin-ajax.php";
+
+        var woof_lang = {
+        'orderby': "orderby",
+        'date': "date",
+        'perpage': "per page",
+        'pricerange': "price range",
+        'menu_order': "menu order",
+        'popularity': "popularity",
+        'rating': "rating",
+        'price': "price low to high",
+        'price-desc': "price high to low",
+        'clear_all': "Clear All",
+        'list_opener': "Сhild list opener",
+        };
+
+        if (typeof woof_lang_custom == 'undefined') {
+        var woof_lang_custom = {};/*!!important*/
+        }
+
+        var woof_is_mobile = 0;
+        
+
+
+        var woof_show_price_search_button = 0;
+        var woof_show_price_search_type = 0;
+        
+        var woof_show_price_search_type = 3;
+        var swoof_search_slug = "swoof";
+
+        
+        var icheck_skin = {};
+                                icheck_skin.skin = "square";
+            icheck_skin.color = "blue";
+        
+        var woof_select_type = 'chosen';
+
+
+                var woof_current_values = '[]';
+                var woof_lang_loading = "Loading ...";
+
+        
+        var woof_lang_show_products_filter = "show products filter";
+        var woof_lang_hide_products_filter = "hide products filter";
+        var woof_lang_pricerange = "price range";
+
+        var woof_use_beauty_scroll =1;
+
+        var woof_autosubmit =1;
+        var woof_ajaxurl = "http://tecprestige/wp-admin/admin-ajax.php";
+        /*var woof_submit_link = "";*/
+        var woof_is_ajax = 0;
+        var woof_ajax_redraw = 0;
+        var woof_ajax_page_num =1;
+        var woof_ajax_first_done = false;
+        var woof_checkboxes_slide_flag = 1;
+
+
+        /*toggles*/
+        var woof_toggle_type = "text";
+
+        var woof_toggle_closed_text = "+";
+        var woof_toggle_opened_text = "-";
+
+        var woof_toggle_closed_image = "http://tecprestige/wp-content/plugins/woocommerce-products-filter/img/plus.svg";
+        var woof_toggle_opened_image = "http://tecprestige/wp-content/plugins/woocommerce-products-filter/img/minus.svg";
+
+
+        /*indexes which can be displayed in red buttons panel*/
+                var woof_accept_array = ["min_price", "orderby", "perpage", "woof_author","stock","onsales","byrating","woof_text","min_rating","product_visibility","product_cat","product_tag","pa_capacidade","pa_capacidade-de-tabuleiros","pa_coluna","pa_dimensoes-dos-tabuleiros","pa_funcao","pa_linhas-unox","pa_litros","pa_marcas","pa_potencia-w","pa_producao-diaria","pa_tipo-de-gelo","pa_tipologia","pa_velocidade","fb_product_set"];
+
+        
+        /*for extensions*/
+
+        var woof_ext_init_functions = null;
+                    woof_ext_init_functions = '{"by_author":"woof_init_author","by_instock":"woof_init_instock","by_onsales":"woof_init_onsales","by_text":"woof_init_text","label":"woof_init_labels","select_radio_check":"woof_init_select_radio_check"}';
+        
+
+        
+        var woof_overlay_skin = "default";
+
+        
+ function woof_js_after_ajax_done() { jQuery(document).trigger('woof_ajax_done'); 
+
+}
+ var woof_front_sd_is_a=1;var woof_front_show_notes=1;var woof_lang_front_builder_del="Are you sure you want to delete this filter-section?";var woof_lang_front_builder_options="Options";var woof_lang_front_builder_option="Option";var woof_lang_front_builder_section_options="Section Options";var woof_lang_front_builder_description="Description";var woof_lang_front_builder_close="Close";var woof_lang_front_builder_suggest="Suggest the feature";var woof_lang_front_builder_good_to_use="good to use in content areas";var woof_lang_front_builder_confirm_sd="Smart Designer item will be created and attached to this filter section and will cancel current type, proceed?";var woof_lang_front_builder_creating="Creating";var woof_lang_front_builder_shortcode="Shortcode";var woof_lang_front_builder_layout="Layout";var woof_lang_front_builder_filter_section="Section options";var woof_lang_front_builder_filter_redrawing="filter redrawing";var woof_lang_front_builder_filter_redrawn="redrawn";var woof_lang_front_builder_filter_redrawn="redrawn";var woof_lang_front_builder_title_top_info="this functionality is only visible for the site administrator";var woof_lang_front_builder_title_top_info_demo="demo mode is activated, and results are visible only to you";;var woof_lang_front_builder_select="+ Add filter section";
+/* ]]> */
+</script>
+<script type="text/javascript" src="http://tecprestige/wp-content/plugins/woocommerce-products-filter/js/front.js?ver=1.3.6.1" id="woof_front-js"></script>
+<script type="text/javascript" id="woof_url_parser-js-extra">
+/* <![CDATA[ */
+var url_parser_data = {"filters":{"by_price":"price","woof_author":"author","by_author":"by_author","by_instock":"by_instock","by_onsales":"by_onsales","min_rating":"min_rating","by_rating":"by_rating","woof_text":"name","by_text":"by_text","product_visibility":"product_visibility","product_cat":"product_cat","product_tag":"product_tag","pa_capacidade":"capacidade","pa_capacidade-de-tabuleiros":"capacidade-de-tabuleiros","pa_coluna":"coluna","pa_dimensoes-dos-tabuleiros":"dimensoes-dos-tabuleiros","pa_funcao":"funcao","pa_linhas-unox":"linhas-unox","pa_litros":"litros","pa_marcas":"marcas","pa_potencia-w":"potencia-w","pa_producao-diaria":"producao-diaria","pa_tipo-de-gelo":"tipo-de-gelo","pa_tipologia":"tipologia","pa_velocidade":"velocidade","fb_product_set":"fb_product_set","instock":"instock","onsale":"onsale","featured":"featured","backorder_not_in":"backorder_not_in","rev_product_visibility":"product_visibility","rev_product_cat":"product_cat","rev_product_tag":"product_tag","rev_pa_capacidade":"capacidade","rev_pa_capacidade-de-tabuleiros":"capacidade-de-tabuleiros","rev_pa_coluna":"coluna","rev_pa_dimensoes-dos-tabuleiros":"dimensoes-dos-tabuleiros","rev_pa_funcao":"funcao","rev_pa_linhas-unox":"linhas-unox","rev_pa_litros":"litros","rev_pa_marcas":"marcas","rev_pa_potencia-w":"potencia-w","rev_pa_producao-diaria":"producao-diaria","rev_pa_tipo-de-gelo":"tipo-de-gelo","rev_pa_tipologia":"tipologia","rev_pa_velocidade":"velocidade","rev_fb_product_set":"fb_product_set"},"special":{"stock":"instock","onsales":"onsale","product_visibility":"featured","backorder":"backorder_not_in"}};
+/* ]]> */
+</script>
+<script type="text/javascript" src="http://tecprestige/wp-content/plugins/woocommerce-products-filter/ext/url_request/js/url_parser.js?ver=1.3.6.1" id="woof_url_parser-js"></script>
+<script type="text/javascript" id="eio-lazy-load-js-before">
+/* <![CDATA[ */
+var eio_lazy_vars = {"exactdn_domain":"","skip_autoscale":0,"threshold":0};
+/* ]]> */
+</script>
+<script type="text/javascript" src="http://tecprestige/wp-content/plugins/ewww-image-optimizer/includes/lazysizes.min.js?ver=770" id="eio-lazy-load-js" async="async" data-wp-strategy="async"></script>
+<script type="text/javascript" id="wapf-frontend-js-js-extra">
+/* <![CDATA[ */
+var wapf_config = {"page_type":"other"};
+/* ]]> */
+</script>
+<script type="text/javascript" src="http://tecprestige/wp-content/plugins/advanced-product-fields-for-woocommerce/assets/js/frontend.min.js?ver=1.6.8" id="wapf-frontend-js-js"></script>
+<script type="text/javascript" src="http://tecprestige/wp-content/plugins/woocommerce/assets/js/sourcebuster/sourcebuster.min.js?ver=9.1.2" id="sourcebuster-js-js"></script>
+<script type="text/javascript" id="wc-order-attribution-js-extra">
+/* <![CDATA[ */
+var wc_order_attribution = {"params":{"lifetime":1.0e-5,"session":30,"base64":false,"ajaxurl":"http:\/\/tecprestige\/wp-admin\/admin-ajax.php","prefix":"wc_order_attribution_","allowTracking":true},"fields":{"source_type":"current.typ","referrer":"current_add.rf","utm_campaign":"current.cmp","utm_source":"current.src","utm_medium":"current.mdm","utm_content":"current.cnt","utm_id":"current.id","utm_term":"current.trm","utm_source_platform":"current.plt","utm_creative_format":"current.fmt","utm_marketing_tactic":"current.tct","session_entry":"current_add.ep","session_start_time":"current_add.fd","session_pages":"session.pgs","session_count":"udata.vst","user_agent":"udata.uag"}};
+/* ]]> */
+</script>
+<script type="text/javascript" src="http://tecprestige/wp-content/plugins/woocommerce/assets/js/frontend/order-attribution.min.js?ver=9.1.2" id="wc-order-attribution-js"></script>
+<script type="text/javascript" id="wcboost-products-compare-js-extra">
+/* <![CDATA[ */
+var wcboost_products_compare_params = {"page_url":"http:\/\/tecprestige\/compare\/","added_behavior":"","exists_item_behavior":"remove","icon_normal":"<svg width=\"24\" height=\"24\" role=\"image\" xmlns=\"http:\/\/www.w3.org\/2000\/svg\" viewBox=\"0 0 576 512\"><path d=\"M422.6 278.6c-12.5 12.5-32.8 12.5-45.3 0s-12.5-32.8 0-45.3L434.7 176H64c-17.7 0-32-14.3-32-32s14.3-32 32-32H434.7L377.4 54.6c-12.5-12.5-12.5-32.8 0-45.3s32.8-12.5 45.3 0l112 112c12.5 12.5 12.5 32.8 0 45.3l-112 112zm-269.3 224l-112-112c-12.5-12.5-12.5-32.8 0-45.3l112-112c12.5-12.5 32.8-12.5 45.3 0s12.5 32.8 0 45.3L141.3 336H512c17.7 0 32 14.3 32 32s-14.3 32-32 32H141.3l57.4 57.4c12.5 12.5 12.5 32.8 0 45.3s-32.8 12.5-45.3 0z\"\/><\/svg>","icon_checked":"<svg width=\"24\" height=\"24\" role=\"image\" xmlns=\"http:\/\/www.w3.org\/2000\/svg\" viewBox=\"0 0 512 512\"><path d=\"M470.6 105.4c12.5 12.5 12.5 32.8 0 45.3l-256 256c-12.5 12.5-32.8 12.5-45.3 0l-128-128c-12.5-12.5-12.5-32.8 0-45.3s32.8-12.5 45.3 0L192 338.7 425.4 105.4c12.5-12.5 32.8-12.5 45.3 0z\"\/><\/svg>","icon_loading":"<span class=\"spinner\"><\/span>","i18n_button_add":"Compare","i18n_button_remove":"Remove compare","i18n_button_view":"Browse compare"};
+/* ]]> */
+</script>
+<script type="text/javascript" src="http://tecprestige/wp-content/plugins/wcboost-products-compare/assets/js/compare.min.js?ver=1.0.5" id="wcboost-products-compare-js"></script>
+<script type="text/javascript" id="wcboost-products-compare-fragments-js-extra">
+/* <![CDATA[ */
+var wcboost_products_compare_fragments_params = {"refresh_on_load":"yes","timeout":"5000"};
+/* ]]> */
+</script>
+<script type="text/javascript" src="http://tecprestige/wp-content/plugins/wcboost-products-compare/assets/js/compare-fragments.min.js?ver=1.0.5" id="wcboost-products-compare-fragments-js"></script>
+<script type="text/javascript" id="wcboost-variation-swatches-js-extra">
+/* <![CDATA[ */
+var wcboost_variation_swatches_params = {"show_selected_label":""};
+/* ]]> */
+</script>
+<script type="text/javascript" src="http://tecprestige/wp-content/plugins/wcboost-variation-swatches/assets/js/frontend.min.js?ver=1.0.17" id="wcboost-variation-swatches-js"></script>
+<script type="text/javascript" id="wcboost-wishlist-js-extra">
+/* <![CDATA[ */
+var wcboost_wishlist_params = {"allow_adding_variations":"","wishlist_redirect_after_add":"","wishlist_url":"http:\/\/tecprestige\/wishlist\/","exists_item_behavior":"view_wishlist","i18n_link_copied_notice":"The wishlist link is copied to clipboard","i18n_close_button_text":"Close","i18n_add_to_wishlist":"Add to wishlist","i18n_view_wishlist":"View wishlist","i18n_remove_from_wishlist":"Remove from wishlist","icon_normal":"<span class=\"svg-icon icon-heart-o size-normal \"><svg role=\"img\"> <use href=\"#heart-o\" xlink:href=\"#heart-o\"><\/use> <\/svg><\/span>","icon_filled":"<span class=\"svg-icon icon-heart size-normal \"><svg role=\"img\"> <use href=\"#heart\" xlink:href=\"#heart\"><\/use> <\/svg><\/span>","icon_loading":"<span class=\"spinner\"><\/span>"};
+/* ]]> */
+</script>
+<script type="text/javascript" src="http://tecprestige/wp-content/plugins/wcboost-wishlist/assets/js/wishlist.min.js?ver=1.1.0" id="wcboost-wishlist-js"></script>
+<script type="text/javascript" id="wcboost-wishlist-fragments-js-extra">
+/* <![CDATA[ */
+var wcboost_wishlist_fragments_params = {"refresh_on_load":"no","hash_name":"wcboost_wishlist_hash_f395ca2e44058f7c6c4e5ad96615c4ec","timeout":"5000"};
+/* ]]> */
+</script>
+<script type="text/javascript" src="http://tecprestige/wp-content/plugins/wcboost-wishlist/assets/js/wishlist-fragments.min.js?ver=1.1.0" id="wcboost-wishlist-fragments-js"></script>
+<script type="text/javascript" src="http://tecprestige/wp-content/plugins/wp-whatsapp/assets/dist/js/njt-whatsapp.js?ver=3.6.7" id="nta-wa-libs-js"></script>
+<script type="text/javascript" id="nta-js-global-js-extra">
+/* <![CDATA[ */
+var njt_wa_global = {"ajax_url":"http:\/\/tecprestige\/wp-admin\/admin-ajax.php","nonce":"023741f079","defaultAvatarSVG":"<svg width=\"48px\" height=\"48px\" class=\"nta-whatsapp-default-avatar\" version=\"1.1\" id=\"Layer_1\" xmlns=\"http:\/\/www.w3.org\/2000\/svg\" xmlns:xlink=\"http:\/\/www.w3.org\/1999\/xlink\" x=\"0px\" y=\"0px\"\n            viewBox=\"0 0 512 512\" style=\"enable-background:new 0 0 512 512;\" xml:space=\"preserve\">\n            <path style=\"fill:#EDEDED;\" d=\"M0,512l35.31-128C12.359,344.276,0,300.138,0,254.234C0,114.759,114.759,0,255.117,0\n            S512,114.759,512,254.234S395.476,512,255.117,512c-44.138,0-86.51-14.124-124.469-35.31L0,512z\"\/>\n            <path style=\"fill:#55CD6C;\" d=\"M137.71,430.786l7.945,4.414c32.662,20.303,70.621,32.662,110.345,32.662\n            c115.641,0,211.862-96.221,211.862-213.628S371.641,44.138,255.117,44.138S44.138,137.71,44.138,254.234\n            c0,40.607,11.476,80.331,32.662,113.876l5.297,7.945l-20.303,74.152L137.71,430.786z\"\/>\n            <path style=\"fill:#FEFEFE;\" d=\"M187.145,135.945l-16.772-0.883c-5.297,0-10.593,1.766-14.124,5.297\n            c-7.945,7.062-21.186,20.303-24.717,37.959c-6.179,26.483,3.531,58.262,26.483,90.041s67.09,82.979,144.772,105.048\n            c24.717,7.062,44.138,2.648,60.028-7.062c12.359-7.945,20.303-20.303,22.952-33.545l2.648-12.359\n            c0.883-3.531-0.883-7.945-4.414-9.71l-55.614-25.6c-3.531-1.766-7.945-0.883-10.593,2.648l-22.069,28.248\n            c-1.766,1.766-4.414,2.648-7.062,1.766c-15.007-5.297-65.324-26.483-92.69-79.448c-0.883-2.648-0.883-5.297,0.883-7.062\n            l21.186-23.834c1.766-2.648,2.648-6.179,1.766-8.828l-25.6-57.379C193.324,138.593,190.676,135.945,187.145,135.945\"\/>\n        <\/svg>","defaultAvatarUrl":"http:\/\/tecprestige\/wp-content\/plugins\/wp-whatsapp\/assets\/img\/whatsapp_logo.svg","timezone":"+00:00","i18n":{"online":"Online","offline":"Offline"},"urlSettings":{"onDesktop":"api","onMobile":"api","openInNewTab":"ON"}};
+/* ]]> */
+</script>
+<script type="text/javascript" src="http://tecprestige/wp-content/plugins/wp-whatsapp/assets/js/whatsapp-button.js?ver=3.6.7" id="nta-js-global-js"></script>
+<script type="text/javascript" src="http://tecprestige/wp-content/themes/konte/js/sticky-kit.min.js?ver=1.1.3" id="sticky-kit-js"></script>
+<script type="text/javascript" src="http://tecprestige/wp-includes/js/jquery/jquery.serialize-object.js?ver=0.2-wp" id="jquery-serialize-object-js"></script>
+<script type="text/javascript" src="http://tecprestige/wp-content/themes/konte/js/background-color-theif.min.js?ver=1.0" id="background-color-theif-js"></script>
+<script type="text/javascript" src="http://tecprestige/wp-includes/js/imagesloaded.min.js?ver=5.0.0" id="imagesloaded-js"></script>
+<script type="text/javascript" src="http://tecprestige/wp-content/themes/konte/js/slick.min.js?ver=1.8.1" id="slick-js"></script>
+<script type="text/javascript" src="http://tecprestige/wp-content/themes/konte/js/perfect-scrollbar.min.js?ver=1.5.0" id="perfect-scrollbar-js"></script>
+<script type="text/javascript" id="konte-js-extra">
+/* <![CDATA[ */
+var konteData = {"ajax_url":"http:\/\/tecprestige\/wp-admin\/admin-ajax.php","rtl":"","preloader":"1","sticky_header":"none","header_search_ajax":"1","wishlist_count":"0","product_sticky_summary":"1","product_summary_sticky_mode":"advanced","product_auto_background":"1","product_gallery_slider":"1","product_image_lightbox":"1","product_image_zoom":"","product_quantity_input_style":"default","product_ajax_addtocart":"1","cart_open_after_added":"","product_quickview_auto_background":"1","product_quickview_auto_close":"1","popup":"","popup_frequency":"1","popup_visible":"loaded","popup_visible_delay":"5","added_to_cart_notice":"1","added_to_cart_message":"Product was added to cart successfully","added_to_wishlist_notice":"1","added_to_wishlist_message":"Product was added to wishlist successfully","blog_nav_ajax_url_change":"1","shop_nav_ajax_url_change":"1","portfolio_nav_ajax_url_change":null,"product_quickview_nonce":"8b28b46ce8","product_search_nonce":"853b52d4fc","share_nonce":"98d8172544","add_to_cart_nonce":"7bb6ecabca"};
+/* ]]> */
+</script>
+<script type="text/javascript" src="http://tecprestige/wp-content/themes/konte/js/scripts.min.js?ver=2.3.9" id="konte-js"></script>
+<script type="text/javascript" src="http://tecprestige/wp-content/uploads/wpmss/wpmssab.min.js?ver=1727751277" id="wpmssab-js"></script>
+<script type="text/javascript" src="http://tecprestige/wp-content/plugins/mousewheel-smooth-scroll/js/SmoothScroll.min.js?ver=1.4.10" id="SmoothScroll-js"></script>
+<script type="text/javascript" src="http://tecprestige/wp-content/uploads/wpmss/wpmss.min.js?ver=1727751277" id="wpmss-js"></script>
+<script type="text/javascript" src="http://tecprestige/wp-content/themes/konte/js/notify.min.js?ver=0.4.2" id="notify-js"></script>
+<script type="text/javascript" src="http://tecprestige/wp-content/themes/konte/js/quantity-dropdown.js?ver=1.0.0" id="jquery-quantity-dropdown-js"></script>
+<script type="text/javascript" src="http://tecprestige/wp-includes/js/jquery/ui/core.min.js?ver=1.13.3" id="jquery-ui-core-js"></script>
+<script type="text/javascript" src="http://tecprestige/wp-includes/js/jquery/ui/mouse.min.js?ver=1.13.3" id="jquery-ui-mouse-js"></script>
+<script type="text/javascript" src="http://tecprestige/wp-includes/js/jquery/ui/slider.min.js?ver=1.13.3" id="jquery-ui-slider-js"></script>
+<script type="text/javascript" src="http://tecprestige/wp-content/plugins/woocommerce/assets/js/jquery-ui-touch-punch/jquery-ui-touch-punch.min.js?ver=9.1.2" id="wc-jquery-ui-touchpunch-js"></script>
+<script type="text/javascript" src="http://tecprestige/wp-content/plugins/woocommerce-currency-switcher/js/price-slider_33.js?ver=1.4.2" id="wc-price-slider_33-js"></script>
+<script type="text/javascript" src="http://tecprestige/wp-content/plugins/woocommerce-currency-switcher/js/real-active-filters.js?ver=1.4.2" id="woocs-real-active-filters-js"></script>
+<script type="text/javascript" src="http://tecprestige/wp-content/plugins/woocommerce-currency-switcher/js/real-price-filter-frontend.js?ver=1.4.2" id="woocs-price-filter-frontend-js"></script>
+<script type="text/javascript" src="http://tecprestige/wp-content/plugins/woocommerce-currency-switcher/js/jquery.ddslick.min.js?ver=1.4.2" id="jquery.ddslick.min-js"></script>
+<script type="text/javascript" id="woocommerce-currency-switcher-js-before">
+/* <![CDATA[ */
+
+        var woocs_is_mobile = 0;
+        var woocs_special_ajax_mode = 0;
+        var woocs_drop_down_view = "ddslick";
+        var woocs_current_currency = {"name":"USD","rate":1,"symbol":"&#36;","position":"right","is_etalon":1,"description":"USA dollar","hide_cents":0,"hide_on_front":0,"flag":""};
+        var woocs_default_currency = {"name":"USD","rate":1,"symbol":"&#36;","position":"right","is_etalon":1,"description":"USA dollar","hide_cents":0,"hide_on_front":0,"flag":""};
+        var woocs_redraw_cart = 1;
+        var woocs_array_of_get = '{}';
+        
+        woocs_array_no_cents = '["JPY","TWD"]';
+
+        var woocs_ajaxurl = "http://tecprestige/wp-admin/admin-ajax.php";
+        var woocs_lang_loading = "loading";
+        var woocs_shop_is_cached =0;
+        
+/* ]]> */
+</script>
+<script type="text/javascript" src="http://tecprestige/wp-content/plugins/woocommerce-currency-switcher/js/front.js?ver=1.4.2" id="woocommerce-currency-switcher-js"></script>
+<script type="text/javascript" src="http://tecprestige/wp-content/plugins/woocommerce-products-filter/js/tooltip/js/tooltipster.bundle.min.js?ver=1.3.6.1" id="woof_tooltip-js-js"></script>
+<script type="text/javascript" src="http://tecprestige/wp-content/plugins/woocommerce-products-filter/js/icheck/icheck.min.js?ver=1.3.6.1" id="icheck-jquery-js"></script>
+<script type="text/javascript" src="http://tecprestige/wp-content/plugins/woocommerce-products-filter/js/html_types/radio.js?ver=1.3.6.1" id="woof_radio_html_items-js"></script>
+<script type="text/javascript" src="http://tecprestige/wp-content/plugins/woocommerce-products-filter/js/html_types/checkbox.js?ver=1.3.6.1" id="woof_checkbox_html_items-js"></script>
+<script type="text/javascript" src="http://tecprestige/wp-content/plugins/woocommerce-products-filter/js/html_types/select.js?ver=1.3.6.1" id="woof_select_html_items-js"></script>
+<script type="text/javascript" src="http://tecprestige/wp-content/plugins/woocommerce-products-filter/js/html_types/mselect.js?ver=1.3.6.1" id="woof_mselect_html_items-js"></script>
+<script type="text/javascript" src="http://tecprestige/wp-content/plugins/woocommerce-products-filter/ext/by_author/js/by_author.js?ver=1.3.6.1" id="woof_by_author_html_items-js"></script>
+<script type="text/javascript" src="http://tecprestige/wp-content/plugins/woocommerce-products-filter/ext/by_instock/js/by_instock.js?ver=1.3.6.1" id="woof_by_instock_html_items-js"></script>
+<script type="text/javascript" src="http://tecprestige/wp-content/plugins/woocommerce-products-filter/ext/by_onsales/js/by_onsales.js?ver=1.3.6.1" id="woof_by_onsales_html_items-js"></script>
+<script type="text/javascript" src="http://tecprestige/wp-content/plugins/woocommerce-products-filter/ext/by_text/assets/js/front.js?ver=1.3.6.1" id="woof_by_text_html_items-js"></script>
+<script type="text/javascript" src="http://tecprestige/wp-content/plugins/woocommerce-products-filter/ext/label/js/html_types/label.js?ver=1.3.6.1" id="woof_label_html_items-js"></script>
+<script type="text/javascript" src="http://tecprestige/wp-content/plugins/woocommerce-products-filter/ext/sections/js/sections.js?ver=1.3.6.1" id="woof_sections_html_items-js"></script>
+<script type="text/javascript" src="http://tecprestige/wp-content/plugins/woocommerce-products-filter/ext/select_radio_check/js/html_types/select_radio_check.js?ver=1.3.6.1" id="woof_select_radio_check_html_items-js"></script>
+<script type="text/javascript" src="http://tecprestige/wp-content/plugins/woocommerce-products-filter/ext/smart_designer/js/front.js?ver=1.3.6.1" id="woof_sd_html_items-js"></script>
+<script type="text/javascript" src="http://tecprestige/wp-content/plugins/woocommerce-products-filter/js/chosen/chosen.jquery.js?ver=1.3.6.1" id="chosen-drop-down-js"></script>
+<script type="text/javascript" src="http://tecprestige/wp-content/plugins/woocommerce-products-filter/js/ion.range-slider/js/ion.rangeSlider.min.js?ver=1.3.6.1" id="ion.range-slider-js"></script>
+<script type="text/javascript" src="http://tecprestige/wp-content/plugins/woocommerce-products-filter/ext/slideout/js/jquery.tabSlideOut.js?ver=1.3.6.1" id="woof-slideout-js-js"></script>
+<script type="text/javascript" src="http://tecprestige/wp-content/plugins/woocommerce-products-filter/ext/slideout/js/slideout.js?ver=1.3.6.1" id="woof-slideout-init-js"></script>
+<script type="text/javascript" id="nta-js-popup-js-extra">
+/* <![CDATA[ */
+var njt_wa = {"gdprStatus":"","accounts":[{"accountId":1383,"accountName":"Apoio Comercial","avatar":"","number":"+351932639539","title":"Precisa de ajuda?","predefinedText":"Converse Connosco","willBeBackText":"I will be back in [njwa_time_work]","dayOffsText":"I will be back soon","isAlwaysAvailable":"ON","daysOfWeekWorking":{"sunday":{"isWorkingOnDay":"OFF","workHours":[{"startTime":"08:00","endTime":"17:30"}]},"monday":{"isWorkingOnDay":"OFF","workHours":[{"startTime":"08:00","endTime":"17:30"}]},"tuesday":{"isWorkingOnDay":"OFF","workHours":[{"startTime":"08:00","endTime":"17:30"}]},"wednesday":{"isWorkingOnDay":"OFF","workHours":[{"startTime":"08:00","endTime":"17:30"}]},"thursday":{"isWorkingOnDay":"OFF","workHours":[{"startTime":"08:00","endTime":"17:30"}]},"friday":{"isWorkingOnDay":"OFF","workHours":[{"startTime":"08:00","endTime":"17:30"}]},"saturday":{"isWorkingOnDay":"OFF","workHours":[{"startTime":"08:00","endTime":"17:30"}]}}}],"options":{"display":{"displayCondition":"showAllPage","includePages":[],"excludePages":[],"includePosts":[],"showOnDesktop":"ON","showOnMobile":"ON","time_symbols":"h:m"},"styles":{"title":"Iniciar Conversa","responseText":"A equipa normalmente responde em alguns minutos.","description":"Oi! Clique num dos nossos membros abaixo para conversar no <strong>WhatsApp<\/strong>","backgroundColor":"#2db742","textColor":"#ffffff","titleSize":"18","accountNameSize":"14","descriptionTextSize":"12","regularTextSize":"11","scrollHeight":"500","isShowScroll":"OFF","isShowResponseText":"OFF","isShowPoweredBy":"ON","btnLabel":"Precisa de ajuda? <strong>Converse connosco<\/strong>","btnLabelWidth":"156","btnPosition":"right","btnLeftDistance":"30","btnRightDistance":"30","btnBottomDistance":"30","isShowBtnLabel":"ON","isShowGDPR":"OFF","gdprContent":"<strong>Aceite nossa <a href=\"https:\/\/ninjateam.org\/privacy-policy\/\">pol\u00edtica de privacidade<\/a> primeiro para iniciar uma conversa.<\/strong>"},"analytics":{"enabledGoogle":"OFF","enabledFacebook":"OFF","enabledGoogleGA4":"OFF"}}};
+/* ]]> */
+</script>
+<script type="text/javascript" src="http://tecprestige/wp-content/plugins/wp-whatsapp/assets/js/whatsapp-popup.js?ver=3.6.7" id="nta-js-popup-js"></script>
+
+</body>
+</html>
+
+<!-- Dynamic page generated in 5.613 seconds. -->
+<!-- Cached page generated by WP-Super-Cache on 2024-07-23 13:33:49 -->
+
+<!-- super cache -->
