@@ -68,6 +68,11 @@ class Konte_WooCommerce_Template_Catalog {
 		remove_action( 'woocommerce_shop_loop_item_title', 'woocommerce_template_loop_product_title' );
 		add_action( 'woocommerce_shop_loop_item_title', array( __CLASS__, 'product_title' ) );
 
+
+		// tecprestige custom buttons - see more and add to cart
+		add_action('woocommerce_shop_loop_item_title', array( __CLASS__, 'custom_product_buttons_tecprestige' ));
+
+
 		// Add a class to add to cart button.
 		add_filter( 'woocommerce_loop_add_to_cart_args', array( __CLASS__, 'add_to_cart_button_args' ) );
 
@@ -1388,5 +1393,51 @@ class Konte_WooCommerce_Template_Catalog {
 		}
 
 		echo '</p>';
+	}
+
+	public static function custom_product_buttons_tecprestige() {
+		global $product;
+	
+		// Get the product ID
+		$product_id = $product->get_id();
+	
+		// Get the product URL
+		$product_url = get_permalink($product_id);
+
+			// Add to cart URL
+			$add_to_cart_url = esc_url( add_query_arg( 'add-to-cart', $product_id ) );
+
+		//wc_get_rating_html( $average );
+// number_format( $average, 1 )
+
+		$average = $product->get_average_rating();
+
+		$nStars = intval(number_format( $average, 1 ));
+
+		if($nStars == 0){
+			$nStars = 5;
+		}
+		
+		echo '<div class="product-card-rate">';
+		for ($i = 1; $i <= $nStars; $i++) {
+			echo Self::getStarSVG();
+		}
+		echo '</div>';
+	
+		echo '<div class="product-button-actions">';
+		// Display product title
+		/* echo '<h2 class="woocommerce-loop-product__title">' . get_the_title() . '</h2>'; */
+		// Button to view more details
+		echo '<a href="' . $product_url . '" class="button-product-action view-more">Saber mais</a>';
+		// Button to add to cart
+		echo '<a href="' . $add_to_cart_url . '" class="button-product-action add-to-cart">Carrinho</a>';
+		echo '</div>';
+	}
+
+	public static function getStarSVG(){
+		return '<svg fill="#000000" width="18px" height="18px" viewBox="0 0 32 32" version="1.1" xmlns="http://www.w3.org/2000/svg">
+        <title>star</title>
+        <path d="M3.488 13.184l6.272 6.112-1.472 8.608 7.712-4.064 7.712 4.064-1.472-8.608 6.272-6.112-8.64-1.248-3.872-7.808-3.872 7.808z"></path>
+        </svg>';
 	}
 }

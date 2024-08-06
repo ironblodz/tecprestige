@@ -15313,4 +15313,40 @@ ul.products li.product .product-thumbnail img {
     /* .product-inner:hover{
         background-color: #0072a7 !important;
     } */
+
+    .button-product-action{
+        border-radius: 25px;
+        color: #0077b5;
+        padding: 4px 10px 4px 10px;
+        background-color: white;
+        margin: 0px 5px;
+        font-weight: 500;
+    }
+
+    .product-inner:hover .product-button-actions .button-product-action{
+        color: #e5e5e5 !important;
+    }
     
+    .product-button-actions{
+        display: flex;
+        justify-content: center;
+    }
+    
+    .product-card-rate{
+        display: flex;
+        justify-content: center;
+        margin-top: 10px;
+        margin-bottom: 25px;
+    }
+    .product-card-rate svg{
+        fill: #0077b5 !important;
+        margin: 0px 1px;
+    }
+
+    .product-inner:hover .product-card-rate svg{
+        fill: white !important;
+    }
+
+    .product-inner .woocommerce-loop-product__title {
+        margin: 0 15px 6px 15px !important;
+    }
