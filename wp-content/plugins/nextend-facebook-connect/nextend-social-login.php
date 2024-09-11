@@ -20,9 +20,9 @@ require_once(NSL_PATH . '/compat.php');
 
 class NextendSocialLogin {
 
-    public static $version = '3.1.13';
+    public static $version = '3.1.14';
 
-    public static $nslPROMinVersion = '3.1.13';
+    public static $nslPROMinVersion = '3.1.14';
 
     public static $proxyPage = false;
 
@@ -541,6 +541,23 @@ class NextendSocialLogin {
                     add_filter('wp_2fa_skip_2fa_login_form', '__return_true');
                 }
 
+            }
+
+            /**
+             * Fix: SolidWP - Solid Security Basic
+             * @url https://wordpress.org/plugins/better-wp-security/
+             *
+             * @see NSLDEV-426
+             *
+             * In case of social login, the "Security > Settings > Features > Login Security > Two-Factor" setting should be used only if our Support Login Restrictions feature is enabled.
+             *
+             */
+            if (class_exists('ITSEC_Core', false)) {
+                if (!self::$settings->get('login_restriction')) {
+                    add_action('nsl_before_wp_login', function () {
+                        add_filter('itsec_two_factor_interstitial_show_to_user', '__return_false');
+                    });
+                }
             }
 
         }

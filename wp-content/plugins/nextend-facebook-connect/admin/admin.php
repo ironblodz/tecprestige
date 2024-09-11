@@ -1022,7 +1022,7 @@ class NextendSocialLoginAdmin {
 
             $documentationURL = 'https://nextendweb.com/nextend-social-login-docs/provider-' . $provider->getId() . '/';
 
-            printf(__('<p><strong><u>Warning</u></strong>: Providers change the App setup process quite often, which means some steps below might not be accurate. If you see significant difference in the written instructions and what you see at the provider, check the guide in the %1$sonline documentation%2$s first, just in case if we are already aware of the changes hence updated the guide. Otherwise feel free to %3$sreport the changes%4$s, so we can check and update the instructions.<br><strong>Last updated:</strong> %5$s.</p>', 'nextend-facebook-connect'), '<a href="' . $documentationURL . '" target="_blank">', '</a>', '<a href="' . $supportUrlWithArgs . '" target="_blank">', '</a>', $lastUpdatedDate);
+            printf(__('<p><strong><u>Warning</u></strong>: Providers change the App setup process quite often, which means some steps below might not be accurate. If you see a significant difference in the written instructions and what you see at the provider, check the guide in the %1$sonline documentation%2$s first, just in case if we are already aware of the changes, hence updated the guide. Otherwise feel free to %3$sreport the changes%4$s, so we can check and update the instructions.<br><strong>Last updated:</strong> %5$s.</p>', 'nextend-facebook-connect'), '<a href="' . $documentationURL . '" target="_blank">', '</a>', '<a href="' . $supportUrlWithArgs . '" target="_blank">', '</a>', $lastUpdatedDate);
         }
     }
 }

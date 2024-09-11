@@ -6,6 +6,7 @@ import { __ } from '@wordpress/i18n';
 import { getSetting } from '@woocommerce/settings';
 import { decodeEntities } from '@wordpress/html-entities';
 import { useEffect, useState } from 'react';
+import { applyFilters } from '@wordpress/hooks';
 
 const settings = getSetting( 'mbway_ifthen_for_woocommerce_data', {} );
 const defaultLabel = __(
@@ -23,23 +24,23 @@ const label = decodeEntities( settings.title ) || defaultLabel;
  */
 const Content = ( props ) => {
 	/* Data to send to the server - https://github.com/woocommerce/woocommerce-blocks/blob/trunk/docs/internal-developers/block-client-apis/checkout/checkout-api.md#passing-a-value-from-the-client-through-to-server-side-payment-processing */
-	const [mbwayPhoneNumber, setMbwayPhoneNumber] = useState(''); //This works but mbwayPhoneNumber is not available inside onPaymentProcessing below
+	const [ mbwayPhoneNumber, setMbwayPhoneNumber ] = useState( settings.default_number ); // This works but mbwayPhoneNumber is not available inside onPaymentProcessing below
 	const { eventRegistration, emitResponse } = props;
 	const { onPaymentProcessing } = eventRegistration;
 	useEffect( () => {
 		const unsubscribe = onPaymentProcessing( async () => {
 			// Here we can do any processing we need, and then emit a response.
 			// For example, we might validate a custom field, or perform an AJAX request, and then emit a response indicating it is valid or not.
-			const mbway_ifthen_for_woocommerce_phone = mbwayPhoneNumber; //This will need to be the value of the input field
+			const mbway_ifthen_for_woocommerce_phone = mbwayPhoneNumber; // This will need to be the value of the input field
 			const customDataIsValid = ( mbway_ifthen_for_woocommerce_phone.length == 9 );
 
 			if ( customDataIsValid ) {
 				return {
 					type: emitResponse.responseTypes.SUCCESS,
 					meta: {
-						paymentMethodData: {
+						paymentMethodData: applyFilters( 'mbway_ifthen_blocks_checkout_payment_data', {
 							mbway_ifthen_for_woocommerce_phone,
-						},
+						} ),
 					},
 				};
 			}
@@ -68,7 +69,9 @@ const Content = ( props ) => {
 		setMbwayPhoneNumber( value );
 	};
 	/* Content */
+	// Description
 	var description = React.createElement( 'p', null, decodeEntities( settings.description || '' ) );
+	// Input field
 	var phonenumberinput = React.createElement( 'input', {
 		type:         'tel',
 		name:         settings.id+'_phone',
@@ -80,13 +83,20 @@ const Content = ( props ) => {
 		value:        mbwayPhoneNumber,
 		onChange:     HandleMBWayChange
 	} );
+	// Label inside field
 	var phonenumberlabel = React.createElement( 'label', {
-		htmlFor: settings.id+'_phone'
+		htmlFor: settings.id + '_phone'
 	}, decodeEntities( settings.phonenumbertext || '' ) );
+	// Extend before phone number
+	var beforePhoneNumber = applyFilters( 'mbway_ifthen_blocks_checkout_before_phone_number', null );
+	// Phone number: input + label
 	var phonenumber = React.createElement( 'div', {
 		className: 'wc-block-components-text-input is-active'
 	}, '', phonenumberinput, phonenumberlabel );
-	return React.createElement( 'div', null, description, phonenumber );
+	// Extend after phone number
+	var afterPhoneNumber = applyFilters( 'mbway_ifthen_blocks_checkout_after_phone_number', null );
+	// Return Content
+	return React.createElement( 'div', null, description, beforePhoneNumber, phonenumber, afterPhoneNumber );
 };
 
 /**

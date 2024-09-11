@@ -20,6 +20,7 @@ if ( ! class_exists( 'AWL_Label_Text' ) ) :
         protected $custom_var = false;
 
         protected $variables = array(
+            '/{NAME}/i' => 'name',
             '/{PRICE}/i' => 'price',
             '/{REGULAR_PRICE}/i' => 'regular_price',
             '/{SALE_PRICE}/i' => 'sale_price',
@@ -95,6 +96,15 @@ if ( ! class_exists( 'AWL_Label_Text' ) ) :
 
             return $text;
             
+        }
+
+        /*
+         * Get product name
+         */
+        private function name() {
+            global $product;
+            $name = $product->get_name();
+            return $name;
         }
 
         /*

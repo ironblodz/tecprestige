@@ -1,7 +1,7 @@
 <?php
 
 /**
- * AWS Kadence plugin support
+ * AWL Kadence plugin support
  */
 
 if (!defined('ABSPATH')) {

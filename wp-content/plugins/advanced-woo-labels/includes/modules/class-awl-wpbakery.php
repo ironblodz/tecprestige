@@ -90,14 +90,14 @@ if (!class_exists('AWL_WPBakery')) :
          * Add custom condition rule method
          */
         public function condition_rules( $rules ) {
-            $rules['aws_is_bakery'] = array( $this, 'aws_is_bakery' );
+            $rules['aws_is_bakery'] = array( $this, 'awl_is_bakery' );
             return $rules;
         }
 
         /*
          * Condition: Is WPBakery block
          */
-        public function aws_is_bakery( $condition_rule ) {
+        public function awl_is_bakery( $condition_rule ) {
             global $product;
 
             $match = false;

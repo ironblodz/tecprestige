@@ -4,7 +4,7 @@ Donate link: https://www.paypal.com/donate/?hosted_button_id=FDRDNZE6XAKE8
 Tags: woocommerce, labels, product labels, badges, woocommerce labels
 Requires at least: 4.0
 Tested up to: 6.6
-Stable tag: 1.98
+Stable tag: 2.01
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -108,6 +108,19 @@ Yes, you can use plugin [text variables](https://advanced-woo-labels.com/guide/t
 == Changelog ==
 
 [View full changelog](https://advanced-woo-labels.com/guide/free-version-changelog/?utm_source=wp-repo&utm_medium=listing&utm_campaign=awl-repo)
+
+= 2.01 ( 02.09.2024 ) =
+* Add - Support for TastyDaily theme
+* Update - Support for Product Filter by WBW plugin. Fix labels display on archive pages
+* Update - Tested with WC 9.2
+
+= 2.00 ( 12.08.2024 ) =
+* Dev - Fix functions naming
+
+= 1.99 ( 05.08.2024 ) =
+* Update - Add new text variable {NAME}
+* Update - New admin integration notice
+* Fix - Labels display when applying filters from Jet Ajax Filters plugin
 
 = 1.98 ( 15.07.2024 ) =
 * Add - Support for Product Slider for WooCommerce plugin
@@ -332,17 +345,3 @@ Yes, you can use plugin [text variables](https://advanced-woo-labels.com/guide/t
 
 = 1.52 ( 05.09.2022 ) =
 * Update - Support for Product Gallery Slider for Woocommerce ( Formerly Twist ) plugin
-
-= 1.51 ( 22.08.2022 ) =
-* Update - Tested with WC 6.8
-
-= 1.50 ( 08.08.2022 ) =
-* Update - Admin dashboard plugin notices
-
-= 1.49 ( 25.07.2022 ) =
-* Add - Unlimited Elements For Elementor plugin support
-* Update - Tested with WC 6.7
-* Update - Integration with YITH WooCommerce Dynamic Pricing and Discounts plugin
-* Update - awl_get_product_labels shortcode. Add option to set product id
-* Fix - Bug with sale discount condition rule
-* Fix - Labels preview view styles

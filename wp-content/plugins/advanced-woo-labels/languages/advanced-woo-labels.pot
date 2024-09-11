@@ -325,6 +325,9 @@ msgstr ""
 msgid "Product regular price ( without sale price )."
 msgstr ""
 
+msgid "Current product name."
+msgstr ""
+
 msgid "Current product price."
 msgstr ""
 

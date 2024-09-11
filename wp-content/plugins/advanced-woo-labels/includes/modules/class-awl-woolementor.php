@@ -1,7 +1,7 @@
 <?php
 
 /**
- * AWS Woolementor plugin support
+ * AWL Woolementor plugin support
  */
 
 if (!defined('ABSPATH')) {

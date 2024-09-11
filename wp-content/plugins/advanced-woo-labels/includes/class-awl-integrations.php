@@ -160,6 +160,10 @@ if ( ! class_exists( 'AWL_Integrations' ) ) :
                 include_once( AWL_DIR . '/includes/modules/class-awl-polylang.php' );
             }
 
+            if ( defined( 'WPF_DIR' ) || defined( 'WPF_SITE_URL' ) ) {
+                include_once( AWL_DIR . '/includes/modules/class-awl-wpf.php' );
+            }
+
             if ( 'Avada' === $this->current_theme ) {
                 include_once( AWL_DIR . '/includes/modules/class-awl-avada.php' );
             }
@@ -394,6 +398,12 @@ if ( ! class_exists( 'AWL_Integrations' ) ) :
                     $hooks['on_image']['single']['xts_before_single_product_main_gallery'] = array( 'priority' => 10 );
                     break;
 
+                case 'TastyDaily':
+                    $hooks['on_image']['archives']['woocommerce_before_shop_loop_item_title'] = array( 'priority' => 10, 'js' => array( '.c-product-grid__thumb-wrap', 'append' ) );
+                    $hooks['on_image']['single']['woocommerce_after_single_product_summary'] = array( 'priority' => 10, 'js' => array( '.c-product__col-1', 'append' ) );
+                    $hooks['before_title']['single']['woocommerce_single_product_summary'] = array( 'priority' => 1, 'js' => array( '.c-product__title', 'before' ) );
+                    break;
+
             }
 
             // Oxygen builder
@@ -590,6 +600,12 @@ if ( ! class_exists( 'AWL_Integrations' ) ) :
             if ( 'OceanWP' === $this->current_theme ) {
                 add_action( 'wp_head', function () {
                     echo '<style>.outofstock-badge { display:none; }</style>';
+                } );
+            }
+
+            if ( 'TastyDaily' === $this->current_theme ) {
+                add_filter( 'woocommerce_stock_html', function ( $html ) {
+                    return '';
                 } );
             }
 

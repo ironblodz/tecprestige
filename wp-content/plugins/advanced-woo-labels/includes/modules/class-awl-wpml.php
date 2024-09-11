@@ -1,7 +1,7 @@
 <?php
 
 /**
- * AWS WPML plugin support
+ * AWL WPML plugin support
  */
 
 if (!defined('ABSPATH')) {

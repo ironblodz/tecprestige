@@ -561,6 +561,14 @@ if ( ! class_exists( 'AWL_Admin_Helpers' ) ) :
                 );
             }
 
+            if ( class_exists( 'Alg_WC_EAN' ) ) {
+                $integrations[] = array(
+                    'id' => 'algwcean',
+                    'name' => __( 'EAN for WooCommerce.', 'advanced-woo-labels' ),
+                    'link' => 'https://advanced-woo-labels.com/guide/ean-for-woocommerce/?utm_source=wp-plugin&utm_medium=integration_notice&utm_campaign=algwcean',
+                );
+            }
+
             return $integrations;
 
         }

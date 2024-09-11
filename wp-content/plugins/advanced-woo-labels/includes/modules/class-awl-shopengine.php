@@ -1,7 +1,7 @@
 <?php
 
 /**
- * AWS Shopengine plugin support
+ * AWL Shopengine plugin support
  */
 
 if (!defined('ABSPATH')) {

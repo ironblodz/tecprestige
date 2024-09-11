@@ -108,11 +108,13 @@ class NextendSocialUserData {
             /**
              * Jetpack removes our "Register" button in our Register flow, so we need to remove their scripts from there.
              * @url https://wordpress.org/plugins/jetpack/
+             *
+             * @see NSLDEV-321
              */
             if (defined('JETPACK__PLUGIN_FILE')) {
-                if (class_exists('Jetpack_SSO') && method_exists('Jetpack_SSO', 'get_instance')) {
+                if (class_exists('Automattic\Jetpack\Connection\SSO') && method_exists('Automattic\Jetpack\Connection\SSO', 'get_instance')) {
                     remove_action('login_enqueue_scripts', array(
-                        Jetpack_SSO::get_instance(),
+                        Automattic\Jetpack\Connection\SSO::get_instance(),
                         'login_enqueue_scripts'
                     ));
                 }

@@ -1,7 +1,7 @@
 <?php
 
 /**
- * AWS Elementor plugin support
+ * AWL Elementor plugin support
  */
 
 if (!defined('ABSPATH')) {
@@ -248,14 +248,14 @@ if (!class_exists('AWL_Elementor')) :
          * Add custom condition rule method
          */
         public function condition_rules( $rules ) {
-            $rules['aws_is_elementor'] = array( $this, 'aws_is_elementor' );
+            $rules['aws_is_elementor'] = array( $this, 'awl_is_elementor' );
             return $rules;
         }
 
         /*
          * Condition: Is Elementor block
          */
-        public function aws_is_elementor( $condition_rule ) {
+        public function awl_is_elementor( $condition_rule ) {
             global $product;
 
             $match = false;

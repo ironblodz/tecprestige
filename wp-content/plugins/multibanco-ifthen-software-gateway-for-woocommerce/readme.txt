@@ -4,7 +4,7 @@ Tags: multibanco, mbway, payshop, card, cofidis
 Requires at least: 5.6
 Tested up to: 6.6
 Requires PHP: 7.0
-Stable tag: 9.4.3
+Stable tag: 9.4.4
 License: GPLv3
 License URI: https://www.gnu.org/licenses/gpl-3.0.html
 
@@ -55,6 +55,7 @@ Get the [PRO add-on](https://ptwooplugins.com/product/multibanco-mbway-credit-ca
 * Recover unpaid MB WAY orders by converting them to Multibanco and notify the customer via email;
 * Automatic cancellation of orders when Multibanco, Payshop or MB WAY references expire;
 * Countdown timer on the “thank you” page for MB WAY payments;
+* Save the MB WAY mobile number to the user profile for future purchases;
 * Trigger Multibanco and MB WAY payments when creating orders via the REST API;
 * Store and show IfthenPay fee on each order;
 * Codifis payment information banner, with the price to pay month, on the product page (simple product for now);
@@ -231,6 +232,10 @@ You can report any security bugs found in the source code of this plugin through
 Sure. Go to [GlotPress](https://translate.wordpress.org/projects/wp-plugins/multibanco-ifthen-software-gateway-for-woocommerce) and help us out.
 
 == Changelog ==
+
+= 9.4.4 - 2024-07-16 =
+* [TWEAK] Implement hook on the MB WAY payment gateway needed by [PRO add-on 4.1](https://ptwooplugins.com/product/multibanco-mbway-credit-card-payshop-ifthenpay-woocommerce-pro-add-on/)
+* [DEV] Tested with WordPress 6.7-alpha-58848 and WooCommerce 9.2.0-beta.1
 
 = 9.4.3 - 2024-07-16 =
 * [TWEAK] Implement hook on the MB WAY settings screen needed by the [PRO add-on 4.0](https://ptwooplugins.com/product/multibanco-mbway-credit-card-payshop-ifthenpay-woocommerce-pro-add-on/)

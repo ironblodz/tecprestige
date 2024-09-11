@@ -1,7 +1,7 @@
 <?php
 
 /**
- * AWS Divi plugin/theme support
+ * AWL Divi plugin/theme support
  */
 
 if (!defined('ABSPATH')) {

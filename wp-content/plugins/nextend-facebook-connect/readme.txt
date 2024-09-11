@@ -3,8 +3,8 @@ Contributors: nextendweb
 Tags: social login, facebook, google, twitter, x, linkedin, register, login, social, nextend facebook connect, social sign in
 Donate link: https://www.facebook.com/nextendweb
 Requires at least: 4.9
-Tested up to: 6.4.3
-Stable tag: 3.1.13
+Tested up to: 6.6.1
+Stable tag: 3.1.14
 Requires PHP: 7.0
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
@@ -124,6 +124,25 @@ Using the Pro Addon you can set where the login buttons should appear on the Reg
 4. The Settings page of the Facebook provider.
 
 == Changelog ==
+
+= 3.1.14 =
+* Fix: Updated compatibility with Jetpack (Jetpack_SSO class has been changed to Automattic\Jetpack\Connection\SSO).
+* Fix: Fixed an issue where the old avatar would still show up due to browser cache even after the avatar has been changed and synced.
+* Fix: Fixed an issue where we had forcefully overriden default avatars as well over the "pre_get_avatar_data" filter. Now the "force_default" argument is respected.
+* Fix: Fixed an issue where the target window setting couldn't work properly for buttons that were loaded dynamically after page load.
+* Fix: Fixed an issue where the "Fallback username prefix on register" and "Ask Username on registration - When username is empty or invalid" options wouldn't work if the "Username prefix on register" was set.
+* Fix: Fixed an issue where it was possible to have too long of a username, thus not being able to register with the social login.
+* Fix: Fixed an issue where consecutive social icons of the same provider could not appear on the same page, when at least one instance was hidden by a CSS visibility property.
+* Improvement: Developers from now on can use the "nsl_register_roles" filter to override the default roles of the user registered by social login.
+* Improvement: Solid Security 2FA compatibility - Their 2FA solution will only show the 2FA modal if our "Support login restrictions" option is enabled.
+* Improvement: [Facebook](https://nextendweb.com/nextend-social-login-docs/provider-facebook/#configuration/) Getting Started updated.
+
+* PRO: Fix: Fixed an issue where it was possible to login with the social login through BuddyPress for the first time even if the account was still awaiting activation.
+* PRO: Improvement: New [TikTok Sync data](https://nextendweb.com/nextend-social-login-docs/provider-tiktok/#sync_data) field: Username ( requires user.info.profile scope ).
+* PRO: Improvement: New [LinkedIn Sync data](https://nextendweb.com/nextend-social-login-docs/provider-linkedin/#sync_data) fields: Headline, Vanity name ( requires Advertising API ).
+* PRO: Improvement: [PayPal Getting Started](https://nextendweb.com/nextend-social-login-docs/provider-paypal/#configuration) Update.
+* PRO: New provider: [Patreon](https://nextendweb.com/nextend-social-login-docs/provider-patreon/)
+
 
 = 3.1.13 =
 * Security fix: Error message sanitization.

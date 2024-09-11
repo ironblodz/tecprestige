@@ -1,7 +1,7 @@
 <?php
 
 /**
- * AWS WooLentor ( ShopLentor ) plugin support
+ * AWL WooLentor ( ShopLentor ) plugin support
  */
 
 if (!defined('ABSPATH')) {

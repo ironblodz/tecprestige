@@ -145,14 +145,14 @@ if (!class_exists('AWL_BB')) :
          * Add custom condition rule method
          */
         public function condition_rules( $rules ) {
-            $rules['aws_is_beaver'] = array( $this, 'aws_is_beaver' );
+            $rules['aws_is_beaver'] = array( $this, 'awl_is_beaver' );
             return $rules;
         }
 
         /*
          * Condition: Is Beaver block
          */
-        public function aws_is_beaver( $condition_rule ) {
+        public function awl_is_beaver( $condition_rule ) {
             global $product;
 
             $match = false;

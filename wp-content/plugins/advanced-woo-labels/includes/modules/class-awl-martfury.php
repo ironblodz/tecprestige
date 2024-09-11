@@ -1,7 +1,7 @@
 <?php
 
 /**
- * AWS martfury theme support
+ * AWL martfury theme support
  */
 
 if (!defined('ABSPATH')) {

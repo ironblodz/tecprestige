@@ -258,57 +258,59 @@ window._nslDOMReady(function () {
         lastPopup = false;
 
 
-    const buttonLinks = document.querySelectorAll(' a[data-plugin="nsl"][data-action="connect"], a[data-plugin="nsl"][data-action="link"]');
-    buttonLinks.forEach(function (buttonLink) {
-        buttonLink.addEventListener('click', function (e) {
-            if (lastPopup && !lastPopup.closed) {
-                e.preventDefault();
-                lastPopup.focus();
-            } else {
-
-                let href = this.href,
-                    success = false;
-                if (href.indexOf('?') !== -1) {
-                    href += '&';
-                } else {
-                    href += '?';
-                }
-
-                const redirectTo = this.dataset.redirect;
-                if (redirectTo === 'current') {
-                    href += 'redirect=' + encodeURIComponent(window.location.href) + '&';
-                } else if (redirectTo && redirectTo !== '') {
-                    href += 'redirect=' + encodeURIComponent(redirectTo) + '&';
-                }
-
-                if (targetWindow !== 'prefer-same-window' && checkWebView()) {
-                    targetWindow = 'prefer-same-window';
-                }
-
-                if (targetWindow === 'prefer-popup') {
-                    lastPopup = NSLPopup(href + 'display=popup', 'nsl-social-connect', this.dataset.popupwidth, this.dataset.popupheight);
-                    if (lastPopup) {
-                        success = true;
-                        e.preventDefault();
-                    }
-                } else if (targetWindow === 'prefer-new-tab') {
-                    const newTab = window.open(href + 'display=popup', '_blank');
-                    if (newTab) {
-                        if (window.focus) {
-                            newTab.focus();
-                        }
-                        success = true;
-                        window._nslHasOpenedPopup = true;
-                        e.preventDefault();
-                    }
-                }
-
-                if (!success) {
-                    window.location = href;
+    document.addEventListener('click', function (e) {
+        if (e.target) {
+            const buttonLinkElement = e.target.closest('a[data-plugin="nsl"][data-action="connect"]') || e.target.closest('a[data-plugin="nsl"][data-action="link"]');
+            if (buttonLinkElement) {
+                if (lastPopup && !lastPopup.closed) {
                     e.preventDefault();
+                    lastPopup.focus();
+                } else {
+
+                    let href = buttonLinkElement.href,
+                        success = false;
+                    if (href.indexOf('?') !== -1) {
+                        href += '&';
+                    } else {
+                        href += '?';
+                    }
+
+                    const redirectTo = buttonLinkElement.dataset.redirect;
+                    if (redirectTo === 'current') {
+                        href += 'redirect=' + encodeURIComponent(window.location.href) + '&';
+                    } else if (redirectTo && redirectTo !== '') {
+                        href += 'redirect=' + encodeURIComponent(redirectTo) + '&';
+                    }
+
+                    if (targetWindow !== 'prefer-same-window' && checkWebView()) {
+                        targetWindow = 'prefer-same-window';
+                    }
+
+                    if (targetWindow === 'prefer-popup') {
+                        lastPopup = NSLPopup(href + 'display=popup', 'nsl-social-connect', buttonLinkElement.dataset.popupwidth, buttonLinkElement.dataset.popupheight);
+                        if (lastPopup) {
+                            success = true;
+                            e.preventDefault();
+                        }
+                    } else if (targetWindow === 'prefer-new-tab') {
+                        const newTab = window.open(href + 'display=popup', '_blank');
+                        if (newTab) {
+                            if (window.focus) {
+                                newTab.focus();
+                            }
+                            success = true;
+                            window._nslHasOpenedPopup = true;
+                            e.preventDefault();
+                        }
+                    }
+
+                    if (!success) {
+                        window.location = href;
+                        e.preventDefault();
+                    }
                 }
             }
-        });
+        }
     });
 
     let buttonCountChanged = false;

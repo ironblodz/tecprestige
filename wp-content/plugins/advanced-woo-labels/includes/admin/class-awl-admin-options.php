@@ -850,6 +850,7 @@ if ( ! class_exists( 'AWL_Admin_Options' ) ) :
         static public function include_text_vars() {
 
             $variables = array(
+                '{NAME}' => __( "Current product name.", "advanced-woo-labels" ),
                 '{PRICE}' => __( "Current product price.", "advanced-woo-labels" ),
                 '{REGULAR_PRICE}' => __( "Product regular price ( without sale price ).", "advanced-woo-labels" ),
                 '{SAVE_PERCENT}' => __( "Product discount percentage.", "advanced-woo-labels" ),

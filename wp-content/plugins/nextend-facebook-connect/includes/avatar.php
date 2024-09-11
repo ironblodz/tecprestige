@@ -281,7 +281,7 @@ class NextendSocialLoginAvatar {
 
                         if (wp_mkdir_p($nslUploadDir)) {
 
-                            $filename = wp_hash($user_id) . '.' . $mime_to_ext[$mime];
+                            $filename = wp_hash(uniqid($user_id . '-')) . '.' . $mime_to_ext[$mime];
                             $filename = wp_unique_filename($nslUploadDir, $filename);
 
                             $newAvatarPath = trailingslashit($nslUploadDir) . $filename;
@@ -397,7 +397,7 @@ class NextendSocialLoginAvatar {
 
         $id = NextendSocialLogin::getUserIDByIdOrEmail($id_or_email);
 
-        if ($id == 0) {
+        if ($id == 0 || (isset($args['force_default']) && boolval($args['force_default']) === true)) {
             return $args;
         }
 

@@ -68,9 +68,19 @@ if (!class_exists('AWL_Jet')) :
         public function awl_labels_hooks( $hooks ) {
 
             $hooks['on_image']['archive']['jet-woo-builder/templates/products/after-item-thumbnail'] = array( 'priority' => 10 );
-            $hooks['before_title']['archive']['jet-woo-builder/templates/products/before-item-thumbnail'] = array( 'priority' => 10, 'js' => array( '.jet-woo-product-title', 'prepend' ) );
             $hooks['on_image']['archive']['jet-woo-builder/templates/products-list/after-item-thumbnail'] = array( 'priority' => 10 );
-            $hooks['before_title']['archive']['jet-woo-builder/templates/products-list/before-item-thumbnail'] = array( 'priority' => 10, 'js' => array( '.jet-woo-product-title', 'prepend' ) );
+
+            if ( is_ajax() ) {
+
+                $hooks['before_title']['archive']['jet-woo-builder/templates/products/after-item-thumbnail'] = array( 'priority' => 10 );
+                $hooks['before_title']['archive']['jet-woo-builder/templates/products-list/after-item-thumbnail'] = array( 'priority' => 10 );
+
+            } else {
+
+                $hooks['before_title']['archive']['jet-woo-builder/templates/products/before-item-thumbnail'] = array( 'priority' => 10, 'js' => array( '.jet-woo-product-title', 'prepend' ) );
+                $hooks['before_title']['archive']['jet-woo-builder/templates/products-list/before-item-thumbnail'] = array( 'priority' => 10, 'js' => array( '.jet-woo-product-title', 'prepend' ) );
+
+            }
 
             return $hooks;
 

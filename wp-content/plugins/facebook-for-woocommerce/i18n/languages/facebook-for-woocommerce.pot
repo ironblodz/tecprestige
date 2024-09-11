@@ -2,14 +2,14 @@
 # This file is distributed under the same license as the Facebook for WooCommerce plugin.
 msgid ""
 msgstr ""
-"Project-Id-Version: Facebook for WooCommerce 3.2.5\n"
+"Project-Id-Version: Facebook for WooCommerce 3.2.8\n"
 "Report-Msgid-Bugs-To: https://wordpress.org/support/plugin/facebook-for-woocommerce\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"POT-Creation-Date: 2024-07-10T06:15:11+00:00\n"
+"POT-Creation-Date: 2024-09-03T15:54:32+00:00\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "X-Generator: WP-CLI 2.10.0\n"
 "X-Domain: facebook-for-woocommerce\n"
@@ -38,7 +38,7 @@ msgstr ""
 #: facebook-for-woocommerce.php
 #: includes/Admin.php:1159
 #: includes/Admin/Settings.php:111
-#: includes/Admin/Settings.php:347
+#: includes/Admin/Settings.php:349
 msgid "Facebook"
 msgstr ""
 
@@ -426,7 +426,7 @@ msgstr ""
 msgid "WC Product Categories"
 msgstr ""
 
-#: includes/Admin/Product_Sets.php:168
+#: includes/Admin/Product_Sets.php:173
 msgid "Map Facebook Product Set to WC Product Categories"
 msgstr ""
 
@@ -458,13 +458,13 @@ msgstr ""
 msgid "This product is not yet synced to Facebook."
 msgstr ""
 
-#: includes/Admin/Settings.php:183
+#: includes/Admin/Settings.php:185
 #: includes/Admin/Settings_Screens/Connection.php:35
 #: includes/Admin/Settings_Screens/Connection.php:36
 msgid "Connection"
 msgstr ""
 
-#: includes/Admin/Settings.php:186
+#: includes/Admin/Settings.php:188
 #: includes/Admin/Settings_Screens/Product_Sync.php:42
 #: includes/Admin/Settings_Screens/Product_Sync.php:43
 #: includes/Admin/Settings_Screens/Product_Sync.php:171
@@ -472,22 +472,22 @@ msgstr ""
 msgid "Product sync"
 msgstr ""
 
-#: includes/Admin/Settings.php:189
+#: includes/Admin/Settings.php:191
 #: includes/Admin/Settings_Screens/Advertise.php:35
 #: includes/Admin/Settings_Screens/Advertise.php:36
 msgid "Advertise"
 msgstr ""
 
-#: includes/Admin/Settings.php:254
+#: includes/Admin/Settings.php:256
 msgid "You do not have permission to save these settings."
 msgstr ""
 
-#: includes/Admin/Settings.php:259
+#: includes/Admin/Settings.php:261
 msgid "Your settings have been saved."
 msgstr ""
 
 #. translators: Placeholders: %s - user-friendly error message
-#: includes/Admin/Settings.php:264
+#: includes/Admin/Settings.php:266
 msgid "Your settings could not be saved. %s"
 msgstr ""
 
@@ -906,24 +906,24 @@ msgstr ""
 msgid "Could not connect. Please ask your hosting company to ensure your server has loopback connections enabled."
 msgstr ""
 
-#: includes/Handlers/Connection.php:284
+#: includes/Handlers/Connection.php:332
 msgid "Connection successful!"
 msgstr ""
 
-#: includes/Handlers/Connection.php:333
+#: includes/Handlers/Connection.php:381
 msgid "You do not have permission to uninstall Facebook Business Extension."
 msgstr ""
 
-#: includes/Handlers/Connection.php:340
+#: includes/Handlers/Connection.php:388
 msgid "Disconnection successful."
 msgstr ""
 
 #. translators: Placeholders: %s - Facebook page ID
-#: includes/Handlers/Connection.php:411
+#: includes/Handlers/Connection.php:459
 msgid "Page %s not authorized."
 msgstr ""
 
-#: includes/Handlers/Connection.php:1291
+#: includes/Handlers/Connection.php:1339
 msgid "You do not have permission to finish App Store login."
 msgstr ""
 
@@ -969,23 +969,23 @@ msgstr ""
 msgid "Product excluded by wc_facebook_should_sync_product filter."
 msgstr ""
 
-#: includes/ProductSync/ProductValidator.php:372
+#: includes/ProductSync/ProductValidator.php:370
 msgid "If product is not simple, variable or variation it must have a price."
 msgstr ""
 
-#: includes/ProductSync/ProductValidator.php:398
+#: includes/ProductSync/ProductValidator.php:396
 msgid "Product description is all capital letters. Please change the description to sentence case in order to allow synchronization of your product."
 msgstr ""
 
-#: includes/ProductSync/ProductValidator.php:401
+#: includes/ProductSync/ProductValidator.php:399
 msgid "Product description is too long. Maximum allowed length is 5000 characters."
 msgstr ""
 
-#: includes/ProductSync/ProductValidator.php:419
+#: includes/ProductSync/ProductValidator.php:417
 msgid "Product title is too long. Maximum allowed length is 150 characters."
 msgstr ""
 
-#: includes/ProductSync/ProductValidator.php:443
+#: includes/ProductSync/ProductValidator.php:441
 msgid "Too many attributes selected for product. Use 4 or less."
 msgstr ""
 
@@ -1041,14 +1041,14 @@ msgstr ""
 msgid "Background sync jobs have been deleted."
 msgstr ""
 
-#: includes/Utilities/DebugTools.php:95
+#: includes/Utilities/DebugTools.php:94
 msgid "Cleared all Facebook settings!"
 msgstr ""
 
-#: includes/Utilities/DebugTools.php:108
+#: includes/Utilities/DebugTools.php:106
 msgid "Reset products Facebook settings job started!"
 msgstr ""
 
-#: includes/Utilities/DebugTools.php:121
+#: includes/Utilities/DebugTools.php:118
 msgid "Delete products from Facebook catalog job started!"
 msgstr ""

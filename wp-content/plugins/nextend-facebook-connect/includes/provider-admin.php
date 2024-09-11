@@ -115,7 +115,19 @@ class NextendSocialProviderAdmin {
                     break;
                 case 'user_prefix':
                 case 'user_fallback':
-                    $newData[$key] = preg_replace("/[^A-Za-z0-9\-_ ]/", '', $value);
+                    $value = preg_replace("/[^A-Za-z0-9\-_ ]/", '', $value);
+
+                    /**
+                     * The length of WordPress usernames are limited to a maximum of 60 characters.
+                     * We should allow a maximum of 28 characters for both prefix and fallback, as the fallback generates 32 character long md5 hashes.
+                     *
+                     * @see NSLDEV-623
+                     */
+
+                    if (mb_strlen($value) > 28) {
+                        $value = substr($value, 0, 28);
+                    }
+                    $newData[$key] = $value;
                     break;
                 case 'settings_saved':
                     $newData[$key] = intval($value) ? 1 : 0;

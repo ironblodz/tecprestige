@@ -1,7 +1,7 @@
 <?php
 
 /**
- * AWS Bricks Builder support
+ * AWL Bricks Builder support
  */
 
 if (!defined('ABSPATH')) {

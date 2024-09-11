@@ -8,30 +8,30 @@ if (!defined('ABSPATH')) {
     exit; // Exit if accessed directly.
 }
 
-if (!class_exists('AWS_Polylang')) :
+if (!class_exists('AWL_Polylang')) :
 
     /**
      * Class for main plugin functions
      */
-    class AWS_Polylang {
+    class AWL_Polylang {
 
         /**
-         * @var AWS_Polylang Custom data
+         * @var AWL_Polylang Custom data
          */
         public $data = array();
 
         /**
-         * @var AWS_Polylang The single instance of the class
+         * @var AWL_Polylang The single instance of the class
          */
         protected static $_instance = null;
 
         /**
-         * Main AWS_Polylang Instance
+         * Main AWL_Polylang Instance
          *
-         * Ensures only one instance of AWS_Polylang is loaded or can be loaded.
+         * Ensures only one instance of AWL_Polylang is loaded or can be loaded.
          *
          * @static
-         * @return AWS_Polylang - Main instance
+         * @return AWL_Polylang - Main instance
          */
         public static function instance()
         {
@@ -64,4 +64,4 @@ if (!class_exists('AWS_Polylang')) :
 
 endif;
 
-AWS_Polylang::instance();
+AWL_Polylang::instance();

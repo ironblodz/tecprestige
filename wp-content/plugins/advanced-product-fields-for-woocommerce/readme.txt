@@ -1,13 +1,12 @@
 === Advanced Product Fields (Product Addons) for WooCommerce ===
 Contributors: studiowombat,maartenbelmans
 Tags: woocommerce product addons, woocommerce, woocommerce product options, product addons, product fields
-Tags: woocommerce product addons, woocommerce product options, woocommerce custom fields, woocommerce product fields, woo product options
 Requires at least: 4.5
-Tested up to: 6.5.4
+Tested up to: 6.6.1
 Requires PHP: 5.6
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
-Stable tag: 1.6.8
+Stable tag: 1.6.10
 
 Add options (addons) to your WooCommerce products so your customers can personalize their products. Product forms for everyone!
 
@@ -165,6 +164,13 @@ From your WordPress dashboard
 
 == Changelog ==
 
+= 1.6.10 =
+ * Fix: products with a large amount of variations and no fields present wrongly called our "calculate" method.
+
+= 1.6.9 =
+ * Fix: fixed a pricing issue when no quantity input can be found on the page.
+ * Other: test compatibility with the latest Woo & WP versions.
+ 
 = 1.6.8 =
  * Improvement: removed outdated code.
  * Other: test compatibility with Woo & WP.

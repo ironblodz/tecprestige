@@ -19,6 +19,11 @@ class NextendSocialUser {
     protected $shouldAutoLogin = false;
 
     /**
+     * @var bool
+     */
+    protected $isEmailVerified;
+
+    /**
      * NextendSocialUser constructor.
      *
      * @param NextendSocialProvider $provider
@@ -27,12 +32,14 @@ class NextendSocialUser {
     public function __construct($provider, $data) {
         $this->provider = $provider;
         $this->data     = $data;
+
+        $this->isEmailVerified = $this->provider->getProviderEmailVerificationStatus();
     }
 
     /**
      * @param $key
      * $key is like id, email, name, first_name, last_name
-     * Returns a single userdata of the current provider or empty sting if $key is invalid.
+     * Returns a single userdata of the current provider or empty string if $key is invalid.
      *
      * @return string
      */
@@ -42,8 +49,9 @@ class NextendSocialUser {
 
     /**
      * Connect with a Provider
-     * If user is not logged in
-     * - and has no linked social data (in wp_social_users table), prepare them for register.
+     * If the user is not logged in
+     * - and has no linked social data (in wp_social_users table), prepare them for register. - do not register if the
+     * social email is not verified
      * - but if has linked social data, log them in.
      * If the user is logged in, retrieve the user data,
      * - if the user has no linked social data with the selected provider and there is no other user who linked that id
@@ -60,7 +68,6 @@ class NextendSocialUser {
         $this->addProfileSyncActions();
 
         if (!is_user_logged_in()) {
-
             if ($user_id == null) {
                 $this->prepareRegister();
             } else {
@@ -72,15 +79,12 @@ class NextendSocialUser {
                 // Let's connect the account to the current user!
 
                 if ($this->provider->linkUserToProviderIdentifier($current_user->ID, $this->getAuthUserData('id'))) {
-
                     Notices::addSuccess(sprintf(__('Your %1$s account is successfully linked with your account. Now you can sign in with %2$s easily.', 'nextend-facebook-connect'), $this->provider->getLabel(), $this->provider->getLabel()));
                 } else {
-
                     Notices::addError(sprintf(__('You have already linked a(n) %s account. Please unlink the current and then you can link another %s account.', 'nextend-facebook-connect'), $this->provider->getLabel(), $this->provider->getLabel()));
                 }
 
             } else if ($current_user->ID != $user_id) {
-
                 Notices::addError(sprintf(__('This %s account is already linked to another user.', 'nextend-facebook-connect'), $this->provider->getLabel()));
             }
         }
@@ -88,10 +92,12 @@ class NextendSocialUser {
 
     /**
      * Prepares the registration and registers the user.
-     * If the email is not registered yet, checks if register is enabled call register() function.
-     * If the email is already registered, checks if autolink is enabled, if it is, log the user in.
-     * Autolink enabled: links the current provider account with the existing social account and attempts to login.
-     * Autolink disabled: Add error with already registered email message.
+     * If the email is not registered yet, checks if register is enabled, call register() function. - Do not register
+     * if the email is not verified.
+     * If the email is already registered, checks if autolink is enabled, if it is, log
+     * the user in.
+     * Autolink enabled: if the email is verified, links the current provider account with the existing social account
+     * and attempts to log in. Autolink disabled: Add error with already registered email message.
      */
     protected function prepareRegister() {
 
@@ -124,13 +130,21 @@ class NextendSocialUser {
         $user_id = apply_filters('nsl_match_social_account_to_user_id', $user_id, $this, $this->provider);
 
         if ($user_id === false) { // Real register
-            if (apply_filters('nsl_is_register_allowed', true, $this->provider)) {
+            if (apply_filters('nsl_is_register_allowed', true, $this->provider) && $this->isEmailVerified) {
                 $this->register($providerUserID, $email);
             } else {
                 //unset the persistent data, so if an error happened, the user can re-authenticate with providers (Google) that offer account selector screen
                 $this->provider->deleteTokenPersistentData();
 
-                $registerDisabledMessage     = apply_filters('nsl_disabled_register_error_message', '');
+                $registerDisabledMessage = apply_filters('nsl_disabled_register_error_message', '');
+
+                /**
+                 * If the email address returned by the provider is not verified, show a custom error message
+                 */
+                if (!$this->isEmailVerified) {
+                    $registerDisabledMessage = apply_filters('nsl_disabled_register_error_message_email_not_verified', sprintf(__('It looks like your %1$s email address is not verified. Please verify the email address of your %1$s account first!', 'nextend-facebook-connect'), $this->provider->getLabel()), $this->provider);
+                }
+
                 $registerDisabledRedirectURL = apply_filters('nsl_disabled_register_redirect_url', '');
 
                 $defaultDisabledMessage = __('User registration is currently not allowed.');
@@ -205,13 +219,20 @@ class NextendSocialUser {
 
         $username = preg_replace('/\s+/', '', $username);
 
-        $sanitized_user_login = sanitize_user($this->provider->settings->get('user_prefix') . $username, true);
-
-        if (empty($sanitized_user_login)) {
+        /**
+         * We have to check if the username itself is valid, otherwise we will never use the fallback
+         * as the prefix string will result in a valid prefixed username even if the username was empty.
+         * Also "Ask Username on registration - When username is empty or invalid" will not be trigger either, since the username won't be invalid.
+         *
+         * @see NSLDEV-622
+         */
+        if (empty(sanitize_user($username, true))) {
             return false;
         }
 
-        if (!validate_username($sanitized_user_login)) {
+        $sanitized_user_login = sanitize_user($this->provider->settings->get('user_prefix') . $username, true);
+
+        if (empty($sanitized_user_login) || mb_strlen($sanitized_user_login) > 60 || !validate_username($sanitized_user_login)) {
             return false;
         }
 
@@ -707,19 +728,32 @@ class NextendSocialUser {
      * @return bool
      */
     public function autoLink($user_id, $providerUserID) {
+        $emailIsNotVerifiedMessage = apply_filters('nsl_auto_link_error_message_email_not_verified', sprintf(__('It looks like your %1$s email address is not verified. <br>Please verify the email address of your %1$s account first, or login to your existing account using your password and link your %1$s account to your existing account manually!', 'nextend-facebook-connect'), $this->provider->getLabel()));
+        $linkFailedMessage         = apply_filters('nsl_already_linked_error_message', sprintf(__('We found a user with your %1$s email address. Unfortunately, it belongs to a different account, so we are unable to log you in. Please use the linked account or log in with your password!', 'nextend-facebook-connect'), $this->provider->getLabel()));
 
-        $isAutoLinkAllowed = true;
-        $isAutoLinkAllowed = apply_filters('nsl_' . $this->provider->getId() . '_auto_link_allowed', $isAutoLinkAllowed, $this->provider, $user_id);
-        if ($isAutoLinkAllowed) {
-            $isLinkSuccessful = $this->provider->linkUserToProviderIdentifier($user_id, $providerUserID);
-            if ($isLinkSuccessful) {
-                return $isLinkSuccessful;
-            } else {
-                $this->provider->deleteLoginPersistentData();
-                $alreadyLinkedMessage = apply_filters('nsl_already_linked_error_message', sprintf(__('We found a user with your %1$s email address. Unfortunately it belongs to a different %1$s account, so we are unable to log you in. Please use the linked %1$s account or log in with your password!', 'nextend-facebook-connect'), $this->provider->getLabel()));
-                Notices::addError($alreadyLinkedMessage);
-            }
+        $isAutoLinkAllowed = apply_filters('nsl_' . $this->provider->getId() . '_auto_link_allowed', true, $this->provider, $user_id);
+
+        if (!$isAutoLinkAllowed) {
+            $this->provider->deleteLoginPersistentData();
+
+            return false;
         }
+
+        if (!$this->isEmailVerified) {
+            $this->provider->deleteLoginPersistentData();
+            Notices::addError($emailIsNotVerifiedMessage);
+
+            return false;
+        }
+
+        $isLinkSuccessful = $this->provider->linkUserToProviderIdentifier($user_id, $providerUserID);
+
+        if ($isLinkSuccessful) {
+            return $isLinkSuccessful;
+        }
+
+        $this->provider->deleteLoginPersistentData();
+        Notices::addError($linkFailedMessage);
 
         return false;
     }

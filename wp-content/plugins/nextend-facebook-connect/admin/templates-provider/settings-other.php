@@ -15,14 +15,14 @@ $settings = $provider->settings;
         <th scope="row"><label
                     for="user_prefix"><?php _e('Username prefix on register', 'nextend-facebook-connect'); ?></label>
         </th>
-        <td><input name="user_prefix" type="text" id="user_prefix"
+        <td><input name="user_prefix" type="text" id="user_prefix" maxlength="28"
                    value="<?php echo esc_attr($settings->get('user_prefix')); ?>" class="regular-text"></td>
     </tr>
     <tr>
         <th scope="row"><label
                     for="user_fallback"><?php _e('Fallback username prefix on register', 'nextend-facebook-connect'); ?></label>
         </th>
-        <td><input name="user_fallback" type="text" id="user_fallback"
+        <td><input name="user_fallback" type="text" id="user_fallback" maxlength="28"
                    value="<?php echo esc_attr($settings->get('user_fallback')); ?>" class="regular-text">
             <p class="description" id="tagline-user_fallback"><?php _e('Used when username is invalid or not stored', 'nextend-facebook-connect'); ?></p>
         </td>

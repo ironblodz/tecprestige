@@ -126,4 +126,17 @@ abstract class NextendSocialProviderDummy {
         return false;
     }
 
+    /**
+     * Some providers allow the login to the social media account even before the email address has been verified.
+     * If the provider returns an email address, we should only attempt to use that for registration and auto-linking if
+     * the email address is verified on the provider's end!
+     *
+     * By default, we consider all social media account email addresses verified.
+     *
+     * @return bool
+     */
+    public function getProviderEmailVerificationStatus() {
+        return true;
+    }
+
 }

@@ -2,8 +2,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: nextend-facebook-connect\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2024-02-20 21:02+0100\n"
-"PO-Revision-Date: 2024-02-20 21:02+0100\n"
+"POT-Creation-Date: 2024-07-30 16:06+0200\n"
+"PO-Revision-Date: 2024-07-30 16:06+0200\n"
 "Last-Translator: \n"
 "Language-Team: עִבְרִית\n"
 "Language: he_IL\n"
@@ -11,7 +11,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Generator: Poedit 3.4.2\n"
+"X-Generator: Poedit 3.3.1\n"
 "X-Poedit-Basepath: ../..\n"
 "X-Poedit-SourceCharset: UTF-8\n"
 "X-Poedit-KeywordsList: __;_e;__ngettext:1,2;_n:1,2;__ngettext_noop:1,2;"
@@ -218,9 +218,9 @@ msgstr ""
 msgid ""
 "<p><strong><u>Warning</u></strong>: Providers change the App setup process "
 "quite often, which means some steps below might not be accurate. If you see "
-"significant difference in the written instructions and what you see at the "
+"a significant difference in the written instructions and what you see at the "
 "provider, check the guide in the %1$sonline documentation%2$s first, just in "
-"case if we are already aware of the changes hence updated the guide. "
+"case if we are already aware of the changes, hence updated the guide. "
 "Otherwise feel free to %3$sreport the changes%4$s, so we can check and "
 "update the instructions.<br><strong>Last updated:</strong> %5$s.</p>"
 msgstr ""
@@ -1284,14 +1284,32 @@ msgstr ""
 msgid "This %s account is already linked to another user."
 msgstr "חשבון זה %s מקושר כבר למשתמש אחר."
 
+#, php-format
+msgid ""
+"It looks like your %1$s email address is not verified. Please verify the "
+"email address of your %1$s account first!"
+msgstr ""
+
 msgid "User registration is currently not allowed."
 msgstr "בשלב זה האתר אינו פתוח להרשמת משתמשים חדשים."
 
 #, php-format
 msgid ""
-"We found a user with your %1$s email address. Unfortunately it belongs to a "
-"different %1$s account, so we are unable to log you in. Please use the "
-"linked %1$s account or log in with your password!"
+"It looks like your %1$s email address is not verified. <br>Please verify the "
+"email address of your %1$s account first, or login to your existing account "
+"using your password and link your %1$s account to your existing account "
+"manually!"
+msgstr ""
+
+#, fuzzy, php-format
+#| msgid ""
+#| "We found a user with your %1$s email address. Unfortunately it belongs to "
+#| "a different %1$s account, so we are unable to log you in. Please use the "
+#| "linked %1$s account or log in with your password!"
+msgid ""
+"We found a user with your %1$s email address. Unfortunately, it belongs to a "
+"different account, so we are unable to log you in. Please use the linked "
+"account or log in with your password!"
 msgstr ""
 "מצאנו משתמש עם כתובת האימייל %1$s שלך. לצערנו הוא שייך לחשבון %1$s אחר, לכן "
 "אין לנו אפשרות להתחבר אליך. יש להשתמש בחשבון %1$s המקושר או להתחבר באמצעות "
@@ -1438,10 +1456,14 @@ msgstr "התחבר עם אישורי ה %s שלך אם אינך מחובר."
 #| msgid ""
 #| "Click on the %1$s button, then fill the %2$s, %3$s, %4$s and %5$s forms."
 msgid ""
-"Click on the %1$s button and then choose the %2$s option as use case and "
-"press %3$s!"
+"Click on the %1$s button and then choose the %2$s option and press %3$s!"
 msgstr ""
 "יש ללחוץ על הכפתור %1$s ולאחר מכן למלא את הטפסים %2$s, %3$s, %4$s ו - %5$s."
+
+#, fuzzy, php-format
+#| msgid "Select your %s App."
+msgid "Select %1$s."
+msgstr "בחר את אפליקציית ה %s שלך."
 
 #, fuzzy, php-format
 #| msgid ""
@@ -1457,7 +1479,7 @@ msgstr ""
 #, php-format
 msgid ""
 "%1$sOptional%2$s: choose a %3$s if you would like to. If you didn't choose a "
-"%3$s at this point, you will need to select it in step 19, before you start "
+"%3$s at this point, you will need to select it in step 24, before you start "
 "the %4$s! "
 msgstr ""
 
@@ -1611,10 +1633,18 @@ msgstr ""
 
 #, php-format
 msgid ""
+"After a successful Business Verification, you need to go to the %1$s tab, "
+"and open the review request with the %2$s button. Fill in any missing fields "
+"here, then submit the form for review, and wait until it is approved by "
+"Meta, which may take several days."
+msgstr ""
+
+#, php-format
+msgid ""
 "Currently your app is in Development Mode which also means that people "
 "outside of your business can not use it. Once your verification is "
 "completed, click on the %1$s tab and publish your app by clicking on the "
-"%1$s button at the bottom right corner. Before you press it, it is "
+"blue %1$s button at the bottom right corner. Before you press it, it is "
 "recommended to check the steps listed on the %2$s page, if you configured "
 "everything properly."
 msgstr ""
@@ -2287,6 +2317,16 @@ msgstr ""
 msgid ""
 "Most of these information can only be retrieved, when the field is filled on "
 "the user's %s page!"
+msgstr ""
+"רוב המידע הזה ניתן לאחזר רק כאשר השדה מסומן כציבורי בדף ה %s של המשתמש!"
+
+#, fuzzy, php-format
+#| msgid ""
+#| "Most of these information can only be retrieved, when the field is marked "
+#| "as Public on the user's %s page!"
+msgid ""
+"Most of these information can only be retrieved, when the field is filled on "
+"the user's %s page! For the campaigns, the user must have a public campaign!"
 msgstr ""
 "רוב המידע הזה ניתן לאחזר רק כאשר השדה מסומן כציבורי בדף ה %s של המשתמש!"
 
@@ -3503,6 +3543,113 @@ msgstr "קשר חשבון עם <b>Microsoft</b>"
 msgid "Unlink account from <b>Microsoft</b>"
 msgstr "ביטול קישור חשבון מ - <b>Microsoft</b>"
 
+msgid "You will see your Apps here."
+msgstr ""
+
+#, fuzzy, php-format
+#| msgid "Click on the name of your %s App."
+msgid "Click on the pencil/edit icon next to the name of your %s App."
+msgstr "לחץ על שם אפליקציית ה %s שלך."
+
+#, fuzzy, php-format
+#| msgid "Scroll down to the %s section."
+msgid "Scroll down to the %s field."
+msgstr "גלול מטה לקטע %s."
+
+#, fuzzy, php-format
+#| msgid "Click on the %1$s button at %2$s."
+msgid "Click on the %s button"
+msgstr "יש ללחוץ על הלחצן %1$s בכתובת %2$s."
+
+#, fuzzy, php-format
+#| msgid ""
+#| "Log in with your %s credentials if you are not logged in or create a new "
+#| "account."
+msgid ""
+"Log in with your %1$s credentials if you are not logged in, or make a new "
+"%1$s account."
+msgstr "התחבר עם אישורי ה %s שלך אם אינך מחובר או צור חשבון חדש."
+
+#, php-format
+msgid ""
+"%1$s Make sure to verify your %2$s email address, as %2$s does not allow "
+"connecting, or linking with a local account without a verified email "
+"address. You can find more information about this %3$shere%4$s."
+msgstr ""
+
+#, fuzzy, php-format
+#| msgid "Enter the name of your App to the \"App name\" field."
+msgid "Enter the name of your App in the %s field."
+msgstr "יש להזין את שם האפליקציה בשדה 'שם האפליקציה '."
+
+#, fuzzy, php-format
+#| msgid "Enter the name of your App to the \"App name\" field."
+msgid "Add the description of your App in the %s field."
+msgstr "יש להזין את שם האפליקציה בשדה 'שם האפליקציה '."
+
+#, fuzzy, php-format
+#| msgid "Check the %1$s option."
+msgid "Select the %1$s, pick %2$s."
+msgstr "יש לבדוק את האפשרות %1$s."
+
+#, fuzzy, php-format
+#| msgid "Enter your email address"
+msgid "Enter your %s."
+msgstr "נא להזין את כתובת הדוא\"ל שלכם"
+
+#, fuzzy, php-format
+#| msgid "Enter your domain name to the %1$s field, probably: %2$s"
+msgid "Add the domain of your company to the %1$s field, probably: %2$s"
+msgstr "הזן את שם הדומיין שלך לשדה %1$s, ככל הנראה: %2$s"
+
+#, php-format
+msgid "Add an %s."
+msgstr ""
+
+#, php-format
+msgid "Enter the %s."
+msgstr ""
+
+#, fuzzy, php-format
+#| msgid "Make sure the %1$s field contains the following URL: %2$s"
+msgid "Make sure that the %1$s is set to %2$s."
+msgstr "ודא שהשדה %1$s מכיל את כתובת ה - URL הבאה: %2$s"
+
+#, php-format
+msgid "Afterwards, press %s."
+msgstr ""
+
+msgid ""
+"You should see your newly created App. Click on the dropdown icon next to "
+"the name of your App."
+msgstr ""
+
+#, php-format
+msgid ""
+"Find the %1$s and %2$s values, and enter these on the %3$s tab into the "
+"fields with the same name!"
+msgstr ""
+
+#, fuzzy
+#| msgid "Continue with <b>Amazon</b>"
+msgid "Continue with <b>Patreon</b>"
+msgstr "המשך עם <b>Amazon</b>"
+
+#, fuzzy
+#| msgid "Sign up with <b>Amazon</b>"
+msgid "Sign up with <b>Patreon</b>"
+msgstr "הרשמה ל - <b>Amazon</b>"
+
+#, fuzzy
+#| msgid "Link account with <b>Amazon</b>"
+msgid "Link account with <b>Patreon</b>"
+msgstr "קשר חשבון עם <b>אמזון</b>"
+
+#, fuzzy
+#| msgid "Unlink account from <b>Amazon</b>"
+msgid "Unlink account from <b>Patreon</b>"
+msgstr "ביטול הקישור של החשבון <b>לאמזון</b>"
+
 msgid "There is a Sandbox/Live switch. Make sure \"<b>Live</b>\" is selected!"
 msgstr "יש מתג Sandbox/Live. ודא כי \"<b>Live</b>\" נבחר!"
 
@@ -3623,6 +3770,14 @@ msgid ""
 "the plugin!"
 msgstr ""
 
+#, php-format
+msgid ""
+"%1$s %2$s has introduced a limitation, so that the App owner account can no "
+"longer be used for social login purposes within the created App. This means "
+"that the verification must be done with a %2$s account, that is not the App "
+"owner!"
+msgstr ""
+
 msgid "Secret"
 msgstr "סוד"
 
@@ -3649,11 +3804,6 @@ msgstr "לחץ על שם אפליקציית ה %s שלך."
 #, php-format
 msgid "Replace your existing %s with this URL:"
 msgstr ""
-
-#, fuzzy, php-format
-#| msgid "Click on the %1$s button at %2$s."
-msgid "Click on the %s button"
-msgstr "יש ללחוץ על הלחצן %1$s בכתובת %2$s."
 
 #, php-format
 msgid "Make sure you have the %s radio option selected!"
