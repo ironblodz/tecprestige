@@ -19,11 +19,6 @@ class NextendSocialUser {
     protected $shouldAutoLogin = false;
 
     /**
-     * @var bool
-     */
-    protected $isEmailVerified;
-
-    /**
      * NextendSocialUser constructor.
      *
      * @param NextendSocialProvider $provider
@@ -32,8 +27,6 @@ class NextendSocialUser {
     public function __construct($provider, $data) {
         $this->provider = $provider;
         $this->data     = $data;
-
-        $this->isEmailVerified = $this->provider->getProviderEmailVerificationStatus();
     }
 
     /**
@@ -130,20 +123,13 @@ class NextendSocialUser {
         $user_id = apply_filters('nsl_match_social_account_to_user_id', $user_id, $this, $this->provider);
 
         if ($user_id === false) { // Real register
-            if (apply_filters('nsl_is_register_allowed', true, $this->provider) && $this->isEmailVerified) {
+            if (apply_filters('nsl_is_register_allowed', true, $this->provider)) {
                 $this->register($providerUserID, $email);
             } else {
                 //unset the persistent data, so if an error happened, the user can re-authenticate with providers (Google) that offer account selector screen
                 $this->provider->deleteTokenPersistentData();
 
                 $registerDisabledMessage = apply_filters('nsl_disabled_register_error_message', '');
-
-                /**
-                 * If the email address returned by the provider is not verified, show a custom error message
-                 */
-                if (!$this->isEmailVerified) {
-                    $registerDisabledMessage = apply_filters('nsl_disabled_register_error_message_email_not_verified', sprintf(__('It looks like your %1$s email address is not verified. Please verify the email address of your %1$s account first!', 'nextend-facebook-connect'), $this->provider->getLabel()), $this->provider);
-                }
 
                 $registerDisabledRedirectURL = apply_filters('nsl_disabled_register_redirect_url', '');
 
@@ -728,7 +714,7 @@ class NextendSocialUser {
      * @return bool
      */
     public function autoLink($user_id, $providerUserID) {
-        $emailIsNotVerifiedMessage = apply_filters('nsl_auto_link_error_message_email_not_verified', sprintf(__('It looks like your %1$s email address is not verified. <br>Please verify the email address of your %1$s account first, or login to your existing account using your password and link your %1$s account to your existing account manually!', 'nextend-facebook-connect'), $this->provider->getLabel()));
+        $emailIsNotVerifiedMessage = apply_filters('nsl_auto_link_error_message_email_not_verified', sprintf(__('We found a user with your %1$s email address but it looks like its email address is not verified.%2$sPlease login to your existing account using your password and link your %1$s account to it manually!', 'nextend-facebook-connect'), $this->provider->getLabel(), '<br>'));
         $linkFailedMessage         = apply_filters('nsl_already_linked_error_message', sprintf(__('We found a user with your %1$s email address. Unfortunately, it belongs to a different account, so we are unable to log you in. Please use the linked account or log in with your password!', 'nextend-facebook-connect'), $this->provider->getLabel()));
 
         $isAutoLinkAllowed = apply_filters('nsl_' . $this->provider->getId() . '_auto_link_allowed', true, $this->provider, $user_id);
@@ -739,7 +725,7 @@ class NextendSocialUser {
             return false;
         }
 
-        if (!$this->isEmailVerified) {
+        if (!$this->provider->getProviderEmailVerificationStatus()) {
             $this->provider->deleteLoginPersistentData();
             Notices::addError($emailIsNotVerifiedMessage);
 
@@ -795,7 +781,7 @@ class NextendSocialUser {
             $terms = $this->provider->settings->get('terms');
 
             if (empty($terms)) {
-                $terms = NextendSocialLogin::$settings->get('terms');
+                $terms = NextendSocialLogin::getPrivacyTerms();
             }
 
             $terms = __($terms, 'nextend-facebook-connect');

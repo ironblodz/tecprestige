@@ -2,7 +2,7 @@
 /**
  * Abstract class for templates notices
  *
- * @version 1.0.0
+ * @version 1.0.1
  *
  * @package WCBoost\Packages\TemplatesStatus
  */
@@ -100,11 +100,19 @@ abstract class Notice {
 	 * @return string
 	 */
 	protected function outdated_templates_notice_html() {
-		$theme = wp_get_theme();
+		$message = $this->get_notice_message();
 
-		/* translators: %s Theme name */
-		return '<p>' . sprintf( __( '<strong>Your theme (%s) contains outdated copies of some template files of WBoost plugins.</strong> These files may need updating to ensure they are compatible with WCBoost plugins.', 'wcboost-packages' ), esc_html( $theme['Name'] ) ) . '</p>';
+		return '<p>' . $message . '</p>';
 	}
+
+	/**
+	 * Get the notice message.
+	 *
+	 * @since 1.0.1
+	 *
+	 * @return string
+	 */
+	abstract public function get_notice_message();
 
 	/**
 	 * Reset all notices

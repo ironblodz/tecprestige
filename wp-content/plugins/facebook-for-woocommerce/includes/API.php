@@ -250,18 +250,17 @@ class API extends Base {
 
 
 	/**
-	 * Deletes user API permission.
+	 * Deletes FBE/MBE connection API.
 	 *
 	 * This is their form of "revoke".
 	 *
-	 * @param string $user_id user ID. Defaults to the currently authenticated user
-	 * @param string $permission permission to delete
-	 * @return API\Response|API\User\Permissions\Delete\Response
+	 * @param string $external_business_id external business ID
+	 * @return API\Response|API\FBE\Installation\Delete\Response
 	 * @throws ApiException
 	 */
-	public function delete_user_permission( string $user_id, string $permission ): API\User\Permissions\Delete\Response {
-		$request = new API\User\Permissions\Delete\Request( $user_id, $permission );
-		$this->set_response_handler( API\User\Permissions\Delete\Response::class );
+	public function delete_mbe_connection( string $external_business_id): API\FBE\Installation\Delete\Response {
+		$request = new API\FBE\Installation\Delete\Request( $external_business_id);
+		$this->set_response_handler( API\FBE\Installation\Delete\Response::class );
 		return $this->perform_request( $request );
 	}
 
@@ -284,12 +283,18 @@ class API extends Base {
 	 *
 	 * @param string $external_business_id external business ID
 	 * @param string $plugin_version The plugin version.
-	 * @return API\Response|API\FBE\Configuration\Update\Response
-	 * @throws WooCommerce\Facebook\Framework\Api\Exception
+	 *
+	 * @return Response|API\FBE\Configuration\Update\Response
+	 * @throws ApiException
 	 */
 	public function update_plugin_version_configuration( string $external_business_id, string $plugin_version ): API\FBE\Configuration\Update\Response {
 		$request = new API\FBE\Configuration\Update\Request( $external_business_id );
-		$request->set_plugin_version( $plugin_version );
+		$request->set_external_client_metadata(
+			array(
+				'version_id' => $plugin_version,
+				'is_multisite'   => is_multisite(),
+			)
+		);
 		$this->set_response_handler( API\FBE\Configuration\Update\Response::class );
 		return $this->perform_request( $request );
 	}
@@ -516,6 +521,18 @@ class API extends Base {
 		return $this->perform_request( $request );
 	}
 
+	/**
+	 * @param string $product_catalog_id Facebook Product Catalog ID.
+	 * @return Response
+	 * @throws ApiException
+	 * @throws API\Exceptions\Request_Limit_Reached
+	 */
+	public function create_feed( string $product_catalog_id, array $data ) {
+		$request = new API\ProductCatalog\ProductFeeds\Create\Request( $product_catalog_id, $data );
+		$this->set_response_handler( API\ProductCatalog\ProductFeeds\Create\Response::class );
+		return $this->perform_request( $request );
+	}
+
 
 	/**
 	 * @param string $product_feed_upload_id
@@ -526,6 +543,18 @@ class API extends Base {
 	public function read_upload( string $product_feed_upload_id ) {
 		$request = new API\ProductCatalog\ProductFeedUploads\Read\Request( $product_feed_upload_id );
 		$this->set_response_handler( API\ProductCatalog\ProductFeedUploads\Read\Response::class );
+		return $this->perform_request( $request );
+	}
+
+	/**
+	 * @param string $product_feed_id Facebook Product Feed ID.
+	 * @return Response
+	 * @throws ApiException
+	 * @throws API\Exceptions\Request_Limit_Reached
+	 */
+	public function create_upload( string $product_feed_id, array $data ) {
+		$request = new API\ProductCatalog\ProductFeedUploads\Create\Request( $product_feed_id, $data );
+		$this->set_response_handler( API\ProductCatalog\ProductFeedUploads\Create\Response::class );
 		return $this->perform_request( $request );
 	}
 

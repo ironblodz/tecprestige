@@ -6,7 +6,7 @@
  *
  * @author  WCBoost
  * @package WCBoost\Wishlist\Templates
- * @version 1.0
+ * @version 1.1.5
  */
 
 defined( 'ABSPATH' ) || exit;
@@ -22,7 +22,10 @@ do_action( 'wcboost_wishlist_before_share_buttons' );
 	<ul class="wishlist-share__buttons">
 		<?php foreach ( $args['socials'] as $social ) : ?>
 			<li class="wishlist-share__<?php echo esc_attr( $social ); ?>">
-				<?php echo \WCBoost\Wishlist\Helper::get_share_link( $social, $args['wishlist'] ); // WPCS: XSS ok. ?>
+				<?php
+				// phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
+				echo \WCBoost\Wishlist\Helper::get_share_link( $social, $args['wishlist'] );
+				?>
 			</li>
 		<?php endforeach; ?>
 	</ul>

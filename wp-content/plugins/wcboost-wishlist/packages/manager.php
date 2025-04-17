@@ -76,6 +76,7 @@ class Manager {
 		foreach ( $files as $file ) {
 			if ( ! file_exists( $file ) ) {
 				if ( defined( 'WP_DEBUG' ) && WP_DEBUG ) {
+					// phpcs:ignore WordPress.PHP.DevelopmentFunctions.error_log_error_log
 					error_log( "Missing the package file of `$package`: $file" );
 				}
 

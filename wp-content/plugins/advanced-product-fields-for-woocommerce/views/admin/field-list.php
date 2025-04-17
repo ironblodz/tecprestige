@@ -13,7 +13,9 @@ use SW_WAPF\Includes\Classes\Helper;
 
         <div class="wapf-field-list__body">
             <span rv-show="fields | isEmpty" class="wapf-list--empty" style="display: <?php echo empty($model['fields']) ? 'block' : 'none';?>;">
-                <a href="#" class="button button-primary button-large" rv-on-click="addField">Add your 1st Field</a>
+                <a href="#" class="button button-primary button-large" rv-on-click="addField">
+                    <?php _e("Add your 1st Field", 'advanced-product-fields-for-woocommerce') ?>
+                </a>
             </span>
 
             <div rv-each-field="fields" rv-cloak>
@@ -24,7 +26,9 @@ use SW_WAPF\Includes\Classes\Helper;
 
         <div rv-cloak>
             <div rv-show="fields | isNotEmpty" class="wapf-field-list__footer">
-                <a href="#" class="button button-primary button-large" rv-on-click="addField">Add a Field</a>
+                <a href="#" class="button button-primary button-large" rv-on-click="addField">
+                    <?php _e("Add a Field", 'advanced-product-fields-for-woocommerce') ?>
+                </a>
             </div>
         </div>
 

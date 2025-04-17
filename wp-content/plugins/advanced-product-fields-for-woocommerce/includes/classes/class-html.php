@@ -140,7 +140,7 @@ namespace SW_WAPF\Includes\Classes
 
         public static function field_container_classes(Field $field) {
 
-            $extra_classes = apply_filters('wapf/field_classes/' . $field->key, [] );
+            $extra_classes = apply_filters( 'wapf/field_container_classes/' . $field->id, [] );
             $classes = ['wapf-field-container','wapf-field-' . $field->type];
 
             if(!empty($field->class))
@@ -178,12 +178,12 @@ namespace SW_WAPF\Includes\Classes
 
         private static function field_attributes($product,Field $field, $field_group_id) {
 
-            $extra_classes = apply_filters('wapf/field_classes/' . $field->key, [] );
+            $extra_classes = apply_filters('wapf/field_classes/' . $field->id, [] );
             $classes = ['wapf-input'];
 
             $field_attributes = [
                 'name'              => 'wapf[field_'.$field->id.']',
-                'class'             => implode(' ',array_merge(array_map('sanitize_html_class',$extra_classes,$classes))),
+                'class'             => implode(' ',array_merge( array_map( 'sanitize_html_class', $extra_classes ), $classes ) ),
                 'data-is-required'  => $field->required,
                 'data-field-id'     => $field->id
             ];

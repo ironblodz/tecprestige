@@ -13,6 +13,8 @@ class Form_Handler {
 		add_action( 'wp_loaded', [ __CLASS__, 'restore_item_action' ], 20 );
 		add_action( 'wp_loaded', [ __CLASS__, 'update_wishlist' ], 20 );
 		add_action( 'wp_loaded', [ __CLASS__, 'delete_wishlist' ], 20 );
+		add_action( 'wp_loaded', [ __CLASS__, 'merge_guest_wishlist' ], 20 );
+		add_action( 'wp_loaded', [ __CLASS__, 'ignore_merge_guest_wishlist' ], 20 );
 
 		// Auto removal.
 		switch ( get_option( 'wcboost_wishlist_auto_remove' ) ) {
@@ -32,7 +34,8 @@ class Form_Handler {
 	 * @param string|bool $url The URL to redirect to.
 	 */
 	public static function add_item_action( $url = false ) {
-		if ( ! isset( $_REQUEST['add-to-wishlist'] ) || ! is_numeric( wp_unslash( $_REQUEST['add-to-wishlist'] ) ) ) { // phpcs:ignore WordPress.Security.NonceVerification.Recommended, WordPress.Security.ValidatedSanitizedInput.InputNotSanitized
+		// phpcs:disable WordPress.Security.NonceVerification.Recommended
+		if ( ! isset( $_REQUEST['add-to-wishlist'] ) || ! is_numeric( wp_unslash( $_REQUEST['add-to-wishlist'] ) ) ) { // phpcs:ignore WordPress.Security.ValidatedSanitizedInput.InputNotSanitized
 			return;
 		}
 
@@ -130,6 +133,7 @@ class Form_Handler {
 
 			wc_add_notice( $message, 'error' );
 		}
+		// phpcs:enable
 	}
 
 	/**
@@ -137,7 +141,7 @@ class Form_Handler {
 	 * This action only removes items from the active wishlist.
 	 */
 	public static function remove_item_action() {
-		if ( empty( $_GET['remove-wishlist-item'] ) || empty( $_GET['_wpnonce'] ) || ! wp_verify_nonce( $_GET['_wpnonce'], 'wcboost-wishlist-remove-item' ) ) {
+		if ( empty( $_GET['remove-wishlist-item'] ) || empty( $_GET['_wpnonce'] ) || ! wp_verify_nonce( sanitize_text_field( wp_unslash( $_GET['_wpnonce'] ) ), 'wcboost-wishlist-remove-item' ) ) {
 			return;
 		}
 
@@ -185,7 +189,7 @@ class Form_Handler {
 	 * Restore a wishlist item that has just been removed
 	 */
 	public static function restore_item_action() {
-		if ( empty( $_GET['undo-wishlist-item'] ) || empty( $_GET['_wpnonce'] ) || ! wp_verify_nonce( $_GET['_wpnonce'], 'wcboost-wishlist-restore-item' ) ) {
+		if ( empty( $_GET['undo-wishlist-item'] ) || empty( $_GET['_wpnonce'] ) || ! wp_verify_nonce( sanitize_text_field( wp_unslash( $_GET['_wpnonce'] ) ), 'wcboost-wishlist-restore-item' ) ) {
 			return;
 		}
 
@@ -228,7 +232,7 @@ class Form_Handler {
 			return;
 		}
 
-		if ( empty( $_POST['_wpnonce'] ) || ! wp_verify_nonce( $_POST['_wpnonce'], 'wcboost-wishlist-update' ) ) {
+		if ( empty( $_POST['_wpnonce'] ) || ! wp_verify_nonce( sanitize_text_field( wp_unslash( $_POST['_wpnonce'] ) ), 'wcboost-wishlist-update' ) ) {
 			return;
 		}
 
@@ -248,20 +252,20 @@ class Form_Handler {
 
 		// Update details.
 		if ( ! empty( $_POST['wishlist_title'] ) ) {
-			$title = wp_unslash( $_POST['wishlist_title'] );
+			$title = sanitize_text_field( wp_unslash( $_POST['wishlist_title'] ) );
 
 			if ( $wishlist->get_wishlist_title() != $title ) {
-				$wishlist->set_wishlist_title( sanitize_text_field( $title ) );
+				$wishlist->set_wishlist_title( $title );
 				$wishlist->set_wishlist_slug( sanitize_title_with_dashes( $title ) );
 			}
 		}
 
 		if ( ! empty( $_POST['wishlist_description'] ) ) {
-			$wishlist->set_description( sanitize_textarea_field( $_POST['wishlist_description'] ) );
+			$wishlist->set_description( sanitize_textarea_field( wp_unslash( $_POST['wishlist_description'] ) ) );
 		}
 
 		if ( ! empty( $_POST['wishlist_privacy'] ) ) {
-			$wishlist->set_status( sanitize_text_field( $_POST['wishlist_privacy'] ) );
+			$wishlist->set_status( sanitize_text_field( wp_unslash( $_POST['wishlist_privacy'] ) ) );
 		}
 
 		$wishlist->save();
@@ -305,7 +309,7 @@ class Form_Handler {
 			return;
 		}
 
-		if ( empty( $_POST['wishlist_id'] ) || empty( $_POST['_wpnonce'] ) || ! wp_verify_nonce( $_POST['_wpnonce'], 'wcboost-wishlist-delete' ) ) {
+		if ( empty( $_POST['wishlist_id'] ) || empty( $_POST['_wpnonce'] ) || ! wp_verify_nonce( sanitize_text_field( wp_unslash( $_POST['_wpnonce'] ) ), 'wcboost-wishlist-delete' ) ) {
 			return;
 		}
 
@@ -326,6 +330,80 @@ class Form_Handler {
 		}
 
 		$referer = wc_get_page_permalink( 'shop' );
+		wp_safe_redirect( $referer );
+		exit;
+	}
+
+	/**
+	 * Merge guest wishlist action
+	 *
+	 * @since 1.1.4
+	 */
+	public static function merge_guest_wishlist() {
+		if ( ! isset( $_GET['action'] ) || 'merge_guest_wishlist' != $_GET['action'] ) {
+			return;
+		}
+
+		if ( empty( $_GET['_wpnonce'] ) || ! wp_verify_nonce( sanitize_text_field( wp_unslash( $_GET['_wpnonce'] ) ), 'wcboost-wishlist-merge' ) ) {
+			return;
+		}
+
+		wc_nocache_headers();
+
+		$wishlist          = Helper::get_wishlist();
+		$guest_wishlist_id = $wishlist->get_data_store()->get_wishlist_id_by_session( Session::get_session_id() );
+		$guest_wishlist    = $guest_wishlist_id ? Helper::get_wishlist( $guest_wishlist_id ) : null;
+
+		if ( $guest_wishlist && ! $guest_wishlist->is_empty() ) {
+			$merged_item_count = $wishlist->merge( $guest_wishlist );
+
+			if ( $merged_item_count ) {
+				/* translators: %d: number of items */
+				$message = _n( '%d item has been added to your wishlist', '%d items have been added to your wishlist', $merged_item_count, 'wcboost-wishlist' );
+				wc_add_notice( sprintf( $message, $merged_item_count ) );
+				$wishlist->save();
+			} else {
+				wc_add_notice( __( 'All items in the temporary wishlist have been added to your wishlist', 'wcboost-wishlist' ), 'notice' );
+			}
+
+			if ( \wc_string_to_bool( get_option( 'wcboost_wishlist_clear_guest_wishlist_after_merge', 'yes' ) ) ) {
+				$guest_wishlist->empty();
+			}
+
+			Session::delete_merge_guest_wishlist_flag();
+		}
+
+		if ( wp_get_referer() ) {
+			$referer = remove_query_arg( [ 'undo-wishlist-item', 'removed-wishlist-item', '_wpnonce' ], wp_get_referer() );
+		} else {
+			$referer = wc_get_page_permalink( 'wishlist' );
+		}
+
+		wp_safe_redirect( $referer );
+		exit;
+	}
+
+	/**
+	 * Ignore merge guest wishlist action
+	 *
+	 * @since 1.1.4
+	 */
+	public static function ignore_merge_guest_wishlist() {
+		if ( ! isset( $_GET['action'] ) || 'ignore_merge_guest_wishlist' != $_GET['action'] ) {
+			return;
+		}
+
+		if ( empty( $_GET['_wpnonce'] ) || ! wp_verify_nonce( sanitize_text_field( wp_unslash( $_GET['_wpnonce'] ) ), 'wcboost-wishlist-merge-ignore' ) ) {
+			return;
+		}
+
+		if ( ! is_user_logged_in() ) {
+			return;
+		}
+
+		Session::delete_merge_guest_wishlist_flag();
+
+		$referer = wp_get_referer() ? remove_query_arg( [ 'action', '_wpnonce' ], wp_get_referer() ) : wc_get_page_permalink( 'wishlist' );
 		wp_safe_redirect( $referer );
 		exit;
 	}
@@ -367,7 +445,7 @@ class Form_Handler {
 	 */
 	protected static function auto_remove_item( $product ) {
 		$removing_item = new Wishlist_Item( $product );
-		$wishlist_id   = isset( $_REQUEST['wishlist_id'] ) ? absint( $_REQUEST['wishlist_id'] ) : false;
+		$wishlist_id   = isset( $_REQUEST['wishlist_id'] ) ? absint( $_REQUEST['wishlist_id'] ) : false; // phpcs:ignore WordPress.Security.NonceVerification.Recommended
 
 		if ( $wishlist_id ) {
 			Helper::get_wishlist( $wishlist_id )->remove_item( $removing_item->get_item_key() );

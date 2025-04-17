@@ -22,6 +22,8 @@ jQuery( function( $ ) {
 	 * Wishlist fragments class.
 	 */
 	var WCBoostWishlistFragments = function() {
+		var self = this;
+
 		this.updateFragments = this.updateFragments.bind( this );
 		this.getProductIds   = this.getProductIds.bind( this );
 
@@ -33,9 +35,8 @@ jQuery( function( $ ) {
 
 		// Refresh when storage changes in another tab.
 		$( window ).on( 'storage onstorage', function( e ) {
-			if ( 'wcboost_wishlist_updated' === e.originalEvent.key ) {
-				// Use option `preventStorageUpdate` to prevent infinite refreshing.
-				$( document.body ).trigger( 'wishlist_fragments_refresh', [ false, { preventStorageUpdate: true } ] );
+			if ( hash_key_name === e.originalEvent.key  && localStorage.getItem( hash_key_name ) !== sessionStorage.getItem( hash_key_name ) ) {
+				$( document.body ).trigger( 'wishlist_fragments_refresh' );
 			}
 		} );
 
@@ -51,18 +52,33 @@ jQuery( function( $ ) {
 			} );
 
 			try {
-				var hash_key = sessionStorage.getItem( hash_key_name );
+				var wishlist_hash = sessionStorage.getItem( hash_key_name ),
+					cookie_hash = Cookies.get( 'wcboost_wishlist_hash' );
 
-				if ( hash_key !== null ) {
+				if ( wishlist_hash !== null && wishlist_hash !== '' && wishlist_hash === cookie_hash ) {
 					this.updateFragmentsFromStorage();
 					this.updateButtons();
 				} else {
-					// Run for the first time.
-					this.refreshFragments();
+					throw 'No wishlist fragment';
 				}
 			} catch ( err ) {
 				this.refreshFragments();
 			}
+		}
+
+		// Customiser support.
+		var hasSelectiveRefresh = (
+			'undefined' !== typeof wp &&
+			wp.customize &&
+			wp.customize.selectiveRefresh &&
+			wp.customize.widgetsPreview &&
+			wp.customize.widgetsPreview.WidgetPartial
+		);
+
+		if ( hasSelectiveRefresh ) {
+			wp.customize.selectiveRefresh.bind( 'partial-content-rendered', function() {
+				self.refreshFragments();
+			} );
 		}
 	}
 
@@ -123,16 +139,21 @@ jQuery( function( $ ) {
 			return;
 		}
 
-		var hash_key = sessionStorage.getItem( hash_key_name );
+		var wishlist_hash = sessionStorage.getItem( hash_key_name );
 
-		if ( ! hash_key ) {
+		if ( ! wishlist_hash ) {
 			return;
 		}
 
-		var fragments = JSON.parse( sessionStorage.getItem( 'wcboost_wishlist_fragments_' + hash_key ) );
+		var hash_parts = wishlist_hash.split( '::' ),
+			hash_key = hash_parts[0];
 
-		if ( fragments !== null ) {
-			this.updateFragments( fragments );
+		if ( hash_key ) {
+			var fragments = JSON.parse( sessionStorage.getItem( 'wcboost_wishlist_fragments_' + hash_key ) );
+
+			if ( fragments !== null ) {
+				this.updateFragments( fragments );
+			}
 		} else {
 			this.refreshFragments();
 		}
@@ -143,16 +164,15 @@ jQuery( function( $ ) {
 			return;
 		}
 
-		var hash_key = data.wishlist_hash ? data.wishlist_hash : '';
+		var wishlist_hash = data.wishlist_hash ? data.wishlist_hash : '';
 
-		sessionStorage.setItem( hash_key_name, hash_key );
+		sessionStorage.setItem( hash_key_name, wishlist_hash );
+		localStorage.setItem( hash_key_name, wishlist_hash );
 
-		if ( ! options || ! options.preventStorageUpdate ) {
-			// Update the wishlist timestamps to sync between tabs.
-			localStorage.setItem( 'wcboost_wishlist_updated', ( new Date() ).getTime() );
-		}
+		if ( wishlist_hash ) {
+			var hash_parts = wishlist_hash.split( '::' ),
+				hash_key = hash_parts[0];
 
-		if ( hash_key !== '' ) {
 			if ( data.wishlist_items ) {
 				sessionStorage.setItem( 'wcboost_wishlist_' + hash_key, JSON.stringify( data.wishlist_items ) );
 			}
@@ -178,7 +198,14 @@ jQuery( function( $ ) {
 			return;
 		}
 
-		var hash_key = sessionStorage.getItem( hash_key_name );
+		var wishlist_hash = sessionStorage.getItem( hash_key_name );
+
+		if ( ! wishlist_hash ) {
+			return;
+		}
+
+		var hash_parts = wishlist_hash.split( '::' ),
+			hash_key = hash_parts[0];
 
 		if ( ! hash_key ) {
 			return;

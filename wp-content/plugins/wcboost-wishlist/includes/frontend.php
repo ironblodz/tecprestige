@@ -11,7 +11,7 @@ class Frontend {
 	/**
 	 * Class constructor
 	 */
-	public function __construct() {
+	protected function __construct() {
 		add_action( 'wp', [ $this, 'template_hooks' ] );
 		add_action( 'wp', [ $this, 'add_nocache_headers' ] );
 		add_filter( 'wp_robots', [ $this, 'add_noindex_robots' ], 20 );
@@ -93,6 +93,7 @@ class Frontend {
 	 * @return array
 	 */
 	public function add_noindex_robots( $robots ) {
+		// phpcs:ignore WordPress.Security.NonceVerification.Recommended
 		if ( ! isset( $_GET['add-to-wishlist'] ) ) {
 			return $robots;
 		}
@@ -552,6 +553,7 @@ class Frontend {
 		}
 
 		if ( wc_string_to_bool( get_option( 'wcboost_wishlist_allow_adding_variations' ) ) && $product->is_type( 'variable' ) ) {
+			/** @var \WC_Product_Variable $product */
 			$variations = $product->get_available_variations( 'objects' );
 			$data       = [];
 
@@ -590,7 +592,7 @@ class Frontend {
 		];
 
 		if ( isset( $args['variations_data'] ) ) {
-			$args['attributes']['data-variations'] = json_encode( $args['variations_data'] );
+			$args['attributes']['data-variations'] = wp_json_encode( $args['variations_data'] );
 		}
 
 		return $args;
@@ -643,5 +645,18 @@ class Frontend {
 			esc_url( $wishlist->get_public_url() ),
 			esc_html__( 'View wishlist', 'wcboost-wishlist' )
 		);
+	}
+
+	/**
+	 * Will set cookies if needed and when possible.
+	 *
+	 * @since 1.1.1
+	 * @deprecated 1.1.2 Moved to the Session class.
+	 *
+	 * @return void
+	 */
+	public function maybe_set_cookies() {
+		_deprecated_function( __METHOD__, '1.1.2', '\WCBoost\Wishlist\Session\maybe_set_cookies' );
+		Session::instance()->maybe_set_cookies();
 	}
 }

@@ -999,6 +999,15 @@ if ( ! class_exists( 'UAGB_Post' ) ) {
 					'imageBottomSpaceMobiile'       => array(
 						'type' => 'number',
 					),
+					'taxonomyBottomSpace'           => array(
+						'type' => 'number',
+					),
+					'taxonomyBottomSpaceTablet'     => array(
+						'type' => 'number',
+					),
+					'taxonomyBottomSpaceMobile'     => array(
+						'type' => 'number',
+					),
 					'titleBottomSpace'              => array(
 						'type'    => 'number',
 						'default' => 15,
@@ -1079,6 +1088,10 @@ if ( ! class_exists( 'UAGB_Post' ) ) {
 						'default' => 'px',
 					),
 					'imageBottomSpaceUnit'          => array(
+						'type'    => 'string',
+						'default' => 'px',
+					),
+					'taxonomyBottomSpaceUnit'       => array(
 						'type'    => 'string',
 						'default' => 'px',
 					),
@@ -1268,7 +1281,7 @@ if ( ! class_exists( 'UAGB_Post' ) ) {
 		 * @since 0.0.1
 		 */
 		public function post_grid_callback( $attributes ) {
-			
+
 			// Render query.
 			$query = UAGB_Helper::get_query( $attributes, 'grid' );
 
@@ -1285,7 +1298,7 @@ if ( ! class_exists( 'UAGB_Post' ) ) {
 		 * Renders the post grid block on pagination clicks.
 		 *
 		 * @since 2.6.0
-		 * 
+		 *
 		 * @return void
 		 */
 		public function post_grid_pagination_ajax_callback() {
@@ -1297,7 +1310,7 @@ if ( ! class_exists( 'UAGB_Post' ) ) {
 				$attr['paged'] = isset( $_POST['page_number'] ) ? sanitize_text_field( $_POST['page_number'] ) : '';
 				$html          = $this->post_grid_callback( $attr );
 				wp_send_json_success( $html );
-				
+
 			}
 
 			wp_send_json_error( ' Something went wrong, failed to load pagination data! ' );
@@ -1355,63 +1368,7 @@ if ( ! class_exists( 'UAGB_Post' ) ) {
 		 * @since 0.0.1
 		 */
 		public function get_post_html( $attributes, $query, $layout ) {
-			// Common Post Attributes.
-			$attributes['post_type']          = $layout;
-			$attributes['postsToShow']        = UAGB_Block_Helper::get_fallback_number( $attributes['postsToShow'], 'postsToShow', $attributes['blockName'] );
-			$attributes['postsOffset']        = UAGB_Block_Helper::get_fallback_number( $attributes['postsOffset'], 'postsOffset', $attributes['blockName'] );
-			$attributes['columns']            = UAGB_Block_Helper::get_fallback_number( $attributes['columns'], 'columns', $attributes['blockName'] );
-			$attributes['tcolumns']           = UAGB_Block_Helper::get_fallback_number( $attributes['tcolumns'], 'columns', $attributes['blockName'] );
-			$attributes['mcolumns']           = UAGB_Block_Helper::get_fallback_number( $attributes['mcolumns'], 'mcolumns', $attributes['blockName'] );
-			$attributes['excerptLength']      = UAGB_Block_Helper::get_fallback_number( $attributes['excerptLength'], 'excerptLength', $attributes['blockName'] );
-			$attributes['overlayOpacity']     = UAGB_Block_Helper::get_fallback_number( $attributes['overlayOpacity'], 'overlayOpacity', $attributes['blockName'] );
-			$attributes['columnGap']          = UAGB_Block_Helper::get_fallback_number( $attributes['columnGap'], 'columnGap', $attributes['blockName'] );
-			$attributes['rowGap']             = UAGB_Block_Helper::get_fallback_number( $attributes['rowGap'], 'rowGap', $attributes['blockName'] );
-			$attributes['imageBottomSpace']   = UAGB_Block_Helper::get_fallback_number( $attributes['imageBottomSpace'], 'imageBottomSpace', $attributes['blockName'] );
-			$attributes['titleBottomSpace']   = UAGB_Block_Helper::get_fallback_number( $attributes['titleBottomSpace'], 'titleBottomSpace', $attributes['blockName'] );
-			$attributes['metaBottomSpace']    = UAGB_Block_Helper::get_fallback_number( $attributes['metaBottomSpace'], 'metaBottomSpace', $attributes['blockName'] );
-			$attributes['excerptBottomSpace'] = UAGB_Block_Helper::get_fallback_number( $attributes['excerptBottomSpace'], 'excerptBottomSpace', $attributes['blockName'] );
-			$attributes['ctaBottomSpace']     = UAGB_Block_Helper::get_fallback_number( $attributes['ctaBottomSpace'], 'ctaBottomSpace', $attributes['blockName'] );
-			// Unique Responsive Attributes.
-			$attributes['rowGapTablet'] = is_numeric( $attributes['rowGapTablet'] ) ? $attributes['rowGapTablet'] : $attributes['rowGap'];
-			$attributes['rowGapMobile'] = is_numeric( $attributes['rowGapMobile'] ) ? $attributes['rowGapMobile'] : $attributes['rowGapTablet'];
-			// Grid / Carousel / Masonry Specific Attributes.
-			if ( isset( $attributes['autoplaySpeed'] ) ) {
-				$attributes['autoplaySpeed'] = UAGB_Block_Helper::get_fallback_number( $attributes['autoplaySpeed'], 'autoplaySpeed', $attributes['blockName'] );
-			}
-			if ( isset( $attributes['transitionSpeed'] ) ) {
-				$attributes['transitionSpeed'] = UAGB_Block_Helper::get_fallback_number( $attributes['transitionSpeed'], 'transitionSpeed', $attributes['blockName'] );
-			}
-			if ( isset( $attributes['arrowSize'] ) ) {
-				$attributes['arrowSize'] = UAGB_Block_Helper::get_fallback_number( $attributes['arrowSize'], 'arrowSize', $attributes['blockName'] );
-			}
-			if ( isset( $attributes['arrowDistance'] ) ) {
-				$attributes['arrowDistance'] = UAGB_Block_Helper::get_fallback_number( $attributes['arrowDistance'], 'arrowDistance', $attributes['blockName'] );
-			}
-			if ( isset( $attributes['arrowDistanceTablet'] ) ) {
-				$attributes['arrowDistanceTablet'] = UAGB_Block_Helper::get_fallback_number( $attributes['arrowDistanceTablet'], 'arrowDistanceTablet', $attributes['blockName'] );
-			}
-			if ( isset( $attributes['arrowDistanceMobile'] ) ) {
-				$attributes['arrowDistanceMobile'] = UAGB_Block_Helper::get_fallback_number( $attributes['arrowDistanceMobile'], 'arrowDistanceMobile', $attributes['blockName'] );
-			}
-			if ( isset( $attributes['arrowBorderSize'] ) ) {
-				$attributes['arrowBorderSize'] = UAGB_Block_Helper::get_fallback_number( $attributes['arrowBorderSize'], 'arrowBorderSize', $attributes['blockName'] );
-			}
-			if ( isset( $attributes['paginationSpacing'] ) ) {
-				$attributes['paginationSpacing'] = UAGB_Block_Helper::get_fallback_number( $attributes['paginationSpacing'], 'paginationSpacing', $attributes['blockName'] );
-			}
-			if ( isset( $attributes['paginationBorderRadius'] ) ) {
-				$attributes['paginationBorderRadius'] = UAGB_Block_Helper::get_fallback_number( $attributes['paginationBorderRadius'], 'paginationBorderRadius', $attributes['blockName'] );
-			}
-			if ( isset( $attributes['paginationBorderSize'] ) ) {
-				$attributes['paginationBorderSize'] = UAGB_Block_Helper::get_fallback_number( $attributes['paginationBorderSize'], 'paginationBorderSize', $attributes['blockName'] );
-			}
-			if ( isset( $attributes['paginationFontSize'] ) ) {
-				$attributes['paginationFontSize'] = UAGB_Block_Helper::get_fallback_number( $attributes['paginationFontSize'], 'paginationFontSize', $attributes['blockName'] );
-			}
-			if ( isset( $attributes['loaderSize'] ) ) {
-				$attributes['loaderSize'] = UAGB_Block_Helper::get_fallback_number( $attributes['loaderSize'], 'loaderSize', $attributes['blockName'] );
-			}
-
+			
 			$wrap = array(
 				'uagb-post__items uagb-post__columns-' . $attributes['columns'],
 				'is-' . $layout,
@@ -1531,7 +1488,7 @@ if ( ! class_exists( 'UAGB_Post' ) ) {
 					<div class="uagb-post-pagination-wrap">
 						<?php
 							// content already escaped using wp_kses_post.
-							echo $this->render_pagination( $query, $attributes ); //phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
+							echo $this->render_pagination( $query, $attributes ); //phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped -- Already escaped using wp_kses_post inside render_pagination().
 						?>
 					</div>
 					<?php
@@ -1579,9 +1536,9 @@ if ( ! class_exists( 'UAGB_Post' ) ) {
 			$base                = UAGB_Helper::build_base_url( $permalink_structure, $base );
 			$format              = UAGB_Helper::paged_format( $permalink_structure, $base );
 			$paged               = UAGB_Helper::get_paged( $query );
-			$p_limit             = UAGB_Block_Helper::get_fallback_number( $attributes['pageLimit'], 'pageLimit', $attributes['blockName'] );
+			$p_limit             = isset( $attributes['pageLimit'] ) ? sanitize_text_field( $attributes['pageLimit'] ) : 10;
 			$page_limit          = min( $p_limit, $query->max_num_pages );
-			$page_limit          = isset( $page_limit ) ? $page_limit : UAGB_Block_Helper::get_fallback_number( $attributes['postsToShow'], 'postsToShow', $attributes['blockName'] );
+			$page_limit          = isset( $page_limit ) ? $page_limit : sanitize_text_field( $attributes['postsToShow'] );
 
 			$links = paginate_links(
 				array(
@@ -1619,7 +1576,7 @@ if ( ! class_exists( 'UAGB_Post' ) ) {
 			if ( isset( $_POST['attributes'] ) ) {
 
 				// $_POST['attributes'] is sanitized in later stage.
-				$attr = isset( $_POST['attributes'] ) ? json_decode( stripslashes( $_POST['attributes'] ), true ) : array(); //phpcs:ignore WordPress.Security.ValidatedSanitizedInput.InputNotSanitized
+				$attr = isset( $_POST['attributes'] ) ? json_decode( wp_unslash( $_POST['attributes'] ), true ) : array(); // phpcs:ignore WordPress.Security.ValidatedSanitizedInput.InputNotSanitized
 
 				$post_attribute_array = $this->required_attribute_for_query( $attr );
 
@@ -1642,8 +1599,8 @@ if ( ! class_exists( 'UAGB_Post' ) ) {
 		 */
 		public function required_attribute_for_query( $attributes ) {
 			return array(
-				'postsOffset'        => UAGB_Block_Helper::get_fallback_number( sanitize_text_field( $attributes['postsOffset'] ), 'postsOffset', sanitize_text_field( $attributes['blockName'] ) ),
-				'postsToShow'        => UAGB_Block_Helper::get_fallback_number( sanitize_text_field( $attributes['postsToShow'] ), 'postsToShow', sanitize_text_field( $attributes['blockName'] ) ),
+				'postsOffset'        => ( isset( $attributes['postsOffset'] ) ) ? sanitize_text_field( $attributes['postsOffset'] ) : 0,
+				'postsToShow'        => ( isset( $attributes['postsToShow'] ) ) ? sanitize_text_field( $attributes['postsToShow'] ) : 6,
 				'postType'           => ( isset( $attributes['postType'] ) ) ? sanitize_text_field( $attributes['postType'] ) : 'post',
 				'order'              => ( isset( $attributes['order'] ) ) ? sanitize_text_field( $attributes['order'] ) : 'desc',
 				'orderBy'            => ( isset( $attributes['orderBy'] ) ) ? sanitize_text_field( $attributes['orderBy'] ) : 'date',
@@ -1665,10 +1622,10 @@ if ( ! class_exists( 'UAGB_Post' ) ) {
 		public function masonry_pagination() {
 
 			check_ajax_referer( 'uagb_masonry_ajax_nonce', 'nonce' );
-			
+
 			$post_attribute_array = array();
 			// $_POST['attr'] is sanitized in later stage.
-			$attr = isset( $_POST['attr'] ) ? json_decode( stripslashes( $_POST['attr'] ), true ) : array(); //phpcs:ignore WordPress.Security.ValidatedSanitizedInput.InputNotSanitized
+			$attr = isset( $_POST['attr'] ) ? json_decode( wp_unslash( $_POST['attr'] ), true ) : array(); // phpcs:ignore WordPress.Security.ValidatedSanitizedInput.InputNotSanitized
 
 			$attr['paged'] = isset( $_POST['page_number'] ) ? sanitize_text_field( $_POST['page_number'] ) : '';
 
@@ -1771,7 +1728,7 @@ if ( ! class_exists( 'UAGB_Post' ) ) {
 		public function render_innerblocks_with_wrapper( $attributes ) {
 			$length   = count( $attributes['layoutConfig'] );
 			$img_atts = array();
-		
+
 			// Iterate through the blocks and find the uagb/post-image block.
 			for ( $i = 0; $i < $length; $i++ ) {
 				if ( 'uagb/post-image' === $attributes['layoutConfig'][ $i ][0] ) {
@@ -1783,12 +1740,12 @@ if ( ! class_exists( 'UAGB_Post' ) ) {
 					$length--;
 				}
 			}
-		
+
 			// Render the uagb/post-image block(s) outside the wrapper, if it exists.
 			foreach ( $img_atts as $img_att ) {
 				echo esc_html( $this->render_layout( $img_att[0], $attributes ) );
 			}
-		
+
 			// Render all blocks except for the uagb/post-image block inside the wrapper.
 			echo '<div class="uag-post-grid-wrapper">';
 			for ( $i = 0; $i < $length; $i++ ) {
@@ -1969,7 +1926,7 @@ if ( ! class_exists( 'UAGB_Post' ) ) {
 					if ( empty( $value ) || ! is_array( $value ) ) {
 						return; // Exit early if this is not the attributes array.
 					}
-					if ( ! empty( $value['paginationType'] ) && 'ajax' !== $value['paginationType'] ) { 
+					if ( ! empty( $value['paginationType'] ) && 'ajax' !== $value['paginationType'] ) {
 						return; // Early return when pagination type exists and is not ajax.
 					}
 					?>
@@ -2013,6 +1970,7 @@ if ( ! class_exists( 'UAGB_Post' ) ) {
 
 			$target = ( $attributes['newTab'] ) ? '_blank' : '_self';
 			do_action( "uagb_single_post_before_featured_image_{$attributes['post_type']}", get_the_ID(), $attributes );
+
 			?>
 			<div class='uagb-post__image'>
 				<?php

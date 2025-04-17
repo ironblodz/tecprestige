@@ -44,7 +44,7 @@ function mc4wp($service = null)
 function mc4wp_get_options()
 {
     $defaults = require MC4WP_PLUGIN_DIR . '/config/default-settings.php';
-    $options  = (array) get_option('mc4wp', array());
+    $options  = (array) get_option('mc4wp', []);
     $options  = array_merge($defaults, $options);
 
     /**
@@ -121,7 +121,7 @@ function mc4wp_get_debug_log()
         }
 
         if (! is_file($dir . '/.htaccess')) {
-            $lines = array(
+            $lines = [
                 '<IfModule !authz_core_module>',
                 'Order deny,allow',
                 'Deny from all',
@@ -129,7 +129,7 @@ function mc4wp_get_debug_log()
                 '<IfModule authz_core_module>',
                 'Require all denied',
                 '</IfModule>',
-            );
+            ];
             file_put_contents($dir . '/.htaccess', join(PHP_EOL, $lines));
         }
 
@@ -181,7 +181,7 @@ function mc4wp_get_request_url()
     $site_request_uri = $wp->request;
 
     // fix for IIS servers using index.php in the URL
-    if (false !== stripos($_SERVER['REQUEST_URI'], '/index.php/' . $site_request_uri)) {
+    if (false !== strpos($_SERVER['REQUEST_URI'], '/index.php/' . $site_request_uri)) {
         $site_request_uri = 'index.php/' . $site_request_uri;
     }
 
@@ -272,7 +272,7 @@ function mc4wp_sanitize_deep($value)
  * @param array $data
  * @return array
  */
-function _mc4wp_update_groupings_data($data = array())
+function _mc4wp_update_groupings_data($data = [])
 {
 
     // data still has old "GROUPINGS" key?
@@ -282,10 +282,10 @@ function _mc4wp_update_groupings_data($data = array())
 
     // prepare new key
     if (! isset($data['INTERESTS'])) {
-        $data['INTERESTS'] = array();
+        $data['INTERESTS'] = [];
     }
 
-    $map = get_option('mc4wp_groupings_map', array());
+    $map = get_option('mc4wp_groupings_map', []);
 
     foreach ($data['GROUPINGS'] as $grouping_id => $groups) {
         // for compatibility with expanded grouping arrays
@@ -439,10 +439,13 @@ function _mc4wp_use_sslverify()
  */
 function mc4wp_obfuscate_string($string)
 {
-    $length            = strlen($string);
-    $obfuscated_length = ceil($length / 2);
-    $string            = str_repeat('*', $obfuscated_length) . substr($string, $obfuscated_length);
-    return $string;
+    if (strlen($string) <= 2) {
+        return $string;
+    }
+    $length = strlen($string);
+    $keep   = floor(strlen($string) / 3);
+    $keep   = min($keep, 4);
+    return substr($string, 0, $keep) . str_repeat('*', $length - ($keep * 2)) . substr($string, -$keep);
 }
 
 /**
@@ -518,7 +521,7 @@ function mc4wp_array_get($array, $key, $default = null)
 function mc4wp_kses($string)
 {
     $always_allowed_attr = array_fill_keys(
-        array(
+        [
             'aria-describedby',
             'aria-details',
             'aria-label',
@@ -531,13 +534,13 @@ function mc4wp_kses($string)
             'role',
             'data-*',
             'tabindex',
-        ),
+        ],
         true
     );
     $input_allowed_attr  = array_merge(
         $always_allowed_attr,
         array_fill_keys(
-            array(
+            [
                 'type',
                 'required',
                 'placeholder',
@@ -556,14 +559,14 @@ function mc4wp_kses($string)
                 'pattern',
                 'disabled',
                 'readonly',
-            ),
+            ],
             true
         )
     );
 
-    $allowed = array(
+    $allowed = [
         'p'        => $always_allowed_attr,
-        'label'    => array_merge($always_allowed_attr, array( 'for' => true )),
+        'label'    => array_merge($always_allowed_attr, [ 'for' => true ]),
         'input'    => $input_allowed_attr,
         'button'   => $input_allowed_attr,
         'fieldset' => $always_allowed_attr,
@@ -571,30 +574,30 @@ function mc4wp_kses($string)
         'ul'       => $always_allowed_attr,
         'ol'       => $always_allowed_attr,
         'li'       => $always_allowed_attr,
-        'select'   => array_merge($input_allowed_attr, array( 'multiple' => true )),
-        'option'   => array_merge($input_allowed_attr, array( 'selected' => true )),
-        'optgroup' => array(
+        'select'   => array_merge($input_allowed_attr, [ 'multiple' => true ]),
+        'option'   => array_merge($input_allowed_attr, [ 'selected' => true ]),
+        'optgroup' => [
             'disabled' => true,
             'label' => true,
-        ),
+        ],
         'textarea' => array_merge(
             $input_allowed_attr,
-            array(
+            [
                 'rows' => true,
                 'cols' => true,
-            )
+            ]
         ),
         'div'      => $always_allowed_attr,
         'strong'   => $always_allowed_attr,
         'b'         => $always_allowed_attr,
         'i'         => $always_allowed_attr,
-        'br'        => array(),
+        'br'        => [],
         'em'       => $always_allowed_attr,
         'span'     => $always_allowed_attr,
-        'a'        => array_merge($always_allowed_attr, array( 'href' => true )),
+        'a'        => array_merge($always_allowed_attr, [ 'href' => true ]),
         'img'      => array_merge(
             $always_allowed_attr,
-            array(
+            [
                 'src' => true,
                 'alt' => true,
                 'width' => true,
@@ -602,10 +605,10 @@ function mc4wp_kses($string)
                 'srcset' => true,
                 'sizes' => true,
                 'referrerpolicy' => true,
-            )
+            ]
         ),
         'u' => $always_allowed_attr,
-    );
+    ];
 
     return wp_kses($string, $allowed);
 }
@@ -621,6 +624,6 @@ function mc4wp_kses($string)
 function mc4wp_apply_deprecated_filters($old_hook, $new_hook)
 {
     add_filter($new_hook, function ($value, $a = null, $b = null, $c = null) use ($new_hook, $old_hook) {
-        return apply_filters_deprecated($old_hook, array( $value, $a, $b, $c ), '4.9.0', $new_hook);
+        return apply_filters_deprecated($old_hook, [ $value, $a, $b, $c ], '4.9.0', $new_hook);
     }, 10, 3);
 }

@@ -143,7 +143,7 @@ class THWCFD_Admin_Settings_Themehigh_Plugins extends THWCFD_Admin_Settings{
 			    return (isset($var['featured']) && $var['featured'] == true && !(isset($var['skip'])));
 			});
 			if(!empty($featured_plugins)){ ?>
-				<h2><?php _e('Compatible Plugins', 'woo-checkout-field-editor-pro'); ?></h2>
+				<h2><?php esc_html_e('Compatible Plugins', 'woo-checkout-field-editor-pro'); ?></h2>
 				<div class="th-plugins-wrapper featured">
 					<?php
 						foreach($featured_plugins as $plugin){
@@ -157,11 +157,11 @@ class THWCFD_Admin_Settings_Themehigh_Plugins extends THWCFD_Admin_Settings{
 						    <div class="th-plugins-child">
 						    	<div class="th-title-box">
 						    		<?php if($img){ ?>
-						    		<img src="<?php echo THWCFD_URL; ?>admin/assets/images/wp-plugins/<?php echo $img; ?>" alt="<?php echo $title; ?>">
+									<img src="<?php echo esc_url( THWCFD_URL . 'admin/assets/images/wp-plugins/' . $img ); ?>" alt="<?php echo esc_attr( $title ); ?>">
 						    		<?php } ?>
-						    		<h3><a href="https://wordpress.org/plugins/<?php echo esc_attr( $slug ); ?>" target="_blank"><?php echo $title; ?></a></h3>
+						    		<h3><a href="https://wordpress.org/plugins/<?php echo esc_attr( $slug ); ?>" target="_blank"><?php echo esc_html($title); ?></a></h3>
 						    	</div>
-						        <?php echo wpautop($content); ?>
+						        <?php echo wp_kses_post(wpautop($content)); ?>
 
 								<?php if($slug && $file){
 									$this->install_plugin_button($slug, $file, $title);
@@ -181,7 +181,7 @@ class THWCFD_Admin_Settings_Themehigh_Plugins extends THWCFD_Admin_Settings{
 			    return (!isset($var['featured']) && !isset($var['skip']));
 			});
 			if(!empty($regular_plugins)){ ?>
-				<h2><?php _e('Other Plugins', 'woo-checkout-field-editor-pro'); ?></h2>
+				<h2><?php esc_html_e('Other Plugins', 'woo-checkout-field-editor-pro'); ?></h2>
 				<div class="th-plugins-wrapper">
 					<?php
 						foreach($regular_plugins as $plugin){
@@ -195,11 +195,11 @@ class THWCFD_Admin_Settings_Themehigh_Plugins extends THWCFD_Admin_Settings{
 						    <div class="th-plugins-child">
 						    	<div class="th-title-box">
 						    		<?php if($img){ ?>
-						    		<img src="<?php echo THWCFD_URL; ?>admin/assets/images/wp-plugins/<?php echo $img; ?>" alt="<?php echo $title; ?>">
+										<img src="<?php echo esc_url( THWCFD_URL . 'admin/assets/images/wp-plugins/' . $img ); ?>" alt="<?php echo esc_attr( $title ); ?>">
 						    		<?php } ?>
-						    		<h3><a href="https://wordpress.org/plugins/<?php echo esc_attr( $slug ); ?>" target="_blank"><?php echo $title; ?></a></h3>
+						    		<h3><a href="https://wordpress.org/plugins/<?php echo esc_attr( $slug ); ?>" target="_blank"><?php echo esc_html($title); ?></a></h3>
 						    	</div>
-						        <?php echo wpautop($content); ?>
+						        <?php echo wp_kses_post((wpautop($content))); ?>
 
 								<?php if($slug && $file){
 									$this->install_plugin_button($slug, $file, $title);
@@ -316,7 +316,7 @@ class THWCFD_Admin_Settings_Themehigh_Plugins extends THWCFD_Admin_Settings{
 	}
 
 	function activate_themehigh_plugins(){
-		$plugin_file = isset($_REQUEST['file']) ? $_REQUEST['file'] : '';
+		$plugin_file = isset($_REQUEST['file']) ? sanitize_text_field(wp_unslash($_REQUEST['file'])) : '';
 		if( $plugin_file && check_ajax_referer( 'activate-plugin_' . $plugin_file ) ){
 			if ( current_user_can( 'install_plugins' ) && current_user_can( 'activate_plugins' ) ) {
 				if (!is_plugin_active($plugin_file) ) {

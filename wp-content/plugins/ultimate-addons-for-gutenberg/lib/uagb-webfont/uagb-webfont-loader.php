@@ -238,6 +238,11 @@ if ( ! class_exists( 'UAGB_WebFont_Loader' ) ) {
 			// Get the remote URL contents.
 			$this->remote_styles = $this->get_remote_url_contents();
 
+			// Early return, if remote style is not there
+			if ( ! isset( $this->remote_styles ) ) {
+				return '';
+			}
+
 			// Get an array of locally-hosted files.
 			$files = $this->get_local_files_from_css();
 
@@ -246,6 +251,15 @@ if ( ! class_exists( 'UAGB_WebFont_Loader' ) ) {
 				$files[ $remote ] = str_replace(
 					$this->get_base_path(),
 					$this->get_base_url(),
+					$local
+				);
+			}
+
+			// Convert base content paths to site content URLs.
+			foreach ( $files as $remote => $local ) {
+				$files[ $remote ] = str_replace(
+					$this->get_filesystem()->wp_content_dir(),
+					content_url() . '/',
 					$local
 				);
 			}

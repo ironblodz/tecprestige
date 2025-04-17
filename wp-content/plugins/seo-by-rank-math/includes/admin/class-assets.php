@@ -66,6 +66,7 @@ class Assets implements Runner {
 		// Scripts.
 		wp_register_script( self::PREFIX . 'common', $js . 'common.js', [ 'jquery', 'wp-i18n', 'lodash' ], rank_math()->version, true );
 		wp_register_script( self::PREFIX . 'dashboard', $js . 'dashboard.js', [ 'jquery', 'clipboard', 'lodash', 'wp-components', 'wp-element' ], rank_math()->version, true );
+		wp_register_script( self::PREFIX . 'components', $js . 'components.js', [ 'lodash', 'wp-components', 'wp-element', 'wp-api-fetch' ], rank_math()->version, true );
 
 		// Select2.
 		wp_register_style( 'select2-rm', $vendor . 'select2/select2.min.css', null, '4.0.6-rc.1' );
@@ -100,7 +101,7 @@ class Assets implements Runner {
 		}
 
 		if ( ! wp_script_is( 'lodash', 'registered' ) ) {
-			wp_register_script( 'lodash', rank_math()->plugin_url() . 'assets/vendor/lodash.js', [], rank_math()->version );
+			wp_register_script( 'lodash', rank_math()->plugin_url() . 'assets/vendor/lodash.js', [], rank_math()->version, [] );
 			wp_add_inline_script( 'lodash', 'window.lodash = _.noConflict();' );
 		}
 
@@ -144,7 +145,6 @@ class Assets implements Runner {
 		 * Allow other plugins to register/deregister admin styles or scripts after plugin assets.
 		 */
 		$this->do_action( 'admin/register_scripts' );
-
 	}
 
 	/**

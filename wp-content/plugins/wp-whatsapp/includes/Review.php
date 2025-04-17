@@ -29,12 +29,12 @@ if ( ! class_exists( 'NjtReview' ) ) {
 
 		public function doHooks() {
 			$option = get_option( "{$this->pluginPrefix}_review" );
-			if ( time() >= (int) $option && $option !== '1' ) {
+			if ( time() >= (int) $option && '1' !== $option ) {
 				add_action( 'admin_notices', array( $this, 'add_notification' ) );
 				add_action( "wp_ajax_{$this->pluginPrefix}_save_review", array( $this, 'save_review' ) );
 			}
 
-			if ( $option === '1' ) {
+			if ( '1' === $option ) {
 				$this->reviewed = true;
 			}
 		}
@@ -42,11 +42,11 @@ if ( ! class_exists( 'NjtReview' ) ) {
 		public function save_review() {
 			check_ajax_referer( 'njt_wa_review_nonce', 'nonce', true );
 
-			$field = sanitize_text_field( $_POST['field'] );
+			$field = isset( $_POST['field'] ) ? sanitize_text_field( $_POST['field'] ) : '';
 
-			if ( $field === 'later' ) {
+			if ( 'later' === $field ) {
 				$this->need_update_option( 3 );
-			} elseif ( $field === 'alreadyDid' || 'rateNow' === $field ) {
+			} elseif ( 'alreadyDid' === $field || 'rateNow' === $field ) {
 				update_option( "{$this->pluginPrefix}_review", 1 );
 			}
 			wp_send_json_success();
@@ -56,7 +56,7 @@ if ( ! class_exists( 'NjtReview' ) ) {
 			if ( $this->reviewed ) {
 				return;
 			}
-			$time = $now === true ? time() : ( time() + ( $days * 60 * 60 * 24 ) );
+			$time = $now ? time() : ( time() + ( $days * 60 * 60 * 24 ) );
 			update_option( "{$this->pluginPrefix}_review", $time );
 		}
 
@@ -66,12 +66,12 @@ if ( ! class_exists( 'NjtReview' ) ) {
 					$selector = esc_attr( $this->pluginPrefix ) . '-review';
 					?>
 					<div class="notice notice-success is-dismissible" id="<?php echo esc_attr( $selector ); ?>">
-						<h3><?php _e( "Give {$this->pluginName} a review" ); ?></h3>
+						<h3><?php echo esc_html( "Give {$this->pluginName} a review" ); ?></h3>
 						<p>
-							<?php _e( "Thank you for choosing {$this->pluginName}. We hope you love it. Could you take a couple of seconds posting a nice review to share your happy experience?" ); ?>
+							<?php echo esc_html( "Thank you for choosing {$this->pluginName}. We hope you love it. Could you take a couple of seconds posting a nice review to share your happy experience?" ); ?>
 						</p>
 						<p>
-							We will be forever grateful. Thank you in advance.
+							<?php echo esc_html__( 'We will be forever grateful. Thank you in advance.', 'wp-whatsapp' ); ?>
 						</p>
 						<p>
 							<a href="javascript:;" data="rateNow" class="button button-primary" style="margin-right: 5px"><?php esc_html_e( 'Rate now', 'wp-whatsapp' ); ?></a>

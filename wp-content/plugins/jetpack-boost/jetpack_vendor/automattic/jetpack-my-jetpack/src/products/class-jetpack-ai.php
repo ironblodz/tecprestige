@@ -29,6 +29,13 @@ class Jetpack_Ai extends Product {
 	public static $slug = 'jetpack-ai';
 
 	/**
+	 * The category of the product
+	 *
+	 * @var string
+	 */
+	public static $category = 'create';
+
+	/**
 	 * Whether this product has a free offering
 	 *
 	 * @var bool
@@ -36,20 +43,11 @@ class Jetpack_Ai extends Product {
 	public static $has_free_offering = true;
 
 	/**
-	 * Get the Product info for the API
+	 * The feature slug that identifies the paid plan
 	 *
-	 * @throws \Exception If required attribute is not declared in the child class.
-	 * @return array
+	 * @var string
 	 */
-	public static function get_info() {
-		// Call parent method to get the default info.
-		$info = parent::get_info();
-
-		// Populate the product with the feature data.
-		$info['ai-assistant-feature'] = self::get_ai_assistant_feature();
-
-		return $info;
-	}
+	public static $feature_identifying_paid_plan = 'ai-assistant';
 
 	/**
 	 * Get the plugin slug - ovewrite it and return Jetpack's
@@ -272,6 +270,7 @@ class Jetpack_Ai extends Product {
 		}
 
 		$features = array(
+			__( 'High request capacity *', 'jetpack-my-jetpack' ),
 			__( 'Generate text, tables, lists, and forms', 'jetpack-my-jetpack' ),
 			__( 'Easily refine content to your liking', 'jetpack-my-jetpack' ),
 			__( 'Make your content easier to read', 'jetpack-my-jetpack' ),
@@ -444,23 +443,17 @@ class Jetpack_Ai extends Product {
 	}
 
 	/**
-	 * Checks whether the site has a paid plan for this product
+	 * Get the product-slugs of the paid plans for this product.
+	 * (Do not include bundle plans, unless it's a bundle plan itself).
 	 *
-	 * @return boolean
+	 * @return array
 	 */
-	public static function has_paid_plan_for_product() {
-		$purchases_data = Wpcom_Products::get_site_current_purchases();
-		if ( is_wp_error( $purchases_data ) ) {
-			return false;
-		}
-		if ( is_array( $purchases_data ) && ! empty( $purchases_data ) ) {
-			foreach ( $purchases_data as $purchase ) {
-				if ( str_contains( $purchase->product_slug, 'jetpack_ai' ) ) {
-					return true;
-				}
-			}
-		}
-		return false;
+	public static function get_paid_plan_product_slugs() {
+		return array(
+			'jetpack_ai_yearly',
+			'jetpack_ai_monthly',
+			'jetpack_ai_bi_yearly',
+		);
 	}
 
 	/**
@@ -499,7 +492,7 @@ class Jetpack_Ai extends Product {
 	 * @return ?string
 	 */
 	public static function get_post_checkout_url() {
-		return '/wp-admin/admin.php?page=my-jetpack#/jetpack-ai';
+		return self::get_manage_url();
 	}
 
 	/**
@@ -508,7 +501,7 @@ class Jetpack_Ai extends Product {
 	 * @return ?string
 	 */
 	public static function get_post_activation_url() {
-		return '/wp-admin/admin.php?page=my-jetpack#/jetpack-ai';
+		return self::get_manage_url();
 	}
 
 	/**
@@ -517,7 +510,7 @@ class Jetpack_Ai extends Product {
 	 * @return ?string
 	 */
 	public static function get_manage_url() {
-		return '/wp-admin/admin.php?page=my-jetpack#/jetpack-ai';
+		return admin_url( 'admin.php?page=my-jetpack#/jetpack-ai' );
 	}
 
 	/**
@@ -610,7 +603,7 @@ class Jetpack_Ai extends Product {
 	 * @return void
 	 */
 	public static function extend_plugin_action_links() {
-		add_action( 'admin_enqueue_scripts', array( static::class, 'admin_enqueue_scripts' ) );
+		add_action( 'myjetpack_enqueue_scripts', array( static::class, 'admin_enqueue_scripts' ) );
 		add_filter( 'default_content', array( static::class, 'add_ai_block' ), 10, 2 );
 	}
 
@@ -648,9 +641,11 @@ class Jetpack_Ai extends Product {
 	 * @param WP_Post $post The post object.
 	 * @return string
 	 */
-	public static function add_ai_block( $content, WP_Post $post ) {
+	public static function add_ai_block( $content, $post ) {
 		if ( isset( $_GET['use_ai_block'] ) && isset( $_GET['_wpnonce'] )
 			&& wp_verify_nonce( sanitize_text_field( wp_unslash( $_GET['_wpnonce'] ) ), 'ai-assistant-content-nonce' )
+			&& ! empty( $post )
+			&& ! is_wp_error( $post )
 			&& current_user_can( 'edit_post', $post->ID )
 			&& '' === $content
 		) {

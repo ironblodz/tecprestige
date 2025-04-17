@@ -2,11 +2,11 @@
 Contributors: studiowombat,maartenbelmans
 Tags: woocommerce product addons, woocommerce, woocommerce product options, product addons, product fields
 Requires at least: 4.5
-Tested up to: 6.6.1
+Tested up to: 6.7.2
 Requires PHP: 5.6
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
-Stable tag: 1.6.10
+Stable tag: 1.6.13
 
 Add options (addons) to your WooCommerce products so your customers can personalize their products. Product forms for everyone!
 
@@ -113,8 +113,10 @@ Everything from the free version, plus:
   * **Color swatches** - multi and single color options
   * **Text swatches** - text options
   * **Date** - adds a calendar picker
-  * **Calculation** - adds an informative calculation (like "square meters") or a cost calculation.
+  * **Calculation** - adds an informative calculation (like "square meters") or a separate extra cost calculation.
   * **Image with quantities** - image swatches with quantity inputs underneath.
+  * **Child products** - select other products from your store as options (and enjoy stock control).
+  * **Cards** - clickable cards with nicely layout information.
 * Content fields to add content to your product pages (no form inputs):
   * **Image** - to add extra images
   * **Text/HTML** - to add extra text, HTML, or even shortcodes
@@ -163,6 +165,19 @@ From your WordPress dashboard
  You'll need WooCommerce 3.6.0 or higher, WordPress 4.7 or higher, and PHP 7.0 or higher to make this plugin work.
 
 == Changelog ==
+
+= 1.6.13 =
+ * Fix: fixed a few translation strings.
+ * Other: added changelog.txt.
+ * Other: verified Woo 9.8 pre-release compatibility.
+ * Dev: fixed developer filters for field and container classes.
+ 
+= 1.6.12 =
+ * Fix: a few texts were not translatable yet. This is now fixed.
+ * Other: verified compatibility with the upcoming WP version 6.7.
+ 
+= 1.6.11 =
+ * Fix: fixed a PHP 8 deprecation warning.
 
 = 1.6.10 =
  * Fix: products with a large amount of variations and no fields present wrongly called our "calculate" method.

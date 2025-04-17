@@ -348,7 +348,7 @@ if (!class_exists('Webtoffee_Product_Feed_Sync_Fruugo_Export')) {
                     if( $product->is_type( 'variation' ) ){
                         $parent_id = $product->get_parent_id();
                         $parent_post = get_post( $parent_id );
-                        if( !is_object( $parent_post ) || ( is_object( $parent_post ) && 'draft' == $parent_post->post_status ) ){
+                        if( !is_object( $parent_post ) || ( is_object( $parent_post ) && ( 'draft' == $parent_post->post_status || 'private' == $parent_post->post_status || 'pending' == $parent_post->post_status ) ) ){
                             continue;
                         }
                     }                    
@@ -416,21 +416,24 @@ if (!class_exists('Webtoffee_Product_Feed_Sync_Fruugo_Export')) {
             }            
             
             $product_id = $product_object->get_id();
-            $product = get_post($product_id);
 
             $row = array();
 
             foreach ($export_columns as $key => $value) {
                 if (method_exists($this, $value)) {
-                    $column_data = $this->$value($key, $value, $export_columns);
-                    if(isset($this->fruugo_feed_keys[$value])){
-                        $row[$this->fruugo_feed_keys[$value]] = $column_data;
+                    $column_data = $this->$value($key, $value, $export_columns);                    
+                    if(isset($this->fruugo_feed_keys[$key])){
+                        $row[$this->fruugo_feed_keys[$key]] = $column_data;
                     }else{
                         $row[$key] = $column_data;
                     }
                 }elseif (strpos($value, 'meta:') !== false) {
                     $mkey = str_replace('meta:', '', $value);
-                    $row[$key] = get_post_meta($product_id, $mkey, true);
+                    if(isset($this->fruugo_feed_keys[$key])){
+                        $row[$this->fruugo_feed_keys[$key]] = get_post_meta($product_id, $mkey, true);
+                    }else{
+                        $row[$key] = get_post_meta($product_id, $mkey, true);
+                    }
                     // TODO
                     // wt_image_ function can be replaced with key exist check
                 }elseif (strpos($value, 'wt_pf_pa_') !== false) {
@@ -469,7 +472,7 @@ if (!class_exists('Webtoffee_Product_Feed_Sync_Fruugo_Export')) {
                 }
             }
 
-                        return apply_filters('wt_batch_product_export_row_data', $row, $product);
+                        return apply_filters("wt_batch_product_export_row_data_{$this->parent_module->module_base}", $row, $product_object);
         }
 
         /**
@@ -533,7 +536,7 @@ if (!class_exists('Webtoffee_Product_Feed_Sync_Fruugo_Export')) {
          * @return mixed|void
          */
         public function language($catalog_attr, $product_attr, $export_columns) {
-            return apply_filters('wt_feed_filter_product_language', 'en', $this->product);
+            return apply_filters('wt_feed_filter_product_language', substr( get_bloginfo ( 'language' ), 0, 2 ), $this->product);
         }         
         
         
@@ -546,6 +549,7 @@ if (!class_exists('Webtoffee_Product_Feed_Sync_Fruugo_Export')) {
 			$ean = ('' == $custom_ean) ? '' : $custom_ean;
 			return apply_filters('wt_feed_product_ean', $ean, $this->product);
 	}
+        
 	public function isbn($catalog_attr, $product_attr, $export_columns){
 		
 			$custom_isbn = get_post_meta($this->product->get_id(), '_wt_feed_isbn', true);
@@ -653,7 +657,7 @@ if (!class_exists('Webtoffee_Product_Feed_Sync_Fruugo_Export')) {
            if (isset($this->form_data['advanced_form_data']['wt_pf_file_as']) && 'xml' === $this->form_data['advanced_form_data']['wt_pf_file_as']) {
                
                $description = array(
-                   'Language' => apply_filters('wt_feed_filter_product_language', 'en', $this->product),
+                   'Language' => apply_filters('wt_feed_filter_product_language', substr( get_bloginfo ( 'language' ), 0, 2 ), $this->product),
                    'Title' => $this->title($catalog_attr, $product_attr, $export_columns),
                    'Description' => $this->wt_remove_emoji( $description )
                    

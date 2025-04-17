@@ -97,6 +97,28 @@ if ( ! class_exists( 'AWL_Admin_Page_Premium' ) ) :
                     echo '</div>';
                 echo '</div>';
 
+                 echo '<div class="features-item">';
+                    echo '<div class="column">';
+                        echo '<h4 class="title">';
+                            echo __( 'Label Animation', 'advanced-woo-labels' );
+                        echo '</h4>';
+                        echo '<p class="desc">';
+                            echo __( 'Set unique animation for each label with different customizable parameters.', 'advanced-woo-labels' );
+                            echo '<br><a href="https://advanced-woo-labels.com/guide/label-animations/?utm_source=plugin&utm_medium=premium-tab&utm_campaign=awl-pro-plugin" target="_blank">' . __( 'Learn more', 'advanced-woo-labels' ) . '</a>';
+                            echo '<ul>';
+                                echo '<li>' . __( 'Choose one of predefined animation types', 'advanced-woo-labels' ) . '</li>';
+                                echo '<li>' . __( 'Customize animation parameters', 'advanced-woo-labels' ) . '</li>';
+                                echo '<li>' . __( 'Create your own custom animations', 'advanced-woo-labels' ) . '</li>';
+                            echo '</ul>';
+                        echo '</p>';
+                    echo '</div>';
+                    echo '<div class="column">';
+                        echo '<div class="img">';
+                            echo '<img alt="" src="' . AWL_URL . '/assets/img/pro/feature-animation.gif' . '" />';
+                        echo '</div>';
+                    echo '</div>';
+                echo '</div>';
+
                 echo '<div class="features-item">';
                     echo '<div class="column">';
                         echo '<h4 class="title">';
@@ -191,11 +213,12 @@ if ( ! class_exists( 'AWL_Admin_Page_Premium' ) ) :
                         echo '</h4>';
                         echo '<p class="desc">';
                             echo __( 'Use even more label styling options to fully adapt it to your needs.', 'advanced-woo-labels' );
-                            echo '<br><a href="https://advanced-woo-labels.com/guide/label-custom-links/?utm_source=plugin&utm_medium=premium-tab&utm_campaign=awl-pro-plugin" target="_blank">' . __( 'Learn more', 'advanced-woo-labels' ) . '</a>';
+                            echo '<br><a href="https://advanced-woo-labels.com/guide/styling-settings/?utm_source=plugin&utm_medium=premium-tab&utm_campaign=awl-pro-plugin" target="_blank">' . __( 'Learn more', 'advanced-woo-labels' ) . '</a>';
                             echo '<ul>';
                                 echo '<li>' . __( 'Set label shadows', 'advanced-woo-labels' ) . '</li>';
                                 echo '<li>' . __( 'Set label borders color', 'advanced-woo-labels' ) . '</li>';
                                 echo '<li>' . __( 'Set label borders size', 'advanced-woo-labels' ) . '</li>';
+                                echo '<li>' . __( 'Set label rotation', 'advanced-woo-labels' ) . '</li>';
                                 echo '<li>' . __( 'Additional label templates', 'advanced-woo-labels' ) . '</li>';
                             echo '</ul>';
                         echo '</p>';
@@ -231,12 +254,14 @@ if ( ! class_exists( 'AWL_Admin_Page_Premium' ) ) :
                 echo '<div class="features-item">';
                     echo '<div class="column">';
                         echo '<h4 class="title">';
-                            echo __( 'WCFM / Dokan Plugins Support', 'advanced-woo-labels' );
+                            echo __( 'WCFM / Dokan / WC Vendors Plugins Support', 'advanced-woo-labels' );
                         echo '</h4>';
                         echo '<p class="desc">';
-                            echo __( 'Build-in integration with WCFM Multivendor Marketplace and Dokan Multivendor Marketplace plugins. Show vendor related data inside product labels and create special labels display conditions based on these data.', 'advanced-woo-labels' );
+                            echo __( 'Build-in integration with WCFM Multivendor Marketplace, WC Vendors and Dokan Multivendor Marketplace plugins. Show vendor related data inside product labels and create special labels display conditions based on these data.', 'advanced-woo-labels' );
                             echo '<br><a href="https://advanced-woo-labels.com/guide/wcfm-multivendor-marketplace/?utm_source=plugin&utm_medium=premium-tab&utm_campaign=awl-pro-plugin" target="_blank">' . __( 'Learn more', 'advanced-woo-labels' ) . ' (WCFM)</a>';
                             echo '<br><a href="https://advanced-woo-labels.com/guide/dokan-woocommerce-multivendor-marketplace/?utm_source=plugin&utm_medium=premium-tab&utm_campaign=awl-pro-plugin" target="_blank">' . __( 'Learn more', 'advanced-woo-labels' ) . ' (Dokan)</a>';
+                            echo '<br><a href="https://advanced-woo-labels.com/guide/wc-vendors/?utm_source=plugin&utm_medium=premium-tab&utm_campaign=awl-pro-plugin" target="_blank">' . __( 'Learn more', 'advanced-woo-labels' ) . ' (WC Vendors)</a>';
+
                             echo '<ul>';
                                 echo '<li>' . __( 'Show vendor data via text variables', 'advanced-woo-labels' ) . '</li>';
                                 echo '<li>' . __( 'Label display conditions based on vendor data', 'advanced-woo-labels' ) . '</li>';

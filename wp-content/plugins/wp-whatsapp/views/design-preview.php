@@ -33,7 +33,7 @@ use NTA_WhatsApp\Helper;
 						</div>
 					<% } else { %>
 						<div class="wa__popup_avatar nta-default-avt">
-							<?php echo Helper::print_icon(); ?>
+							<?php echo Helper::print_icon(); //phpcs:ignore ?>
 						</div>
 					<% } %>
 					<div class="wa__popup_txt">

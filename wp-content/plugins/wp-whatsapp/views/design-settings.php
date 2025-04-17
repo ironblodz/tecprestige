@@ -127,18 +127,9 @@
 		<tr>
 			<th scope="row"><label for=""><?php echo esc_html__( 'Widget Scroll Bar (PRO)', 'wp-whatsapp' ); ?><span class="dashicons dashicons-editor-help njt-wa-tooltip"></span></label></th>
 			<td>
-				<div class="nta-wa-switch-control" style="margin-top: 5px;">
-					<input class="njt-wa-pro" type="checkbox" id="isShowScroll" name="isShowScroll" <?php checked( $option['isShowScroll'], 'ON' ); ?>>
+				<div class="nta-wa-switch-control" style="margin-top: 5px; pointer-events: none;">
+					<input class="njt-wa-pro" type="checkbox" id="isShowScroll" name="isShowScroll" <?php checked( false ); ?>>
 					<label for="isShowScroll" class="green njt-wa-pro-tooltip"></label>
-				</div>
-			</td>
-		</tr>
-		<tr>
-			<th scope="row"><label for=""><?php echo esc_html__( 'Powered-by Label (PRO)', 'wp-whatsapp' ); ?></label></th>
-			<td>
-				<div class="nta-wa-switch-control" style="margin-top: 5px;">
-					<input class="njt-wa-pro" type="checkbox" id="isShowPoweredBy" name="isShowPoweredBy" <?php checked( $option['isShowPoweredBy'], 'ON' ); ?>>
-					<label for="isShowPoweredBy" class="green njt-wa-pro-tooltip"></label>
 				</div>
 			</td>
 		</tr>

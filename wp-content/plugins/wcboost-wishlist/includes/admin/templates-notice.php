@@ -51,10 +51,10 @@ class Templates_Notice extends Templates_Status_Notice {
 	 *
 	 * @return string
 	 */
-	protected function outdated_templates_notice_html() {
+	public function get_notice_message() {
 		$theme = wp_get_theme();
 
 		/* translators: %s Theme name */
-		return '<p>' . sprintf( __( '<strong>Your theme (%s) contains outdated copies of some template files from the WBoost - Wishlist plugin.</strong> These files may need updating to ensure they are compatible with the current version of WCBoost - Wishlist.', 'wcboost-wishlist' ), esc_html( $theme['Name'] ) ) . '</p>';
+		return sprintf( __( '<strong>Your theme (%s) contains outdated copies of some template files from the WBoost - Wishlist plugin.</strong> These files may need updating to ensure they are compatible with the current version of WCBoost - Wishlist.', 'wcboost-wishlist' ), esc_html( $theme['Name'] ) );
 	}
 }

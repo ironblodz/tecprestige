@@ -3,8 +3,8 @@ Contributors: nextendweb
 Tags: social login, facebook, google, twitter, x, linkedin, register, login, social, nextend facebook connect, social sign in
 Donate link: https://www.facebook.com/nextendweb
 Requires at least: 4.9
-Tested up to: 6.6.1
-Stable tag: 3.1.14
+Tested up to: 6.7.1
+Stable tag: 3.1.17
 Requires PHP: 7.0
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
@@ -125,6 +125,33 @@ Using the Pro Addon you can set where the login buttons should appear on the Reg
 
 == Changelog ==
 
+= 3.1.17 =
+* Fix: PHP warnings in the Getting Started section of some providers
+
+* PRO: Improvement: [Apple](https://nextendweb.com/nextend-social-login-docs/provider-apple/) provider security improvements.
+* PRO: Improvement: [Kakao](https://nextendweb.com/nextend-social-login-docs/provider-kakao/) Getting Started and core integration update.
+* PRO: Removed: [BuddyPress](https://nextendweb.com/nextend-social-login-docs/global-settings-buddypress/) - BuddyPress registration integration - as BuddyPress deprecated the option to create traditional WordPress accounts for unverified users.
+* PRO: Feature: [BuddyPress](https://nextendweb.com/nextend-social-login-docs/global-settings-buddypress/) - Email template for registration - setting defines the email template that the registration notification will use when the registration happens with social login. Earlier this was part of the BuddyPress registration integration.
+
+
+= 3.1.16 =
+* Fix: Some third parties could end up breaking our "Page for register flow" and "OAuth redirect uri proxy page" select inputs
+* Fix: WordPress 6.7 compatibility - fix for "_load_textdomain_just_in_time was called incorrectly" notice
+
+* PRO: Fix: [Steam](https://nextendweb.com/nextend-social-login-docs/provider-steam/) - Invalid Params error
+
+
+= 3.1.15 =
+* Fix: Our BroadcastChannel could prevent the back/forward cache (or bfcache) from caching the page
+* Improvement: Auto-linking security improvements.
+* Improvement: [Facebook](https://nextendweb.com/nextend-social-login-docs/provider-facebook/#configuration/) Getting Started updated.
+* Feature: [Google](https://nextendweb.com/nextend-social-login-docs/provider-google/) provider - Added option to choose a custom profile image size.
+
+* PRO: Fix: [Line](https://nextendweb.com/nextend-social-login-docs/provider-line/) - PHP warning when the returned name was 1 word long only
+* PRO: Improvement: [TikTok](https://nextendweb.com/nextend-social-login-docs/provider-tiktok/#configuration) Getting Started updated.
+* PRO: Improvement: [Custom Actions](https://nextendweb.com/nextend-social-login-docs/global-settings-custom-actions/) - option to display the buttons with either login or register specific label, based on the field where the action was added.
+
+
 = 3.1.14 =
 * Fix: Updated compatibility with Jetpack (Jetpack_SSO class has been changed to Automattic\Jetpack\Connection\SSO).
 * Fix: Fixed an issue where the old avatar would still show up due to browser cache even after the avatar has been changed and synced.
@@ -145,7 +172,7 @@ Using the Pro Addon you can set where the login buttons should appear on the Reg
 
 
 = 3.1.13 =
-* Security fix: Error message sanitization.
+* Improvement: Error message sanitization.
 
 
 = 3.1.12 =

@@ -199,7 +199,7 @@ class Helper {
 	public static function generate_item_key( $product ) {
 		$product_id = is_a( $product, 'WC_Product' ) ? $product->get_id() : $product;
 
-		return apply_filters( 'wcboost_products_compare_item_key',  md5( $product_id ) );
+		return apply_filters( 'wcboost_products_compare_item_key', md5( $product_id ) );
 	}
 
 	/**

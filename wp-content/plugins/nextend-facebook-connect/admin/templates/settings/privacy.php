@@ -1,21 +1,34 @@
 <script type="text/javascript">
     (function ($) {
 
-        window.NSLResetTerms = function () {
-            var id = 'terms',
-                content =  <?php echo wp_json_encode('By clicking Register, you accept our <a href="#privacy_policy_url" target="_blank">Privacy Policy</a>'); ?>;
+        window.NSLIsTermsResetInProgress = false;
+        const nslTermsEditorId = 'terms-helper';
 
-            if ($('#wp-' + id + '-wrap').hasClass('html-active')) {
-                $('#' + id).val(content);
+        window.NSLResetTerms = () => {
+            const visibleTermsContent =  <?php echo wp_json_encode(NextendSocialLogin::getDefaultPrivacyTerms()); ?>;
+            window.NSLIsTermsResetInProgress = true;
+
+            if ($('#wp-' + nslTermsEditorId + '-wrap').hasClass('html-active')) {
+                $('#' + nslTermsEditorId).val(visibleTermsContent);
             } else { // We are in tinyMCE mode
-                var activeEditor = tinyMCE.get(id);
+                var activeEditor = tinyMCE.get(nslTermsEditorId);
                 if (activeEditor !== null) {
-                    activeEditor.setContent(content);
+                    activeEditor.setContent(visibleTermsContent);
                 }
             }
 
+            NSLChangeTermsValue('');
+
             return false;
         };
+
+        window.NSLChangeTermsValue = (newValue) => {
+            const realTermsField = $('textarea[name="terms"]');
+
+            if (newValue !== realTermsField.val()) {
+                realTermsField.val(newValue);
+            }
+        }
 
         $(document).ready(function () {
             $('#terms_show').on('change', function () {
@@ -23,6 +36,55 @@
                     $('#nsl-terms').css('display', '');
                 } else {
                     $('#nsl-terms').css('display', 'none');
+                }
+            });
+
+            const maybeSyncVisualEditorChanges = (editor, e) => {
+                if (editor && e) {
+                    if (e.type === 'input' || e.type === 'keyup') {
+                        window.NSLIsTermsResetInProgress = false;
+                    }
+
+                    if (!window.NSLIsTermsResetInProgress) {
+                        /**
+                         * TinyMCE might modify the content of the TinyMCE editor on form submit, thus triggering a change event.
+                         * If there is a terms reset in progress, we shouldn't attempt to use that changed value!
+                         */
+                        NSLChangeTermsValue(editor.getContent());  // Sync hidden field with editor content ( Visual mode )
+                    }
+                }
+            };
+
+            if (typeof tinyMCE !== 'undefined') {
+                let editor = tinyMCE.get(nslTermsEditorId);
+                if (editor) {
+                    /**
+                     * TinyMCE editor loaded on page load ( the Visual tab was active on page load )
+                     */
+                    editor.on('change input keyup', e => {
+                        maybeSyncVisualEditorChanges(editor, e);
+                    });
+                } else {
+                    $(document).on('tinymce-editor-init', (event, editor) => {
+                        /**
+                         * TinyMCE editor is lazy loaded  ( the Text tab was active on page load )
+                         */
+                        if (editor.id === nslTermsEditorId) {
+                            editor.on('change input keyup', e => {
+                                maybeSyncVisualEditorChanges(editor, e);
+                            });
+                        }
+                    });
+                }
+            }
+
+            $('#' + nslTermsEditorId).on('change input', e => {
+                if (e.type === 'input') {
+                    window.NSLIsTermsResetInProgress = false;
+                }
+
+                if (!window.NSLIsTermsResetInProgress) {
+                    NSLChangeTermsValue($('#' + nslTermsEditorId).val()); // Sync hidden field with editor content ( Text mode )
                 }
             });
         });
@@ -44,11 +106,12 @@
 
                 <div id="nsl-terms" <?php if ($settings->get('terms_show') != '1') : ?> style="display:none;" <?php endif; ?>>
                     <?php
-                    wp_editor($settings->get('terms'), 'terms', array(
+                    wp_editor(NextendSocialLogin::getPrivacyTerms(), 'terms-helper', array(
                         'textarea_rows' => 4,
                         'media_buttons' => false
                     ));
                     ?>
+                    <textarea name="terms" style="display:none;"><?php echo $settings->get('terms'); ?></textarea>
                     <p class="description"><a href="#"
                                               onclick="return NSLResetTerms();"><?php _e('Reset to default', 'nextend-facebook-connect'); ?></a>
                 </div>

@@ -187,7 +187,7 @@ class Webtoffee_Product_Feed_Sync_Google_Export extends Webtoffee_Product_Feed_P
                 if( $product->is_type( 'variation' ) ){
                     $parent_id = $product->get_parent_id();
                     $parent_post = get_post( $parent_id );
-                    if( !is_object( $parent_post ) || ( is_object( $parent_post ) && 'draft' == $parent_post->post_status ) ){
+                    if( !is_object( $parent_post ) || ( is_object( $parent_post ) && ( 'draft' == $parent_post->post_status || 'private' == $parent_post->post_status || 'pending' == $parent_post->post_status ) ) ){
                         continue;
                     }
                 }
@@ -214,9 +214,12 @@ class Webtoffee_Product_Feed_Sync_Google_Export extends Webtoffee_Product_Feed_P
                         foreach ($children_ids as $id) {                                
                             if(!in_array($id, $products_ids)){  // skipping if alredy processed in $products_ids                                                                                                                               
                                 $variation = wc_get_product($id);  
+                                if( !is_object($variation)){
+                                    continue;
+                                }
                                 $this->parent_product = $product;
                                 $this->product = $variation;
-                                                                    $this->current_product_id = $variation->get_id();
+                                $this->current_product_id = $variation->get_id();
                                 if(is_object($variation)){
                                     $product_array[] = $this->generate_row_data_wc_lower($variation);
                                 }
@@ -246,8 +249,7 @@ class Webtoffee_Product_Feed_Sync_Google_Export extends Webtoffee_Product_Feed_P
 
         $export_columns = $this->parent_module->get_selected_column_names();
 
-		$product_id = $product_object->get_id();
-        $product = get_post($product_id);
+        $product_id = $product_object->get_id();
 
         $csv_columns = $export_columns; //Webtoffee_Product_Feed_Sync_Google::wt_array_walk($export_columns,'meta:'); // Remove string 'meta:' from keys and values, YOAST support
 
@@ -259,8 +261,14 @@ class Webtoffee_Product_Feed_Sync_Google_Export extends Webtoffee_Product_Feed_P
                 if (method_exists($this, $value)) {
                     $row[$key] = $this->$value($key, $value, $export_columns);
                 }elseif (strpos($value, 'meta:') !== false) {
-                    $mkey = str_replace('meta:', '', $value);
-                    $row[$key] = get_post_meta($product_id, $mkey, true);
+					$mkey = str_replace('meta:', '', $value);
+                    if($product_object->is_type('variation')){
+                        $product_id = $product_object->get_parent_id();
+                    }
+                    if ( (strpos($value, 'global_unique_id') !== false) || (strpos($value, 'alg_ean') !== false) ){
+                        $product_id = $product_object->get_id();
+                    }
+                    $row[$key] = wp_strip_all_tags( get_post_meta($product_id, $mkey, true) );
                     // TODO
                     // wt_image_ function can be replaced with key exist check
                 }elseif (strpos($value, 'wt_pf_pa_') !== false) {
@@ -301,7 +309,7 @@ class Webtoffee_Product_Feed_Sync_Google_Export extends Webtoffee_Product_Feed_P
             
         
 
-        return apply_filters('wt_batch_product_export_row_data', $row, $product);
+        return apply_filters("wt_batch_product_export_row_data_{$this->parent_module->module_base}", $row, $product_object);
     }
 
 	
@@ -313,42 +321,7 @@ class Webtoffee_Product_Feed_Sync_Google_Export extends Webtoffee_Product_Feed_P
 	public function id($catalog_attr, $product_attr, $export_columns) {
 		return apply_filters( 'wt_feed_filter_product_id', $this->product->get_id(), $this->product );
 	}
-	
-	/**
-	 * Get product name.
-	 *
-	 * @return mixed|void
-	 */
-	public function title($catalog_attr, $product_attr, $export_columns) {
 		
-		$title =  $this->product->get_name( );
-		
-		// Add all available variation attributes to variation title.
-		if ( $this->product->is_type( 'variation' ) && ! empty( $this->product->get_attributes() ) ) {
-			$title      = $this->parent_product->get_name();
-			$attributes = [];
-			foreach ( $this->product->get_attributes() as $slug => $value ) {
-				$attribute = $this->product->get_attribute( $slug );
-				if ( ! empty( $attribute ) ) {
-					$attributes[ $slug ] = $attribute;
-				}
-			}
-			
-			// set variation attributes with separator
-			$separator = ',';
-
-			$variation_attributes = implode( $separator, $attributes );
-			
-			//get product title with variation attribute
-			$get_with_var_attributes = apply_filters( "wt_feed_get_product_title_with_variation_attribute", true, $this->product );
-			
-			if ( $get_with_var_attributes ) {
-				$title .= " - " . $variation_attributes;
-			}
-		}
-		
-		return apply_filters( 'wt_feed_filter_product_title', $title, $this->product );
-	}
 	
 	/**
 	 * Get parent product title for variation.
@@ -905,6 +878,9 @@ class Webtoffee_Product_Feed_Sync_Google_Export extends Webtoffee_Product_Feed_P
 		return apply_filters( 'wt_feed_filter_product_sku_id', $sku_id, $this->product );
 	}
 	
+	public function promotion_id($catalog_attr, $product_attr, $export_columns) {
+		return apply_filters('wt_feed_filter_product_promotion_id', $this->product->get_id(), $this->product, $this->form_data);
+	}
 	
 	public function brand($catalog_attr, $product_attr, $export_columns) {
 		
@@ -963,9 +939,12 @@ class Webtoffee_Product_Feed_Sync_Google_Export extends Webtoffee_Product_Feed_P
 	public function gtin($catalog_attr, $product_attr, $export_columns){
 		
 			$custom_gtin = get_post_meta($this->product->get_id(), '_wt_feed_gtin', true);
-                        if( !$custom_gtin ){
-                            $custom_gtin = get_post_meta($this->product->get_id(), '_wt_google_gtin', true);
-                        }                        
+			if( !$custom_gtin ){
+				$custom_gtin = get_post_meta($this->product->get_id(), '_wt_google_gtin', true);
+			}
+			if(!$custom_gtin){
+				$custom_gtin = get_post_meta($this->product->get_id(), '_global_unique_id', true);
+			}
 			$gtin = ( $custom_gtin) ? $custom_gtin : '';
 			return apply_filters('wt_feed_product_gtin', $gtin, $this->product);
 	}
@@ -1727,6 +1706,15 @@ class Webtoffee_Product_Feed_Sync_Google_Export extends Webtoffee_Product_Feed_P
 	public function tax_status($catalog_attr, $product_attr, $export_columns) {
 		return apply_filters( 'wt_feed_filter_product_tax_status', $this->product->get_tax_status(), $this->product );
 	}
+        
+        public function checkout_link_template($catalog_attr, $product_attr, $export_columns) {                                                
+            
+            $id = $this->product->get_id();
+            $checkout_url = trailingslashit( wc_get_checkout_url() ).'?&add-to-cart='.$id;            
+
+            return apply_filters("wt_feed_{$this->parent_module->module_base}_product_checkout_link", $checkout_url, $this->product);
+            
+        }        
 	
     /**
      * Format the data if required

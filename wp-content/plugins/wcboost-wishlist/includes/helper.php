@@ -5,53 +5,36 @@ defined( 'ABSPATH' ) || exit;
 
 class Helper {
 
-	const COOKIE_NAME = 'wcboost_wishlist_hash';
-
-	/**
-	 * Store session in a variable.
-	 * This will be useful when set the cookie on the first time.
-	 *
-	 * @var string;
-	 */
-	protected static $session_id = '';
-
 	/**
 	 * Get wishlist session id of guests.
+	 *
+	 * @since 1.1.2 Moved to class \WCBoost\Wishlist\Session
 	 *
 	 * @return string
 	 */
 	public static function get_session_id() {
-		if ( ! empty( self::$session_id ) ) {
-			return self::$session_id;
-		}
-
-		if ( empty( $_COOKIE[ self::COOKIE_NAME ] ) ) {
-			return '';
-		}
-
-		return $_COOKIE[ self::COOKIE_NAME ];
+		return Session::get_session_id();
 	}
 
 	/**
 	 * Set session id for guests.
 	 * Store the session id in cookie for 30 days. It can be changed via a hook.
 	 *
+	 * @since 1.1.2 Moved to class \WCBoost\Wishlist\Session
+	 *
 	 * @param string $session_id
 	 */
 	public static function set_session_id( $session_id ) {
-		$expire = time() + absint( apply_filters( 'wcboost_wishlist_session_expire', MONTH_IN_SECONDS ) );
-		wc_setcookie( self::COOKIE_NAME, $session_id, $expire );
-
-		self::$session_id = $session_id;
+		Session::set_session_id( $session_id );
 	}
 
 	/**
 	 * Clear session id in the cookie
+	 *
+	 * @since 1.1.2 Moved to class \WCBoost\Wishlist\Session
 	 */
 	public static function clear_session_id() {
-		wc_setcookie( self::COOKIE_NAME, '', time() - HOUR_IN_SECONDS );
-
-		self::$session_id = '';
+		Session::clear_session_id();
 	}
 
 	/**

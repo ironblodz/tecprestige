@@ -27,32 +27,9 @@ if (!class_exists('Webtoffee_Product_Feed_Product')) {
         public function title($catalog_attr, $product_attr, $export_columns) {
 
             $title = $this->product->get_name();
-
-            // Add all available variation attributes to variation title.
-            if ($this->product->is_type('variation') && !empty($this->product->get_attributes())) {
-                $title = $this->parent_product->get_name();
-                $attributes = [];
-                foreach ($this->product->get_attributes() as $slug => $value) {
-                    $attribute = $this->product->get_attribute($slug);
-                    if (!empty($attribute)) {
-                        $attributes[$slug] = $attribute;
-                    }
-                }
-
-                // set variation attributes with separator
-                $separator = ',';
-
-                $variation_attributes = implode($separator, $attributes);
-
-                //get product title with variation attribute
-                $get_with_var_attributes = apply_filters("wt_feed_get_product_title_with_variation_attribute", true, $this->product);
-
-                if ($get_with_var_attributes) {
-                    $title .= " - " . $variation_attributes;
-                }
-            }
-
-            return apply_filters('wt_feed_filter_product_title', $title, $this->product);
+            
+            $title = apply_filters('wt_feed_filter_product_title', $title, $this->product, $this->form_data);
+            return apply_filters("wt_feed_{$this->parent_module->module_base}_product_title", $title, $this->product, $this->form_data);
         }
 
         /**
@@ -71,7 +48,8 @@ if (!class_exists('Webtoffee_Product_Feed_Product')) {
                 $title = $this->product->get_name();
             }
 
-            return apply_filters('wt_feed_filter_product_parent_title', $title, $this->product);
+            $title =  apply_filters('wt_feed_filter_product_parent_title', $title, $this->product);
+            return apply_filters("wt_feed_{$this->parent_module->module_base}_product_parent_title", $title, $this->product, $this->form_data);
         }
 
         /**
@@ -125,10 +103,17 @@ if (!class_exists('Webtoffee_Product_Feed_Product')) {
                 $description .= ' ' . $extension;
             }
 
+            $do_shortcode = apply_filters("wt_feed_{$this->parent_module->module_base}_product_description_do_shortcode", true);
+            
+            if($do_shortcode){
+                $description = do_shortcode($description);
+            }            
+            
             //strip tags and special characters
             $description = trim( strip_tags($description) );
 
-            return apply_filters('wt_feed_filter_product_description', $description, $this->product);
+            $description = apply_filters('wt_feed_filter_product_description', $description, $this->product);
+            return apply_filters("wt_feed_{$this->parent_module->module_base}_product_description", $description, $this->product, $this->form_data);
         }
 
         /**
@@ -166,7 +151,8 @@ if (!class_exists('Webtoffee_Product_Feed_Product')) {
             //remove spacial characters
             $description = wp_check_invalid_utf8(wp_specialchars_decode($description), true);
 
-            return apply_filters('wt_feed_filter_product_description_with_html', $description, $this->product);
+            $description = apply_filters('wt_feed_filter_product_description_with_html', $description, $this->product);
+            return apply_filters("wt_feed_{$this->parent_module->module_base}_product_description_with_html", $description, $this->product, $this->form_data);
         }
 
         /**
@@ -189,8 +175,36 @@ if (!class_exists('Webtoffee_Product_Feed_Product')) {
             // Strip tags and special characters
             $short_description = strip_tags($short_description);
 
-            return apply_filters('wt_feed_filter_product_short_description', $short_description, $this->product);
+            $short_description = apply_filters('wt_feed_filter_product_short_description', $short_description, $this->product);
+            return apply_filters("wt_feed_{$this->parent_module->module_base}_product_short_description", $short_description, $this->product, $this->form_data);
         }
+        
+        
+        /**
+         * Get product type.
+         *
+         * @return mixed|void
+         */
+        public function product_type($catalog_attr, $product_attr, $export_columns) {
+            $id = $this->product->get_id();
+            if ($this->product->is_type('variation')) {
+                $id = $this->product->get_parent_id();
+            }                      
+            
+            $separator = apply_filters('wt_feed_product_type_separator', ' > ');
+            $product_categories = '';
+            $term_list = get_the_terms($id, 'product_cat');
+
+            if (is_array($term_list)) {
+                $col = array_column($term_list, "term_id");
+                array_multisort($col, SORT_ASC, $term_list);
+                $term_list = array_column($term_list, "name");                
+                $product_categories = implode($separator, $term_list);
+            }
+
+
+            return apply_filters("wt_feed_{$this->parent_module->module_base}_product_local_category", $product_categories, $this->product, $this->form_data);
+        }        
 
         /**
          * Get product primary category.
@@ -207,7 +221,7 @@ if (!class_exists('Webtoffee_Product_Feed_Product')) {
                 $parent_category = $full_category_array[0];
             }
 
-            return apply_filters('wt_feed_filter_product_primary_category', $parent_category, $this->product);
+            return apply_filters("wt_feed_{$this->parent_module->module_base}_product_primary_category", $parent_category, $this->product, $this->form_data);
         }
 
         /**
@@ -225,7 +239,7 @@ if (!class_exists('Webtoffee_Product_Feed_Product')) {
                 $parent_category_id = isset($parent_category_obj->term_id) ? $parent_category_obj->term_id : "";
             }
 
-            return apply_filters('wt_feed_filter_product_primary_category_id', $parent_category_id, $this->product);
+            return apply_filters("wt_feed_{$this->parent_module->module_base}_product_primary_category_id", $parent_category_id, $this->product, $this->form_data);
         }
 
         /**
@@ -242,28 +256,46 @@ if (!class_exists('Webtoffee_Product_Feed_Product')) {
                 $child_category = end($full_category_array);
             }
 
-            return apply_filters('wt_feed_filter_product_child_category', $child_category, $this->product);
+            return apply_filters("wt_feed_{$this->parent_module->module_base}_product_child_category", $child_category, $this->product, $this->form_data);
         }
+        
+	/**
+	 * Get product child category id.
+	 *
+	 * @return mixed|void
+	 */
+	public function child_category_id($catalog_attr, $product_attr, $export_columns) {
+		$child_category_id = "";
+		$separator         = apply_filters( 'wt_feed_product_type_separator', ' > ' );
+		$full_category     = $this->product_type();
+		if ( ! empty( $full_category ) ) {
+			$full_category_array = explode( $separator, $full_category );
+			$child_category_obj  = get_term_by( 'name', end( $full_category_array ), 'product_cat' );
+			$child_category_id   = isset( $child_category_obj->term_id ) ? $child_category_obj->term_id : "";
+		}
+		
+		return apply_filters( "wt_feed_{$this->parent_module->module_base}_product_child_category_id", $child_category_id, $this->product, $this->form_data );
+	}        
         
         public function material($catalog_attr, $product_attr, $export_columns) {
 
             $material = get_post_meta($this->product->get_id(), '_wt_feed_material', true);
           
-            return apply_filters("wt_feed_{$this->parent_module->module_base}_product_material", $material, $this->product);
+            return apply_filters("wt_feed_{$this->parent_module->module_base}_product_material", $material, $this->product, $this->form_data);
         }
 
         public function pattern($catalog_attr, $product_attr, $export_columns) {
 
             $pattern = get_post_meta($this->product->get_id(), '_wt_feed_pattern', true);
            
-            return apply_filters("wt_feed_{$this->parent_module->module_base}_product_pattern", $pattern, $this->product);
+            return apply_filters("wt_feed_{$this->parent_module->module_base}_product_pattern", $pattern, $this->product, $this->form_data);
         }    
                 
 	public function condition($catalog_attr, $product_attr, $export_columns) {
             
                 $condition = get_post_meta($this->product->get_id(), '_wt_feed_condition', true);
                 $condition = ( $condition ) ? $condition : 'new';
-		return apply_filters( "wt_feed_{$this->parent_module->module_base}_product_condition", $condition, $this->product );
+		return apply_filters( "wt_feed_{$this->parent_module->module_base}_product_condition", $condition, $this->product, $this->form_data );
 	}        
         
 
@@ -271,35 +303,35 @@ if (!class_exists('Webtoffee_Product_Feed_Product')) {
 
             $custom_label_0 = get_post_meta($this->product->get_id(), '_wt_feed_custom_label_0', true);
 
-            return apply_filters("wt_feed_{$this->parent_module->module_base}_product_custom_label_0", $custom_label_0, $this->product);
+            return apply_filters("wt_feed_{$this->parent_module->module_base}_product_custom_label_0", $custom_label_0, $this->product, $this->form_data);
         }
 
         public function custom_label_1($catalog_attr, $product_attr, $export_columns) {
 
             $custom_label_1 = get_post_meta($this->product->get_id(), '_wt_feed_custom_label_1', true);
 
-            return apply_filters("wt_feed_{$this->parent_module->module_base}_product_custom_label_1", $custom_label_1, $this->product);
+            return apply_filters("wt_feed_{$this->parent_module->module_base}_product_custom_label_1", $custom_label_1, $this->product, $this->form_data);
         }
 
         public function custom_label_2($catalog_attr, $product_attr, $export_columns) {
 
             $custom_label_2 = get_post_meta($this->product->get_id(), '_wt_feed_custom_label_2', true);
 
-            return apply_filters("wt_feed_{$this->parent_module->module_base}_product_custom_label_2", $custom_label_2, $this->product);
+            return apply_filters("wt_feed_{$this->parent_module->module_base}_product_custom_label_2", $custom_label_2, $this->product, $this->form_data);
         }
 
         public function custom_label_3($catalog_attr, $product_attr, $export_columns) {
 
             $custom_label_3 = get_post_meta($this->product->get_id(), '_wt_feed_custom_label_3', true);
 
-            return apply_filters("wt_feed_{$this->parent_module->module_base}_product_custom_label_3", $custom_label_3, $this->product);
+            return apply_filters("wt_feed_{$this->parent_module->module_base}_product_custom_label_3", $custom_label_3, $this->product, $this->form_data);
         }
 
         public function custom_label_4($catalog_attr, $product_attr, $export_columns) {
 
             $custom_label_4 = get_post_meta($this->product->get_id(), '_wt_feed_custom_label_4', true);
 
-            return apply_filters("wt_feed_{$this->parent_module->module_base}_product_custom_label_4", $custom_label_4, $this->product);
+            return apply_filters("wt_feed_{$this->parent_module->module_base}_product_custom_label_4", $custom_label_4, $this->product, $this->form_data);
         }
         
         public function parent_sku($catalog_attr, $product_attr, $export_columns) {
@@ -312,7 +344,7 @@ if (!class_exists('Webtoffee_Product_Feed_Product')) {
                 }
             }
 
-            return apply_filters("wt_feed_{$this->parent_module->module_base}_product_parent_sku", $parent_sku, $this->product);
+            return apply_filters("wt_feed_{$this->parent_module->module_base}_product_parent_sku", $parent_sku, $this->product, $this->form_data);
         }
 
         /**
@@ -322,7 +354,7 @@ if (!class_exists('Webtoffee_Product_Feed_Product')) {
          */
         public function weightnunit($catalog_attr, $product_attr, $export_columns) {
             $weight = ($this->product->get_weight()) ? $this->product->get_weight().' '.get_option('woocommerce_weight_unit') : '';
-            return apply_filters("wt_feed_{$this->parent_module->module_base}_product_weight", $weight, $this->product);
+            return apply_filters("wt_feed_{$this->parent_module->module_base}_product_weight", $weight, $this->product, $this->form_data);
         }
         
         /**
@@ -332,7 +364,7 @@ if (!class_exists('Webtoffee_Product_Feed_Product')) {
          */
         public function lengthnunit($catalog_attr, $product_attr, $export_columns) {
             $length = ($this->product->get_length()) ? $this->product->get_length().' '.get_option('woocommerce_dimension_unit') : '';
-            return apply_filters("wt_feed_{$this->parent_module->module_base}_product_weight", $length, $this->product);
+            return apply_filters("wt_feed_{$this->parent_module->module_base}_product_weight", $length, $this->product, $this->form_data);
         }     
         
         /**
@@ -342,7 +374,7 @@ if (!class_exists('Webtoffee_Product_Feed_Product')) {
          */
         public function heightnunit($catalog_attr, $product_attr, $export_columns) {
             $height = ($this->product->get_height()) ? $this->product->get_height().' '.get_option('woocommerce_dimension_unit') : '';
-            return apply_filters("wt_feed_{$this->parent_module->module_base}_product_weight", $height, $this->product);
+            return apply_filters("wt_feed_{$this->parent_module->module_base}_product_weight", $height, $this->product, $this->form_data);
         }
 
         /**
@@ -352,11 +384,41 @@ if (!class_exists('Webtoffee_Product_Feed_Product')) {
          */
         public function widthnunit($catalog_attr, $product_attr, $export_columns) {
             $width = ($this->product->get_width()) ? $this->product->get_width().' '.get_option('woocommerce_dimension_unit') : '';
-            return apply_filters("wt_feed_{$this->parent_module->module_base}_product_weight", $width, $this->product);
+            return apply_filters("wt_feed_{$this->parent_module->module_base}_product_weight", $width, $this->product, $this->form_data);
         }        
         
-        
-        
+        /**
+         * Get Product tax.
+         *
+         * @return mixed|void
+         */
+        public function vat($catalog_attr, $product_attr, $export_columns) {
+
+            $tax_value = 0;
+            // Tax rate for a product
+            $tax_rates = WC_Tax::get_rates();
+            if (!empty($tax_rates)) {
+                // Getting the first rate percentage
+                $tax_rate = reset($tax_rates);
+                $tax_value = $tax_rate['rate']; // Returns the tax rate percentage
+            }
+
+            $tax_value = '::'.$tax_value;
+            
+            /*
+             *  Tax amount for a product
+              if( is_object( $this->product ) ){
+              $price_excl_tax = wc_get_price_excluding_tax($this->product);
+              $price_incl_tax = wc_get_price_including_tax($this->product);
+              $tax_amount = $price_incl_tax - $price_excl_tax;
+              $tax_value =  $tax_amount;
+              }
+             * 
+             */
+
+            return apply_filters("wt_feed_{$this->parent_module->module_base}_product_tax", $tax_value, $this->product, $this->form_data);
+        }
+
         /**
          * Get additional attributes for variation other than color, size, gender and pattern.
          *
@@ -463,7 +525,7 @@ if (!class_exists('Webtoffee_Product_Feed_Product')) {
                         }
 
 
-            return apply_filters("wt_feed_{$this->parent_module->module_base}_additional_variant_attributes", $product_data, $this->product);
+            return apply_filters("wt_feed_{$this->parent_module->module_base}_additional_variant_attributes", $product_data, $this->product, $this->form_data);
         }
 
         public function get_variant_option_name( $product_id, $label, $default_value ) {

@@ -231,18 +231,17 @@ NextendSocialLoginAdmin::showProBox();
     </tr>
 
     <tr>
-        <th scope="row"><?php _e('BuddyPress registration integration', 'nextend-facebook-connect'); ?></th>
+        <th scope="row"><?php _e('Email template for registration', 'nextend-facebook-connect'); ?></th>
         <td>
             <fieldset>
-                <label><input type="radio" name="buddypress_registration_integration"
-                              value="0" <?php if ($settings->get('buddypress_registration_integration') == '0') : ?> checked="checked" <?php endif; ?>>
-                    <span><?php _e('Disabled', 'nextend-facebook-connect'); ?></span></label><br>
-                <label><input type="radio" name="buddypress_registration_integration"
-                              value="1" <?php if ($settings->get('buddypress_registration_integration') == '1') : ?> checked="checked" <?php endif; ?>>
-                    <span><?php _e('Enabled', 'nextend-facebook-connect'); ?></span></label><br>
+                <label><input type="radio" name="buddypress_registration_email_template"
+                              value="default" <?php if ($settings->get('buddypress_registration_email_template') == 'default') : ?> checked="checked" <?php endif; ?><?php echo $attr; ?>>
+                    <span><?php _e('WordPress default notification', 'nextend-facebook-connect'); ?></span></label><br>
+                <label><input type="radio" name="buddypress_registration_email_template"
+                              value="buddypress" <?php if ($settings->get('buddypress_registration_email_template') == 'buddypress') : ?> checked="checked" <?php endif; ?><?php echo $attr; ?>>
+                    <span><?php _e('BuddyPress welcome notification', 'nextend-facebook-connect'); ?></span></label><br>
             </fieldset>
-            <p class="description"><?php printf(__('When this setting is enabled the actual registration will be done by %1$s, so it could send the activation emails uppon registration.', 'nextend-facebook-connect'), '<b>BuddyPress</b>'); ?></p>
-            <p class="description"><?php printf(__('%1$s To prevent the login with social login until the account is activated, you also need to enable the %2$s feature on the %3$s tab!', 'nextend-facebook-connect'), '<b>' . __("Usage:", "nextend-facebook-connect") . '</b>', '<b>' . __("Support login restrictions", "nextend-facebook-connect") . '</b>', '<a href="' . NextendSocialLoginAdmin::getAdminSettingsUrl('general') . '"><b>' . __("General", "nextend-facebook-connect") . '</b></a>'); ?></p>
+            <p class="description"><?php printf(__('Defines whether the registration with %1$s will send the same welcome notification that %2$s does, instead of the %3$s default one.', 'nextend-facebook-connect'), '<b>Nextend Social Login</b>', '<b>BuddyPress</b>', '<b>WordPress</b>'); ?></p>
         </td>
     </tr>
     </tbody>

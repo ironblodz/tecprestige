@@ -58,14 +58,14 @@ final class Plugin {
 	 * Cloning is forbidden.
 	 */
 	public function __clone() {
-		_doing_it_wrong( __FUNCTION__, __( 'Foul!', 'wcboost-wishlist' ), '1.0.0' );
+		_doing_it_wrong( __FUNCTION__, esc_html__( 'Foul!', 'wcboost-wishlist' ), '1.0.0' );
 	}
 
 	/**
 	 * Unserializing instances of this class is forbidden.
 	 */
 	public function __wakeup() {
-		_doing_it_wrong( __FUNCTION__, __( 'Foul!', 'wcboost-wishlist' ), '1.0.0' );
+		_doing_it_wrong( __FUNCTION__, esc_html__( 'Foul!', 'wcboost-wishlist' ), '1.0.0' );
 	}
 
 	/**
@@ -139,6 +139,7 @@ final class Plugin {
 	protected function includes() {
 		include_once __DIR__ . '/helper.php';
 		include_once __DIR__ . '/install.php';
+		include_once __DIR__ . '/session.php';
 		include_once __DIR__ . '/query.php';
 		include_once __DIR__ . '/action-scheduler.php';
 		include_once __DIR__ . '/form-handler.php';
@@ -152,6 +153,7 @@ final class Plugin {
 		include_once __DIR__ . '/data-stores/wishlist-item.php';
 		include_once __DIR__ . '/customizer/customizer.php';
 		include_once __DIR__ . '/widgets/wishlist.php';
+		include_once __DIR__ . '/integrations/manager.php';
 
 		if ( is_admin() ) {
 			include_once __DIR__ . '/admin/templates-notice.php';
@@ -174,6 +176,8 @@ final class Plugin {
 
 		Customize\Customizer::instance();
 		Frontend::instance();
+		Session::instance();
+		Integrations\Manager::instance();
 
 		if ( is_admin() ) {
 			new Admin\Templates_Notice();
@@ -233,7 +237,7 @@ final class Plugin {
 	public function wishlist_page_id() {
 		$page_id = get_option( 'wcboost_wishlist_page_id' );
 
-		return $page_id;
+		return absint( $page_id );
 	}
 
 	/**

@@ -1,0 +1,44 @@
+.wpb_konte_banner_grid2 .vc_controls > .vc_controls-cc {
+	top: 30px;
+}
+
+.konte_banner-grid-container {
+	overflow: hidden;
+	display: flex;
+}
+
+.konte_banner-grid-container__column {
+	box-sizing: border-box;
+}
+
+.konte_banner-grid-container > .column-1 {
+	width: 60%;
+	padding-right: 5px;
+}
+
+.konte_banner-grid-container > .column-2 {
+	width: 40%;
+	padding-left: 5px;
+}
+
+.konte_banner-grid-container__banner {
+	border: 1px dotted #e6e6e6;
+	min-height: 50px;
+	position: relative;
+	margin: 5px 0;
+}
+
+.konte_banner-grid-container__banner-control {
+	position: absolute;
+	top: 50%;
+	left: 50%;
+	margin: -10px 0 0 -10px;
+	width: 20px;
+	height: 20px;
+}
+
+.konte_banner-grid-container__banner-control a {
+	font-size: 20px;
+	color: #888;
+	text-decoration: none;
+}

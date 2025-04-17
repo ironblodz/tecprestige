@@ -320,7 +320,7 @@ if (!class_exists('Webtoffee_Product_Feed_Sync_Heureka_Export')) {
                     if( $product->is_type( 'variation' ) ){
                         $parent_id = $product->get_parent_id();
                         $parent_post = get_post( $parent_id );
-                        if( !is_object( $parent_post ) || ( is_object( $parent_post ) && 'draft' == $parent_post->post_status ) ){
+                        if( !is_object( $parent_post ) || ( is_object( $parent_post ) && ( 'draft' == $parent_post->post_status || 'private' == $parent_post->post_status || 'pending' == $parent_post->post_status ) ) ){
                             continue;
                         }
                     }
@@ -387,7 +387,6 @@ if (!class_exists('Webtoffee_Product_Feed_Sync_Heureka_Export')) {
             $export_columns = $this->parent_module->get_selected_column_names();
 
             $product_id = $product_object->get_id();
-            $product = get_post($product_id);
 
             $csv_columns = $export_columns;
 
@@ -439,37 +438,12 @@ if (!class_exists('Webtoffee_Product_Feed_Sync_Heureka_Export')) {
                 } elseif (strpos($value, 'wt_static_map_vl:') !== false) { // Static value.
                     $static_feed_value = str_replace('wt_static_map_vl:', '', $value);
                     $row[$key] = $static_feed_value;
-                } elseif (strpos($value, 'wt_compute_map_vl:') !== false) { // Computed value.
-                    $compute_feed_value = str_replace('wt_compute_map_vl:', '', $value);
-                    $compute_feed_value = trim($compute_feed_value);
-                    $mode = substr($compute_feed_value, 0, 3);
-                    $do_arithmatic = true;
-                    if ($mode == '(+)') {                        
-                        $amount = substr($compute_feed_value, 3);
-                        $row[$key] = $this->wt_pf_product_field_calc($key, $amount, 'increase', $product_object);
-                        $do_arithmatic = false;
-                    }
-                    if ($mode == '(-)') {
-                        $amount = substr($compute_feed_value, 3);
-                        $row[$key] = $this->wt_pf_product_field_calc($key, $amount, 'decrease', $product_object);
-                        $do_arithmatic = false;
-                    }
-                    if ($mode == '(*)') {                        
-                        $amount = substr($compute_feed_value, 3);
-                        $row[$key] = $this->wt_pf_product_field_calc($key, $amount, 'multiply', $product_object);
-                        $do_arithmatic = false;
-                    }                    
-                    if($do_arithmatic){
-                        $row[$key] = $this->do_arithmetic($compute_feed_value);
-                    }
                 }else {
                     $row[$key] = '';
                 }
             }
 
-
-
-            return apply_filters('wt_batch_product_export_row_data', $row, $product);
+            return apply_filters("wt_batch_product_export_row_data_{$this->parent_module->module_base}", $row, $product_object);
         }
 
         /**
@@ -817,7 +791,7 @@ if (!class_exists('Webtoffee_Product_Feed_Sync_Heureka_Export')) {
             $id = ( $this->product->is_type('variation') ? $this->product->get_parent_id() : $this->product->get_id() );
 
             $getImage = wp_get_attachment_image_src(get_post_thumbnail_id($id), 'single-post-thumbnail');
-            $image = isset($getImage[0]) ? wt_feed_get_formatted_url($getImage[0]) : '';
+            $image = isset($getImage[0]) ? self::wt_feed_get_formatted_url($getImage[0]) : '';
 
             return apply_filters('wt_feed_filter_product_feature_image', $image, $this->product);
         }
@@ -1053,6 +1027,9 @@ if (!class_exists('Webtoffee_Product_Feed_Sync_Heureka_Export')) {
             $custom_gtin = get_post_meta($this->product->get_id(), '_wt_feed_gtin', true);
             if ('' == $custom_gtin) {
                 $custom_gtin = get_post_meta($this->product->get_id(), '_wt_google_gtin', true);
+            }
+            if(!$custom_gtin){
+                $custom_gtin = get_post_meta($this->product->get_id(), '_global_unique_id', true);
             }
             $gtin = ('' == $custom_gtin) ? '' : $custom_gtin;
             return apply_filters('wt_feed_product_gtin', $gtin, $this->product);

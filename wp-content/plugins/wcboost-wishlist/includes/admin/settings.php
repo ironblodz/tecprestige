@@ -35,7 +35,7 @@ class Settings extends \WC_Settings_Page {
 		] );
 
 		$settings = [
-			  // General section.
+			// General section.
 			[
 				'type'  => 'title',
 				'title' => __( 'General', 'wcboost-wishlist' ),
@@ -65,6 +65,21 @@ class Settings extends \WC_Settings_Page {
 				'default' => __( 'You need to login to add products to your wishlist', 'wcboost-wishlist' ),
 				'type'    => 'textarea',
 				'css'     => 'min-width: 50%; height: 75px;',
+			],
+			[
+				'name'          => __( 'Merge guest wishlist', 'wcboost-wishlist' ),
+				'desc'          => __( 'Allow merging guest wishlist after a user login', 'wcboost-wishlist' ),
+				'type'          => 'checkbox',
+				'id'            => 'wcboost_wishlist_merge_guest_wishlist',
+				'default'       => 'yes',
+				'checkboxgroup' => 'start',
+			],
+			[
+				'desc'          => __( 'Automatically empty guest wishlist after merging', 'wcboost-wishlist' ),
+				'type'          => 'checkbox',
+				'id'            => 'wcboost_wishlist_clear_guest_wishlist_after_merge',
+				'default'       => 'yes',
+				'checkboxgroup' => 'end',
 			],
 			[
 				'name'    => __( 'Add variations', 'wcboost-wishlist' ),
@@ -164,11 +179,11 @@ class Settings extends \WC_Settings_Page {
 				'type' => 'sectionend',
 				'id'   => 'wcboost_wishlist_button_section',
 			],
-			  // Wishlist page.
+			// Wishlist page.
 			[
 				'type'  => 'title',
 				'title' => __( 'Wishlist Page', 'wcboost-wishlist' ),
-				  /* translators: %s: URL to the Customizer section */
+				/* translators: %s: URL to the Customizer section */
 				'desc' => wp_kses( sprintf( __( 'This section controls how the wishlist page is displayed. Some visual settings can be configured in the <a href="%s" target="_blank">Customizer</a>.', 'wcboost-wishlist' ), esc_url( admin_url( 'customize.php?autofocus[section]=wcboost_wishlist_page' ) ) ), [ 'a' => [ 'href' => true, 'target' => true ] ] ),
 				'id'   => 'wcboost_wishlist_page_section',
 			],
@@ -182,6 +197,7 @@ class Settings extends \WC_Settings_Page {
 				'css'      => 'min-width:300px;',
 				'autoload' => false,
 				'args'     => [
+					// phpcs:ignore WordPressVIPMinimum.Performance.WPQueryParams.PostNotIn_exclude
 					'exclude' => $exclude_pages,
 				],
 			],

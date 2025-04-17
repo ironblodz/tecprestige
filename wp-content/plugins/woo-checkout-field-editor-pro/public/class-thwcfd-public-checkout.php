@@ -27,10 +27,11 @@ class THWCFD_Public_Checkout {
 			$suffix = $debug_mode ? '' : '.min';
 			wp_register_script('thwcfd-checkout-script', THWCFD_ASSETS_URL_PUBLIC.'js/thwcfd-public' . $suffix . '.js', $deps, THWCFD_VERSION, $in_footer);
 			wp_enqueue_script('thwcfd-checkout-script');
-			wp_enqueue_style('thwcfd-checkout-style', THWCFD_ASSETS_URL_PUBLIC . 'css/thwcfd-public' . $suffix . '.css', THWCFD_VERSION);
+			wp_enqueue_style('thwcfd-checkout-style', THWCFD_ASSETS_URL_PUBLIC . 'css/thwcfd-public' . $suffix . '.css', [],THWCFD_VERSION);
 
 			$wcfd_var = array(
 				'is_override_required' => $this->is_override_required_prop(),
+				'is_wc_version_grt_9_x' => version_compare(THWCFD_Utils::get_wc_version(), '9.7.0', ">="),
 			);
 			wp_localize_script('thwcfd-checkout-script', 'thwcfd_public_var', $wcfd_var);
 		}
@@ -71,6 +72,11 @@ class THWCFD_Public_Checkout {
 		add_filter('woocommerce_form_field_heading', array($this, 'woo_form_field_heading'), 10, 4);
 		add_filter('woocommerce_form_field_paragraph', array($this, 'woo_form_field_paragraph'), 10, 4);
 
+		//Radio field required indicator fix
+		if(version_compare(THWCFD_Utils::get_wc_version(), '9.7.0', ">=")){
+			add_filter('woocommerce_form_field_radio', array($this, 'woo_form_field_radio'), 10, 4);
+		}
+		
 	}
 
 	/**
@@ -610,18 +616,17 @@ class THWCFD_Public_Checkout {
 						if($f_type == 'textarea'){
 							$value =  nl2br($value);
 						}
-						
 						if(is_account_page()){
 							if(apply_filters( 'thwcfd_view_order_customer_details_table_view', true )){
-								$fields_html .= '<tr><th>'. $label .':</th><td>'. $value .'</td></tr>';
+								$fields_html .= '<tr><th>'. $label .':</th><td>'. esc_html($value) .'</td></tr>';
 							}else{
 								$fields_html .= '<br/><dt>'. $label .':</dt><dd>'. $value .'</dd>';
 							}
 						}else{
 							if(apply_filters( 'thwcfd_thankyou_customer_details_table_view', true )){
-								$fields_html .= '<tr><th>'. $label .':</th><td>'. $value .'</td></tr>';
+								$fields_html .= '<tr><th>'. $label .':</th><td>'. esc_html($value) .'</td></tr>';
 							}else{
-								$fields_html .= '<br/><dt>'. $label .':</dt><dd>'. $value .'</dd>';
+								$fields_html .= '<br/><dt>'. $label .':</dt><dd>'. esc_html($value) .'</dd>';
 							}
 						}
 					}
@@ -633,7 +638,7 @@ class THWCFD_Public_Checkout {
 				?>
 				<table class="woocommerce-table woocommerce-table--custom-fields shop_table custom-fields">
 					<?php
-						echo $fields_html;
+						echo wp_kses_post($fields_html);
 					?>
 				</table>
 				<?php
@@ -655,7 +660,11 @@ class THWCFD_Public_Checkout {
 
 		if ( $args['required'] ) {
 			$args['class'][] = 'validate-required';
-			$required        = '&nbsp;<abbr class="required" title="' . esc_attr__( 'required', 'woocommerce' ) . '">*</abbr>';
+			if(version_compare(THWCFD_Utils::get_wc_version(), '9.7.0', ">=")){
+				$required        ='&nbsp;<span class="required" aria-hidden="true">*</span>';
+			}else{
+				$required        = '&nbsp;<abbr class="required" title="' . esc_attr__( 'required', 'woocommerce' ) . '">*</abbr>';
+			}		
 		} else {
 			$required = '&nbsp;<span class="optional">(' . esc_html__( 'optional', 'woocommerce' ) . ')</span>';
 		}
@@ -855,6 +864,14 @@ class THWCFD_Public_Checkout {
 			$field .= '<div class="form-row '.esc_attr(implode(' ', $args['class'])).'" id="'.esc_attr($key).'_field" data-name="'.esc_attr($key).'" >'. $heading_html .'</div>';
 		}
 		return $field;		
+	}
+
+	public function woo_form_field_radio($field, $key, $args, $value){
+		//replace unwanted required indicator from wc version > 9.7. 
+		$field = preg_replace('/(<input[^>]*>)(<label[^>]*>)(.*?)(&nbsp;<span class="required" aria-hidden="true">\*<\/span>)/', '$1$2$3', $field);
+		$field = preg_replace('/(<input[^>]*>)(<label[^>]*>)(.*?)(&nbsp;<span class="optional">\(optional\)<\/span>)/', '$1$2$3', $field);
+		return $field;
+
 	}
 	
 }

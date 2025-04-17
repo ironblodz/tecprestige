@@ -1,11 +1,11 @@
 <?php
 use NTA_WhatsApp\Helper;
 ?>
-<p><?php echo __( 'Display WhatsApp click to chat button on WooCommerce single product pages.', 'wp-whatsapp' ); ?></p>
+<p><?php echo esc_html__( 'Display WhatsApp click to chat button on WooCommerce single product pages.', 'wp-whatsapp' ); ?></p>
 <table class="form-table">
 	<tbody>
 		<tr>
-			<th scope="row"><label for="nta-wa-switch-control"><?php echo __( 'Enabled', 'wp-whatsapp' ); ?></label></th>
+			<th scope="row"><label for="nta-wa-switch-control"><?php echo esc_html__( 'Enabled', 'wp-whatsapp' ); ?></label></th>
 			<td>
 				<div class="nta-wa-switch-control">
 					<input type="checkbox" id="nta-wa-switch" name="isShow" <?php checked( $option['isShow'], 'ON' ); ?>>
@@ -14,69 +14,69 @@ use NTA_WhatsApp\Helper;
 			</td>
 		</tr>
 		<tr>
-			<th scope="row"><label for="position"><?php echo __( 'Button position', 'wp-whatsapp' ); ?></label></th>
+			<th scope="row"><label for="position"><?php echo esc_html__( 'Button position', 'wp-whatsapp' ); ?></label></th>
 			<td>
 				<div class="nta-wa-d-row nta-wa-border-box">
 					<div class="nta-wa-radio-select-img njt-wa-pro-tooltip">
 						<input type="radio" id="nta-wa_before_atc" name="position" value="before_atc" <?php checked( $option['position'], 'before_atc' ); ?>>
 						<label for="nta-wa_before_atc">
 							<div class="nta-wa-radio-img-wrap">
-								<img src="<?php echo NTA_WHATSAPP_PLUGIN_URL . 'assets/img/woo_settings/before_add_to_cart.png'; ?>">
+								<img src="<?php echo esc_url( NTA_WHATSAPP_PLUGIN_URL . 'assets/img/woo_settings/before_add_to_cart.png' ); ?>">
 							</div>    
-							<span><?php echo __( 'Before Add to Cart button', 'wp-whatsapp' ); ?></span>
+							<span><?php echo esc_html__( 'Before Add to Cart button', 'wp-whatsapp' ); ?></span>
 						</label>
 					</div>
 					<div class="nta-wa-radio-select-img">
 						<input type="radio" id="nta-wa_after_atc" name="position" value="after_atc" <?php checked( $option['position'], 'after_atc' ); ?>>
 						<label for="nta-wa_after_atc">
 							<div class="nta-wa-radio-img-wrap">
-								<img src="<?php echo NTA_WHATSAPP_PLUGIN_URL . 'assets/img/woo_settings/after_add_to_cart.png'; ?>">
+								<img src="<?php echo esc_url( NTA_WHATSAPP_PLUGIN_URL . 'assets/img/woo_settings/after_add_to_cart.png' ); ?>">
 							</div>    
-							<span><?php echo __( 'After Add to Cart button', 'wp-whatsapp' ); ?></span>
+							<span><?php echo esc_html__( 'After Add to Cart button', 'wp-whatsapp' ); ?></span>
 						</label>
 					</div>
 					<div class="nta-wa-radio-select-img njt-wa-pro-tooltip">
 						<input type="radio" id="nta-wa_after_short_description" name="position" value="after_short_description" <?php checked( $option['position'], 'after_short_description' ); ?>>
 						<label for="nta-wa_after_short_description">
 							<div class="nta-wa-radio-img-wrap">
-								<img src="<?php echo NTA_WHATSAPP_PLUGIN_URL . 'assets/img/woo_settings/after_short_desc.png'; ?>">
+								<img src="<?php echo esc_url( NTA_WHATSAPP_PLUGIN_URL . 'assets/img/woo_settings/after_short_desc.png' ); ?>">
 							</div>
-							<span><?php echo __( 'After short description', 'wp-whatsapp' ); ?></span>
+							<span><?php echo esc_html__( 'After short description', 'wp-whatsapp' ); ?></span>
 						</label>
 					</div>
 					<div class="nta-wa-radio-select-img njt-wa-pro-tooltip">
 						<input type="radio" id="nta-wa_after_long_description" name="position" value="after_long_description" <?php checked( $option['position'], 'after_long_description' ); ?>>
 						<label for="nta-wa_after_long_description">
 							<div class="nta-wa-radio-img-wrap">
-								<img src="<?php echo NTA_WHATSAPP_PLUGIN_URL . 'assets/img/woo_settings/after_long_desc.png'; ?>">
+								<img src="<?php echo esc_url( NTA_WHATSAPP_PLUGIN_URL . 'assets/img/woo_settings/after_long_desc.png' ); ?>">
 							</div>
-							<span><?php echo __( 'After long description', 'wp-whatsapp' ); ?></span>
+							<span><?php echo esc_html__( 'After long description', 'wp-whatsapp' ); ?></span>
 						</label>
 					</div>
 				</div>
 			</td>
 		</tr>
 		<tr>
-			<th scope="row"><label for="selected_accounts"><?php echo __( 'Select accounts to display', 'wp-whatsapp' ); ?></label></th>
+			<th scope="row"><label for="selected_accounts"><?php echo esc_html__( 'Select accounts to display', 'wp-whatsapp' ); ?></label></th>
 			<td>
 				<div id="app-woo"></div>
 			</td>
 		</tr>
 		<tr>
-			<th scope="row"><label for=""><?php echo __( 'Third party integrations (PRO)', 'wp-whatsapp' ); ?></label></th>
+			<th scope="row"><label for=""><?php echo esc_html__( 'Third party integrations (PRO)', 'wp-whatsapp' ); ?></label></th>
 			<td>
 				<div class="nta-wa-built-in-feature">
-					<div class="nta-wa-switch-control">
+					<div class="nta-wa-switch-control" style="pointer-events: none;">
 						<input class="njt-wa-pro" type="checkbox" id="nta-wa-dokan-enabled-switch" name="nta-wa-dokan-enabled-switch" <?php checked( 'OFF' ); ?>>
 						<label for="nta-wa-dokan-enabled-switch" class="green njt-wa-pro-tooltip"></label>
 					</div>
-					<div class="nta-wa-label" style="margin-top:4px"><?php echo __( 'Enable Dokan vendor button', 'wp-whatsapp' ); ?></div>
+					<div class="nta-wa-label" style="margin-top:4px"><?php echo esc_html__( 'Enable Dokan vendor button', 'wp-whatsapp' ); ?></div>
 				</div>
 			</td>
 		</tr>
 	</tbody>
 </table>
-<button class="button button-large button-primary wa-save"><?php echo __( 'Save Changes', 'wp-whatsapp' ); ?><span></span></button>
+<button class="button button-large button-primary wa-save"><?php echo esc_html__( 'Save Changes', 'wp-whatsapp' ); ?><span></span></button>
 
 <script type="text/template" id="selectedAccountTemplate">
 	<div class="search-account">
@@ -93,7 +93,7 @@ use NTA_WhatsApp\Helper;
 				<% if (!_.isEmpty(account.avatar)) { %>
 					<div class="wa_img_wrap" style="background: url(<%= account.avatar %>) center center no-repeat; background-size: cover;"></div>
 				<% } else { %>
-					<?php echo Helper::print_icon(); ?>
+					<?php echo Helper::print_icon(); //phpcs:ignore ?>
 				<% } %>
 			</div>
 			<div class="container-block">
@@ -118,9 +118,9 @@ use NTA_WhatsApp\Helper;
 	<label class="nta-list-status">
 		<strong>
 			<% if (_.isEmpty(activeAccounts)) { %>
-			<?php echo __( 'Please select accounts you want them to display in WhatsApp Chat Widget', 'wp-whatsapp' ); ?>
+			<?php echo esc_html__( 'Please select accounts you want them to display in WhatsApp Chat Widget', 'wp-whatsapp' ); ?>
 			<% } else { %>
-			<?php echo __( 'Selected Accounts:', 'wp-whatsapp' ); ?>
+			<?php echo esc_html__( 'Selected Accounts:', 'wp-whatsapp' ); ?>
 			<% } %>
 		</strong>
 	</label>
@@ -134,7 +134,7 @@ use NTA_WhatsApp\Helper;
 							<% if (!_.isEmpty(account.avatar)) { %>
 								<div class="wa_img_wrap" style="background: url(<%= account.avatar %>) center center no-repeat; background-size: cover;"></div>
 							<% } else { %>
-								<?php echo Helper::print_icon(); ?>
+								<?php echo Helper::print_icon(); //phpcs:ignore ?>
 							<% } %>
 						</div>
 						<div class="container-block">
@@ -154,7 +154,7 @@ use NTA_WhatsApp\Helper;
 							<a data-remove="<%= account.accountId %>" class="btn-remove-account">Remove</a>
 						</div>
 						<div class="icon-block">
-							<img src="<?php echo NTA_WHATSAPP_PLUGIN_URL . 'assets/img/bar-sortable.svg'; ?>" width="20px">
+							<img src="<?php echo esc_url( NTA_WHATSAPP_PLUGIN_URL . 'assets/img/bar-sortable.svg' ); ?>" width="20px">
 						</div>
 					</div>
 				</div>

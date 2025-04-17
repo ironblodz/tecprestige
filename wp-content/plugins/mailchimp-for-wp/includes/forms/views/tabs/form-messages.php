@@ -7,18 +7,13 @@
 
 <table class="form-table mc4wp-form-messages">
 
-    <?php
-
-    /** @ignore */
-
-    do_action('mc4wp_admin_form_before_messages_settings_rows', $opts, $form);
-    ?>
+    <?php do_action('mc4wp_admin_form_before_messages_settings_rows', $opts, $form); ?>
 
     <tr valign="top">
         <th scope="row"><label for="mc4wp_form_subscribed"><?php echo esc_html__('Successfully subscribed', 'mailchimp-for-wp'); ?></label></th>
         <td>
             <input type="text" class="widefat" id="mc4wp_form_subscribed" name="mc4wp_form[messages][subscribed]" value="<?php echo esc_attr($form->messages['subscribed']); ?>" />
-            <p class="description"><?php echo esc_html__('The text that shows when an email address is successfully subscribed to the selected list(s).', 'mailchimp-for-wp'); ?></p>
+            <p class="description"><?php echo esc_html__('The text that shows when an email address is successfully subscribed to the selected Mailchimp audiences.', 'mailchimp-for-wp'); ?></p>
         </td>
     </tr>
     <tr valign="top">
@@ -32,14 +27,14 @@
         <th scope="row"><label for="mc4wp_form_required_field_missing"><?php echo esc_html__('Required field missing', 'mailchimp-for-wp'); ?></label></th>
         <td>
             <input type="text" class="widefat" id="mc4wp_form_required_field_missing" name="mc4wp_form[messages][required_field_missing]" value="<?php echo esc_attr($form->messages['required_field_missing']); ?>" required />
-            <p class="description"><?php echo esc_html__('The text that shows when a required field for the selected list(s) is missing.', 'mailchimp-for-wp'); ?></p>
+            <p class="description"><?php echo esc_html__('The text that shows when a required field for the selected Mailchimp audiences is missing.', 'mailchimp-for-wp'); ?></p>
         </td>
     </tr>
     <tr valign="top">
         <th scope="row"><label for="mc4wp_form_already_subscribed"><?php echo esc_html__('Already subscribed', 'mailchimp-for-wp'); ?></label></th>
         <td>
             <input type="text" class="widefat" id="mc4wp_form_already_subscribed" name="mc4wp_form[messages][already_subscribed]" value="<?php echo esc_attr($form->messages['already_subscribed']); ?>" required />
-            <p class="description"><?php echo esc_html__('The text that shows when the given email is already subscribed to the selected list(s).', 'mailchimp-for-wp'); ?></p>
+            <p class="description"><?php echo esc_html__('The text that shows when the given email is already subscribed to the selected Mailchimp audiences.', 'mailchimp-for-wp'); ?></p>
         </td>
     </tr>
     <tr valign="top">
@@ -53,29 +48,29 @@
         <th scope="row"><label for="mc4wp_form_unsubscribed"><?php echo esc_html__('Unsubscribed', 'mailchimp-for-wp'); ?></label></th>
         <td>
             <input type="text" class="widefat" id="mc4wp_form_unsubscribed" name="mc4wp_form[messages][unsubscribed]" value="<?php echo esc_attr($form->messages['unsubscribed']); ?>" required />
-            <p class="description"><?php echo esc_html__('When using the unsubscribe method, this is the text that shows when the given email address is successfully unsubscribed from the selected list(s).', 'mailchimp-for-wp'); ?></p>
+            <p class="description"><?php echo esc_html__('When using the unsubscribe method, this is the text that shows when the given email address is successfully unsubscribed from the selected Mailchimp audiences).', 'mailchimp-for-wp'); ?></p>
         </td>
     </tr>
     <tr valign="top">
         <th scope="row"><label for="mc4wp_form_not_subscribed"><?php echo esc_html__('Not subscribed', 'mailchimp-for-wp'); ?></label></th>
         <td>
             <input type="text" class="widefat" id="mc4wp_form_not_subscribed" name="mc4wp_form[messages][not_subscribed]" value="<?php echo esc_attr($form->messages['not_subscribed']); ?>" required />
-            <p class="description"><?php echo esc_html__('When using the unsubscribe method, this is the text that shows when the given email address is not on the selected list(s).', 'mailchimp-for-wp'); ?></p>
+            <p class="description"><?php echo esc_html__('When using the unsubscribe method, this is the text that shows when the given email address is not on the selected Mailchimp audiences.', 'mailchimp-for-wp'); ?></p>
         </td>
     </tr>
     <tr valign="top">
-        <th scope="row"><label for="mc4wp_form_no_lists_selected"><?php echo esc_html__('No list selected', 'mailchimp-for-wp'); ?></label></th>
+        <th scope="row"><label for="mc4wp_form_no_lists_selected"><?php echo esc_html__('No Mailchimp audiences selected', 'mailchimp-for-wp'); ?></label></th>
         <td>
             <input type="text" class="widefat" id="mc4wp_form_no_lists_selected" name="mc4wp_form[messages][no_lists_selected]" value="<?php echo esc_attr($form->messages['no_lists_selected']); ?>" required />
-            <p class="description"><?php echo esc_html__('When offering a list choice, this is the text that shows when no lists were selected.', 'mailchimp-for-wp'); ?></p>
+            <p class="description"><?php echo esc_html__('When offering an audience choice, this is the text that shows when no Mailchimp audiences were selected.', 'mailchimp-for-wp'); ?></p>
         </td>
     </tr>
 
     <?php
-    $config = array(
+    $config = [
         'element' => 'mc4wp_form[settings][update_existing]',
         'value'   => 1,
-    );
+    ];
     ?>
     <tr valign="top" data-showif="<?php echo esc_attr(json_encode($config)); ?>">
         <th scope="row"><label for="mc4wp_form_updated"><?php echo esc_html__('Updated', 'mailchimp-for-wp'); ?></label></th>
@@ -85,10 +80,15 @@
         </td>
     </tr>
 
-    <?php
-    /** @ignore */
-    do_action('mc4wp_admin_form_after_messages_settings_rows', array(), $form);
-    ?>
+    <tr valign="top">
+        <th scope="row"><label for="mc4wp_form_message_spam"><?php echo esc_html__('Spam', 'mailchimp-for-wp'); ?></label></th>
+        <td>
+            <input type="text" class="widefat" id="mc4wp_form_message_spam" name="mc4wp_form[messages][spam]" value="<?php echo esc_attr($form->messages['spam']); ?>" />
+            <p class="description"><?php echo esc_html__('The text that shows when a submission is marked as spam.', 'mailchimp-for-wp'); ?></p>
+        </td>
+    </tr>
+
+    <?php do_action('mc4wp_admin_form_after_messages_settings_rows', [], $form); ?>
 
     <tr valign="top">
         <th></th>

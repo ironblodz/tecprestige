@@ -29,7 +29,7 @@ define('DB_NAME', 'tecprestige');
 define('DB_USER', 'root');
 
 /** Database password */
-define('DB_PASSWORD', '');
+define('DB_PASSWORD', 'root');
 
 /** Database hostname */
 define('DB_HOST', 'localhost');
@@ -41,8 +41,8 @@ define('DB_CHARSET', 'utf8');
 define('DB_COLLATE', '');
 
 if (!defined('WP_CLI')) {
-    define('WP_SITEURL', $_SERVER['REQUEST_SCHEME'] . '://' . $_SERVER['HTTP_HOST']);
-    define('WP_HOME',    $_SERVER['REQUEST_SCHEME'] . '://' . $_SERVER['HTTP_HOST']);
+   define('WP_SITEURL', $_SERVER['REQUEST_SCHEME'] . '://' . $_SERVER['HTTP_HOST'] . '/tecprestige');
+define('WP_HOME',    $_SERVER['REQUEST_SCHEME'] . '://' . $_SERVER['HTTP_HOST'] . '/tecprestige');
 }
 
 

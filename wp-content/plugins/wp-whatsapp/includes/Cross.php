@@ -55,12 +55,12 @@ if ( ! class_exists( 'NjtCross' ) ) {
 						$notificationOption = get_option( "njt_notification_{$this->pluginPrefix}_cross" ); //Save the next time notification will appear
 						$popupOption        = get_option( "njt_popup_{$this->pluginPrefix}_cross" ); //Save the next time notification will appear
 
-						if ( $notificationOption === false || time() >= $notificationOption ) {
+						if ( false === $notificationOption || time() >= $notificationOption ) {
 							add_action( 'admin_notices', array( $this, 'add_notification' ) );
 							add_action( "wp_ajax_njt_{$this->pluginPrefix}_cross_notification", array( $this, 'ajax_set_notification' ) );
 						}
 
-						if ( $popupOption === false || time() >= $popupOption ) {
+						if ( false === $popupOption || time() >= $popupOption ) {
 							$this->showPopup = true;
 						}
 
@@ -135,7 +135,7 @@ if ( ! class_exists( 'NjtCross' ) ) {
 			<div class="notice notice-info is-dismissible" id="njt-ads-wrapper">
 				<div class="njt-d-row njt-justify-between">
 					<div class="njt-ads-info">
-					<h4 class="njt-ads-title"><?php _e( 'Recommend', 'wp-whatsapp' ); ?></h4>
+					<h4 class="njt-ads-title"><?php echo esc_html__( 'Recommend', 'wp-whatsapp' ); ?></h4>
 					<p>To easily manage your files in WordPress media library with folders, please try FileBird plugin.</p>
 					<div class="njt-btn-row">
 						<a class="button button-primary" target="_blank" rel="noopener noreferrer" href="<?php echo esc_url( $url ); ?>">
@@ -149,7 +149,7 @@ if ( ! class_exists( 'NjtCross' ) ) {
 						</a>
 					</div>
 					</div>
-					<img class="njt-ads-img" src="<?php echo NTA_WHATSAPP_PLUGIN_URL . 'assets/img/FB_Wireframe.png'; ?>" alt="filebird">
+					<img class="njt-ads-img" src="<?php echo esc_url( NTA_WHATSAPP_PLUGIN_URL . 'assets/img/FB_Wireframe.png' ); ?>" alt="filebird">
 				</div>
 			</div>
 			<style>
@@ -204,10 +204,14 @@ if ( ! class_exists( 'NjtCross' ) ) {
 		}
 
 		public function ajax_install_plugin() {
+			if ( ! function_exists( 'current_user_can' ) || ! current_user_can( 'install_plugins' ) ) {
+				wp_send_json_error( array( 'message' => 'Current user cannot install this plugin' ) );
+			}
+
 			check_ajax_referer( 'njt_filebird_cross_nonce', 'nonce', true );
 
 			$installed = $this->pluginInstaller( 'filebird' );
-			if ( $installed === false ) {
+			if ( false === $installed ) {
 				wp_send_json_error( array( 'message' => $installed ) );
 			}
 			try {
@@ -218,7 +222,7 @@ if ( ! class_exists( 'NjtCross' ) ) {
 				}
 				wp_send_json_success();
 			} catch ( \Exception $e ) {
-				throw new \Exception( $e->getMessage() );
+				throw new \Exception( esc_html( $e->getMessage() ) );
 			}
 		}
 
@@ -254,12 +258,12 @@ if ( ! class_exists( 'NjtCross' ) ) {
 				$result = $upgrader->install( $api->download_link );
 
 				if ( is_wp_error( $result ) ) {
-					throw new \Exception( $result->get_error_message() );
+					throw new \Exception( esc_html( $result->get_error_message() ) );
 				}
 
 				return true;
 			} catch ( \Exception $e ) {
-				throw new \Exception( $e->getMessage() );
+				throw new \Exception( esc_html( $e->getMessage() ) );
 			}
 
 			return false;
@@ -275,7 +279,7 @@ if ( ! class_exists( 'NjtCross' ) ) {
 		public function ajax_hide_cross() {
 			check_ajax_referer( "njt_{$this->pluginPrefix}_cross_nonce", 'nonce', true );
 
-			$type = sanitize_text_field( $_POST['type'] );
+			$type = isset( $_POST['type'] ) ? sanitize_text_field( $_POST['type'] ) : '';
 			$time = time() + ( 30 * 60 * 60 * 24 ); // hide 30 days
 
 			update_option( "njt_{$type}_{$this->pluginPrefix}_cross", $time );

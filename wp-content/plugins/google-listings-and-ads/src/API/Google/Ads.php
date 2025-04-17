@@ -13,12 +13,12 @@ use Automattic\WooCommerce\GoogleListingsAndAds\Options\OptionsAwareInterface;
 use Automattic\WooCommerce\GoogleListingsAndAds\Options\OptionsAwareTrait;
 use Automattic\WooCommerce\GoogleListingsAndAds\Options\OptionsInterface;
 use Exception;
-use Google\Ads\GoogleAds\Util\V16\ResourceNames;
-use Google\Ads\GoogleAds\V16\Enums\AccessRoleEnum\AccessRole;
-use Google\Ads\GoogleAds\V16\Enums\ProductLinkInvitationStatusEnum\ProductLinkInvitationStatus;
-use Google\Ads\GoogleAds\V16\Resources\ProductLinkInvitation;
-use Google\Ads\GoogleAds\V16\Services\ListAccessibleCustomersRequest;
-use Google\Ads\GoogleAds\V16\Services\UpdateProductLinkInvitationRequest;
+use Google\Ads\GoogleAds\Util\V18\ResourceNames;
+use Google\Ads\GoogleAds\V18\Enums\AccessRoleEnum\AccessRole;
+use Google\Ads\GoogleAds\V18\Enums\ProductLinkInvitationStatusEnum\ProductLinkInvitationStatus;
+use Google\Ads\GoogleAds\V18\Resources\ProductLinkInvitation;
+use Google\Ads\GoogleAds\V18\Services\ListAccessibleCustomersRequest;
+use Google\Ads\GoogleAds\V18\Services\UpdateProductLinkInvitationRequest;
 use Google\ApiCore\ApiException;
 use Google\ApiCore\ValidationException;
 
@@ -129,7 +129,7 @@ class Ads implements OptionsAwareInterface {
 	 * @throws Exception When a link is unavailable.
 	 */
 	public function accept_merchant_link( int $merchant_id ) {
-		$link        = $this->get_merchant_link( $merchant_id, 3 );
+		$link        = $this->get_merchant_link( $merchant_id, 5 );
 		$link_status = $link->getStatus();
 		if ( $link_status === ProductLinkInvitationStatus::ACCEPTED ) {
 			return;
@@ -351,6 +351,7 @@ class Ads implements OptionsAwareInterface {
 		}
 
 		if ( $attempts_left > 0 ) {
+			sleep( 1 );
 			return $this->get_merchant_link( $merchant_id, $attempts_left - 1 );
 		}
 

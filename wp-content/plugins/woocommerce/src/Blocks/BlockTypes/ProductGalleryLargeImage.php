@@ -1,4 +1,6 @@
 <?php
+declare(strict_types=1);
+
 namespace Automattic\WooCommerce\Blocks\BlockTypes;
 
 use Automattic\WooCommerce\Blocks\Utils\ProductGalleryUtils;
@@ -71,10 +73,7 @@ class ProductGalleryLargeImage extends AbstractBlock {
 			return '';
 		}
 
-		if ( class_exists( 'WC_Frontend_Scripts' ) ) {
-			$frontend_scripts = new \WC_Frontend_Scripts();
-			$frontend_scripts::load_scripts();
-		}
+		wp_enqueue_script_module( $this->get_full_block_name() );
 
 		$processor = new \WP_HTML_Tag_Processor( $content );
 		$processor->next_tag();
@@ -98,7 +97,7 @@ class ProductGalleryLargeImage extends AbstractBlock {
 				'{content}'            => $content,
 				'{directives}'         => array_reduce(
 					array_keys( $directives ),
-					function( $carry, $key ) use ( $directives ) {
+					function ( $carry, $key ) use ( $directives ) {
 						return $carry . ' ' . $key . '="' . esc_attr( $directives[ $key ] ) . '"';
 					},
 					''
@@ -118,20 +117,22 @@ class ProductGalleryLargeImage extends AbstractBlock {
 	private function get_main_images_html( $context, $product_id ) {
 		$attributes = array(
 			'class'                  => 'wc-block-woocommerce-product-gallery-large-image__image',
-			'data-wc-bind--hidden'   => '!state.isSelected',
-			'data-wc-watch'          => 'callbacks.scrollInto',
-			'data-wc-bind--tabindex' => 'state.thumbnailTabIndex',
-			'data-wc-on--keydown'    => 'actions.onSelectedLargeImageKeyDown',
-			'data-wc-class--wc-block-woocommerce-product-gallery-large-image__image--active-image-slide' => 'state.isSelected',
+			'data-wp-watch'          => 'callbacks.scrollInto',
+			'data-wp-bind--tabindex' => 'state.thumbnailTabIndex',
+			'data-wp-on--keydown'    => 'actions.onSelectedLargeImageKeyDown',
+			'data-wp-class--wc-block-woocommerce-product-gallery-large-image__image--active-image-slide' => 'state.isSelected',
+			'data-wp-on--touchstart' => 'actions.onTouchStart',
+			'data-wp-on--touchmove'  => 'actions.onTouchMove',
+			'data-wp-on--touchend'   => 'actions.onTouchEnd',
 		);
 
 		if ( $context['fullScreenOnClick'] ) {
-			$attributes['class'] .= ' wc-block-woocommerce-product-gallery-large-image__image--full-screen-on-click wc-block-product-gallery-dialog-on-click';
+			$attributes['class'] .= ' wc-block-woocommerce-product-gallery-large-image__image--full-screen-on-click';
 		}
 
 		if ( $context['hoverZoom'] ) {
 			$attributes['class']              .= ' wc-block-woocommerce-product-gallery-large-image__image--hoverZoom';
-			$attributes['data-wc-bind--style'] = 'state.styles';
+			$attributes['data-wp-bind--style'] = 'state.styles';
 		}
 
 		$main_images = ProductGalleryUtils::get_product_gallery_images(
@@ -143,7 +144,7 @@ class ProductGalleryLargeImage extends AbstractBlock {
 		);
 
 		$main_image_with_wrapper = array_map(
-			function( $main_image_element ) {
+			function ( $main_image_element ) {
 				return "<li class='wc-block-product-gallery-large-image__wrapper'>" . $main_image_element . '</li>';
 			},
 			$main_images
@@ -151,7 +152,6 @@ class ProductGalleryLargeImage extends AbstractBlock {
 
 		$visible_main_image = array_shift( $main_images );
 		return array( $visible_main_image, $main_image_with_wrapper );
-
 	}
 
 	/**
@@ -179,18 +179,11 @@ class ProductGalleryLargeImage extends AbstractBlock {
 		if ( ! $block_context['hoverZoom'] ) {
 			return array();
 		}
-		$context = array(
-			'styles' => array(
-				'transform'        => 'scale(1.0)',
-				'transform-origin' => '',
-			),
-		);
 
 		return array(
-			'data-wc-interactive'    => wp_json_encode( array( 'namespace' => 'woocommerce/product-gallery' ) ),
-			'data-wc-context'        => wp_json_encode( $context, JSON_NUMERIC_CHECK ),
-			'data-wc-on--mousemove'  => 'actions.startZoom',
-			'data-wc-on--mouseleave' => 'actions.resetZoom',
+			'data-wp-interactive'    => 'woocommerce/product-gallery',
+			'data-wp-on--mousemove'  => 'actions.startZoom',
+			'data-wp-on--mouseleave' => 'actions.resetZoom',
 		);
 	}
 
@@ -207,7 +200,18 @@ class ProductGalleryLargeImage extends AbstractBlock {
 		}
 
 		return array(
-			'data-wc-on--click' => 'actions.openDialog',
+			'data-wp-on--click' => 'actions.openDialog',
 		);
+	}
+
+	/**
+	 * Disable the block type script, this uses script modules.
+	 *
+	 * @param string|null $key The key.
+	 *
+	 * @return null
+	 */
+	protected function get_block_type_script( $key = null ) {
+		return null;
 	}
 }

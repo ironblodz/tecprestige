@@ -41,11 +41,23 @@ class Post extends WP_REST_Controller {
 			'/updateMetaBulk',
 			[
 				'methods'             => WP_REST_Server::CREATABLE,
-				'permission_callback' => function() {
+				'permission_callback' => function () {
 					return \RankMath\Helper::has_cap( 'onpage_general' );
 				},
 				'callback'            => [ $this, 'update_bulk_meta' ],
-				'args'                => $this->get_update_metadata_args(),
+				'args'                => $this->get_update_bulk_meta_args(),
+			]
+		);
+
+		register_rest_field(
+			'page',
+			'rankMath',
+			[
+				'get_callback'        => [ $this, 'get_post_screen_meta' ],
+				'schema'              => null,
+				'permission_callback' => function () {
+					return current_user_can( 'read' );
+				},
 			]
 		);
 	}
@@ -75,6 +87,15 @@ class Post extends WP_REST_Controller {
 		}
 
 		return [ 'success' => true ];
+	}
+
+	/**
+	 * Retrieves the Post screen metadata to be utilized when a Page is changed from the Full Site Editor.
+	 */
+	public function get_post_screen_meta() {
+		$screen = new \RankMath\Admin\Metabox\Screen();
+		$screen->load_screen( 'post' );
+		return $screen->get_values();
 	}
 
 	/**
@@ -128,11 +149,11 @@ class Post extends WP_REST_Controller {
 	 *
 	 * @return array
 	 */
-	private function get_update_metadata_args() {
+	private function get_update_bulk_meta_args() {
 		return [
 			'rows' => [
 				'required'          => true,
-				'description'       => esc_html__( 'No meta rows found to update.', 'rank-math' ),
+				'description'       => esc_html__( 'Selected posts to update the data for.', 'rank-math' ),
 				'validate_callback' => [ '\\RankMath\\Rest\\Rest_Helper', 'is_param_empty' ],
 			],
 		];

@@ -32,7 +32,7 @@ class Plugin {
 	 *
 	 * @since 2.0.0
 	 * @access public
-	 * @var string Last checksums.
+	 * @var array<string> Last checksums.
 	 */
 	public static $color_palette = array();
 
@@ -101,12 +101,12 @@ class Plugin {
 
 		// Get the default role object.
 		$default_role_object = get_role( $default_role );
-	
+
 		// Remove the custom capability from all roles except the default role.
 		if ( $default_role_object ) {
 			$roles = wp_roles()->role_names;
 			unset( $roles[ $default_role ] ); // Exclude the default role.
-	
+
 			foreach ( $roles as $role_slug => $role_name ) {
 				$role_object = get_role( $role_slug );
 				if ( $role_object && $role_object->has_cap( self::$custom_capability ) ) {
@@ -118,7 +118,7 @@ class Plugin {
 
 	/**
 	 * Define constants.
-	 * 
+	 *
 	 * @return void
 	 */
 	public function define_constants() {
@@ -131,7 +131,7 @@ class Plugin {
 	 * Get Color Palette.
 	 *
 	 * @since 2.0.0
-	 * @return array
+	 * @return array<string>
 	 */
 	public function get_default_color_palette() {
 
@@ -155,7 +155,8 @@ class Plugin {
 	/**
 	 * Add .json files as supported format in the uploader.
 	 *
-	 * @param array $mimes Already supported mime types.
+	 * @param array<string, string> $mimes Already supported mime types.
+	 * @return array<string, string>
 	 */
 	public function custom_upload_mimes( $mimes ) {
 
@@ -212,7 +213,7 @@ class Plugin {
 	 * @return void
 	 */
 	public function sync_disable_ai_settings() {
-		
+
 		$ast_ai_settings = get_option( 'ast_block_templates_ai_settings', array() );
 		$zip_ai_modules_settings = Helper::get_admin_settings_option( 'zip_ai_modules' );
 
@@ -223,7 +224,7 @@ class Plugin {
 			if ( 'disabled' === $zi_copipt_status ) {
 				$ast_ai_settings['disable_ai'] = true;
 			}
-	
+
 			if ( 'enabled' === $zi_copipt_status ) {
 				$ast_ai_settings['disable_ai'] = false;
 			}
@@ -278,13 +279,13 @@ class Plugin {
 		update_option( 'ast-block-templates_data-' . $block_id, $body );
 		wp_send_json_success( $body );
 	}
-	
+
 
 	/**
 	 * Hide notice.
 	 *
 	 * @since 2.1.1
-	 * @return void 
+	 * @return void
 	 */
 	public function hide_notices() {
 
@@ -311,16 +312,16 @@ class Plugin {
 				case 'credit-danger':
 					set_transient( 'ast_block_templates_hide_credit_danger_notice', true, 30 * DAY_IN_SECONDS );
 					break;
-				
+
 				default:
 					break;
-			}       
+			}
 		}
 
 		wp_send_json_success(
 			array(
 				'status' => true,
-			) 
+			)
 		);
 	}
 
@@ -342,7 +343,7 @@ class Plugin {
 			array(
 				'block' => $this->get_block_palette_colors(),
 				'page' => $this->get_page_palette_colors(),
-			) 
+			)
 		);
 	}
 
@@ -389,7 +390,15 @@ class Plugin {
 					$ext = strtolower( pathinfo( $file_path['data']['file'], PATHINFO_EXTENSION ) );
 
 					if ( 'json' === $ext ) {
-						$forms = json_decode( Helper::instance()->ast_block_templates_get_filesystem()->get_contents( $file_path['data']['file'] ), true );
+						/** 
+						 * 
+						 * Retrieves the contents of a file using the specified file system.
+						 *
+						 * @var \WP_Filesystem_Base $filesystem 
+						 * */
+						$filesystem = Helper::instance()->ast_block_templates_get_filesystem();
+						$file_content = $filesystem->get_contents( $file_path['data']['file'] );
+						$forms = json_decode( $file_content ? $file_content : '', true );
 
 						if ( ! empty( $forms ) ) {
 
@@ -409,7 +418,7 @@ class Plugin {
 										)
 									);
 
-									ast_block_templates_log( 'Imported Form ' . $title );
+									Helper::instance()->ast_block_templates_log( 'Imported Form ' . $title );
 								}
 
 								if ( $new_id ) {
@@ -443,9 +452,11 @@ class Plugin {
 
 	/**
 	 * Import Block
+	 *
+	 * @return void
 	 */
 	public function import_block() {
-
+		
 		if ( ! current_user_can( 'manage_ast_block_templates' ) ) {
 			wp_send_json_error( __( 'You are not allowed to perform this action', 'ultimate-addons-for-gutenberg' ) );
 		}
@@ -460,6 +471,8 @@ class Plugin {
 		// Post content.
 		$content = isset( $_REQUEST['content'] ) ? stripslashes( $_REQUEST['content'] ) : ''; // phpcs:ignore WordPress.Security.ValidatedSanitizedInput.InputNotSanitized
 		$category = isset( $_REQUEST['category'] ) ? intval( $_REQUEST['category'] ) : '';
+
+		$block_id = isset( $_REQUEST['id'] ) ? absint( $_REQUEST['id'] ) : '';
 
 		// Empty mapping? Then return.
 		if ( ! empty( $ids_mapping ) ) {
@@ -519,8 +532,12 @@ class Plugin {
 			$content = $this->maybe_import_images( $content );
 		}
 
+		// Flush the object when import is successful.
+		delete_option( 'ast-block-templates_data-' . $block_id );
+
 		// Update content.
 		wp_send_json_success( $content );
+
 	}
 
 	/**
@@ -596,8 +613,8 @@ class Plugin {
 	/**
 	 * Replace content
 	 *
-	 * @param  string $content         Content.
-	 * @param  array  $dynamic_content Dynamic content.
+	 * @param  string               $content         Content.
+	 * @param  array<string, mixed> $dynamic_content Dynamic content.
 	 * @return string                  Content.
 	 */
 	public function replace( $content, $dynamic_content ) {
@@ -670,7 +687,7 @@ class Plugin {
 
 						if ( empty( $ai_content ) ) {
 							// Generating random content.
-							$ai_content = isset( $key ) ? $key : '';
+							$ai_content = $key;
 							if ( '' === $ai_content ) {
 								$words          = str_word_count( FALLBACK_TEXT, 1 ); // Split the statement into an array of words.
 								$selected_words = array_slice( $words, 0, absint( 10 ) ); // Added atstic 10 words. Here fallback logic will be added.
@@ -726,11 +743,11 @@ class Plugin {
 	/**
 	 * Allowed tags for the batch update process.
 	 *
-	 * @param  array        $allowedposttags   Array of default allowable HTML tags.
-	 * @param  string|array $context    The context for which to retrieve tags. Allowed values are 'post',
-	 *                                  'strip', 'data', 'entities', or the name of a field filter such as
-	 *                                  'pre_user_description'.
-	 * @return array Array of allowed HTML tags and their allowed attributes.
+	 * @param  array<string, mixed> $allowedposttags   Array of default allowable HTML tags.
+	 * @param  string               $context    The context for which to retrieve tags. Allowed values are 'post',
+	 *                                                'strip', 'data', 'entities', or the name of a field filter such as
+	 *                                                'pre_user_description'.
+	 * @return array<string, mixed> Array of allowed HTML tags and their allowed attributes.
 	 */
 	public function allowed_tags_and_attributes( $allowedposttags, $context ) {
 
@@ -754,6 +771,8 @@ class Plugin {
 
 	/**
 	 * Activate Plugin
+	 *
+	 * @return void
 	 */
 	public function activate_plugin() {
 
@@ -823,13 +842,12 @@ class Plugin {
 		// API Call.
 		$response = wp_safe_remote_get( $demo_api_uri, $api_args );
 
-		if ( is_wp_error( $response ) || ( isset( $response->status ) && 0 === $response->status ) ) {
-			if ( isset( $response->status ) ) {
-				wp_send_json_error( json_decode( $response, true ) );
-			} else {
-				wp_send_json_error( $response->get_error_message() );
-			}
+		if ( is_wp_error( $response ) ) {
+			wp_send_json_error( $response->get_error_message() );
+		} elseif ( 'error' !== $response['response']['message'] ) {
+			wp_send_json_error( wp_json_encode( $response['response'] ) );
 		}
+
 
 		if ( wp_remote_retrieve_response_code( $response ) !== 200 ) {
 			wp_send_json_error( wp_remote_retrieve_body( $response ) );
@@ -847,19 +865,21 @@ class Plugin {
 	 * Template Assets
 	 *
 	 * @since 1.0.0
+	 * @return void
 	 */
 	public function template_assets() {
-		
+
 		if ( ! current_user_can( 'manage_ast_block_templates' ) ) {
 			return;
 		}
-
-		$post_types = get_post_types( array( 'public' => true ), 'names' );
+		
+		$exclude_post_types = apply_filters( 'ast_block_templates_exclude_post_types', array() );
+		$post_types = array_diff( get_post_types( array( 'public' => true ), 'names' ), $exclude_post_types );
 
 		$current_screen = get_current_screen();
 
 		if ( ! is_object( $current_screen ) && is_null( $current_screen ) ) {
-			return false;
+			return;
 		}
 
 		if ( 'site-editor' !== $current_screen->base && ! array_key_exists( $current_screen->post_type, $post_types ) ) {
@@ -877,7 +897,7 @@ class Plugin {
 		wp_enqueue_script( 'ast-block-templates', AST_BLOCK_TEMPLATES_URI . 'dist/main.js', array( 'wp-blocks', 'wp-i18n', 'wp-element', 'wp-editor', 'masonry', 'imagesloaded', 'updates', 'media-upload', 'wp-util' ), AST_BLOCK_TEMPLATES_VER, true );
 		wp_add_inline_script( 'ast-block-templates', 'window.lodash = _.noConflict();', 'after' );
 		wp_enqueue_media();
-		
+
 		wp_enqueue_style( 'ast-block-templates', AST_BLOCK_TEMPLATES_URI . 'dist/style.css', array(), AST_BLOCK_TEMPLATES_VER, 'all' );
 
 		wp_enqueue_script(
@@ -888,21 +908,22 @@ class Plugin {
 			true
 		);
 
+		// Google fonts.
+		wp_enqueue_style( 'ast-block-templates-google-fonts', $this->google_fonts_url(), array( 'ast-block-templates' ), 'all' );
+
 		$license_status = false;
-		if ( is_callable( 'BSF_License_Manager::bsf_is_active_license' ) ) {
+		if ( class_exists( 'BSF_License_Manager' ) && is_callable( 'BSF_License_Manager::bsf_is_active_license' ) ) {
 			$license_status = \BSF_License_Manager::bsf_is_active_license( 'astra-pro-sites' );
 		}
-		$astra_theme_css = apply_filters( 'astra_dynamic_theme_css', '' );
-		$astra_theme_css = str_replace( ':root', '', $astra_theme_css );
-		$astra_theme_css = preg_replace( '/(?<!-)(\\bbody\\b)(?!-)/i', '', $astra_theme_css );
 
 		$upload_dir = wp_upload_dir();
 		$common_style_url = trailingslashit( $upload_dir['basedir'] ) . 'uag-plugin/custom-style-blocks.css';
 
 		if ( ! file_exists( $common_style_url ) ) {
 			$this->regenerate_spectra_css();
-			$common_css_content = file_exists( $common_style_url ) ? file_get_contents( $common_style_url ) : '';
 		}
+
+		$common_css_content = file_exists( $common_style_url ) ? file_get_contents( $common_style_url ) : '';
 
 		if ( empty( $common_css_content ) ) {
 			$common_css_content = Sync_Library::instance()->get_server_spectra_common_css();
@@ -915,17 +936,6 @@ class Plugin {
 
 		if ( defined( 'ASTRA_THEME_VERSION' ) ) {
 			$astra_customizer_css = ( class_exists( 'Astra_Dynamic_CSS' ) ) ? \Astra_Dynamic_CSS::return_output( '' ) : '';
-			//phpcs:disable
-			// ob_start();
-			// $ast_header = astra_header_markup();
-			// $ast_header = ob_get_clean();
-
-			// ob_start();
-			// $ast_footer = astra_footer_markup();
-			// $ast_footer = ob_get_clean();
-			// $static_css_path = ASTRA_THEME_DIR . 'assets/css/minified/main.min.css';
-			//phpcs:enable
-			
 		}
 
 		$server_astra_customizer_css = Helper::instance()->get_block_template_customiser_css();
@@ -933,7 +943,7 @@ class Plugin {
 			Sync_Library::instance()->get_server_astra_customizer_css();
 			$server_astra_customizer_css = Helper::instance()->get_block_template_customiser_css();
 		}
-		
+
 		$settings = get_option( 'ast_block_templates_ai_settings', array() );
 		$disable_ai = isset( $settings['disable_ai'] ) ? $settings['disable_ai'] : false;
 		$adaptive_mode = isset( $settings['adaptive_mode'] ) ? $settings['adaptive_mode'] : true;
@@ -944,12 +954,13 @@ class Plugin {
 			'ast_block_templates_authorization_url_param', array(
 				'type' => 'token',
 				'scs-authorize' => true,
-				'redirect_url' => isset( $_SERVER['REQUEST_URI'] ) ? urlencode( network_home_url() . $_SERVER['REQUEST_URI'] . '&ast_action=auth&nonce=' . wp_create_nonce( 'zip_ai_auth_nonce' ) ) : '', // phpcs:ignore WordPress.Security.ValidatedSanitizedInput.InputNotSanitized
+				'source' => 'spectra',
 			)
 		);
-		
+
 		$credit_request_params = array(
 			'success_url' => isset( $_SERVER['REQUEST_URI'] ) ? urlencode( $this->remove_query_params( network_home_url() . $_SERVER['REQUEST_URI'], $remove_parameters ) . '&ast_action=credits' ) : '', // phpcs:ignore WordPress.Security.ValidatedSanitizedInput.InputNotSanitized
+			'source' => 'spectra',
 		);
 
 		$spec_ai_auth_url = add_query_arg( $request_params, ZIPWP_APP );
@@ -967,6 +978,14 @@ class Plugin {
 		}
 		$pro_url = apply_filters( 'ast_block_templates_pro_url', 'https://wpastra.com/starter-templates-plans/?utm_source=gutenberg-templates&utm_medium=dashboard&utm_campaign=Starter-Template-Backend' );
 
+		$wp_stylesheet_path = ABSPATH . 'wp-includes/css/dist/block-library/style.min.css';
+
+		$wp_stylesheet = '';
+		if ( file_exists( $wp_stylesheet_path ) ) {
+			$wp_stylesheet = file_get_contents( $wp_stylesheet_path ); //phpcs:ignore
+			$wp_stylesheet = preg_replace( '/html/i', '.st-block-container', (string) $wp_stylesheet );
+		}
+
 		wp_localize_script(
 			'ast-block-templates',
 			'ast_block_template_vars',
@@ -980,7 +999,6 @@ class Plugin {
 					'spectra_status'          => $this->get_plugin_status( 'ultimate-addons-for-gutenberg/ultimate-addons-for-gutenberg.php' ),
 					'spectra_pro_status'      => $this->get_plugin_status( 'spectra-pro/spectra-pro.php' ),
 					'astra_sites_pro_status'  => $this->get_plugin_status( 'astra-pro-sites/astra-pro-sites.php' ),
-					'wpforms_status'          => $this->get_plugin_status( 'spectra-pro/spectra-pro.php' ),
 					'astra_sites_status'          => $this->get_plugin_status( 'astra-sites/astra-sites.php' ),
 					'_ajax_nonce'             => wp_create_nonce( 'ast-block-templates-ajax-nonce' ),
 					'button_text'             => esc_html__( 'Design Library', 'ultimate-addons-for-gutenberg' ),
@@ -994,8 +1012,8 @@ class Plugin {
 					'license_status'          => $license_status,
 					'isPro'                   => defined( 'ASTRA_PRO_SITES_NAME' ) ? true : false,
 					'getProURL'               => esc_url( defined( 'ASTRA_PRO_SITES_NAME' ) ? ( admin_url( 'plugins.php?bsf-inline-license-form=astra-pro-sites' ) ) : $pro_url ),
-					'astra_theme_css'         => isset( $astra_theme_css ) ? $astra_theme_css : '',
 					'site_url'                => site_url(),
+					'home_url'                => home_url(),
 					'global-styles'           => preg_replace( '/(?<!-)(\\bbody\\b)(?!-)/i', '.st-block-container', wp_get_global_stylesheet() ),
 					'spectra_common_styles'   => preg_replace( '/(?<!-)(\\bbody\\b)(?!-)/i', '.st-block-container', $common_css_content ) . ' .st-block-container .uagb-button__wrapper a { text-decoration: none; }',
 					'block_color_palette'     => $this->get_block_palette_colors(),
@@ -1051,9 +1069,37 @@ class Plugin {
 					'hide_notice' => $this->is_show_personalize_ai_notice(),
 					'is_sync_business_details' => get_option( 'ast-templates-business-details-synced', false ),
 					'bypassAuth' => apply_filters( 'ast_block_templates_bypass_auth', false ),
+					'zipwp_ai_auth_nonce' => wp_create_nonce( 'zip_ai_auth_nonce' ),
+					'gutenberg_plugin_status' => is_plugin_active( 'gutenberg/gutenberg.php' ),
+					'is_personalized' => get_option( 'ast-templates-ai-content', false ),
+					'wp_stylesheet' => $wp_stylesheet,
 				)
 			)
 		);
+	}
+
+		/**
+		 * Generate and return the Google fonts url.
+		 *
+		 * @since 1.0.1
+		 * @return string
+		 */
+	public function google_fonts_url() {
+
+		$fonts_url     = '';
+		$font_families = array(
+			'Inter:400,500,600',
+			'Figtree:400,500,600,700',
+		);
+
+		$query_args = array(
+			'family' => rawurlencode( implode( '|', $font_families ) ),
+			'subset' => rawurlencode( 'latin,latin-ext' ),
+		);
+
+		$fonts_url = add_query_arg( $query_args, '//fonts.googleapis.com/css' );
+
+		return $fonts_url;
 	}
 
 	/**
@@ -1076,13 +1122,13 @@ class Plugin {
 
 				if ( $host ) {
 					$domain_parts = explode( '.', $host );
-					$type = reset( $domain_parts ); 
+					$type = reset( $domain_parts );
 					$social_profiles[ $index ]['type'] = strtolower( $type );
 					$social_profiles[ $index ]['id'] = strtolower( $type );
 				}
 
 				$save = true;
-			}       
+			}
 		}
 
 		if ( $save ) {
@@ -1134,18 +1180,26 @@ class Plugin {
 		if ( ! defined( 'UAGB_FILE' ) && ! class_exists( 'UAGB_Helper' ) ) {
 			return;
 		}
-
-		$file_generation = \UAGB_Helper::allow_file_generation();
-
-		if ( 'enabled' === $file_generation ) {
-
-			\UAGB_Helper::delete_uag_asset_dir();
+	
+		if ( class_exists( 'UAGB_Helper' ) && is_callable( array( 'UAGB_Helper', 'allow_file_generation' ) ) ) {
+			$file_generation = \UAGB_Helper::allow_file_generation();
+	
+			if ( 'enabled' === $file_generation ) {
+	
+				if ( is_callable( array( 'UAGB_Helper', 'delete_uag_asset_dir' ) ) ) {
+					\UAGB_Helper::delete_uag_asset_dir();
+				}
+			}
 		}
-
-		\UAGB_Admin_Helper::create_specific_stylesheet();
-
+	
+		if ( class_exists( 'UAGB_Admin_Helper' ) && is_callable( array( 'UAGB_Admin_Helper', 'create_specific_stylesheet' ) ) ) {
+			\UAGB_Admin_Helper::create_specific_stylesheet();
+		}
+	
 		/* Update the asset version */
-		\UAGB_Admin_Helper::update_admin_settings_option( '__uagb_asset_version', time() );
+		if ( class_exists( 'UAGB_Admin_Helper' ) && is_callable( array( 'UAGB_Admin_Helper', 'update_admin_settings_option' ) ) ) {
+			\UAGB_Admin_Helper::update_admin_settings_option( '__uagb_asset_version', time() );
+		}
 	}
 
 	/**
@@ -1166,7 +1220,7 @@ class Plugin {
 			$adaptive_mode = isset( $settings['adaptive_mode'] ) ? $settings['adaptive_mode'] : true;
 		}
 
-		if ( class_exists( 'Astra_Global_Palette' ) && $adaptive_mode ) {
+		if ( class_exists( 'Astra_Global_Palette' ) && $adaptive_mode && function_exists( 'astra_get_palette_colors' ) ) {
 			$astra_palette_colors = astra_get_palette_colors();
 			$default_palette_color = $astra_palette_colors['palettes'][ $astra_palette_colors['currentPalette'] ];
 		}
@@ -1222,8 +1276,8 @@ class Plugin {
 			$settings = get_option( 'ast_block_templates_ai_settings', array() );
 			$adaptive_mode = isset( $settings['adaptive_mode'] ) ? $settings['adaptive_mode'] : true;
 		}
-		
-		if ( class_exists( 'Astra_Global_Palette' ) && $adaptive_mode ) {
+
+		if ( class_exists( 'Astra_Global_Palette' ) && $adaptive_mode && function_exists( 'astra_get_palette_colors' ) ) {
 			$astra_palette_colors = astra_get_palette_colors();
 			$default_palette_color = $astra_palette_colors['palettes'][ $astra_palette_colors['currentPalette'] ];
 		}
@@ -1330,7 +1384,7 @@ class Plugin {
 	 *
 	 * @since 1.0.0
 	 *
-	 * @return array page builder sites.
+	 * @return array<int, mixed> page builder sites.
 	 */
 	public function get_all_sites() {
 		$total_requests = (int) Helper::instance()->get_site_request();
@@ -1400,15 +1454,21 @@ class Plugin {
 	 * Get all blocks
 	 *
 	 * @since 1.0.0
-	 * @return array All Elementor Blocks.
+	 * @param  int $start Start Page.
+	 * @param  int $end End Page.
+	 * @return array<string, mixed> All Elementor Blocks.
 	 */
-	public function get_all_blocks() {
-		$blocks         = array();
-		$blocks_pages   = array();
-		$blocks_wireframe   = array();
-		$total_requests = (int) Helper::instance()->get_block_templates_requests();
+	public function get_all_blocks( $start = 0, $end = 0 ) {
+		$blocks = array();
+		$blocks_pages = array();
+		$blocks_wireframe = array();
 
-		for ( $page = 1; $page <= $total_requests; $page++ ) {
+		if ( 0 === $start && 0 === $end ) {
+			$start = 1;
+			$end = (int) Helper::instance()->get_block_templates_requests();
+		}
+
+		for ( $page = $start; $page <= $end; $page++ ) {
 			$current_page_data = Helper::instance()->get_blocks_templates( $page );
 			if ( ! empty( $current_page_data ) ) {
 				foreach ( $current_page_data as $page_id => $page_data ) {
@@ -1423,6 +1483,7 @@ class Plugin {
 					}
 				}
 			}
+			unset( $current_page_data );
 		}
 
 		return array(
@@ -1437,10 +1498,10 @@ class Plugin {
 	 *
 	 * @since 1.0.0
 	 *
-	 * @param  string $file Download File URL.
-	 * @param  array  $overrides Upload file arguments.
-	 * @param  int    $timeout_seconds Timeout in downloading the XML file in seconds.
-	 * @return array        Downloaded file data.
+	 * @param  string               $file Download File URL.
+	 * @param  array<string, mixed> $overrides Upload file arguments.
+	 * @param  int                  $timeout_seconds Timeout in downloading the XML file in seconds.
+	 * @return array<string, mixed>        Downloaded file data.
 	 */
 	public function download_file( $file = '', $overrides = array(), $timeout_seconds = 300 ) {
 
@@ -1512,7 +1573,7 @@ class Plugin {
 
 	/**
 	 * Remove query parameters from the URL.
-	 * 
+	 *
 	 * @param  String   $url URL.
 	 * @param  String[] $params Query parameters.
 	 *

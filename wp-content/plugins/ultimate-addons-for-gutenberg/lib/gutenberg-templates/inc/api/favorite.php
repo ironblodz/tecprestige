@@ -127,7 +127,7 @@ class Favorite extends Api_Base {
 	 */
 	public function save( $request ) {
 
-		$nonce = $request->get_header( 'X-WP-Nonce' );
+		$nonce = (string) $request->get_header( 'X-WP-Nonce' );
 		// Verify the nonce.
 		if ( ! wp_verify_nonce( sanitize_text_field( $nonce ), 'wp_rest' ) ) {
 			wp_send_json_error(
@@ -145,17 +145,16 @@ class Favorite extends Api_Base {
 		$status = $request->get_param( 'status' );
 
 		// Empty favorite then add favorite in respective array tye and early return.
+		if ( ! isset( $favorites[ $block_type ] ) || ! is_array( $favorites[ $block_type ] ) ) {
+			$favorites[ $block_type ] = array();
+		}
 		if ( empty( $favorites ) && $status ) {
 			$favorites[ $block_type ][] = $id;
-			$update_status = update_option( 'ast_block_templates_favorites', $favorites );
-			return rest_ensure_response( array( 'success' => $update_status ) );
 		}
 
 		// Empty patterns OR blocks array then add favorite and return early.
 		if ( empty( $favorites[ $block_type ] ) && $status ) {
 			$favorites[ $block_type ][] = $id;
-			$update_status = update_option( 'ast_block_templates_favorites', $favorites );
-			return rest_ensure_response( array( 'success' => $update_status ) );
 		}
 
 		if ( $status ) {
@@ -176,6 +175,13 @@ class Favorite extends Api_Base {
 
 		$update_status = update_option( 'ast_block_templates_favorites', $favorites );
 
-		return rest_ensure_response( array( 'success' => $update_status ) );
+
+		$data = array( 
+			'success' => $update_status, 
+			'message' => $update_status ? __( 'Action Completed', 'ultimate-addons-for-gutenberg' ) : __( 'Action failed', 'ultimate-addons-for-gutenberg' ),
+			'data' => $favorites, 
+		);
+
+		return rest_ensure_response( $data );
 	}
 }

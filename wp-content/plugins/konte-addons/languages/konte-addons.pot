@@ -1,0 +1,5889 @@
+# Copyright (C) 2024 UIX Themes
+# This file is distributed under the GPLv2.
+msgid ""
+msgstr ""
+"Project-Id-Version: Konte Addons 2.2.8\n"
+"Report-Msgid-Bugs-To: https://wordpress.org/support/plugin/konte-addons\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"POT-Creation-Date: 2024-12-20T09:18:40+00:00\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"X-Generator: WP-CLI 2.10.0\n"
+"X-Domain: konte-addons\n"
+
+#. Plugin Name of the plugin
+#: konte-addons.php
+msgid "Konte Addons"
+msgstr ""
+
+#. Plugin URI of the plugin
+#: konte-addons.php
+msgid "https://uix.store/intro/konte/"
+msgstr ""
+
+#. Description of the plugin
+#: konte-addons.php
+msgid "A collection of extra elements for WPBakery Page Builder. It was made for Konte premium theme and requires Konte theme installed in order to work properly."
+msgstr ""
+
+#. Author of the plugin
+#: konte-addons.php
+msgid "UIX Themes"
+msgstr ""
+
+#. Author URI of the plugin
+#: konte-addons.php
+msgid "https://uix.store"
+msgstr ""
+
+#: includes/elementor/base/carousel-widget-base.php:38
+#: includes/elementor/widgets/products-carousel-2.php:91
+#: includes/elementor/widgets/products-carousel.php:81
+#: includes/elementor/widgets/products-tabs-carousel.php:83
+msgid "Slides to show"
+msgstr ""
+
+#: includes/elementor/base/carousel-widget-base.php:53
+#: includes/elementor/widgets/products-carousel-2.php:103
+#: includes/elementor/widgets/products-carousel.php:94
+#: includes/elementor/widgets/products-tabs-carousel.php:96
+msgid "Slides to scroll"
+msgstr ""
+
+#: includes/elementor/base/carousel-widget-base.php:67
+#: includes/elementor/widgets/products-carousel-2.php:115
+#: includes/elementor/widgets/products-carousel.php:106
+#: includes/elementor/widgets/products-tabs-carousel.php:108
+msgid "Navigation"
+msgstr ""
+
+#: includes/elementor/base/carousel-widget-base.php:70
+#: includes/elementor/widgets/products-carousel.php:109
+#: includes/elementor/widgets/products-tabs-carousel.php:111
+msgid "Arrows and Dots"
+msgstr ""
+
+#: includes/elementor/base/carousel-widget-base.php:71
+#: includes/elementor/widgets/products-carousel-2.php:118
+#: includes/elementor/widgets/products-carousel-2.php:206
+#: includes/elementor/widgets/products-carousel.php:110
+#: includes/elementor/widgets/products-carousel.php:216
+#: includes/elementor/widgets/products-tabs-carousel.php:112
+#: includes/elementor/widgets/products-tabs-carousel.php:201
+#: includes/js-composer.php:379
+msgid "Arrows"
+msgstr ""
+
+#: includes/elementor/base/carousel-widget-base.php:72
+#: includes/elementor/widgets/products-carousel-2.php:119
+#: includes/elementor/widgets/products-carousel-2.php:298
+#: includes/elementor/widgets/products-carousel.php:111
+#: includes/elementor/widgets/products-carousel.php:330
+#: includes/elementor/widgets/products-tabs-carousel.php:113
+#: includes/elementor/widgets/products-tabs-carousel.php:314
+msgid "Dots"
+msgstr ""
+
+#: includes/elementor/base/carousel-widget-base.php:73
+#: includes/elementor/widgets/banner-carousel.php:653
+#: includes/elementor/widgets/banner-image.php:334
+#: includes/elementor/widgets/product-banner.php:104
+#: includes/elementor/widgets/products-carousel-2.php:120
+#: includes/elementor/widgets/products-carousel.php:112
+#: includes/elementor/widgets/products-tabs-carousel.php:114
+msgid "None"
+msgstr ""
+
+#: includes/elementor/base/carousel-widget-base.php:86
+msgid "Infinite Loop"
+msgstr ""
+
+#: includes/elementor/base/carousel-widget-base.php:88
+#: includes/elementor/base/carousel-widget-base.php:102
+#: includes/elementor/base/carousel-widget-base.php:129
+#: includes/elementor/widgets/products-carousel-2.php:141
+#: includes/elementor/widgets/products-carousel-2.php:168
+#: includes/elementor/widgets/products-carousel.php:133
+#: includes/elementor/widgets/products-carousel.php:160
+#: includes/elementor/widgets/products-tabs-carousel.php:135
+#: includes/elementor/widgets/products-tabs-carousel.php:162
+msgid "Off"
+msgstr ""
+
+#: includes/elementor/base/carousel-widget-base.php:89
+#: includes/elementor/base/carousel-widget-base.php:103
+#: includes/elementor/base/carousel-widget-base.php:130
+#: includes/elementor/widgets/products-carousel-2.php:142
+#: includes/elementor/widgets/products-carousel-2.php:169
+#: includes/elementor/widgets/products-carousel.php:134
+#: includes/elementor/widgets/products-carousel.php:161
+#: includes/elementor/widgets/products-tabs-carousel.php:136
+#: includes/elementor/widgets/products-tabs-carousel.php:163
+msgid "On"
+msgstr ""
+
+#: includes/elementor/base/carousel-widget-base.php:100
+#: includes/elementor/widgets/products-carousel-2.php:139
+#: includes/elementor/widgets/products-carousel.php:131
+#: includes/elementor/widgets/products-tabs-carousel.php:133
+msgid "Autoplay"
+msgstr ""
+
+#: includes/elementor/base/carousel-widget-base.php:112
+#: includes/elementor/widgets/products-carousel-2.php:151
+#: includes/elementor/widgets/products-carousel.php:143
+#: includes/elementor/widgets/products-tabs-carousel.php:145
+msgid "Autoplay Speed"
+msgstr ""
+
+#: includes/elementor/base/carousel-widget-base.php:127
+#: includes/elementor/widgets/products-carousel-2.php:166
+#: includes/elementor/widgets/products-carousel.php:158
+#: includes/elementor/widgets/products-tabs-carousel.php:160
+msgid "Pause on Hover"
+msgstr ""
+
+#: includes/elementor/base/carousel-widget-base.php:144
+#: includes/elementor/widgets/products-carousel-2.php:181
+#: includes/elementor/widgets/products-carousel.php:173
+#: includes/elementor/widgets/products-tabs-carousel.php:175
+msgid "Animation Speed"
+msgstr ""
+
+#: includes/elementor/base/carousel-widget-base.php:158
+#: includes/elementor/widgets/accordion.php:256
+#: includes/elementor/widgets/banner-carousel.php:691
+#: includes/elementor/widgets/banner-image.php:423
+#: includes/elementor/widgets/banner-image.php:473
+#: includes/elementor/widgets/banner-image.php:523
+#: includes/elementor/widgets/info-list.php:176
+#: includes/elementor/widgets/separator-dash.php:174
+msgid "Spacing"
+msgstr ""
+
+#: includes/elementor/base/carousel-widget-base.php:161
+#: includes/elementor/base/products-widget-base.php:226
+#: includes/elementor/modules/display-settings.php:156
+#: includes/elementor/modules/display-settings.php:188
+#: includes/elementor/modules/display-settings.php:219
+#: includes/elementor/modules/display-settings.php:253
+#: includes/elementor/modules/display-settings.php:390
+#: includes/elementor/modules/display-settings.php:426
+#: includes/elementor/modules/display-settings.php:511
+#: includes/elementor/modules/display-settings.php:542
+#: includes/elementor/modules/display-settings.php:594
+#: includes/elementor/modules/display-settings.php:633
+#: includes/elementor/widgets/banner-carousel.php:186
+#: includes/elementor/widgets/banner-carousel.php:380
+#: includes/elementor/widgets/banner-carousel.php:613
+#: includes/elementor/widgets/banner-carousel.php:694
+#: includes/elementor/widgets/countdown.php:171
+#: includes/elementor/widgets/google-map.php:146
+#: includes/elementor/widgets/team-member-carousel.php:120
+#: includes/elementor/widgets/team-member.php:120
+#: includes/js-composer.php:302
+#: includes/js-composer.php:660
+#: includes/js-composer.php:1237
+#: includes/js-composer.php:1355
+#: includes/js-composer.php:1653
+#: includes/js-composer.php:1958
+#: includes/js-composer.php:2067
+#: includes/js-composer.php:2355
+#: includes/js-composer.php:2428
+#: includes/js-composer.php:2497
+#: includes/js-composer.php:2604
+#: includes/js-composer.php:2829
+#: includes/js-composer.php:2996
+#: includes/js-composer.php:3163
+#: includes/js-composer.php:3330
+#: includes/mega-menu/views/design.php:143
+#: includes/mega-menu/views/mega-grid-options.php:141
+#: includes/mega-menu/views/mega.php:21
+#: includes/mega-menu/views/mega.php:32
+#: includes/portfolio.php:387
+#: includes/size-guide.php:569
+#: includes/size-guide.php:577
+msgid "Default"
+msgstr ""
+
+#: includes/elementor/base/carousel-widget-base.php:162
+#: includes/elementor/modules/display-settings.php:192
+#: includes/elementor/modules/display-settings.php:392
+#: includes/elementor/modules/display-settings.php:515
+#: includes/elementor/modules/display-settings.php:596
+#: includes/elementor/modules/display-settings.php:635
+#: includes/elementor/widgets/banner-carousel.php:187
+#: includes/elementor/widgets/banner-carousel.php:381
+#: includes/elementor/widgets/banner-carousel.php:695
+#: includes/elementor/widgets/chart.php:127
+#: includes/elementor/widgets/message-box.php:87
+#: includes/elementor/widgets/team-member-carousel.php:121
+#: includes/elementor/widgets/team-member.php:121
+#: includes/flex-post.php:462
+#: includes/js-composer.php:732
+#: includes/mega-menu/views/design.php:87
+#: includes/mega-menu/views/design.php:104
+#: includes/mega-menu/views/mega-grid-options.php:83
+#: includes/mega-menu/views/mega-grid-options.php:100
+#: includes/mega-menu/views/mega.php:34
+msgid "Custom"
+msgstr ""
+
+#: includes/elementor/base/carousel-widget-base.php:174
+#: includes/elementor/widgets/banner-carousel.php:707
+msgid "Custom Spacing"
+msgstr ""
+
+#: includes/elementor/base/carousel-widget-base.php:198
+#: includes/elementor/widgets/products-carousel.php:228
+#: includes/elementor/widgets/products-tabs-carousel.php:212
+msgid "Arrow Type"
+msgstr ""
+
+#: includes/elementor/base/carousel-widget-base.php:201
+#: includes/elementor/widgets/banner-grid.php:376
+#: includes/elementor/widgets/banner-image.php:545
+#: includes/elementor/widgets/button.php:31
+#: includes/elementor/widgets/button.php:71
+#: includes/elementor/widgets/button.php:258
+#: includes/elementor/widgets/category-banner.php:322
+#: includes/elementor/widgets/countdown-banner.php:315
+#: includes/elementor/widgets/cta.php:100
+#: includes/elementor/widgets/cta.php:244
+#: includes/elementor/widgets/price-table.php:466
+#: includes/elementor/widgets/products-carousel-2.php:420
+#: includes/elementor/widgets/products-carousel.php:231
+#: includes/elementor/widgets/products-tabs-carousel.php:215
+#: includes/elementor/widgets/promotion.php:167
+#: includes/js-composer.php:566
+#: includes/js-composer.php:1663
+#: includes/js-composer.php:1676
+#: includes/js-composer.php:1690
+#: includes/js-composer.php:1698
+#: includes/js-composer.php:1708
+#: includes/js-composer.php:2782
+#: includes/js-composer.php:2949
+#: includes/js-composer.php:3116
+#: includes/js-composer.php:3283
+#: includes/mega-menu/widgets/image.php:91
+msgid "Button"
+msgstr ""
+
+#: includes/elementor/base/carousel-widget-base.php:202
+#: includes/elementor/widgets/products-carousel.php:232
+#: includes/elementor/widgets/products-tabs-carousel.php:216
+#: includes/js-composer.php:1802
+msgid "Arrow"
+msgstr ""
+
+#: includes/elementor/base/carousel-widget-base.php:217
+#: includes/elementor/widgets/products-carousel-2.php:310
+#: includes/elementor/widgets/products-carousel.php:342
+#: includes/elementor/widgets/products-tabs-carousel.php:326
+msgid "Dots Alignment"
+msgstr ""
+
+#: includes/elementor/base/carousel-widget-base.php:221
+#: includes/elementor/modules/display-settings.php:101
+#: includes/elementor/widgets/banner-carousel.php:222
+#: includes/elementor/widgets/banner-carousel.php:542
+#: includes/elementor/widgets/banner-grid.php:257
+#: includes/elementor/widgets/banner-grid.php:277
+#: includes/elementor/widgets/banner-image.php:314
+#: includes/elementor/widgets/banner-image.php:361
+#: includes/elementor/widgets/button.php:153
+#: includes/elementor/widgets/button.php:186
+#: includes/elementor/widgets/button.php:217
+#: includes/elementor/widgets/category-banner.php:240
+#: includes/elementor/widgets/chart.php:152
+#: includes/elementor/widgets/countdown.php:143
+#: includes/elementor/widgets/heading.php:180
+#: includes/elementor/widgets/icon-box.php:247
+#: includes/elementor/widgets/products-carousel-2.php:314
+#: includes/elementor/widgets/products-carousel.php:346
+#: includes/elementor/widgets/products-tabs-carousel.php:330
+#: includes/elementor/widgets/tabs.php:210
+#: includes/elementor/widgets/tabs.php:264
+#: includes/js-composer.php:645
+#: includes/js-composer.php:672
+#: includes/js-composer.php:967
+#: includes/js-composer.php:1200
+#: includes/js-composer.php:1344
+#: includes/js-composer.php:1462
+#: includes/js-composer.php:1577
+#: includes/js-composer.php:2709
+#: includes/js-composer.php:2729
+#: includes/js-composer.php:2810
+#: includes/js-composer.php:2876
+#: includes/js-composer.php:2896
+#: includes/js-composer.php:2977
+#: includes/js-composer.php:3043
+#: includes/js-composer.php:3063
+#: includes/js-composer.php:3144
+#: includes/js-composer.php:3210
+#: includes/js-composer.php:3230
+#: includes/js-composer.php:3311
+#: includes/mega-menu/views/design.php:21
+#: includes/mega-menu/views/design.php:48
+#: includes/mega-menu/views/design.php:84
+#: includes/mega-menu/views/mega-grid-options.php:27
+#: includes/mega-menu/views/mega-grid-options.php:80
+msgid "Left"
+msgstr ""
+
+#: includes/elementor/base/carousel-widget-base.php:225
+#: includes/elementor/widgets/banner-carousel.php:226
+#: includes/elementor/widgets/banner-carousel.php:543
+#: includes/elementor/widgets/banner-grid.php:258
+#: includes/elementor/widgets/banner-grid.php:281
+#: includes/elementor/widgets/banner-image.php:315
+#: includes/elementor/widgets/banner-image.php:365
+#: includes/elementor/widgets/button.php:154
+#: includes/elementor/widgets/button.php:190
+#: includes/elementor/widgets/button.php:221
+#: includes/elementor/widgets/chart.php:156
+#: includes/elementor/widgets/countdown.php:147
+#: includes/elementor/widgets/heading.php:184
+#: includes/elementor/widgets/icon-box.php:251
+#: includes/elementor/widgets/products-carousel-2.php:318
+#: includes/elementor/widgets/products-carousel.php:350
+#: includes/elementor/widgets/products-tabs-carousel.php:334
+#: includes/elementor/widgets/tabs.php:214
+#: includes/elementor/widgets/tabs.php:268
+#: includes/js-composer.php:646
+#: includes/js-composer.php:673
+#: includes/js-composer.php:968
+#: includes/js-composer.php:1201
+#: includes/js-composer.php:1345
+#: includes/js-composer.php:1578
+#: includes/js-composer.php:2710
+#: includes/js-composer.php:2730
+#: includes/js-composer.php:2811
+#: includes/js-composer.php:2877
+#: includes/js-composer.php:2897
+#: includes/js-composer.php:2978
+#: includes/js-composer.php:3044
+#: includes/js-composer.php:3064
+#: includes/js-composer.php:3145
+#: includes/js-composer.php:3211
+#: includes/js-composer.php:3231
+#: includes/js-composer.php:3312
+#: includes/mega-menu/views/design.php:85
+#: includes/mega-menu/views/mega-grid-options.php:81
+msgid "Center"
+msgstr ""
+
+#: includes/elementor/base/carousel-widget-base.php:229
+#: includes/elementor/modules/display-settings.php:102
+#: includes/elementor/widgets/banner-carousel.php:230
+#: includes/elementor/widgets/banner-carousel.php:544
+#: includes/elementor/widgets/banner-grid.php:259
+#: includes/elementor/widgets/banner-grid.php:285
+#: includes/elementor/widgets/banner-image.php:316
+#: includes/elementor/widgets/banner-image.php:369
+#: includes/elementor/widgets/button.php:155
+#: includes/elementor/widgets/button.php:194
+#: includes/elementor/widgets/button.php:225
+#: includes/elementor/widgets/category-banner.php:244
+#: includes/elementor/widgets/chart.php:160
+#: includes/elementor/widgets/countdown.php:151
+#: includes/elementor/widgets/heading.php:188
+#: includes/elementor/widgets/icon-box.php:255
+#: includes/elementor/widgets/products-carousel-2.php:322
+#: includes/elementor/widgets/products-carousel.php:354
+#: includes/elementor/widgets/products-tabs-carousel.php:338
+#: includes/js-composer.php:647
+#: includes/js-composer.php:674
+#: includes/js-composer.php:969
+#: includes/js-composer.php:1202
+#: includes/js-composer.php:1346
+#: includes/js-composer.php:1463
+#: includes/js-composer.php:1579
+#: includes/js-composer.php:2711
+#: includes/js-composer.php:2731
+#: includes/js-composer.php:2812
+#: includes/js-composer.php:2878
+#: includes/js-composer.php:2898
+#: includes/js-composer.php:2979
+#: includes/js-composer.php:3045
+#: includes/js-composer.php:3065
+#: includes/js-composer.php:3146
+#: includes/js-composer.php:3212
+#: includes/js-composer.php:3232
+#: includes/js-composer.php:3313
+#: includes/mega-menu/views/design.php:26
+#: includes/mega-menu/views/design.php:53
+#: includes/mega-menu/views/design.php:86
+#: includes/mega-menu/views/mega-grid-options.php:32
+#: includes/mega-menu/views/mega-grid-options.php:82
+msgid "Right"
+msgstr ""
+
+#: includes/elementor/base/products-widget-base.php:35
+msgid "Number of Products"
+msgstr ""
+
+#: includes/elementor/base/products-widget-base.php:49
+#: includes/elementor/widgets/button.php:102
+#: includes/elementor/widgets/message-box.php:79
+#: includes/elementor/widgets/tabs.php:120
+#: includes/js-composer.php:764
+#: includes/js-composer.php:2214
+#: includes/mega-menu/views/icon.php:705
+msgid "Type"
+msgstr ""
+
+#: includes/elementor/base/products-widget-base.php:61
+#: includes/elementor/widgets/posts-carousel.php:89
+#: includes/elementor/widgets/posts-grid.php:125
+#: includes/elementor/widgets/products-tabs.php:194
+#: includes/js-composer.php:1128
+#: includes/js-composer.php:1165
+#: includes/js-composer.php:1380
+#: includes/js-composer.php:2167
+msgid "Category"
+msgstr ""
+
+#: includes/elementor/base/products-widget-base.php:74
+#: includes/elementor/widgets/products-tabs.php:221
+#: includes/js-composer.php:2001
+#: includes/js-composer.php:2110
+#: includes/mega-menu/widgets/heading.php:84
+msgid "Tag"
+msgstr ""
+
+#: includes/elementor/base/products-widget-base.php:87
+#: includes/elementor/widgets/products-tabs.php:134
+#: includes/js-composer.php:1953
+#: includes/js-composer.php:2062
+msgid "Order By"
+msgstr ""
+
+#: includes/elementor/base/products-widget-base.php:102
+#: includes/elementor/widgets/products-tabs.php:147
+#: includes/js-composer.php:1974
+#: includes/js-composer.php:2083
+msgid "Order"
+msgstr ""
+
+#: includes/elementor/base/products-widget-base.php:105
+#: includes/elementor/widgets/products-tabs.php:150
+#: includes/js-composer.php:1980
+#: includes/js-composer.php:2089
+msgid "Ascending"
+msgstr ""
+
+#: includes/elementor/base/products-widget-base.php:106
+#: includes/elementor/widgets/products-tabs.php:151
+#: includes/js-composer.php:1981
+#: includes/js-composer.php:2090
+msgid "Descending"
+msgstr ""
+
+#: includes/elementor/base/products-widget-base.php:227
+msgid "Menu Order"
+msgstr ""
+
+#: includes/elementor/base/products-widget-base.php:228
+#: includes/elementor/widgets/countdown-banner.php:187
+#: includes/elementor/widgets/countdown.php:78
+#: includes/js-composer.php:1320
+#: includes/js-composer.php:1960
+#: includes/js-composer.php:2069
+#: includes/js-composer.php:2591
+msgid "Date"
+msgstr ""
+
+#: includes/elementor/base/products-widget-base.php:229
+#: includes/elementor/widgets/product-banner.php:79
+#: includes/js-composer.php:1961
+#: includes/js-composer.php:2070
+msgid "Product ID"
+msgstr ""
+
+#: includes/elementor/base/products-widget-base.php:230
+#: includes/js-composer.php:1962
+#: includes/js-composer.php:2071
+msgid "Product Title"
+msgstr ""
+
+#: includes/elementor/base/products-widget-base.php:231
+#: includes/js-composer.php:1963
+#: includes/js-composer.php:2072
+msgid "Random"
+msgstr ""
+
+#: includes/elementor/base/products-widget-base.php:232
+#: includes/elementor/widgets/price-table.php:309
+#: includes/elementor/widgets/price-table.php:352
+#: includes/elementor/widgets/products-carousel-2.php:391
+#: includes/js-composer.php:191
+#: includes/js-composer.php:1964
+#: includes/js-composer.php:2073
+#: includes/widgets/products-filter.php:1331
+msgid "Price"
+msgstr ""
+
+#: includes/elementor/base/products-widget-base.php:233
+#: includes/js-composer.php:1965
+#: includes/js-composer.php:2074
+msgid "Popularity (Sales)"
+msgstr ""
+
+#: includes/elementor/base/products-widget-base.php:234
+#: includes/js-composer.php:1966
+#: includes/js-composer.php:2075
+#: includes/widgets/products-filter.php:1333
+msgid "Rating"
+msgstr ""
+
+#: includes/elementor/base/products-widget-base.php:245
+#: includes/js-composer.php:1763
+#: includes/js-composer.php:1840
+#: includes/js-composer.php:1945
+#: includes/js-composer.php:2054
+#: includes/js-composer.php:2205
+#: includes/js-composer.php:2219
+#: includes/shortcodes.php:1458
+msgid "Recent Products"
+msgstr ""
+
+#: includes/elementor/base/products-widget-base.php:246
+#: includes/js-composer.php:1764
+#: includes/js-composer.php:1841
+#: includes/js-composer.php:1946
+#: includes/js-composer.php:2055
+#: includes/js-composer.php:2220
+msgid "Featured Products"
+msgstr ""
+
+#: includes/elementor/base/products-widget-base.php:247
+#: includes/elementor/widgets/products-tabs.php:177
+#: includes/js-composer.php:1765
+#: includes/js-composer.php:1842
+#: includes/js-composer.php:1947
+#: includes/js-composer.php:2056
+#: includes/js-composer.php:2209
+#: includes/js-composer.php:2221
+#: includes/shortcodes.php:1462
+#: includes/widgets/products-filter.php:492
+msgid "Sale Products"
+msgstr ""
+
+#: includes/elementor/base/products-widget-base.php:248
+#: includes/js-composer.php:1766
+#: includes/js-composer.php:1843
+#: includes/js-composer.php:1948
+#: includes/js-composer.php:2057
+#: includes/js-composer.php:2222
+msgid "Best Selling Products"
+msgstr ""
+
+#: includes/elementor/base/products-widget-base.php:249
+#: includes/js-composer.php:1767
+#: includes/js-composer.php:1844
+#: includes/js-composer.php:1949
+#: includes/js-composer.php:2058
+#: includes/js-composer.php:2223
+msgid "Top Rated Products"
+msgstr ""
+
+#: includes/elementor/elementor.php:229
+#: includes/js-composer.php:148
+#: includes/js-composer.php:244
+#: includes/js-composer.php:337
+#: includes/js-composer.php:427
+#: includes/js-composer.php:499
+#: includes/js-composer.php:547
+#: includes/js-composer.php:570
+#: includes/js-composer.php:694
+#: includes/js-composer.php:761
+#: includes/js-composer.php:809
+#: includes/js-composer.php:1016
+#: includes/js-composer.php:1096
+#: includes/js-composer.php:1155
+#: includes/js-composer.php:1222
+#: includes/js-composer.php:1265
+#: includes/js-composer.php:1317
+#: includes/js-composer.php:1377
+#: includes/js-composer.php:1504
+#: includes/js-composer.php:1733
+#: includes/js-composer.php:1823
+#: includes/js-composer.php:1902
+#: includes/js-composer.php:2023
+#: includes/js-composer.php:2132
+#: includes/js-composer.php:2294
+#: includes/js-composer.php:2386
+#: includes/js-composer.php:2456
+#: includes/js-composer.php:2525
+#: includes/js-composer.php:2633
+#: includes/js-composer.php:3355
+#: includes/js-composer.php:3410
+#: includes/js-composer.php:3482
+#: includes/js-composer.php:3533
+msgid "Konte"
+msgstr ""
+
+#: includes/elementor/modules/display-settings.php:98
+#: includes/elementor/widgets/banner-carousel.php:536
+#: includes/elementor/widgets/banner-grid.php:251
+#: includes/elementor/widgets/banner-image.php:308
+msgid "Content Position"
+msgstr ""
+
+#: includes/elementor/modules/display-settings.php:127
+msgid "Subtitle"
+msgstr ""
+
+#: includes/elementor/modules/display-settings.php:145
+#: includes/elementor/modules/display-settings.php:177
+#: includes/elementor/widgets/price-table.php:76
+#: includes/elementor/widgets/price-table.php:146
+msgid "Header"
+msgstr ""
+
+#: includes/elementor/modules/display-settings.php:153
+#: includes/elementor/widgets/promotion.php:74
+#: includes/js-composer.php:2459
+msgid "Layout"
+msgstr ""
+
+#: includes/elementor/modules/display-settings.php:157
+msgid "Header V1"
+msgstr ""
+
+#: includes/elementor/modules/display-settings.php:158
+msgid "Header V2"
+msgstr ""
+
+#: includes/elementor/modules/display-settings.php:159
+msgid "Header V3"
+msgstr ""
+
+#: includes/elementor/modules/display-settings.php:160
+msgid "Header V4"
+msgstr ""
+
+#: includes/elementor/modules/display-settings.php:161
+msgid "Header V5"
+msgstr ""
+
+#: includes/elementor/modules/display-settings.php:162
+msgid "Header V6"
+msgstr ""
+
+#: includes/elementor/modules/display-settings.php:163
+msgid "Header V7"
+msgstr ""
+
+#: includes/elementor/modules/display-settings.php:164
+msgid "Header V8"
+msgstr ""
+
+#: includes/elementor/modules/display-settings.php:165
+msgid "Header V9"
+msgstr ""
+
+#: includes/elementor/modules/display-settings.php:166
+msgid "Header V10"
+msgstr ""
+
+#: includes/elementor/modules/display-settings.php:185
+#: includes/elementor/modules/display-settings.php:508
+#: includes/elementor/widgets/cta.php:150
+#: includes/elementor/widgets/cta.php:158
+#: includes/elementor/widgets/testimonial-slideshow.php:255
+#: includes/mega-menu/views/design.php:61
+#: includes/mega-menu/views/mega-grid-options.php:57
+msgid "Background"
+msgstr ""
+
+#: includes/elementor/modules/display-settings.php:189
+#: includes/elementor/modules/display-settings.php:220
+#: includes/elementor/modules/display-settings.php:427
+#: includes/elementor/modules/display-settings.php:512
+#: includes/elementor/modules/display-settings.php:543
+#: includes/js-composer.php:661
+#: includes/js-composer.php:1238
+#: includes/js-composer.php:1356
+#: includes/js-composer.php:1654
+#: includes/js-composer.php:2357
+#: includes/js-composer.php:2430
+#: includes/js-composer.php:2499
+#: includes/js-composer.php:2606
+#: includes/js-composer.php:2831
+#: includes/js-composer.php:2998
+#: includes/js-composer.php:3165
+#: includes/js-composer.php:3332
+msgid "Dark"
+msgstr ""
+
+#: includes/elementor/modules/display-settings.php:190
+#: includes/elementor/modules/display-settings.php:221
+#: includes/elementor/modules/display-settings.php:428
+#: includes/elementor/modules/display-settings.php:544
+#: includes/js-composer.php:2830
+#: includes/js-composer.php:2997
+#: includes/js-composer.php:3164
+#: includes/js-composer.php:3331
+msgid "White"
+msgstr ""
+
+#: includes/elementor/modules/display-settings.php:191
+#: includes/elementor/modules/display-settings.php:514
+msgid "Transparent"
+msgstr ""
+
+#: includes/elementor/modules/display-settings.php:201
+#: includes/elementor/modules/display-settings.php:524
+#: includes/elementor/widgets/banner-carousel.php:472
+#: includes/elementor/widgets/banner-carousel.php:506
+#: includes/elementor/widgets/banner-image.php:581
+#: includes/elementor/widgets/banner-image.php:615
+#: includes/elementor/widgets/button.php:293
+#: includes/elementor/widgets/button.php:327
+#: includes/elementor/widgets/cta.php:281
+#: includes/elementor/widgets/cta.php:312
+#: includes/elementor/widgets/message-box.php:145
+#: includes/elementor/widgets/price-table.php:502
+#: includes/elementor/widgets/price-table.php:533
+#: includes/elementor/widgets/products-carousel-2.php:242
+#: includes/elementor/widgets/products-carousel-2.php:282
+#: includes/elementor/widgets/products-carousel.php:270
+#: includes/elementor/widgets/products-carousel.php:311
+#: includes/elementor/widgets/products-tabs-carousel.php:254
+#: includes/elementor/widgets/products-tabs-carousel.php:295
+msgid "Background Color"
+msgstr ""
+
+#: includes/elementor/modules/display-settings.php:216
+#: includes/elementor/modules/display-settings.php:539
+#: includes/js-composer.php:2824
+#: includes/js-composer.php:2991
+#: includes/js-composer.php:3158
+#: includes/js-composer.php:3325
+msgid "Text Color"
+msgstr ""
+
+#: includes/elementor/modules/display-settings.php:242
+#: includes/elementor/modules/display-settings.php:379
+msgid "Page Header "
+msgstr ""
+
+#: includes/elementor/modules/display-settings.php:250
+msgid "Page Title Display"
+msgstr ""
+
+#: includes/elementor/modules/display-settings.php:254
+msgid "Hide Page Title"
+msgstr ""
+
+#: includes/elementor/modules/display-settings.php:255
+msgid "About Featured Image"
+msgstr ""
+
+#: includes/elementor/modules/display-settings.php:256
+msgid "In Front Of Featured Image"
+msgstr ""
+
+#: includes/elementor/modules/display-settings.php:265
+msgid "Page Header Content"
+msgstr ""
+
+#: includes/elementor/modules/display-settings.php:268
+msgid "Featured image"
+msgstr ""
+
+#: includes/elementor/modules/display-settings.php:269
+msgid "Video"
+msgstr ""
+
+#: includes/elementor/modules/display-settings.php:270
+#: includes/elementor/widgets/google-map.php:30
+#: includes/elementor/widgets/google-map.php:70
+#: includes/js-composer.php:240
+msgid "Google Map"
+msgstr ""
+
+#: includes/elementor/modules/display-settings.php:271
+msgid "Do not show"
+msgstr ""
+
+#: includes/elementor/modules/display-settings.php:280
+msgid "Youtube Video URL"
+msgstr ""
+
+#: includes/elementor/modules/display-settings.php:292
+msgid "Mute The Video"
+msgstr ""
+
+#: includes/elementor/modules/display-settings.php:304
+#: includes/elementor/widgets/google-map.php:76
+#: includes/elementor/widgets/google-map.php:163
+#: includes/js-composer.php:247
+#: includes/js-composer.php:1274
+#: includes/shortcodes.php:1065
+msgid "Address"
+msgstr ""
+
+#: includes/elementor/modules/display-settings.php:316
+msgid "Or Coordinates"
+msgstr ""
+
+#: includes/elementor/modules/display-settings.php:317
+#: includes/elementor/widgets/google-map.php:90
+#: includes/elementor/widgets/google-map.php:175
+msgid "Latitude, Longitude"
+msgstr ""
+
+#: includes/elementor/modules/display-settings.php:329
+#: includes/elementor/widgets/google-map.php:123
+#: includes/js-composer.php:288
+msgid "Zoom"
+msgstr ""
+
+#: includes/elementor/modules/display-settings.php:347
+msgid "Map Color"
+msgstr ""
+
+#: includes/elementor/modules/display-settings.php:366
+msgid "Show the map marker"
+msgstr ""
+
+#: includes/elementor/modules/display-settings.php:387
+#: includes/elementor/modules/display-settings.php:401
+msgid "Page Header Height"
+msgstr ""
+
+#: includes/elementor/modules/display-settings.php:391
+msgid "Fit To Screen"
+msgstr ""
+
+#: includes/elementor/modules/display-settings.php:423
+msgid "Page Title Color"
+msgstr ""
+
+#: includes/elementor/modules/display-settings.php:450
+#: includes/elementor/modules/display-settings.php:500
+#: includes/elementor/widgets/price-table.php:423
+#: includes/elementor/widgets/price-table.php:458
+msgid "Footer"
+msgstr ""
+
+#: includes/elementor/modules/display-settings.php:462
+msgid "Custom Footer Layout"
+msgstr ""
+
+#: includes/elementor/modules/display-settings.php:463
+msgid "Change the content of site footer"
+msgstr ""
+
+#: includes/elementor/modules/display-settings.php:471
+msgid "Footer Left"
+msgstr ""
+
+#: includes/elementor/modules/display-settings.php:484
+msgid "Footer Right"
+msgstr ""
+
+#: includes/elementor/modules/display-settings.php:513
+#: includes/js-composer.php:662
+#: includes/js-composer.php:1239
+#: includes/js-composer.php:1357
+#: includes/js-composer.php:1655
+#: includes/js-composer.php:2356
+#: includes/js-composer.php:2429
+#: includes/js-composer.php:2498
+#: includes/js-composer.php:2605
+msgid "Light"
+msgstr ""
+
+#: includes/elementor/modules/display-settings.php:565
+msgid "Content Area"
+msgstr ""
+
+#: includes/elementor/modules/display-settings.php:573
+msgid "Content Width"
+msgstr ""
+
+#: includes/elementor/modules/display-settings.php:590
+msgid "Top Spacing"
+msgstr ""
+
+#: includes/elementor/modules/display-settings.php:595
+#: includes/elementor/modules/display-settings.php:634
+msgid "No spacing"
+msgstr ""
+
+#: includes/elementor/modules/display-settings.php:607
+msgid "Custom Top Spacing"
+msgstr ""
+
+#: includes/elementor/modules/display-settings.php:630
+msgid "Bottom Spacing"
+msgstr ""
+
+#: includes/elementor/modules/display-settings.php:644
+msgid "Custom Bottom Spacing"
+msgstr ""
+
+#: includes/elementor/products.php:36
+#: includes/shortcodes.php:2932
+msgid "No query data."
+msgstr ""
+
+#: includes/elementor/widgets/accordion.php:32
+#: includes/elementor/widgets/accordion.php:60
+#: includes/elementor/widgets/accordion.php:133
+msgid "Accordion"
+msgstr ""
+
+#: includes/elementor/widgets/accordion.php:69
+#: includes/elementor/widgets/banner-carousel.php:162
+#: includes/elementor/widgets/banner-image.php:166
+#: includes/elementor/widgets/icon-box.php:139
+#: includes/elementor/widgets/price-table.php:204
+#: includes/elementor/widgets/price-table.php:236
+#: includes/elementor/widgets/products-grid.php:115
+#: includes/elementor/widgets/products-grid.php:147
+#: includes/elementor/widgets/products-masonry.php:108
+#: includes/elementor/widgets/subscribe-box.php:89
+#: includes/elementor/widgets/subscribe-box.php:125
+#: includes/elementor/widgets/tabs.php:75
+msgid "Title & Description"
+msgstr ""
+
+#: includes/elementor/widgets/accordion.php:71
+msgid "Accordion Title"
+msgstr ""
+
+#: includes/elementor/widgets/accordion.php:82
+#: includes/elementor/widgets/accordion.php:197
+#: includes/elementor/widgets/banner-grid.php:199
+#: includes/elementor/widgets/countdown-banner.php:250
+#: includes/elementor/widgets/cta.php:216
+#: includes/elementor/widgets/icon-box.php:235
+#: includes/elementor/widgets/message-box.php:110
+#: includes/elementor/widgets/tabs.php:86
+#: includes/elementor/widgets/testimonial-carousel.php:81
+#: includes/elementor/widgets/testimonial-carousel.php:207
+#: includes/elementor/widgets/testimonial-slideshow.php:103
+#: includes/elementor/widgets/testimonial-slideshow.php:289
+#: includes/elementor/widgets/testimonial.php:79
+#: includes/elementor/widgets/testimonial.php:155
+#: includes/js-composer.php:310
+#: includes/js-composer.php:521
+#: includes/js-composer.php:987
+#: includes/js-composer.php:1553
+#: includes/js-composer.php:1562
+#: includes/js-composer.php:1569
+#: includes/js-composer.php:1588
+#: includes/js-composer.php:1603
+#: includes/js-composer.php:1616
+#: includes/js-composer.php:1629
+#: includes/js-composer.php:1645
+#: includes/js-composer.php:1657
+#: includes/mega-menu/views/menu.php:10
+#: includes/mega-menu/views/menu.php:14
+#: includes/mega-menu/widgets/html.php:58
+msgid "Content"
+msgstr ""
+
+#: includes/elementor/widgets/accordion.php:84
+msgid "Accordion Content"
+msgstr ""
+
+#: includes/elementor/widgets/accordion.php:92
+msgid "Accordion Items"
+msgstr ""
+
+#: includes/elementor/widgets/accordion.php:97
+msgid "Accordion #1"
+msgstr ""
+
+#: includes/elementor/widgets/accordion.php:98
+#: includes/elementor/widgets/accordion.php:102
+#: includes/elementor/widgets/icon-box.php:153
+#: includes/elementor/widgets/price-table.php:223
+#: includes/elementor/widgets/products-grid.php:131
+#: includes/elementor/widgets/products-masonry.php:124
+#: includes/elementor/widgets/tabs.php:106
+#: includes/elementor/widgets/tabs.php:110
+#: includes/elementor/widgets/testimonial-carousel.php:87
+#: includes/elementor/widgets/testimonial-slideshow.php:109
+#: includes/elementor/widgets/testimonial.php:85
+msgid "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ut elit tellus, luctus nec ullamcorper mattis, pulvinar dapibus leo."
+msgstr ""
+
+#: includes/elementor/widgets/accordion.php:101
+msgid "Accordion #2"
+msgstr ""
+
+#: includes/elementor/widgets/accordion.php:112
+msgid "Title HTML Tag"
+msgstr ""
+
+#: includes/elementor/widgets/accordion.php:141
+msgid "Border Width"
+msgstr ""
+
+#: includes/elementor/widgets/accordion.php:158
+msgid "Border Color"
+msgstr ""
+
+#: includes/elementor/widgets/accordion.php:169
+#: includes/elementor/widgets/banner-carousel.php:256
+#: includes/elementor/widgets/banner-grid.php:218
+#: includes/elementor/widgets/banner-grid.php:347
+#: includes/elementor/widgets/category-banner.php:180
+#: includes/elementor/widgets/category-banner.php:294
+#: includes/elementor/widgets/countdown-banner.php:148
+#: includes/elementor/widgets/countdown-banner.php:286
+#: includes/elementor/widgets/cta.php:188
+#: includes/elementor/widgets/heading.php:104
+#: includes/elementor/widgets/heading.php:111
+#: includes/elementor/widgets/heading.php:208
+#: includes/elementor/widgets/icon-box.php:270
+#: includes/elementor/widgets/info-list.php:81
+#: includes/elementor/widgets/price-table.php:210
+#: includes/elementor/widgets/price-table.php:244
+#: includes/elementor/widgets/products-grid.php:156
+#: includes/elementor/widgets/products-masonry.php:149
+#: includes/elementor/widgets/products-tabs.php:113
+#: includes/elementor/widgets/tabs.php:168
+#: includes/elementor/widgets/testimonial-slideshow.php:80
+#: includes/elementor/widgets/testimonial-slideshow.php:207
+#: includes/js-composer.php:468
+#: includes/js-composer.php:973
+#: includes/js-composer.php:1905
+#: includes/js-composer.php:2026
+#: includes/js-composer.php:2227
+#: includes/js-composer.php:3358
+#: includes/js-composer.php:3667
+#: includes/js-composer.php:3701
+#: includes/widgets/products-filter.php:1168
+#: includes/widgets/socials.php:126
+msgid "Title"
+msgstr ""
+
+#: includes/elementor/widgets/accordion.php:178
+#: includes/elementor/widgets/accordion.php:206
+#: includes/elementor/widgets/accordion.php:234
+#: includes/elementor/widgets/banner-carousel.php:264
+#: includes/elementor/widgets/banner-carousel.php:318
+#: includes/elementor/widgets/banner-carousel.php:461
+#: includes/elementor/widgets/banner-carousel.php:495
+#: includes/elementor/widgets/banner-grid.php:328
+#: includes/elementor/widgets/banner-grid.php:356
+#: includes/elementor/widgets/banner-grid.php:385
+#: includes/elementor/widgets/banner-image.php:404
+#: includes/elementor/widgets/banner-image.php:454
+#: includes/elementor/widgets/banner-image.php:504
+#: includes/elementor/widgets/banner-image.php:570
+#: includes/elementor/widgets/banner-image.php:604
+#: includes/elementor/widgets/button.php:282
+#: includes/elementor/widgets/button.php:316
+#: includes/elementor/widgets/category-banner.php:275
+#: includes/elementor/widgets/category-banner.php:303
+#: includes/elementor/widgets/category-banner.php:331
+#: includes/elementor/widgets/chart.php:213
+#: includes/elementor/widgets/countdown-banner.php:267
+#: includes/elementor/widgets/countdown-banner.php:295
+#: includes/elementor/widgets/countdown-banner.php:324
+#: includes/elementor/widgets/countdown-banner.php:362
+#: includes/elementor/widgets/countdown-banner.php:390
+#: includes/elementor/widgets/countdown.php:199
+#: includes/elementor/widgets/countdown.php:227
+#: includes/elementor/widgets/cta.php:197
+#: includes/elementor/widgets/cta.php:225
+#: includes/elementor/widgets/cta.php:270
+#: includes/elementor/widgets/cta.php:301
+#: includes/elementor/widgets/cta.php:335
+#: includes/elementor/widgets/heading.php:216
+#: includes/elementor/widgets/icon-box.php:198
+#: includes/elementor/widgets/icon-box.php:279
+#: includes/elementor/widgets/icon-box.php:307
+#: includes/elementor/widgets/info-list.php:208
+#: includes/elementor/widgets/info-list.php:258
+#: includes/elementor/widgets/message-box.php:156
+#: includes/elementor/widgets/price-table.php:260
+#: includes/elementor/widgets/price-table.php:288
+#: includes/elementor/widgets/price-table.php:360
+#: includes/elementor/widgets/price-table.php:402
+#: includes/elementor/widgets/price-table.php:491
+#: includes/elementor/widgets/price-table.php:522
+#: includes/elementor/widgets/product-banner.php:172
+#: includes/elementor/widgets/products-carousel-2.php:228
+#: includes/elementor/widgets/products-carousel-2.php:268
+#: includes/elementor/widgets/products-carousel-2.php:339
+#: includes/elementor/widgets/products-carousel-2.php:371
+#: includes/elementor/widgets/products-carousel-2.php:400
+#: includes/elementor/widgets/products-carousel-2.php:429
+#: includes/elementor/widgets/products-carousel.php:203
+#: includes/elementor/widgets/products-carousel.php:256
+#: includes/elementor/widgets/products-carousel.php:297
+#: includes/elementor/widgets/products-carousel.php:371
+#: includes/elementor/widgets/products-grid.php:167
+#: includes/elementor/widgets/products-grid.php:206
+#: includes/elementor/widgets/products-grid.php:240
+#: includes/elementor/widgets/products-masonry.php:160
+#: includes/elementor/widgets/products-masonry.php:199
+#: includes/elementor/widgets/products-masonry.php:233
+#: includes/elementor/widgets/products-tabs-carousel.php:240
+#: includes/elementor/widgets/products-tabs-carousel.php:281
+#: includes/elementor/widgets/products-tabs-carousel.php:355
+#: includes/elementor/widgets/products-tabs.php:264
+#: includes/elementor/widgets/products-tabs.php:292
+#: includes/elementor/widgets/promotion.php:147
+#: includes/elementor/widgets/promotion.php:176
+#: includes/elementor/widgets/separator-dash.php:97
+#: includes/elementor/widgets/subscribe-box.php:141
+#: includes/elementor/widgets/subscribe-box.php:169
+#: includes/elementor/widgets/tabs.php:176
+#: includes/elementor/widgets/tabs.php:241
+#: includes/elementor/widgets/team-member-carousel.php:225
+#: includes/elementor/widgets/team-member-carousel.php:254
+#: includes/elementor/widgets/team-member.php:170
+#: includes/elementor/widgets/team-member.php:199
+#: includes/elementor/widgets/testimonial-carousel.php:216
+#: includes/elementor/widgets/testimonial-carousel.php:245
+#: includes/elementor/widgets/testimonial-carousel.php:274
+#: includes/elementor/widgets/testimonial-slideshow.php:215
+#: includes/elementor/widgets/testimonial-slideshow.php:243
+#: includes/elementor/widgets/testimonial-slideshow.php:297
+#: includes/elementor/widgets/testimonial-slideshow.php:325
+#: includes/elementor/widgets/testimonial-slideshow.php:353
+#: includes/elementor/widgets/testimonial.php:163
+#: includes/elementor/widgets/testimonial.php:192
+#: includes/elementor/widgets/testimonial.php:221
+#: includes/js-composer.php:295
+#: includes/js-composer.php:655
+#: includes/js-composer.php:719
+#: includes/js-composer.php:1232
+#: includes/js-composer.php:1350
+#: includes/js-composer.php:2349
+#: includes/js-composer.php:2422
+#: includes/js-composer.php:2491
+#: includes/js-composer.php:2598
+#: includes/mega-menu/views/design.php:118
+#: includes/mega-menu/views/icon.php:716
+#: includes/mega-menu/views/mega-grid-options.php:116
+msgid "Color"
+msgstr ""
+
+#: includes/elementor/widgets/accordion.php:225
+#: includes/elementor/widgets/icon-box.php:82
+#: includes/elementor/widgets/icon-box.php:93
+#: includes/elementor/widgets/icon-box.php:187
+#: includes/elementor/widgets/message-box.php:95
+#: includes/elementor/widgets/price-table.php:85
+#: includes/elementor/widgets/price-table.php:97
+#: includes/js-composer.php:829
+#: includes/js-composer.php:844
+#: includes/js-composer.php:860
+#: includes/js-composer.php:876
+#: includes/js-composer.php:892
+#: includes/js-composer.php:908
+#: includes/js-composer.php:924
+#: includes/mega-menu/menus.php:115
+#: includes/mega-menu/views/menu.php:16
+msgid "Icon"
+msgstr ""
+
+#: includes/elementor/widgets/accordion.php:245
+#: includes/elementor/widgets/tabs.php:187
+msgid "Active Color"
+msgstr ""
+
+#: includes/elementor/widgets/banner-carousel.php:41
+#: includes/elementor/widgets/banner-carousel.php:92
+#: includes/elementor/widgets/banner-carousel.php:683
+msgid "Banner Carousel"
+msgstr ""
+
+#: includes/elementor/widgets/banner-carousel.php:101
+#: includes/elementor/widgets/banner-grid.php:147
+#: includes/elementor/widgets/banner-image.php:98
+#: includes/elementor/widgets/category-banner.php:80
+#: includes/elementor/widgets/countdown-banner.php:81
+#: includes/js-composer.php:430
+#: includes/js-composer.php:1392
+#: includes/js-composer.php:1507
+#: includes/js-composer.php:2528
+#: includes/js-composer.php:2671
+#: includes/js-composer.php:2838
+#: includes/js-composer.php:3005
+#: includes/js-composer.php:3172
+msgid "Image Source"
+msgstr ""
+
+#: includes/elementor/widgets/banner-carousel.php:106
+#: includes/elementor/widgets/banner-grid.php:152
+#: includes/elementor/widgets/banner-image.php:103
+#: includes/elementor/widgets/category-banner.php:85
+#: includes/elementor/widgets/countdown-banner.php:86
+#: includes/elementor/widgets/product-banner.php:108
+msgid "Media Library"
+msgstr ""
+
+#: includes/elementor/widgets/banner-carousel.php:110
+#: includes/elementor/widgets/banner-grid.php:156
+#: includes/elementor/widgets/banner-image.php:107
+#: includes/elementor/widgets/category-banner.php:89
+#: includes/elementor/widgets/countdown-banner.php:90
+#: includes/elementor/widgets/product-banner.php:112
+#: includes/js-composer.php:825
+#: includes/js-composer.php:951
+msgid "External Image"
+msgstr ""
+
+#: includes/elementor/widgets/banner-carousel.php:120
+#: includes/elementor/widgets/banner-grid.php:166
+#: includes/elementor/widgets/banner-image.php:117
+#: includes/elementor/widgets/countdown-banner.php:100
+#: includes/elementor/widgets/icon-box.php:108
+#: includes/elementor/widgets/price-table.php:112
+#: includes/elementor/widgets/testimonial-carousel.php:94
+#: includes/elementor/widgets/testimonial-slideshow.php:116
+#: includes/elementor/widgets/testimonial.php:92
+msgid "Choose Image"
+msgstr ""
+
+#: includes/elementor/widgets/banner-carousel.php:147
+#: includes/elementor/widgets/banner-grid.php:183
+#: includes/elementor/widgets/banner-image.php:143
+#: includes/elementor/widgets/category-banner.php:125
+#: includes/elementor/widgets/countdown-banner.php:125
+#: includes/elementor/widgets/product-banner.php:148
+msgid "Image URL"
+msgstr ""
+
+#: includes/elementor/widgets/banner-carousel.php:164
+#: includes/elementor/widgets/banner-grid.php:220
+#: includes/elementor/widgets/banner-image.php:168
+#: includes/elementor/widgets/category-banner.php:182
+#: includes/elementor/widgets/countdown-banner.php:150
+msgid "This is the title"
+msgstr ""
+
+#: includes/elementor/widgets/banner-carousel.php:173
+#: includes/elementor/widgets/banner-carousel.php:310
+#: includes/elementor/widgets/banner-image.php:176
+#: includes/elementor/widgets/banner-image.php:495
+#: includes/elementor/widgets/icon-box.php:298
+#: includes/elementor/widgets/info-list.php:91
+#: includes/elementor/widgets/info-list.php:249
+#: includes/elementor/widgets/price-table.php:221
+#: includes/elementor/widgets/price-table.php:271
+#: includes/elementor/widgets/products-grid.php:129
+#: includes/elementor/widgets/products-grid.php:194
+#: includes/elementor/widgets/products-masonry.php:122
+#: includes/elementor/widgets/products-masonry.php:187
+#: includes/elementor/widgets/promotion.php:88
+#: includes/elementor/widgets/promotion.php:138
+#: includes/elementor/widgets/subscribe-box.php:99
+#: includes/elementor/widgets/tabs.php:232
+#: includes/js-composer.php:211
+#: includes/js-composer.php:1912
+#: includes/js-composer.php:2034
+#: includes/js-composer.php:3364
+#: includes/mega-menu/widgets/image.php:84
+#: includes/size-guide.php:440
+msgid "Description"
+msgstr ""
+
+#: includes/elementor/widgets/banner-carousel.php:184
+msgid "Content Style"
+msgstr ""
+
+#: includes/elementor/widgets/banner-carousel.php:217
+#: includes/elementor/widgets/banner-grid.php:272
+#: includes/elementor/widgets/banner-image.php:356
+msgid "Text Align"
+msgstr ""
+
+#: includes/elementor/widgets/banner-carousel.php:243
+#: includes/elementor/widgets/banner-image.php:382
+msgid "Content Padding"
+msgstr ""
+
+#: includes/elementor/widgets/banner-carousel.php:275
+#: includes/elementor/widgets/banner-carousel.php:329
+msgid "Font"
+msgstr ""
+
+#: includes/elementor/widgets/banner-carousel.php:286
+#: includes/elementor/widgets/banner-carousel.php:340
+msgid "Font Size"
+msgstr ""
+
+#: includes/elementor/widgets/banner-carousel.php:366
+#: includes/elementor/widgets/banner-grid.php:228
+#: includes/elementor/widgets/banner-image.php:206
+#: includes/elementor/widgets/category-banner.php:210
+#: includes/elementor/widgets/countdown-banner.php:158
+#: includes/elementor/widgets/price-table.php:428
+#: includes/elementor/widgets/promotion.php:99
+#: includes/js-composer.php:217
+#: includes/js-composer.php:474
+#: includes/js-composer.php:577
+#: includes/js-composer.php:1482
+#: includes/js-composer.php:1693
+#: includes/js-composer.php:1697
+#: includes/js-composer.php:2342
+#: includes/js-composer.php:2403
+#: includes/js-composer.php:2478
+#: includes/js-composer.php:2578
+#: includes/js-composer.php:2783
+#: includes/js-composer.php:2950
+#: includes/js-composer.php:3117
+#: includes/js-composer.php:3284
+msgid "Button Text"
+msgstr ""
+
+#: includes/elementor/widgets/banner-carousel.php:368
+#: includes/elementor/widgets/banner-grid.php:230
+#: includes/elementor/widgets/banner-image.php:208
+#: includes/elementor/widgets/button.php:79
+#: includes/elementor/widgets/category-banner.php:212
+#: includes/elementor/widgets/countdown-banner.php:160
+msgid "Click here"
+msgstr ""
+
+#: includes/elementor/widgets/banner-carousel.php:369
+#: includes/elementor/widgets/banner-grid.php:231
+#: includes/elementor/widgets/banner-image.php:209
+#: includes/elementor/widgets/button.php:80
+#: includes/elementor/widgets/category-banner.php:213
+#: includes/elementor/widgets/countdown-banner.php:161
+#: includes/elementor/widgets/product-banner.php:88
+#: includes/elementor/widgets/product-banner.php:90
+msgid "Button text"
+msgstr ""
+
+#: includes/elementor/widgets/banner-carousel.php:378
+msgid "Button Style"
+msgstr ""
+
+#: includes/elementor/widgets/banner-carousel.php:391
+#: includes/elementor/widgets/banner-image.php:218
+#: includes/js-composer.php:1666
+msgid "Button Type"
+msgstr ""
+
+#: includes/elementor/widgets/banner-carousel.php:395
+#: includes/elementor/widgets/banner-carousel.php:426
+#: includes/elementor/widgets/banner-image.php:222
+#: includes/elementor/widgets/banner-image.php:253
+#: includes/elementor/widgets/banner-image.php:563
+#: includes/elementor/widgets/button.php:106
+#: includes/elementor/widgets/button.php:171
+#: includes/elementor/widgets/button.php:275
+#: includes/elementor/widgets/cta.php:263
+#: includes/elementor/widgets/heading.php:246
+#: includes/elementor/widgets/price-table.php:484
+#: includes/elementor/widgets/products-carousel-2.php:218
+#: includes/elementor/widgets/products-carousel.php:246
+#: includes/elementor/widgets/products-tabs-carousel.php:230
+#: includes/js-composer.php:592
+#: includes/js-composer.php:620
+#: includes/js-composer.php:1612
+#: includes/js-composer.php:1686
+msgid "Normal"
+msgstr ""
+
+#: includes/elementor/widgets/banner-carousel.php:396
+#: includes/elementor/widgets/banner-image.php:223
+#: includes/elementor/widgets/button.php:107
+#: includes/js-composer.php:593
+msgid "Outline"
+msgstr ""
+
+#: includes/elementor/widgets/banner-carousel.php:397
+#: includes/elementor/widgets/banner-image.php:224
+#: includes/elementor/widgets/button.php:108
+#: includes/js-composer.php:594
+msgid "Underline"
+msgstr ""
+
+#: includes/elementor/widgets/banner-carousel.php:405
+#: includes/elementor/widgets/banner-image.php:232
+msgid "Button Shape"
+msgstr ""
+
+#: includes/elementor/widgets/banner-carousel.php:409
+#: includes/elementor/widgets/banner-image.php:236
+#: includes/elementor/widgets/button.php:121
+#: includes/elementor/widgets/instagram-carousel.php:90
+#: includes/elementor/widgets/instagram.php:101
+#: includes/js-composer.php:604
+#: includes/js-composer.php:3511
+#: includes/js-composer.php:3547
+msgid "Square"
+msgstr ""
+
+#: includes/elementor/widgets/banner-carousel.php:410
+#: includes/elementor/widgets/banner-image.php:237
+#: includes/elementor/widgets/button.php:122
+#: includes/js-composer.php:605
+msgid "Rounded"
+msgstr ""
+
+#: includes/elementor/widgets/banner-carousel.php:421
+#: includes/elementor/widgets/banner-image.php:248
+#: includes/js-composer.php:1679
+msgid "Button Size"
+msgstr ""
+
+#: includes/elementor/widgets/banner-carousel.php:425
+#: includes/elementor/widgets/banner-carousel.php:440
+#: includes/elementor/widgets/banner-image.php:252
+#: includes/elementor/widgets/banner-image.php:267
+#: includes/elementor/widgets/button.php:137
+#: includes/elementor/widgets/button.php:170
+#: includes/elementor/widgets/countdown.php:172
+#: includes/js-composer.php:619
+#: includes/js-composer.php:632
+#: includes/js-composer.php:1333
+#: includes/js-composer.php:1685
+msgid "Small"
+msgstr ""
+
+#: includes/elementor/widgets/banner-carousel.php:427
+#: includes/elementor/widgets/banner-image.php:254
+#: includes/elementor/widgets/button.php:172
+#: includes/js-composer.php:621
+#: includes/js-composer.php:1613
+#: includes/js-composer.php:1687
+msgid "Medium"
+msgstr ""
+
+#: includes/elementor/widgets/banner-carousel.php:428
+#: includes/elementor/widgets/banner-image.php:255
+#: includes/elementor/widgets/button.php:173
+#: includes/js-composer.php:622
+msgid "Large"
+msgstr ""
+
+#: includes/elementor/widgets/banner-carousel.php:436
+#: includes/elementor/widgets/banner-image.php:263
+#: includes/elementor/widgets/button.php:133
+#: includes/js-composer.php:626
+msgid "Line Width"
+msgstr ""
+
+#: includes/elementor/widgets/banner-carousel.php:441
+#: includes/elementor/widgets/banner-image.php:268
+#: includes/elementor/widgets/button.php:138
+#: includes/js-composer.php:1332
+msgid "Full"
+msgstr ""
+
+#: includes/elementor/widgets/banner-carousel.php:452
+msgid "BUTTON NORMAL"
+msgstr ""
+
+#: includes/elementor/widgets/banner-carousel.php:486
+msgid "BUTTON HOVER"
+msgstr ""
+
+#: includes/elementor/widgets/banner-carousel.php:523
+#: includes/elementor/widgets/banner-grid.php:239
+#: includes/elementor/widgets/banner-image.php:292
+#: includes/elementor/widgets/button.php:87
+#: includes/elementor/widgets/category-banner.php:221
+#: includes/elementor/widgets/countdown-banner.php:169
+#: includes/elementor/widgets/cta.php:119
+#: includes/elementor/widgets/heading.php:124
+#: includes/js-composer.php:480
+#: includes/js-composer.php:1387
+#: includes/js-composer.php:2774
+#: includes/js-composer.php:2941
+#: includes/js-composer.php:3108
+#: includes/js-composer.php:3275
+msgid "Link"
+msgstr ""
+
+#: includes/elementor/widgets/banner-carousel.php:525
+#: includes/elementor/widgets/banner-grid.php:241
+#: includes/elementor/widgets/banner-image.php:294
+#: includes/elementor/widgets/button.php:89
+#: includes/elementor/widgets/category-banner.php:223
+#: includes/elementor/widgets/countdown-banner.php:171
+#: includes/elementor/widgets/cta.php:121
+#: includes/elementor/widgets/price-table.php:439
+#: includes/elementor/widgets/promotion.php:111
+#: includes/elementor/widgets/team-member-carousel.php:137
+#: includes/elementor/widgets/team-member.php:137
+msgid "https://your-link.com"
+msgstr ""
+
+#: includes/elementor/widgets/banner-carousel.php:540
+#: includes/elementor/widgets/banner-carousel.php:614
+#: includes/elementor/widgets/banner-grid.php:255
+#: includes/elementor/widgets/banner-image.php:312
+#: includes/js-composer.php:1580
+#: includes/js-composer.php:2713
+#: includes/js-composer.php:2733
+#: includes/js-composer.php:2814
+#: includes/js-composer.php:2880
+#: includes/js-composer.php:2900
+#: includes/js-composer.php:2981
+#: includes/js-composer.php:3047
+#: includes/js-composer.php:3067
+#: includes/js-composer.php:3148
+#: includes/js-composer.php:3214
+#: includes/js-composer.php:3234
+#: includes/js-composer.php:3315
+#: includes/mega-menu/views/design.php:11
+#: includes/mega-menu/views/design.php:38
+#: includes/mega-menu/views/design.php:101
+#: includes/mega-menu/views/mega-grid-options.php:17
+#: includes/mega-menu/views/mega-grid-options.php:45
+#: includes/mega-menu/views/mega-grid-options.php:97
+msgid "Top"
+msgstr ""
+
+#: includes/elementor/widgets/banner-carousel.php:541
+#: includes/elementor/widgets/banner-carousel.php:617
+#: includes/elementor/widgets/banner-grid.php:256
+#: includes/elementor/widgets/banner-image.php:313
+#: includes/elementor/widgets/category-banner.php:194
+#: includes/js-composer.php:1477
+#: includes/js-composer.php:1583
+#: includes/js-composer.php:2716
+#: includes/js-composer.php:2736
+#: includes/js-composer.php:2817
+#: includes/js-composer.php:2883
+#: includes/js-composer.php:2903
+#: includes/js-composer.php:2984
+#: includes/js-composer.php:3050
+#: includes/js-composer.php:3070
+#: includes/js-composer.php:3151
+#: includes/js-composer.php:3217
+#: includes/js-composer.php:3237
+#: includes/js-composer.php:3318
+#: includes/mega-menu/views/design.php:16
+#: includes/mega-menu/views/design.php:43
+#: includes/mega-menu/views/design.php:103
+#: includes/mega-menu/views/mega-grid-options.php:22
+#: includes/mega-menu/views/mega-grid-options.php:50
+#: includes/mega-menu/views/mega-grid-options.php:99
+msgid "Bottom"
+msgstr ""
+
+#: includes/elementor/widgets/banner-carousel.php:545
+#: includes/elementor/widgets/banner-carousel.php:615
+#: includes/elementor/widgets/banner-grid.php:260
+#: includes/elementor/widgets/banner-image.php:317
+#: includes/js-composer.php:1581
+#: includes/js-composer.php:2712
+#: includes/js-composer.php:2732
+#: includes/js-composer.php:2813
+#: includes/js-composer.php:2879
+#: includes/js-composer.php:2899
+#: includes/js-composer.php:2980
+#: includes/js-composer.php:3046
+#: includes/js-composer.php:3066
+#: includes/js-composer.php:3147
+#: includes/js-composer.php:3213
+#: includes/js-composer.php:3233
+#: includes/js-composer.php:3314
+msgid "Top Left"
+msgstr ""
+
+#: includes/elementor/widgets/banner-carousel.php:546
+#: includes/elementor/widgets/banner-carousel.php:616
+#: includes/elementor/widgets/banner-grid.php:261
+#: includes/elementor/widgets/banner-image.php:318
+#: includes/js-composer.php:1582
+#: includes/js-composer.php:2714
+#: includes/js-composer.php:2734
+#: includes/js-composer.php:2815
+#: includes/js-composer.php:2881
+#: includes/js-composer.php:2901
+#: includes/js-composer.php:2982
+#: includes/js-composer.php:3048
+#: includes/js-composer.php:3068
+#: includes/js-composer.php:3149
+#: includes/js-composer.php:3215
+#: includes/js-composer.php:3235
+#: includes/js-composer.php:3316
+msgid "Top Right"
+msgstr ""
+
+#: includes/elementor/widgets/banner-carousel.php:547
+#: includes/elementor/widgets/banner-carousel.php:618
+#: includes/elementor/widgets/banner-grid.php:262
+#: includes/elementor/widgets/banner-image.php:319
+#: includes/js-composer.php:1584
+#: includes/js-composer.php:2715
+#: includes/js-composer.php:2735
+#: includes/js-composer.php:2816
+#: includes/js-composer.php:2882
+#: includes/js-composer.php:2902
+#: includes/js-composer.php:2983
+#: includes/js-composer.php:3049
+#: includes/js-composer.php:3069
+#: includes/js-composer.php:3150
+#: includes/js-composer.php:3216
+#: includes/js-composer.php:3236
+#: includes/js-composer.php:3317
+msgid "Bottom Left"
+msgstr ""
+
+#: includes/elementor/widgets/banner-carousel.php:548
+#: includes/elementor/widgets/banner-carousel.php:619
+#: includes/elementor/widgets/banner-grid.php:263
+#: includes/elementor/widgets/banner-image.php:320
+#: includes/js-composer.php:1585
+#: includes/js-composer.php:2717
+#: includes/js-composer.php:2737
+#: includes/js-composer.php:2818
+#: includes/js-composer.php:2884
+#: includes/js-composer.php:2904
+#: includes/js-composer.php:2985
+#: includes/js-composer.php:3051
+#: includes/js-composer.php:3071
+#: includes/js-composer.php:3152
+#: includes/js-composer.php:3218
+#: includes/js-composer.php:3238
+#: includes/js-composer.php:3319
+msgid "Bottom Right"
+msgstr ""
+
+#: includes/elementor/widgets/banner-carousel.php:549
+#: includes/elementor/widgets/banner-image.php:321
+#: includes/js-composer.php:1586
+msgid "Under Image"
+msgstr ""
+
+#: includes/elementor/widgets/banner-carousel.php:558
+msgid "Banner Slides"
+msgstr ""
+
+#: includes/elementor/widgets/banner-carousel.php:564
+#: includes/elementor/widgets/banner-carousel.php:567
+#: includes/elementor/widgets/banner-carousel.php:570
+#: includes/elementor/widgets/banner-carousel.php:573
+#: includes/elementor/widgets/banner-image.php:41
+#: includes/elementor/widgets/banner-image.php:92
+#: includes/elementor/widgets/banner-image.php:348
+#: includes/elementor/widgets/category-banner.php:99
+#: includes/js-composer.php:1500
+#: includes/js-composer.php:1519
+#: includes/mega-menu/widgets/image.php:30
+msgid "Banner Image"
+msgstr ""
+
+#: includes/elementor/widgets/banner-carousel.php:593
+#: includes/js-composer.php:731
+#: includes/mega-menu/menus.php:200
+#: includes/mega-menu/views/mega-grid-column.php:9
+#: includes/widgets/products-filter.php:1386
+msgid "Auto"
+msgstr ""
+
+#: includes/elementor/widgets/banner-carousel.php:609
+msgid "Arrows Position"
+msgstr ""
+
+#: includes/elementor/widgets/banner-carousel.php:631
+#: includes/js-composer.php:405
+msgid "Show Slide Index"
+msgstr ""
+
+#: includes/elementor/widgets/banner-carousel.php:640
+msgid "Show Outside Slides"
+msgstr ""
+
+#: includes/elementor/widgets/banner-carousel.php:649
+#: includes/elementor/widgets/banner-image.php:330
+msgid "Hover Effect"
+msgstr ""
+
+#: includes/elementor/widgets/banner-carousel.php:654
+#: includes/elementor/widgets/banner-image.php:335
+msgid "Zoom In"
+msgstr ""
+
+#: includes/elementor/widgets/banner-carousel.php:655
+#: includes/elementor/widgets/banner-image.php:336
+msgid "Zoom Out"
+msgstr ""
+
+#: includes/elementor/widgets/banner-carousel.php:656
+#: includes/elementor/widgets/banner-image.php:337
+msgid "Shadow"
+msgstr ""
+
+#: includes/elementor/widgets/banner-carousel.php:667
+msgid "Additional Options"
+msgstr ""
+
+#: includes/elementor/widgets/banner-carousel.php:727
+msgid "Slide Index Position"
+msgstr ""
+
+#: includes/elementor/widgets/banner-grid.php:32
+#: includes/elementor/widgets/banner-grid.php:74
+#: includes/js-composer.php:2628
+msgid "Banner Grid"
+msgstr ""
+
+#: includes/elementor/widgets/banner-grid.php:79
+#: includes/elementor/widgets/google-map.php:98
+#: includes/elementor/widgets/separator-dash.php:139
+#: includes/js-composer.php:281
+#: includes/js-composer.php:2637
+#: includes/js-composer.php:3413
+msgid "Height"
+msgstr ""
+
+#: includes/elementor/widgets/banner-grid.php:99
+#: includes/elementor/widgets/posts-grid.php:147
+#: includes/js-composer.php:391
+msgid "Gap"
+msgstr ""
+
+#: includes/elementor/widgets/banner-grid.php:140
+#: includes/elementor/widgets/banner-grid.php:298
+msgid "Banner %s"
+msgstr ""
+
+#: includes/elementor/widgets/banner-grid.php:208
+#: includes/elementor/widgets/banner-grid.php:210
+#: includes/elementor/widgets/banner-grid.php:319
+#: includes/elementor/widgets/banner-image.php:156
+#: includes/elementor/widgets/banner-image.php:395
+#: includes/elementor/widgets/countdown-banner.php:138
+#: includes/elementor/widgets/countdown-banner.php:140
+#: includes/elementor/widgets/countdown-banner.php:259
+#: includes/js-composer.php:1549
+#: includes/js-composer.php:2566
+#: includes/js-composer.php:2791
+#: includes/js-composer.php:2958
+#: includes/js-composer.php:3125
+#: includes/js-composer.php:3292
+msgid "Tagline"
+msgstr ""
+
+#: includes/elementor/widgets/banner-grid.php:306
+#: includes/elementor/widgets/cta.php:176
+#: includes/elementor/widgets/testimonial-slideshow.php:265
+#: includes/mega-menu/views/design.php:6
+#: includes/mega-menu/views/mega-grid-options.php:12
+msgid "Padding"
+msgstr ""
+
+#: includes/elementor/widgets/banner-image.php:279
+#: includes/js-composer.php:1701
+msgid "Button Visibility"
+msgstr ""
+
+#: includes/elementor/widgets/banner-image.php:283
+#: includes/js-composer.php:1705
+msgid "Always Visible"
+msgstr ""
+
+#: includes/elementor/widgets/banner-image.php:284
+msgid "On Hover"
+msgstr ""
+
+#: includes/elementor/widgets/banner-image.php:445
+#: includes/mega-menu/views/design.php:126
+#: includes/mega-menu/views/mega-grid-options.php:124
+msgid "Tile"
+msgstr ""
+
+#: includes/elementor/widgets/banner-image.php:597
+#: includes/elementor/widgets/button.php:309
+#: includes/elementor/widgets/cta.php:294
+#: includes/elementor/widgets/price-table.php:515
+#: includes/elementor/widgets/products-carousel-2.php:258
+#: includes/elementor/widgets/products-carousel.php:287
+#: includes/elementor/widgets/products-tabs-carousel.php:271
+msgid "Hover"
+msgstr ""
+
+#: includes/elementor/widgets/button.php:77
+#: includes/elementor/widgets/cta.php:109
+#: includes/elementor/widgets/separator-dash.php:77
+#: includes/elementor/widgets/separator-dash.php:157
+#: includes/js-composer.php:573
+#: includes/js-composer.php:1225
+#: includes/js-composer.php:2396
+#: includes/js-composer.php:2470
+#: includes/js-composer.php:2571
+#: includes/js-composer.php:2798
+#: includes/js-composer.php:2965
+#: includes/js-composer.php:3132
+#: includes/js-composer.php:3299
+#: includes/mega-menu/widgets/heading.php:73
+msgid "Text"
+msgstr ""
+
+#: includes/elementor/widgets/button.php:117
+#: includes/js-composer.php:598
+msgid "Shape"
+msgstr ""
+
+#: includes/elementor/widgets/button.php:149
+#: includes/js-composer.php:640
+msgid "Line Position"
+msgstr ""
+
+#: includes/elementor/widgets/button.php:166
+#: includes/elementor/widgets/countdown.php:167
+#: includes/elementor/widgets/icon-box.php:209
+#: includes/js-composer.php:613
+#: includes/mega-menu/views/design.php:141
+#: includes/mega-menu/views/icon.php:721
+#: includes/mega-menu/views/mega-grid-options.php:139
+msgid "Size"
+msgstr ""
+
+#: includes/elementor/widgets/button.php:181
+#: includes/elementor/widgets/button.php:212
+#: includes/elementor/widgets/category-banner.php:236
+#: includes/elementor/widgets/chart.php:148
+#: includes/elementor/widgets/heading.php:176
+#: includes/elementor/widgets/icon-box.php:243
+#: includes/elementor/widgets/tabs.php:206
+#: includes/elementor/widgets/tabs.php:260
+#: includes/js-composer.php:666
+#: includes/js-composer.php:962
+#: includes/js-composer.php:1338
+#: includes/js-composer.php:1457
+msgid "Alignment"
+msgstr ""
+
+#: includes/elementor/widgets/button.php:198
+#: includes/elementor/widgets/heading.php:192
+#: includes/elementor/widgets/tabs.php:218
+msgid "Justified"
+msgstr ""
+
+#: includes/elementor/widgets/button.php:239
+msgid "Button ID"
+msgstr ""
+
+#: includes/elementor/widgets/button.php:245
+msgid "Add your custom id WITHOUT the Pound key. e.g: my-id"
+msgstr ""
+
+#: includes/elementor/widgets/button.php:247
+msgid "Please make sure the ID is unique and not used elsewhere on the page this form is displayed. This field allows <code>A-z 0-9</code> & underscore chars without spaces."
+msgstr ""
+
+#: includes/elementor/widgets/category-banner.php:33
+#: includes/elementor/widgets/category-banner.php:74
+#: includes/elementor/widgets/category-banner.php:259
+#: includes/js-composer.php:1373
+msgid "Category Banner"
+msgstr ""
+
+#: includes/elementor/widgets/category-banner.php:137
+#: includes/js-composer.php:1413
+#: includes/js-composer.php:1446
+msgid "Sub Image"
+msgstr ""
+
+#: includes/elementor/widgets/category-banner.php:145
+#: includes/elementor/widgets/category-banner.php:156
+msgid "The size of this image is fixed to 200x200."
+msgstr ""
+
+#: includes/elementor/widgets/category-banner.php:169
+#: includes/elementor/widgets/category-banner.php:171
+#: includes/elementor/widgets/category-banner.php:267
+msgid "Category Name"
+msgstr ""
+
+#: includes/elementor/widgets/category-banner.php:190
+msgid "Position"
+msgstr ""
+
+#: includes/elementor/widgets/category-banner.php:198
+#: includes/js-composer.php:1478
+#: includes/mega-menu/views/design.php:102
+#: includes/mega-menu/views/mega-grid-options.php:98
+msgid "Middle"
+msgstr ""
+
+#: includes/elementor/widgets/chart.php:31
+msgid "Chart"
+msgstr ""
+
+#: includes/elementor/widgets/chart.php:71
+#: includes/js-composer.php:690
+msgid "Circle Chart"
+msgstr ""
+
+#: includes/elementor/widgets/chart.php:77
+#: includes/js-composer.php:697
+#: includes/js-composer.php:1295
+msgid "Value"
+msgstr ""
+
+#: includes/elementor/widgets/chart.php:83
+msgid "Enter the chart value in percentage."
+msgstr ""
+
+#: includes/elementor/widgets/chart.php:97
+#: includes/js-composer.php:705
+msgid "Circle Size"
+msgstr ""
+
+#: includes/elementor/widgets/chart.php:110
+msgid "Circle Thickness"
+msgstr ""
+
+#: includes/elementor/widgets/chart.php:123
+#: includes/elementor/widgets/chart.php:136
+#: includes/elementor/widgets/chart.php:205
+#: includes/elementor/widgets/countdown-banner.php:381
+#: includes/elementor/widgets/countdown.php:218
+#: includes/elementor/widgets/info-list.php:199
+#: includes/js-composer.php:1289
+msgid "Label"
+msgstr ""
+
+#: includes/elementor/widgets/chart.php:126
+msgid "Percentage"
+msgstr ""
+
+#: includes/elementor/widgets/chart.php:177
+msgid "Circle"
+msgstr ""
+
+#: includes/elementor/widgets/chart.php:185
+msgid "Circle Color"
+msgstr ""
+
+#: includes/elementor/widgets/chart.php:194
+msgid "Fill Color"
+msgstr ""
+
+#: includes/elementor/widgets/countdown-banner.php:33
+#: includes/js-composer.php:2521
+msgid "Countdown Banner"
+msgstr ""
+
+#: includes/elementor/widgets/countdown-banner.php:75
+msgid "Banner"
+msgstr ""
+
+#: includes/elementor/widgets/countdown-banner.php:181
+#: includes/elementor/widgets/countdown-banner.php:346
+#: includes/elementor/widgets/countdown.php:31
+#: includes/elementor/widgets/countdown.php:71
+#: includes/elementor/widgets/countdown.php:183
+#: includes/js-composer.php:1313
+msgid "Countdown"
+msgstr ""
+
+#: includes/elementor/widgets/countdown-banner.php:199
+#: includes/elementor/widgets/countdown.php:90
+msgid "Labels"
+msgstr ""
+
+#: includes/elementor/widgets/countdown-banner.php:208
+#: includes/elementor/widgets/countdown.php:99
+msgid "Day"
+msgstr ""
+
+#: includes/elementor/widgets/countdown-banner.php:210
+#: includes/elementor/widgets/countdown.php:101
+#: includes/shortcodes.php:1151
+msgid "Days"
+msgstr ""
+
+#: includes/elementor/widgets/countdown-banner.php:218
+#: includes/elementor/widgets/countdown.php:109
+msgid "Hour"
+msgstr ""
+
+#: includes/elementor/widgets/countdown-banner.php:220
+#: includes/elementor/widgets/countdown.php:111
+#: includes/shortcodes.php:1152
+msgid "Hours"
+msgstr ""
+
+#: includes/elementor/widgets/countdown-banner.php:228
+#: includes/elementor/widgets/countdown.php:119
+msgid "Minute"
+msgstr ""
+
+#: includes/elementor/widgets/countdown-banner.php:230
+#: includes/elementor/widgets/countdown.php:121
+#: includes/shortcodes.php:1153
+msgid "Minutes"
+msgstr ""
+
+#: includes/elementor/widgets/countdown-banner.php:238
+#: includes/elementor/widgets/countdown.php:129
+msgid "Second"
+msgstr ""
+
+#: includes/elementor/widgets/countdown-banner.php:240
+#: includes/elementor/widgets/countdown.php:131
+#: includes/shortcodes.php:1154
+msgid "Seconds"
+msgstr ""
+
+#: includes/elementor/widgets/countdown-banner.php:354
+#: includes/elementor/widgets/countdown.php:191
+msgid "Time"
+msgstr ""
+
+#: includes/elementor/widgets/countdown.php:139
+msgid "Text Alignment"
+msgstr ""
+
+#: includes/elementor/widgets/cta.php:32
+msgid "Call to Action"
+msgstr ""
+
+#: includes/elementor/widgets/cta.php:72
+#: includes/elementor/widgets/cta.php:169
+#: includes/js-composer.php:2382
+msgid "Call To Action"
+msgstr ""
+
+#: includes/elementor/widgets/cta.php:78
+msgid "Title & Content"
+msgstr ""
+
+#: includes/elementor/widgets/cta.php:80
+#: includes/elementor/widgets/icon-box.php:141
+#: includes/elementor/widgets/price-table.php:212
+#: includes/elementor/widgets/products-grid.php:117
+#: includes/elementor/widgets/products-masonry.php:110
+msgid "This is the heading"
+msgstr ""
+
+#: includes/elementor/widgets/cta.php:81
+#: includes/elementor/widgets/products-grid.php:118
+#: includes/elementor/widgets/products-masonry.php:111
+msgid "Enter your heading"
+msgstr ""
+
+#: includes/elementor/widgets/cta.php:90
+#: includes/elementor/widgets/message-box.php:112
+msgid "This is the content"
+msgstr ""
+
+#: includes/elementor/widgets/cta.php:91
+#: includes/elementor/widgets/message-box.php:113
+msgid "Enter your content"
+msgstr ""
+
+#: includes/elementor/widgets/cta.php:111
+#: includes/elementor/widgets/price-table.php:430
+#: includes/elementor/widgets/promotion.php:101
+msgid "Click Here"
+msgstr ""
+
+#: includes/elementor/widgets/cta.php:135
+#: includes/elementor/widgets/cta.php:326
+#: includes/js-composer.php:2416
+msgid "Note"
+msgstr ""
+
+#: includes/elementor/widgets/cta.php:137
+msgid "This is a short note"
+msgstr ""
+
+#: includes/elementor/widgets/cta.php:138
+msgid "Enter a short note"
+msgstr ""
+
+#: includes/elementor/widgets/google-map.php:79
+#: includes/elementor/widgets/google-map.php:208
+msgctxt "The default address for Google Map"
+msgid "New York"
+msgstr ""
+
+#: includes/elementor/widgets/google-map.php:88
+#: includes/elementor/widgets/google-map.php:173
+msgid "Or enter coordinates"
+msgstr ""
+
+#: includes/elementor/widgets/google-map.php:142
+msgid "Color Scheme"
+msgstr ""
+
+#: includes/elementor/widgets/google-map.php:147
+#: includes/js-composer.php:305
+msgid "Grey"
+msgstr ""
+
+#: includes/elementor/widgets/google-map.php:148
+msgid "Inverse"
+msgstr ""
+
+#: includes/elementor/widgets/google-map.php:149
+#: includes/js-composer.php:304
+msgid "Vista Blue"
+msgstr ""
+
+#: includes/elementor/widgets/google-map.php:150
+#: includes/js-composer.php:306
+msgid "Classic Black"
+msgstr ""
+
+#: includes/elementor/widgets/google-map.php:183
+msgid "Infomation"
+msgstr ""
+
+#: includes/elementor/widgets/google-map.php:193
+msgid "Marker Icon"
+msgstr ""
+
+#: includes/elementor/widgets/google-map.php:203
+msgid "Markers"
+msgstr ""
+
+#: includes/elementor/widgets/heading.php:47
+#: includes/js-composer.php:2389
+#: includes/mega-menu/widgets/heading.php:30
+msgid "Heading"
+msgstr ""
+
+#: includes/elementor/widgets/heading.php:116
+#: includes/elementor/widgets/icon-box.php:142
+#: includes/elementor/widgets/price-table.php:213
+msgid "Enter your title"
+msgstr ""
+
+#: includes/elementor/widgets/heading.php:117
+msgid "Add Your Heading Text Here"
+msgstr ""
+
+#: includes/elementor/widgets/heading.php:156
+msgid "HTML Tag"
+msgstr ""
+
+#: includes/elementor/widgets/heading.php:243
+msgid "Blend Mode"
+msgstr ""
+
+#: includes/elementor/widgets/icon-box.php:33
+#: includes/elementor/widgets/icon-box.php:73
+#: includes/js-composer.php:805
+msgid "Icon Box"
+msgstr ""
+
+#: includes/elementor/widgets/icon-box.php:79
+#: includes/elementor/widgets/price-table.php:82
+msgid "Icon Type"
+msgstr ""
+
+#: includes/elementor/widgets/icon-box.php:83
+#: includes/elementor/widgets/price-table.php:86
+#: includes/elementor/widgets/team-member-carousel.php:78
+#: includes/elementor/widgets/team-member.php:78
+#: includes/js-composer.php:1019
+#: includes/js-composer.php:1518
+#: includes/mega-menu/views/icon.php:709
+#: includes/mega-menu/widgets/image.php:73
+msgid "Image"
+msgstr ""
+
+#: includes/elementor/widgets/icon-box.php:84
+#: includes/elementor/widgets/price-table.php:87
+msgid "External"
+msgstr ""
+
+#: includes/elementor/widgets/icon-box.php:125
+#: includes/elementor/widgets/price-table.php:129
+msgid "External Icon URL"
+msgstr ""
+
+#: includes/elementor/widgets/icon-box.php:154
+#: includes/elementor/widgets/price-table.php:224
+#: includes/elementor/widgets/products-grid.php:132
+#: includes/elementor/widgets/products-masonry.php:125
+#: includes/elementor/widgets/promotion.php:91
+msgid "Enter your description"
+msgstr ""
+
+#: includes/elementor/widgets/info-list.php:32
+#: includes/elementor/widgets/info-list.php:73
+#: includes/elementor/widgets/info-list.php:130
+#: includes/js-composer.php:1261
+msgid "Info List"
+msgstr ""
+
+#: includes/elementor/widgets/info-list.php:106
+msgid "Label #1"
+msgstr ""
+
+#: includes/elementor/widgets/info-list.php:107
+msgid "This is the description #1"
+msgstr ""
+
+#: includes/elementor/widgets/info-list.php:111
+msgid "Label #2"
+msgstr ""
+
+#: includes/elementor/widgets/info-list.php:112
+msgid "This is the description #2"
+msgstr ""
+
+#: includes/elementor/widgets/info-list.php:115
+msgid "Label #3"
+msgstr ""
+
+#: includes/elementor/widgets/info-list.php:116
+msgid "This is the description #3"
+msgstr ""
+
+#: includes/elementor/widgets/info-list.php:138
+msgid "Item Alignment"
+msgstr ""
+
+#: includes/elementor/widgets/info-list.php:142
+#: includes/elementor/widgets/tabs.php:124
+msgid "Horizontal"
+msgstr ""
+
+#: includes/elementor/widgets/info-list.php:146
+#: includes/elementor/widgets/tabs.php:125
+msgid "Vertical"
+msgstr ""
+
+#: includes/elementor/widgets/info-list.php:227
+#: includes/elementor/widgets/separator-dash.php:117
+#: includes/js-composer.php:274
+#: includes/mega-menu/views/mega.php:30
+msgid "Width"
+msgstr ""
+
+#: includes/elementor/widgets/instagram-carousel.php:30
+#: includes/elementor/widgets/instagram-carousel.php:71
+#: includes/elementor/widgets/instagram-carousel.php:123
+#: includes/js-composer.php:3529
+msgid "Instagram Carousel"
+msgstr ""
+
+#: includes/elementor/widgets/instagram-carousel.php:77
+#: includes/elementor/widgets/instagram.php:77
+#: includes/js-composer.php:3485
+#: includes/js-composer.php:3536
+msgid "Number of Photos"
+msgstr ""
+
+#: includes/elementor/widgets/instagram-carousel.php:87
+#: includes/elementor/widgets/instagram.php:98
+#: includes/js-composer.php:1025
+#: includes/js-composer.php:1866
+#: includes/js-composer.php:3506
+#: includes/js-composer.php:3542
+msgid "Image Size"
+msgstr ""
+
+#: includes/elementor/widgets/instagram-carousel.php:91
+#: includes/elementor/widgets/instagram.php:102
+#: includes/js-composer.php:3512
+#: includes/js-composer.php:3548
+msgid "Original"
+msgstr ""
+
+#: includes/elementor/widgets/instagram-carousel.php:108
+#: includes/elementor/widgets/posts-carousel.php:108
+#: includes/elementor/widgets/products-carousel-2.php:133
+#: includes/elementor/widgets/products-carousel.php:125
+#: includes/elementor/widgets/products-tabs-carousel.php:127
+#: includes/elementor/widgets/team-member-carousel.php:186
+#: includes/elementor/widgets/testimonial-carousel.php:177
+#: includes/elementor/widgets/testimonial-slideshow.php:184
+msgid "Additional Settings"
+msgstr ""
+
+#: includes/elementor/widgets/instagram.php:30
+#: includes/elementor/widgets/instagram.php:71
+#: includes/elementor/widgets/team-member-carousel.php:296
+#: includes/elementor/widgets/team-member.php:241
+#: includes/js-composer.php:1076
+#: includes/js-composer.php:3477
+#: includes/user.php:18
+#: includes/widgets/instagram.php:25
+#: includes/widgets/socials.php:38
+msgid "Instagram"
+msgstr ""
+
+#: includes/elementor/widgets/instagram.php:87
+#: includes/elementor/widgets/posts-grid.php:90
+#: includes/elementor/widgets/products-grid.php:89
+#: includes/elementor/widgets/products-masonry.php:88
+#: includes/elementor/widgets/products-tabs.php:81
+#: includes/js-composer.php:1106
+#: includes/js-composer.php:1743
+#: includes/js-composer.php:1925
+#: includes/js-composer.php:2142
+#: includes/js-composer.php:3491
+msgid "Columns"
+msgstr ""
+
+#: includes/elementor/widgets/message-box.php:32
+#: includes/elementor/widgets/message-box.php:73
+#: includes/elementor/widgets/message-box.php:137
+#: includes/js-composer.php:757
+msgid "Message Box"
+msgstr ""
+
+#: includes/elementor/widgets/message-box.php:83
+#: includes/js-composer.php:772
+msgid "Success"
+msgstr ""
+
+#: includes/elementor/widgets/message-box.php:84
+msgid "Info"
+msgstr ""
+
+#: includes/elementor/widgets/message-box.php:85
+msgid "Danger"
+msgstr ""
+
+#: includes/elementor/widgets/message-box.php:86
+#: includes/js-composer.php:775
+msgid "Warning"
+msgstr ""
+
+#: includes/elementor/widgets/message-box.php:121
+msgid "Dismiss Button"
+msgstr ""
+
+#: includes/elementor/widgets/message-box.php:123
+msgid "Show"
+msgstr ""
+
+#: includes/elementor/widgets/message-box.php:124
+#: includes/js-composer.php:3434
+#: includes/js-composer.php:3449
+#: includes/js-composer.php:3464
+msgid "Hide"
+msgstr ""
+
+#: includes/elementor/widgets/posts-carousel.php:30
+#: includes/elementor/widgets/posts-carousel.php:71
+#: includes/elementor/widgets/posts-carousel.php:123
+msgid "Posts Carousel"
+msgstr ""
+
+#: includes/elementor/widgets/posts-carousel.php:77
+#: includes/elementor/widgets/posts-grid.php:78
+msgid "Number Of Posts"
+msgstr ""
+
+#: includes/elementor/widgets/posts-carousel.php:189
+#: includes/shortcodes.php:912
+#: includes/shortcodes.php:998
+msgid "Continue reading"
+msgstr ""
+
+#: includes/elementor/widgets/posts-grid.php:31
+#: includes/elementor/widgets/posts-grid.php:72
+#: includes/elementor/widgets/posts-grid.php:139
+msgid "Posts Grid"
+msgstr ""
+
+#: includes/elementor/widgets/posts-grid.php:93
+msgid "1 Column"
+msgstr ""
+
+#: includes/elementor/widgets/posts-grid.php:94
+#: includes/js-composer.php:3496
+#: includes/widgets/instagram.php:130
+msgid "2 Columns"
+msgstr ""
+
+#: includes/elementor/widgets/posts-grid.php:95
+#: includes/elementor/widgets/products-grid.php:92
+#: includes/elementor/widgets/products-tabs.php:84
+#: includes/js-composer.php:1111
+#: includes/js-composer.php:1749
+#: includes/js-composer.php:1931
+#: includes/js-composer.php:2148
+#: includes/js-composer.php:3497
+#: includes/widgets/instagram.php:131
+msgid "3 Columns"
+msgstr ""
+
+#: includes/elementor/widgets/posts-grid.php:96
+#: includes/elementor/widgets/products-grid.php:93
+#: includes/elementor/widgets/products-tabs.php:85
+#: includes/js-composer.php:1112
+#: includes/js-composer.php:1750
+#: includes/js-composer.php:1932
+#: includes/js-composer.php:2149
+#: includes/js-composer.php:3498
+#: includes/widgets/instagram.php:132
+msgid "4 Columns"
+msgstr ""
+
+#: includes/elementor/widgets/price-table.php:33
+msgid "Price Table"
+msgstr ""
+
+#: includes/elementor/widgets/price-table.php:154
+msgid "Icon Size"
+msgstr ""
+
+#: includes/elementor/widgets/price-table.php:180
+#: includes/js-composer.php:185
+msgid "Image Width"
+msgstr ""
+
+#: includes/elementor/widgets/price-table.php:303
+#: includes/elementor/widgets/price-table.php:344
+msgid "Pricing"
+msgstr ""
+
+#: includes/elementor/widgets/price-table.php:312
+msgid "Enter your price"
+msgstr ""
+
+#: includes/elementor/widgets/price-table.php:320
+msgid "Currency Symbol"
+msgstr ""
+
+#: includes/elementor/widgets/price-table.php:323
+msgid "Enter your currency symbol"
+msgstr ""
+
+#: includes/elementor/widgets/price-table.php:331
+#: includes/elementor/widgets/price-table.php:393
+msgid "Period"
+msgstr ""
+
+#: includes/elementor/widgets/price-table.php:333
+#: includes/js-composer.php:208
+#: includes/shortcodes.php:102
+msgid "Per Month"
+msgstr ""
+
+#: includes/elementor/widgets/price-table.php:379
+msgid "Currency Font Size"
+msgstr ""
+
+#: includes/elementor/widgets/price-table.php:437
+#: includes/elementor/widgets/promotion.php:109
+#: includes/js-composer.php:223
+#: includes/js-composer.php:2410
+#: includes/js-composer.php:2485
+#: includes/js-composer.php:2585
+msgid "Button Link"
+msgstr ""
+
+#: includes/elementor/widgets/product-banner.php:33
+#: includes/elementor/widgets/product-banner.php:73
+msgid "Product Banner"
+msgstr ""
+
+#: includes/elementor/widgets/product-banner.php:97
+#: includes/js-composer.php:824
+msgid "Custom Image"
+msgstr ""
+
+#: includes/elementor/widgets/product-banner.php:164
+#: includes/elementor/widgets/products-carousel-2.php:355
+#: includes/js-composer.php:2290
+#: includes/js-composer.php:2297
+msgid "Product"
+msgstr ""
+
+#: includes/elementor/widgets/product-banner.php:184
+msgid "Title Typography"
+msgstr ""
+
+#: includes/elementor/widgets/products-carousel-2.php:32
+#: includes/elementor/widgets/products-carousel-2.php:73
+msgid "Products Carousel 2"
+msgstr ""
+
+#: includes/elementor/widgets/products-carousel-2.php:195
+#: includes/js-composer.php:328
+msgid "Carousel"
+msgstr ""
+
+#: includes/elementor/widgets/products-carousel-2.php:363
+msgid "Product Name"
+msgstr ""
+
+#: includes/elementor/widgets/products-carousel-2.php:382
+#: includes/elementor/widgets/products-carousel-2.php:411
+#: includes/elementor/widgets/products-carousel-2.php:440
+msgid "Typography"
+msgstr ""
+
+#: includes/elementor/widgets/products-carousel-2.php:567
+#: includes/shortcodes.php:1399
+msgid "Buy Now"
+msgstr ""
+
+#: includes/elementor/widgets/products-carousel.php:30
+#: includes/elementor/widgets/products-carousel.php:72
+#: includes/elementor/widgets/products-carousel.php:187
+#: includes/elementor/widgets/products-tabs-carousel.php:190
+msgid "Products Carousel"
+msgstr ""
+
+#: includes/elementor/widgets/products-carousel.php:195
+#: includes/elementor/widgets/products-grid.php:231
+#: includes/elementor/widgets/products-masonry.php:224
+#: includes/elementor/widgets/products-tabs.php:123
+#: includes/elementor/widgets/products-tabs.php:283
+msgid "Products"
+msgstr ""
+
+#: includes/elementor/widgets/products-grid.php:31
+#: includes/elementor/widgets/products-grid.php:73
+#: includes/js-composer.php:1898
+msgid "Products Grid"
+msgstr ""
+
+#: includes/elementor/widgets/products-grid.php:94
+#: includes/elementor/widgets/products-tabs.php:86
+#: includes/js-composer.php:1751
+#: includes/js-composer.php:1933
+#: includes/js-composer.php:2150
+#: includes/js-composer.php:3499
+msgid "5 Columns"
+msgstr ""
+
+#: includes/elementor/widgets/products-grid.php:95
+#: includes/js-composer.php:1752
+#: includes/js-composer.php:1934
+#: includes/js-composer.php:3500
+msgid "6 Columns"
+msgstr ""
+
+#: includes/elementor/widgets/products-grid.php:104
+#: includes/elementor/widgets/products-masonry.php:97
+msgid "Heading Block"
+msgstr ""
+
+#: includes/elementor/widgets/products-grid.php:105
+#: includes/elementor/widgets/products-masonry.php:98
+msgid "Add a heading block as the the first item"
+msgstr ""
+
+#: includes/elementor/widgets/products-masonry.php:31
+#: includes/elementor/widgets/products-masonry.php:72
+#: includes/js-composer.php:2019
+msgid "Products Masonry"
+msgstr ""
+
+#: includes/elementor/widgets/products-masonry.php:140
+msgid "Title and Description"
+msgstr ""
+
+#: includes/elementor/widgets/products-tabs-carousel.php:29
+msgid "Products Tabs Carousel"
+msgstr ""
+
+#: includes/elementor/widgets/products-tabs.php:31
+#: includes/elementor/widgets/products-tabs.php:248
+#: includes/js-composer.php:2128
+msgid "Products Tabs"
+msgstr ""
+
+#: includes/elementor/widgets/products-tabs.php:71
+msgid "Product Tabs"
+msgstr ""
+
+#: includes/elementor/widgets/products-tabs.php:95
+msgid "Tabs Type"
+msgstr ""
+
+#: includes/elementor/widgets/products-tabs.php:98
+#: includes/elementor/widgets/products-tabs.php:204
+#: includes/js-composer.php:1771
+#: includes/js-composer.php:1848
+#: includes/js-composer.php:1989
+#: includes/js-composer.php:2098
+#: includes/js-composer.php:2161
+msgid "Categories"
+msgstr ""
+
+#: includes/elementor/widgets/products-tabs.php:99
+#: includes/elementor/widgets/products-tabs.php:231
+#: includes/flex-post.php:182
+#: includes/js-composer.php:1860
+#: includes/js-composer.php:2162
+#: includes/js-composer.php:2183
+msgid "Tags"
+msgstr ""
+
+#: includes/elementor/widgets/products-tabs.php:100
+#: includes/js-composer.php:2163
+#: includes/js-composer.php:2194
+msgid "Groups"
+msgstr ""
+
+#: includes/elementor/widgets/products-tabs.php:115
+msgid "This is heading"
+msgstr ""
+
+#: includes/elementor/widgets/products-tabs.php:169
+msgid "New Arrivals"
+msgstr ""
+
+#: includes/elementor/widgets/products-tabs.php:173
+#: includes/js-composer.php:2201
+#: includes/widgets/products-filter.php:490
+msgid "Best Sellers"
+msgstr ""
+
+#: includes/elementor/widgets/products-tabs.php:256
+#: includes/elementor/widgets/tabs.php:35
+#: includes/elementor/widgets/tabs.php:66
+#: includes/elementor/widgets/tabs.php:136
+#: includes/mega-menu/menus.php:183
+#: includes/mega-menu/views/mega.php:23
+msgid "Tabs"
+msgstr ""
+
+#: includes/elementor/widgets/promotion.php:33
+#: includes/elementor/widgets/promotion.php:68
+#: includes/elementor/widgets/promotion.php:129
+#: includes/js-composer.php:2452
+msgid "Promotion"
+msgstr ""
+
+#: includes/elementor/widgets/promotion.php:78
+#: includes/flex-post.php:232
+#: includes/flex-post.php:459
+#: includes/js-composer.php:2465
+msgid "Standard"
+msgstr ""
+
+#: includes/elementor/widgets/promotion.php:79
+#: includes/js-composer.php:671
+#: includes/js-composer.php:1334
+#: includes/js-composer.php:1343
+#: includes/js-composer.php:2466
+msgid "Inline"
+msgstr ""
+
+#: includes/elementor/widgets/promotion.php:90
+msgid "This is the description"
+msgstr ""
+
+#: includes/elementor/widgets/separator-dash.php:31
+#: includes/js-composer.php:1217
+msgid "Separator Dash"
+msgstr ""
+
+#: includes/elementor/widgets/separator-dash.php:71
+#: includes/elementor/widgets/separator-dash.php:89
+msgid "Separator"
+msgstr ""
+
+#: includes/elementor/widgets/separator-dash.php:80
+msgid "Enter your text"
+msgstr ""
+
+#: includes/elementor/widgets/separator-dash.php:108
+msgid "Line"
+msgstr ""
+
+#: includes/elementor/widgets/subscribe-box.php:31
+#: includes/elementor/widgets/subscribe-box.php:72
+#: includes/js-composer.php:3351
+msgid "Subscribe Box"
+msgstr ""
+
+#: includes/elementor/widgets/subscribe-box.php:78
+#: includes/js-composer.php:3380
+msgid "Form"
+msgstr ""
+
+#: includes/elementor/widgets/subscribe-box.php:82
+#: includes/js-composer.php:3381
+msgid "Select the MailChimp form"
+msgstr ""
+
+#: includes/elementor/widgets/tabs.php:77
+#: includes/elementor/widgets/tabs.php:78
+msgid "Tab Title"
+msgstr ""
+
+#: includes/elementor/widgets/tabs.php:87
+#: includes/elementor/widgets/tabs.php:88
+#: includes/mega-menu/views/menu.php:7
+msgid "Tab Content"
+msgstr ""
+
+#: includes/elementor/widgets/tabs.php:100
+msgid "Tabs Items"
+msgstr ""
+
+#: includes/elementor/widgets/tabs.php:105
+msgid "Tab #1"
+msgstr ""
+
+#: includes/elementor/widgets/tabs.php:109
+msgid "Tab #2"
+msgstr ""
+
+#: includes/elementor/widgets/tabs.php:144
+msgid "Navigation Width"
+msgstr ""
+
+#: includes/elementor/widgets/team-member-carousel.php:32
+#: includes/elementor/widgets/team-member-carousel.php:201
+msgid "Team Member Carousel"
+msgstr ""
+
+#: includes/elementor/widgets/team-member-carousel.php:70
+#: includes/elementor/widgets/team-member.php:32
+#: includes/elementor/widgets/team-member.php:72
+#: includes/elementor/widgets/team-member.php:153
+#: includes/js-composer.php:1012
+msgid "Team Member"
+msgstr ""
+
+#: includes/elementor/widgets/team-member-carousel.php:98
+#: includes/elementor/widgets/team-member-carousel.php:216
+#: includes/elementor/widgets/team-member.php:98
+#: includes/elementor/widgets/team-member.php:162
+#: includes/elementor/widgets/testimonial-carousel.php:117
+#: includes/elementor/widgets/testimonial-carousel.php:236
+#: includes/elementor/widgets/testimonial-slideshow.php:130
+#: includes/elementor/widgets/testimonial-slideshow.php:316
+#: includes/elementor/widgets/testimonial.php:116
+#: includes/elementor/widgets/testimonial.php:183
+#: includes/js-composer.php:508
+msgid "Name"
+msgstr ""
+
+#: includes/elementor/widgets/team-member-carousel.php:100
+#: includes/elementor/widgets/team-member.php:100
+#: includes/js-composer.php:1033
+msgid "Member name"
+msgstr ""
+
+#: includes/elementor/widgets/team-member-carousel.php:108
+#: includes/elementor/widgets/team-member-carousel.php:245
+#: includes/elementor/widgets/team-member.php:108
+#: includes/elementor/widgets/team-member.php:190
+#: includes/js-composer.php:1039
+msgid "Job"
+msgstr ""
+
+#: includes/elementor/widgets/team-member-carousel.php:110
+#: includes/elementor/widgets/team-member.php:110
+msgid "Member job"
+msgstr ""
+
+#: includes/elementor/widgets/team-member-carousel.php:118
+#: includes/elementor/widgets/team-member.php:118
+msgid "Socials"
+msgstr ""
+
+#: includes/elementor/widgets/team-member-carousel.php:150
+msgid "Members"
+msgstr ""
+
+#: includes/elementor/widgets/team-member-carousel.php:156
+msgid "Member name #1"
+msgstr ""
+
+#: includes/elementor/widgets/team-member-carousel.php:157
+msgid "Member job #1"
+msgstr ""
+
+#: includes/elementor/widgets/team-member-carousel.php:160
+msgid "Member name #2"
+msgstr ""
+
+#: includes/elementor/widgets/team-member-carousel.php:161
+msgid "Member job #2"
+msgstr ""
+
+#: includes/elementor/widgets/team-member-carousel.php:164
+msgid "Member name #3"
+msgstr ""
+
+#: includes/elementor/widgets/team-member-carousel.php:165
+msgid "Member job #3"
+msgstr ""
+
+#: includes/elementor/widgets/team-member-carousel.php:168
+msgid "Member name #4"
+msgstr ""
+
+#: includes/elementor/widgets/team-member-carousel.php:169
+msgid "Member job #4"
+msgstr ""
+
+#: includes/elementor/widgets/team-member-carousel.php:280
+#: includes/elementor/widgets/team-member.php:225
+#: includes/js-composer.php:1046
+#: includes/user.php:14
+#: includes/widgets/socials.php:31
+msgid "Facebook"
+msgstr ""
+
+#: includes/elementor/widgets/team-member-carousel.php:284
+#: includes/elementor/widgets/team-member.php:229
+#: includes/js-composer.php:1051
+#: includes/user.php:15
+#: includes/widgets/socials.php:32
+msgid "Twitter"
+msgstr ""
+
+#: includes/elementor/widgets/team-member-carousel.php:288
+#: includes/elementor/widgets/team-member.php:233
+#: includes/js-composer.php:1071
+#: includes/widgets/socials.php:43
+msgid "Youtube"
+msgstr ""
+
+#: includes/elementor/widgets/team-member-carousel.php:292
+#: includes/elementor/widgets/team-member.php:237
+#: includes/widgets/socials.php:39
+msgid "Dribbble"
+msgstr ""
+
+#: includes/elementor/widgets/team-member-carousel.php:300
+#: includes/elementor/widgets/team-member.php:245
+#: includes/js-composer.php:1066
+#: includes/user.php:16
+#: includes/widgets/socials.php:35
+msgid "Linkedin"
+msgstr ""
+
+#: includes/elementor/widgets/team-member-carousel.php:304
+#: includes/elementor/widgets/team-member.php:249
+#: includes/js-composer.php:1061
+#: includes/user.php:17
+#: includes/widgets/socials.php:36
+msgid "Pinterest"
+msgstr ""
+
+#: includes/elementor/widgets/testimonial-carousel.php:33
+#: includes/elementor/widgets/testimonial-carousel.php:73
+#: includes/elementor/widgets/testimonial-carousel.php:192
+#: includes/js-composer.php:538
+msgid "Testimonial Carousel"
+msgstr ""
+
+#: includes/elementor/widgets/testimonial-carousel.php:119
+#: includes/elementor/widgets/testimonial-slideshow.php:132
+#: includes/elementor/widgets/testimonial.php:118
+msgid "John Doe"
+msgstr ""
+
+#: includes/elementor/widgets/testimonial-carousel.php:131
+#: includes/elementor/widgets/testimonial-carousel.php:265
+#: includes/elementor/widgets/testimonial-slideshow.php:144
+#: includes/elementor/widgets/testimonial-slideshow.php:344
+#: includes/elementor/widgets/testimonial.php:130
+msgid "Company/Title"
+msgstr ""
+
+#: includes/elementor/widgets/testimonial-carousel.php:133
+#: includes/elementor/widgets/testimonial-slideshow.php:146
+#: includes/elementor/widgets/testimonial.php:132
+msgid "Company Name"
+msgstr ""
+
+#: includes/elementor/widgets/testimonial-carousel.php:144
+#: includes/elementor/widgets/testimonial-slideshow.php:82
+#: includes/elementor/widgets/testimonial-slideshow.php:157
+#: includes/elementor/widgets/testimonial-slideshow.php:281
+#: includes/js-composer.php:553
+#: includes/shortcodes.php:766
+msgid "Testimonials"
+msgstr ""
+
+#: includes/elementor/widgets/testimonial-carousel.php:150
+#: includes/elementor/widgets/testimonial-slideshow.php:163
+msgid "Name #1"
+msgstr ""
+
+#: includes/elementor/widgets/testimonial-carousel.php:151
+#: includes/elementor/widgets/testimonial-slideshow.php:164
+msgid "Company #1"
+msgstr ""
+
+#: includes/elementor/widgets/testimonial-carousel.php:154
+#: includes/elementor/widgets/testimonial-slideshow.php:167
+msgid "Name #2"
+msgstr ""
+
+#: includes/elementor/widgets/testimonial-carousel.php:155
+#: includes/elementor/widgets/testimonial-slideshow.php:168
+msgid "Company #2"
+msgstr ""
+
+#: includes/elementor/widgets/testimonial-carousel.php:158
+#: includes/elementor/widgets/testimonial-slideshow.php:171
+msgid "Name #3"
+msgstr ""
+
+#: includes/elementor/widgets/testimonial-carousel.php:159
+#: includes/elementor/widgets/testimonial-slideshow.php:172
+msgid "Company #3"
+msgstr ""
+
+#: includes/elementor/widgets/testimonial-slideshow.php:34
+#: includes/elementor/widgets/testimonial-slideshow.php:74
+msgid "Testimonial Slideshow"
+msgstr ""
+
+#: includes/elementor/widgets/testimonial-slideshow.php:199
+msgid "Slideshow"
+msgstr ""
+
+#: includes/elementor/widgets/testimonial-slideshow.php:234
+msgid "Pagination"
+msgstr ""
+
+#: includes/elementor/widgets/testimonial.php:33
+#: includes/elementor/widgets/testimonial.php:73
+#: includes/elementor/widgets/testimonial.php:146
+#: includes/js-composer.php:495
+msgid "Testimonial"
+msgstr ""
+
+#: includes/elementor/widgets/testimonial.php:212
+#: includes/js-composer.php:515
+msgid "Company"
+msgstr ""
+
+#: includes/flex-post.php:82
+msgid "Konte Custom Content Types"
+msgstr ""
+
+#: includes/flex-post.php:89
+#: includes/flex-post.php:145
+msgid "Flex Posts"
+msgstr ""
+
+#: includes/flex-post.php:110
+msgid "Use these settings to display different types of content on your website"
+msgstr ""
+
+#: includes/flex-post.php:126
+msgid "Enable Flex Posts for this site."
+msgstr ""
+
+#: includes/flex-post.php:141
+msgid "Flexible post content"
+msgstr ""
+
+#: includes/flex-post.php:143
+msgid "Flex Post"
+msgstr ""
+
+#: includes/flex-post.php:144
+#: includes/flex-post.php:460
+msgid "Post"
+msgstr ""
+
+#: includes/flex-post.php:146
+msgid "All Posts"
+msgstr ""
+
+#: includes/flex-post.php:147
+#: includes/portfolio.php:104
+#: includes/size-guide.php:169
+msgid "Add New"
+msgstr ""
+
+#: includes/flex-post.php:148
+msgid "Add New Post"
+msgstr ""
+
+#: includes/flex-post.php:149
+msgid "Edit Post"
+msgstr ""
+
+#: includes/flex-post.php:150
+msgid "New Post"
+msgstr ""
+
+#: includes/flex-post.php:151
+msgid "View Post"
+msgstr ""
+
+#: includes/flex-post.php:152
+msgid "Search Posts"
+msgstr ""
+
+#: includes/flex-post.php:153
+msgid "No posts found"
+msgstr ""
+
+#: includes/flex-post.php:154
+msgid "No posts found in Trash"
+msgstr ""
+
+#: includes/flex-post.php:155
+msgid "Filter posts list"
+msgstr ""
+
+#: includes/flex-post.php:156
+#: includes/portfolio.php:113
+msgid "Project list navigation"
+msgstr ""
+
+#: includes/flex-post.php:157
+msgid "Posts list"
+msgstr ""
+
+#: includes/flex-post.php:180
+msgid "Post Tags"
+msgstr ""
+
+#: includes/flex-post.php:181
+msgid "Post Tag"
+msgstr ""
+
+#: includes/flex-post.php:183
+msgid "All Post Tags"
+msgstr ""
+
+#: includes/flex-post.php:184
+msgid "Edit Post Tag"
+msgstr ""
+
+#: includes/flex-post.php:185
+msgid "View Post Tag"
+msgstr ""
+
+#: includes/flex-post.php:186
+msgid "Update Post Tag"
+msgstr ""
+
+#: includes/flex-post.php:187
+msgid "Add New Post Tag"
+msgstr ""
+
+#: includes/flex-post.php:188
+msgid "New Post Tag Name"
+msgstr ""
+
+#: includes/flex-post.php:189
+msgid "Parent Post Tag"
+msgstr ""
+
+#: includes/flex-post.php:190
+msgid "Parent Post Tag:"
+msgstr ""
+
+#: includes/flex-post.php:191
+msgid "Search Post Tags"
+msgstr ""
+
+#: includes/flex-post.php:192
+msgid "Post tag list navigation"
+msgstr ""
+
+#: includes/flex-post.php:193
+msgid "Post tag list"
+msgstr ""
+
+#: includes/flex-post.php:214
+#: includes/flex-post.php:242
+msgid "Content Type"
+msgstr ""
+
+#: includes/flex-post.php:243
+msgid "Post Data"
+msgstr ""
+
+#: includes/flex-post.php:260
+msgid "Flex content type"
+msgstr ""
+
+#: includes/flex-post.php:296
+msgid "Select Post"
+msgstr ""
+
+#: includes/flex-post.php:309
+msgid "Instagram Post URL"
+msgstr ""
+
+#: includes/flex-post.php:312
+msgid "Enter the full URL of the Instagram post"
+msgstr ""
+
+#: includes/flex-post.php:317
+msgid "Instagram Post Caption"
+msgstr ""
+
+#: includes/flex-post.php:320
+msgid "Enter the short caption for the Instagram image (featured image) to display on the frontend"
+msgstr ""
+
+#: includes/flex-post.php:325
+msgid "Instagram Username"
+msgstr ""
+
+#: includes/flex-post.php:328
+msgid "The Instagram username"
+msgstr ""
+
+#: includes/flex-post.php:335
+msgid "Custom URL"
+msgstr ""
+
+#: includes/flex-post.php:342
+msgid "Read More Text"
+msgstr ""
+
+#: includes/flex-post.php:351
+msgid "Tag Color"
+msgstr ""
+
+#: includes/flex-post.php:354
+msgid "The color of the post tag"
+msgstr ""
+
+#: includes/flex-post.php:359
+msgid "Background Image"
+msgstr ""
+
+#: includes/flex-post.php:366
+#: includes/js-composer.php:167
+#: includes/js-composer.php:440
+#: includes/js-composer.php:2314
+#: includes/js-composer.php:2538
+#: includes/js-composer.php:2682
+#: includes/js-composer.php:2849
+#: includes/js-composer.php:3016
+#: includes/js-composer.php:3183
+#: includes/mega-menu/views/icon.php:747
+msgid "Upload Image"
+msgstr ""
+
+#: includes/flex-post.php:371
+msgid "Custom CSS"
+msgstr ""
+
+#: includes/flex-post.php:374
+msgid "Custom CSS for this post. This CSS will be added directly to this post. Please DO NOT enter CSS selector, just CSS rules only."
+msgstr ""
+
+#: includes/flex-post.php:461
+msgid "Instagram Post"
+msgstr ""
+
+#: includes/functions.php:16
+msgid "Share on"
+msgstr ""
+
+#: includes/functions.php:52
+msgid "Share On StumbleUpon"
+msgstr ""
+
+#: includes/functions.php:73
+msgid "Save On Pocket"
+msgstr ""
+
+#: includes/functions.php:86
+msgid "Check out this site:"
+msgstr ""
+
+#: includes/functions.php:87
+msgid "Share Via Email"
+msgstr ""
+
+#: includes/js-composer.php:37
+msgid "Stretch left"
+msgstr ""
+
+#: includes/js-composer.php:38
+msgid "Stretch left no padding"
+msgstr ""
+
+#: includes/js-composer.php:39
+msgid "Stretch right"
+msgstr ""
+
+#: includes/js-composer.php:40
+msgid "Stretch right no padding"
+msgstr ""
+
+#: includes/js-composer.php:46
+msgid "40px"
+msgstr ""
+
+#: includes/js-composer.php:47
+msgid "60px"
+msgstr ""
+
+#: includes/js-composer.php:48
+msgid "120px"
+msgstr ""
+
+#: includes/js-composer.php:54
+msgid "Separate Link"
+msgstr ""
+
+#: includes/js-composer.php:55
+msgid "Do not wrap heading text with the link tag. Display the link separately. It requires the link to has title."
+msgstr ""
+
+#: includes/js-composer.php:58
+#: includes/js-composer.php:356
+#: includes/js-composer.php:363
+#: includes/js-composer.php:409
+#: includes/js-composer.php:790
+#: includes/js-composer.php:1192
+#: includes/js-composer.php:1628
+#: includes/js-composer.php:1793
+#: includes/js-composer.php:1883
+#: includes/js-composer.php:2243
+#: includes/js-composer.php:2251
+#: includes/js-composer.php:2270
+#: includes/js-composer.php:3568
+#: includes/js-composer.php:3575
+#: includes/js-composer.php:3583
+msgid "Yes"
+msgstr ""
+
+#: includes/js-composer.php:73
+msgid "Product Description"
+msgstr ""
+
+#: includes/js-composer.php:74
+msgid "About Us v1"
+msgstr ""
+
+#: includes/js-composer.php:75
+msgid "About Us v2"
+msgstr ""
+
+#: includes/js-composer.php:76
+msgid "Contact Us v1"
+msgstr ""
+
+#: includes/js-composer.php:77
+msgid "Contact Us v2"
+msgstr ""
+
+#: includes/js-composer.php:78
+msgid "FAQ Page"
+msgstr ""
+
+#: includes/js-composer.php:79
+msgid "Our Team Page"
+msgstr ""
+
+#: includes/js-composer.php:80
+msgid "Home v2"
+msgstr ""
+
+#: includes/js-composer.php:81
+msgid "Home v3"
+msgstr ""
+
+#: includes/js-composer.php:82
+msgid "Home v5"
+msgstr ""
+
+#: includes/js-composer.php:83
+msgid "Home v6"
+msgstr ""
+
+#: includes/js-composer.php:84
+msgid "Home v7"
+msgstr ""
+
+#: includes/js-composer.php:85
+msgid "Home v9"
+msgstr ""
+
+#: includes/js-composer.php:86
+msgid "Home v11"
+msgstr ""
+
+#: includes/js-composer.php:87
+msgid "Home v12"
+msgstr ""
+
+#: includes/js-composer.php:88
+msgid "Home v13"
+msgstr ""
+
+#: includes/js-composer.php:144
+msgid "Pricing Table"
+msgstr ""
+
+#: includes/js-composer.php:145
+msgid "Eye catching pricing table"
+msgstr ""
+
+#: includes/js-composer.php:151
+msgid "Plan Name"
+msgstr ""
+
+#: includes/js-composer.php:157
+msgid "Plan Image"
+msgstr ""
+
+#: includes/js-composer.php:162
+#: includes/js-composer.php:435
+#: includes/js-composer.php:1397
+#: includes/js-composer.php:1513
+#: includes/js-composer.php:2309
+#: includes/js-composer.php:2533
+#: includes/js-composer.php:2676
+#: includes/js-composer.php:2843
+#: includes/js-composer.php:3010
+#: includes/js-composer.php:3177
+msgid "Media library"
+msgstr ""
+
+#: includes/js-composer.php:163
+#: includes/js-composer.php:436
+#: includes/js-composer.php:1398
+#: includes/js-composer.php:1514
+#: includes/js-composer.php:2310
+#: includes/js-composer.php:2534
+#: includes/js-composer.php:2677
+#: includes/js-composer.php:2844
+#: includes/js-composer.php:3011
+#: includes/js-composer.php:3178
+msgid "External link"
+msgstr ""
+
+#: includes/js-composer.php:176
+msgid "Image Link"
+msgstr ""
+
+#: includes/js-composer.php:186
+msgid "Force image width if you want to resize it. Leave it empty to use the full size."
+msgstr ""
+
+#: includes/js-composer.php:192
+msgid "Plan pricing"
+msgstr ""
+
+#: includes/js-composer.php:197
+msgid "Currency"
+msgstr ""
+
+#: includes/js-composer.php:198
+msgid "Price currency"
+msgstr ""
+
+#: includes/js-composer.php:204
+msgid "Recurrence"
+msgstr ""
+
+#: includes/js-composer.php:205
+msgid "Recurring payment unit"
+msgstr ""
+
+#: includes/js-composer.php:212
+msgid "Plan description."
+msgstr ""
+
+#: includes/js-composer.php:220
+#: includes/shortcodes.php:103
+msgid "Get Started"
+msgstr ""
+
+#: includes/js-composer.php:231
+#: includes/js-composer.php:318
+#: includes/js-composer.php:412
+#: includes/js-composer.php:485
+#: includes/js-composer.php:528
+#: includes/js-composer.php:556
+#: includes/js-composer.php:679
+#: includes/js-composer.php:747
+#: includes/js-composer.php:796
+#: includes/js-composer.php:996
+#: includes/js-composer.php:1082
+#: includes/js-composer.php:1140
+#: includes/js-composer.php:1206
+#: includes/js-composer.php:1244
+#: includes/js-composer.php:1303
+#: includes/js-composer.php:1362
+#: includes/js-composer.php:1489
+#: includes/js-composer.php:1712
+#: includes/js-composer.php:1808
+#: includes/js-composer.php:1887
+#: includes/js-composer.php:2008
+#: includes/js-composer.php:2117
+#: includes/js-composer.php:2279
+#: includes/js-composer.php:2362
+#: includes/js-composer.php:2435
+#: includes/js-composer.php:2504
+#: includes/js-composer.php:2611
+#: includes/js-composer.php:2664
+#: includes/js-composer.php:3388
+#: includes/js-composer.php:3420
+#: includes/js-composer.php:3518
+#: includes/js-composer.php:3588
+msgid "Extra class name"
+msgstr ""
+
+#: includes/js-composer.php:233
+#: includes/js-composer.php:319
+#: includes/js-composer.php:413
+#: includes/js-composer.php:486
+#: includes/js-composer.php:529
+#: includes/js-composer.php:557
+#: includes/js-composer.php:680
+#: includes/js-composer.php:748
+#: includes/js-composer.php:798
+#: includes/js-composer.php:997
+#: includes/js-composer.php:1083
+#: includes/js-composer.php:1141
+#: includes/js-composer.php:1207
+#: includes/js-composer.php:1245
+#: includes/js-composer.php:1304
+#: includes/js-composer.php:1363
+#: includes/js-composer.php:1490
+#: includes/js-composer.php:1713
+#: includes/js-composer.php:1809
+#: includes/js-composer.php:1888
+#: includes/js-composer.php:2009
+#: includes/js-composer.php:2118
+#: includes/js-composer.php:2280
+#: includes/js-composer.php:2363
+#: includes/js-composer.php:2436
+#: includes/js-composer.php:2505
+#: includes/js-composer.php:2612
+#: includes/js-composer.php:2665
+#: includes/js-composer.php:3389
+#: includes/js-composer.php:3421
+#: includes/js-composer.php:3520
+#: includes/js-composer.php:3590
+msgid "If you wish to style particular content element differently, then use this field to add a class name and then refer to it in your css file."
+msgstr ""
+
+#: includes/js-composer.php:241
+msgid "Google map in style"
+msgstr ""
+
+#: includes/js-composer.php:248
+msgid "Enter address for map marker. If this option does not work correctly, use the Latitude and Longitude options bellow."
+msgstr ""
+
+#: includes/js-composer.php:254
+msgid "Latitude"
+msgstr ""
+
+#: includes/js-composer.php:261
+msgid "Longitude"
+msgstr ""
+
+#: includes/js-composer.php:268
+msgid "Marker"
+msgstr ""
+
+#: includes/js-composer.php:269
+msgid "Upload custom marker icon or leave this to use default one."
+msgstr ""
+
+#: includes/js-composer.php:275
+msgid "Map width in pixel or percentage."
+msgstr ""
+
+#: includes/js-composer.php:282
+msgid "Map height in pixel."
+msgstr ""
+
+#: includes/js-composer.php:289
+msgid "Enter zoom level. The value is between 1 and 20."
+msgstr ""
+
+#: includes/js-composer.php:296
+msgid "Select map color style"
+msgstr ""
+
+#: includes/js-composer.php:303
+msgid "Blue"
+msgstr ""
+
+#: includes/js-composer.php:311
+msgid "Enter content of info window."
+msgstr ""
+
+#: includes/js-composer.php:329
+msgid "Carousel of items"
+msgstr ""
+
+#: includes/js-composer.php:340
+#: includes/js-composer.php:3552
+msgid "Slide To Show"
+msgstr ""
+
+#: includes/js-composer.php:346
+#: includes/js-composer.php:3558
+msgid "Slide To Scroll"
+msgstr ""
+
+#: includes/js-composer.php:352
+#: includes/js-composer.php:1188
+#: includes/js-composer.php:3564
+msgid "Infinite Scroll"
+msgstr ""
+
+#: includes/js-composer.php:359
+msgid "Free mode"
+msgstr ""
+
+#: includes/js-composer.php:360
+msgid "Carousel items do not need to be equal."
+msgstr ""
+
+#: includes/js-composer.php:366
+msgid "Pagination Dots"
+msgstr ""
+
+#: includes/js-composer.php:367
+msgid "Select position of carousel dots or disable them"
+msgstr ""
+
+#: includes/js-composer.php:372
+msgid "No Dots"
+msgstr ""
+
+#: includes/js-composer.php:373
+msgid "At Bottom Left"
+msgstr ""
+
+#: includes/js-composer.php:374
+msgid "At Bottom"
+msgstr ""
+
+#: includes/js-composer.php:375
+msgid "At Bottom Right"
+msgstr ""
+
+#: includes/js-composer.php:380
+msgid "Select position of carousel arrows or disable them"
+msgstr ""
+
+#: includes/js-composer.php:385
+msgid "No Arrows"
+msgstr ""
+
+#: includes/js-composer.php:386
+msgid "On Top Right"
+msgstr ""
+
+#: includes/js-composer.php:387
+msgid "At Middle"
+msgstr ""
+
+#: includes/js-composer.php:392
+msgid "Select gap between slides"
+msgstr ""
+
+#: includes/js-composer.php:406
+msgid "Show the order number beside slides"
+msgstr ""
+
+#: includes/js-composer.php:422
+msgid "Carousel Item"
+msgstr ""
+
+#: includes/js-composer.php:423
+msgid "Carousel item"
+msgstr ""
+
+#: includes/js-composer.php:449
+msgid "Image Size. Example: \"thumbnail\", \"medium\", \"large\", \"full\" or other sizes defined by theme. Alternatively enter size in pixels (Example: 200x100 (Width x Height)). Leave empty to use \"thumbnail\" size."
+msgstr ""
+
+#: includes/js-composer.php:459
+#: includes/js-composer.php:2333
+#: includes/js-composer.php:2557
+msgid "External image link."
+msgstr ""
+
+#: includes/js-composer.php:477
+#: includes/js-composer.php:2407
+#: includes/js-composer.php:2582
+#: includes/js-composer.php:2787
+#: includes/js-composer.php:2954
+#: includes/js-composer.php:3121
+#: includes/js-composer.php:3288
+#: includes/shortcodes.php:708
+#: includes/shortcodes.php:1808
+#: includes/shortcodes.php:1882
+#: includes/shortcodes.php:1896
+#: includes/shortcodes.php:1910
+#: includes/shortcodes.php:1924
+#: includes/shortcodes.php:2089
+#: includes/shortcodes.php:2196
+msgid "Shop Now"
+msgstr ""
+
+#: includes/js-composer.php:496
+msgid "Written review from a satisfied customer"
+msgstr ""
+
+#: includes/js-composer.php:502
+msgid "Photo"
+msgstr ""
+
+#: includes/js-composer.php:503
+msgid "Author photo or avatar. Recommend 200x200 in dimension."
+msgstr ""
+
+#: includes/js-composer.php:509
+msgid "Enter full name of the author"
+msgstr ""
+
+#: includes/js-composer.php:516
+msgid "Enter company name of author"
+msgstr ""
+
+#: includes/js-composer.php:522
+msgid "Testimonial content"
+msgstr ""
+
+#: includes/js-composer.php:539
+msgid "Carousel of testimonials"
+msgstr ""
+
+#: includes/js-composer.php:550
+msgid "Widget Title"
+msgstr ""
+
+#: includes/js-composer.php:567
+msgid "Button in style"
+msgstr ""
+
+#: includes/js-composer.php:574
+msgid "Enter button text"
+msgstr ""
+
+#: includes/js-composer.php:581
+msgid "URL (Link)"
+msgstr ""
+
+#: includes/js-composer.php:586
+#: includes/js-composer.php:1327
+#: includes/js-composer.php:3370
+msgid "Style"
+msgstr ""
+
+#: includes/js-composer.php:587
+msgid "Select button style"
+msgstr ""
+
+#: includes/js-composer.php:599
+msgid "Select button shape"
+msgstr ""
+
+#: includes/js-composer.php:614
+#: includes/js-composer.php:1680
+msgid "Select button size"
+msgstr ""
+
+#: includes/js-composer.php:627
+msgid "Select underline size"
+msgstr ""
+
+#: includes/js-composer.php:631
+#: includes/mega-menu/views/mega.php:33
+msgid "Full width"
+msgstr ""
+
+#: includes/js-composer.php:641
+msgid "Select underline position"
+msgstr ""
+
+#: includes/js-composer.php:656
+msgid "Select button color"
+msgstr ""
+
+#: includes/js-composer.php:667
+msgid "Select button alignment"
+msgstr ""
+
+#: includes/js-composer.php:691
+msgid "Circle chart with animation"
+msgstr ""
+
+#: includes/js-composer.php:698
+msgid "Enter the chart value in percentage. Minimum 0 and maximum 100."
+msgstr ""
+
+#: includes/js-composer.php:706
+msgid "Width of the circle"
+msgstr ""
+
+#: includes/js-composer.php:712
+msgid "Circle thickness"
+msgstr ""
+
+#: includes/js-composer.php:713
+msgid "Width of the arc"
+msgstr ""
+
+#: includes/js-composer.php:720
+msgid "Pick color for the circle"
+msgstr ""
+
+#: includes/js-composer.php:726
+msgid "Label Source"
+msgstr ""
+
+#: includes/js-composer.php:727
+msgid "Chart label source"
+msgstr ""
+
+#: includes/js-composer.php:736
+msgid "Custom label"
+msgstr ""
+
+#: includes/js-composer.php:737
+msgid "Text label for the chart"
+msgstr ""
+
+#: includes/js-composer.php:758
+msgid "Notification box with close button"
+msgstr ""
+
+#: includes/js-composer.php:765
+msgid "Select message box type"
+msgstr ""
+
+#: includes/js-composer.php:773
+msgid "Informational"
+msgstr ""
+
+#: includes/js-composer.php:774
+msgid "Error"
+msgstr ""
+
+#: includes/js-composer.php:779
+msgid "Message Text"
+msgstr ""
+
+#: includes/js-composer.php:784
+msgid "Closeable"
+msgstr ""
+
+#: includes/js-composer.php:785
+msgid "Display close button for this box"
+msgstr ""
+
+#: includes/js-composer.php:806
+msgid "Information box with icon"
+msgstr ""
+
+#: includes/js-composer.php:812
+msgid "Icon library"
+msgstr ""
+
+#: includes/js-composer.php:813
+msgid "Select icon library."
+msgstr ""
+
+#: includes/js-composer.php:817
+msgid "Font Awesome"
+msgstr ""
+
+#: includes/js-composer.php:818
+msgid "Open Iconic"
+msgstr ""
+
+#: includes/js-composer.php:819
+msgid "Typicons"
+msgstr ""
+
+#: includes/js-composer.php:820
+msgid "Entypo"
+msgstr ""
+
+#: includes/js-composer.php:821
+msgid "Linecons"
+msgstr ""
+
+#: includes/js-composer.php:822
+msgid "Mono Social"
+msgstr ""
+
+#: includes/js-composer.php:823
+msgid "Material"
+msgstr ""
+
+#: includes/js-composer.php:830
+#: includes/js-composer.php:845
+#: includes/js-composer.php:861
+#: includes/js-composer.php:877
+#: includes/js-composer.php:893
+#: includes/js-composer.php:909
+#: includes/js-composer.php:925
+msgid "Select icon from library."
+msgstr ""
+
+#: includes/js-composer.php:940
+msgid "Icon Image"
+msgstr ""
+
+#: includes/js-composer.php:941
+msgid "Upload icon image"
+msgstr ""
+
+#: includes/js-composer.php:952
+msgid "Image link"
+msgstr ""
+
+#: includes/js-composer.php:963
+msgid "Box content aliment"
+msgstr ""
+
+#: includes/js-composer.php:974
+#: includes/js-composer.php:988
+msgid "The box title"
+msgstr ""
+
+#: includes/js-composer.php:978
+#: includes/shortcodes.php:494
+msgid "I am Icon Box"
+msgstr ""
+
+#: includes/js-composer.php:981
+msgid "Title Font Size"
+msgstr ""
+
+#: includes/js-composer.php:982
+msgid "Leave this empty to use the default font size."
+msgstr ""
+
+#: includes/js-composer.php:992
+msgid "I am icon box. Click edit button to change this text."
+msgstr ""
+
+#: includes/js-composer.php:1002
+#: includes/js-composer.php:1252
+#: includes/js-composer.php:1719
+#: includes/js-composer.php:2370
+#: includes/js-composer.php:2443
+#: includes/js-composer.php:2512
+#: includes/js-composer.php:2619
+#: includes/js-composer.php:3396
+msgid "CSS box"
+msgstr ""
+
+#: includes/js-composer.php:1005
+#: includes/js-composer.php:1254
+#: includes/js-composer.php:1722
+#: includes/js-composer.php:2372
+#: includes/js-composer.php:2445
+#: includes/js-composer.php:2514
+#: includes/js-composer.php:2621
+#: includes/js-composer.php:3398
+msgid "Design Options"
+msgstr ""
+
+#: includes/js-composer.php:1013
+msgid "Single team member information"
+msgstr ""
+
+#: includes/js-composer.php:1020
+msgid "Member photo"
+msgstr ""
+
+#: includes/js-composer.php:1026
+#: includes/js-composer.php:1425
+#: includes/js-composer.php:1867
+msgid "Enter image size (Example: \"thumbnail\", \"medium\", \"large\", \"full\" or other sizes defined by theme). Alternatively enter size in pixels (Example: 200x100 (Width x Height)). Leave empty to use \"thumbnail\" size."
+msgstr ""
+
+#: includes/js-composer.php:1032
+msgid "Full Name"
+msgstr ""
+
+#: includes/js-composer.php:1040
+msgid "The job/position name of member in your team"
+msgstr ""
+
+#: includes/js-composer.php:1056
+#: includes/widgets/socials.php:33
+msgid "Google Plus"
+msgstr ""
+
+#: includes/js-composer.php:1092
+msgid "Post Grid"
+msgstr ""
+
+#: includes/js-composer.php:1093
+msgid "Display posts in a grid"
+msgstr ""
+
+#: includes/js-composer.php:1099
+msgid "Number of posts you want to show"
+msgstr ""
+
+#: includes/js-composer.php:1100
+#: includes/js-composer.php:1158
+msgid "Number of posts"
+msgstr ""
+
+#: includes/js-composer.php:1107
+msgid "Display posts in how many columns"
+msgstr ""
+
+#: includes/js-composer.php:1116
+msgid "Columns Gap"
+msgstr ""
+
+#: includes/js-composer.php:1117
+msgid "Select gap between columns"
+msgstr ""
+
+#: includes/js-composer.php:1129
+#: includes/js-composer.php:1166
+msgid "Enter categories name"
+msgstr ""
+
+#: includes/js-composer.php:1151
+msgid "Post Carousel"
+msgstr ""
+
+#: includes/js-composer.php:1152
+msgid "Display posts as a carousel"
+msgstr ""
+
+#: includes/js-composer.php:1159
+msgid "Total number of posts you want to get"
+msgstr ""
+
+#: includes/js-composer.php:1176
+msgid "Posts To Show"
+msgstr ""
+
+#: includes/js-composer.php:1182
+msgid "Posts To Scroll"
+msgstr ""
+
+#: includes/js-composer.php:1195
+msgid "Dots position"
+msgstr ""
+
+#: includes/js-composer.php:1218
+msgid "A short dash"
+msgstr ""
+
+#: includes/js-composer.php:1226
+msgid "Optional. Enter the separator text or leave it empty to display the dash only."
+msgstr ""
+
+#: includes/js-composer.php:1233
+msgid "Select dash color"
+msgstr ""
+
+#: includes/js-composer.php:1262
+msgid "List of information"
+msgstr ""
+
+#: includes/js-composer.php:1268
+msgid "Information"
+msgstr ""
+
+#: includes/js-composer.php:1269
+msgid "Enter information"
+msgstr ""
+
+#: includes/js-composer.php:1278
+#: includes/shortcodes.php:1069
+msgid "Phone"
+msgstr ""
+
+#: includes/js-composer.php:1282
+#: includes/shortcodes.php:1073
+msgid "Email"
+msgstr ""
+
+#: includes/js-composer.php:1314
+msgid "Countdown digital clock"
+msgstr ""
+
+#: includes/js-composer.php:1321
+#: includes/js-composer.php:2592
+msgid "Enter the date in format: YYYY/MM/DD"
+msgstr ""
+
+#: includes/js-composer.php:1328
+msgid "Select countdown style"
+msgstr ""
+
+#: includes/js-composer.php:1339
+msgid "Select countdown aligment"
+msgstr ""
+
+#: includes/js-composer.php:1351
+msgid "Select color"
+msgstr ""
+
+#: includes/js-composer.php:1374
+msgid "Styled banner for Konte."
+msgstr ""
+
+#: includes/js-composer.php:1381
+msgid "Enter category name"
+msgstr ""
+
+#: includes/js-composer.php:1402
+#: includes/js-composer.php:1435
+msgid "Main Image"
+msgstr ""
+
+#: includes/js-composer.php:1403
+msgid "The main banner image"
+msgstr ""
+
+#: includes/js-composer.php:1414
+msgid "Optional. Size of this image is fixed to 200x200."
+msgstr ""
+
+#: includes/js-composer.php:1424
+msgid "Main Image Size"
+msgstr ""
+
+#: includes/js-composer.php:1436
+msgid "The main banner image link"
+msgstr ""
+
+#: includes/js-composer.php:1447
+msgid "Optional. The image size should be fixed to 200x200."
+msgstr ""
+
+#: includes/js-composer.php:1467
+msgid "Banner Title"
+msgstr ""
+
+#: includes/js-composer.php:1472
+msgid "Title Position"
+msgstr ""
+
+#: includes/js-composer.php:1485
+#: includes/shortcodes.php:1196
+msgid "Explore Now"
+msgstr ""
+
+#: includes/js-composer.php:1501
+msgid "Banner image for promotion"
+msgstr ""
+
+#: includes/js-composer.php:1508
+msgid "Select image source"
+msgstr ""
+
+#: includes/js-composer.php:1528
+msgid "Image size"
+msgstr ""
+
+#: includes/js-composer.php:1529
+#: includes/js-composer.php:2323
+msgid "Enter image size. Example: \"thumbnail\", \"medium\", \"large\", \"full\" or other sizes defined by current theme. Alternatively enter image size in pixels: 200x100 (Width x Height). Leave empty to use \"thumbnail\" size."
+msgstr ""
+
+#: includes/js-composer.php:1539
+msgid "External Link"
+msgstr ""
+
+#: includes/js-composer.php:1540
+msgid "Select external link"
+msgstr ""
+
+#: includes/js-composer.php:1550
+msgid "A short tagline display above the banner text"
+msgstr ""
+
+#: includes/js-composer.php:1556
+msgid "Banner Text"
+msgstr ""
+
+#: includes/js-composer.php:1557
+msgid "Enter the banner text"
+msgstr ""
+
+#: includes/js-composer.php:1559
+msgid "Enter banner text here"
+msgstr ""
+
+#: includes/js-composer.php:1565
+msgid "Banner description"
+msgstr ""
+
+#: includes/js-composer.php:1566
+msgid "A short text display bellow the banner text"
+msgstr ""
+
+#: includes/js-composer.php:1572
+msgid "Banner Text Position"
+msgstr ""
+
+#: includes/js-composer.php:1573
+msgid "Select the text position"
+msgstr ""
+
+#: includes/js-composer.php:1599
+msgid "Font size of banner text"
+msgstr ""
+
+#: includes/js-composer.php:1600
+msgid "Line height of banner text"
+msgstr ""
+
+#: includes/js-composer.php:1606
+msgid "Font Weight"
+msgstr ""
+
+#: includes/js-composer.php:1607
+msgid "Font weight of banner text"
+msgstr ""
+
+#: includes/js-composer.php:1614
+msgid "Bold"
+msgstr ""
+
+#: includes/js-composer.php:1623
+msgid "Use theme default font family?"
+msgstr ""
+
+#: includes/js-composer.php:1624
+msgid "Use font family from the theme."
+msgstr ""
+
+#: includes/js-composer.php:1637
+msgid "Select font family."
+msgstr ""
+
+#: includes/js-composer.php:1638
+msgid "Select font styling."
+msgstr ""
+
+#: includes/js-composer.php:1648
+msgid "Banner Color Scheme"
+msgstr ""
+
+#: includes/js-composer.php:1649
+msgid "Select color scheme for banner texts and button"
+msgstr ""
+
+#: includes/js-composer.php:1660
+msgid "Link (URL)"
+msgstr ""
+
+#: includes/js-composer.php:1667
+msgid "Select button type"
+msgstr ""
+
+#: includes/js-composer.php:1672
+msgid "Normal Button"
+msgstr ""
+
+#: includes/js-composer.php:1673
+msgid "Outline Button"
+msgstr ""
+
+#: includes/js-composer.php:1674
+msgid "Underline Button"
+msgstr ""
+
+#: includes/js-composer.php:1688
+msgid "Large "
+msgstr ""
+
+#: includes/js-composer.php:1694
+msgid "Enter the text for banner button"
+msgstr ""
+
+#: includes/js-composer.php:1706
+msgid "Visible on hover"
+msgstr ""
+
+#: includes/js-composer.php:1729
+#: includes/js-composer.php:2246
+msgid "Product Carousel"
+msgstr ""
+
+#: includes/js-composer.php:1730
+msgid "Product carousel slider"
+msgstr ""
+
+#: includes/js-composer.php:1736
+#: includes/js-composer.php:1826
+#: includes/js-composer.php:1918
+#: includes/js-composer.php:2040
+#: includes/js-composer.php:2135
+msgid "Number Of Products"
+msgstr ""
+
+#: includes/js-composer.php:1737
+#: includes/js-composer.php:1827
+#: includes/js-composer.php:1919
+#: includes/js-composer.php:2041
+msgid "Total number of products you want to show"
+msgstr ""
+
+#: includes/js-composer.php:1744
+#: includes/js-composer.php:1926
+#: includes/js-composer.php:2143
+msgid "Display products in how many columns"
+msgstr ""
+
+#: includes/js-composer.php:1756
+#: includes/js-composer.php:1833
+#: includes/js-composer.php:1938
+#: includes/js-composer.php:2047
+msgid "Product Type"
+msgstr ""
+
+#: includes/js-composer.php:1757
+#: includes/js-composer.php:1834
+#: includes/js-composer.php:1939
+#: includes/js-composer.php:2048
+msgid "Select product type you want to show"
+msgstr ""
+
+#: includes/js-composer.php:1772
+#: includes/js-composer.php:1849
+#: includes/js-composer.php:1990
+#: includes/js-composer.php:2099
+msgid "Select what categories you want to use. Leave it empty to use all categories."
+msgstr ""
+
+#: includes/js-composer.php:1783
+#: includes/js-composer.php:1873
+#: includes/js-composer.php:2255
+msgid "Auto Play"
+msgstr ""
+
+#: includes/js-composer.php:1784
+#: includes/js-composer.php:1874
+#: includes/js-composer.php:2256
+msgid "Auto play speed in miliseconds. Enter \"0\" to disable auto play."
+msgstr ""
+
+#: includes/js-composer.php:1790
+#: includes/js-composer.php:1880
+msgid "Loop"
+msgstr ""
+
+#: includes/js-composer.php:1796
+msgid "Navigation Stype"
+msgstr ""
+
+#: includes/js-composer.php:1797
+msgid "Select the style for navigation arrows"
+msgstr ""
+
+#: includes/js-composer.php:1803
+msgid "Angle"
+msgstr ""
+
+#: includes/js-composer.php:1819
+msgid "Product Carousel 2"
+msgstr ""
+
+#: includes/js-composer.php:1820
+msgid "Product carousel in a special style"
+msgstr ""
+
+#: includes/js-composer.php:1861
+#: includes/js-composer.php:2002
+#: includes/js-composer.php:2111
+msgid "Product tag slugs, separated by commas"
+msgstr ""
+
+#: includes/js-composer.php:1899
+msgid "Display products in grid"
+msgstr ""
+
+#: includes/js-composer.php:1906
+#: includes/js-composer.php:2027
+msgid "Title of the grid"
+msgstr ""
+
+#: includes/js-composer.php:1913
+#: includes/js-composer.php:2035
+msgid "Description of the grid"
+msgstr ""
+
+#: includes/js-composer.php:1959
+#: includes/js-composer.php:2068
+msgid "Default Order (Menu Order)"
+msgstr ""
+
+#: includes/js-composer.php:1975
+#: includes/js-composer.php:2084
+msgid "This option will not be used if \"Order By\" option is \"Default\""
+msgstr ""
+
+#: includes/js-composer.php:2020
+msgid "Display products in masonry layout"
+msgstr ""
+
+#: includes/js-composer.php:2031
+msgid "Explore Our Product"
+msgstr ""
+
+#: includes/js-composer.php:2129
+msgid "Display products in tabs"
+msgstr ""
+
+#: includes/js-composer.php:2136
+msgid "Total number of products you want to show. Set -1 to show all products"
+msgstr ""
+
+#: includes/js-composer.php:2154
+msgid "Tab Type"
+msgstr ""
+
+#: includes/js-composer.php:2155
+msgid "Select what tab type do you want to use"
+msgstr ""
+
+#: includes/js-composer.php:2168
+msgid "Select what categories you want to use."
+msgstr ""
+
+#: includes/js-composer.php:2184
+msgid "Enter tag slugs. Separates by comma."
+msgstr ""
+
+#: includes/js-composer.php:2195
+msgid "Select product types as groups."
+msgstr ""
+
+#: includes/js-composer.php:2215
+msgid "Select product type for this tab"
+msgstr ""
+
+#: includes/js-composer.php:2228
+msgid "Enter title for this tab."
+msgstr ""
+
+#: includes/js-composer.php:2239
+msgid "Adds \"All\" tab"
+msgstr ""
+
+#: includes/js-composer.php:2240
+msgid "Adds \"All\" tab as the default tab."
+msgstr ""
+
+#: includes/js-composer.php:2247
+msgid "Display products in a carousel instead of a grid"
+msgstr ""
+
+#: includes/js-composer.php:2267
+msgid "Carousel Loop"
+msgstr ""
+
+#: includes/js-composer.php:2291
+msgid "Display a product item"
+msgstr ""
+
+#: includes/js-composer.php:2298
+msgid "Input product ID or product SKU or product title to see suggestions"
+msgstr ""
+
+#: includes/js-composer.php:2304
+msgid "Custom Product Image"
+msgstr ""
+
+#: includes/js-composer.php:2343
+msgid "Optional. Enter the custom button text. Leave this empty to use the default text."
+msgstr ""
+
+#: includes/js-composer.php:2350
+#: includes/js-composer.php:2423
+#: includes/js-composer.php:2492
+#: includes/js-composer.php:2599
+msgid "Select the text color"
+msgstr ""
+
+#: includes/js-composer.php:2383
+msgid "CTA block"
+msgstr ""
+
+#: includes/js-composer.php:2393
+#: includes/shortcodes.php:1806
+msgid "Mid Season Sale"
+msgstr ""
+
+#: includes/js-composer.php:2400
+msgid "Up to 50% off"
+msgstr ""
+
+#: includes/js-composer.php:2404
+#: includes/js-composer.php:2479
+#: includes/js-composer.php:2579
+msgid "Enter the custom button text."
+msgstr ""
+
+#: includes/js-composer.php:2411
+msgid "Set the link for the button"
+msgstr ""
+
+#: includes/js-composer.php:2453
+msgid "Simple CTA block"
+msgstr ""
+
+#: includes/js-composer.php:2460
+msgid "Promotion layout"
+msgstr ""
+
+#: includes/js-composer.php:2471
+msgid "Promotion text"
+msgstr ""
+
+#: includes/js-composer.php:2486
+#: includes/js-composer.php:2586
+msgid "Set the link for button"
+msgstr ""
+
+#: includes/js-composer.php:2522
+msgid "A banner with countdown clock"
+msgstr ""
+
+#: includes/js-composer.php:2547
+msgid "Enter image size, example: \"thumbnail\", \"medium\", \"large\", \"full\" or other sizes defined by theme. Alternatively enter size in pixels (Example: 200x100 (Width x Height)). Leave empty to use \"thumbnail\" size."
+msgstr ""
+
+#: includes/js-composer.php:2629
+msgid "Grid of banners"
+msgstr ""
+
+#: includes/js-composer.php:2638
+msgid "Enter height of the grid"
+msgstr ""
+
+#: includes/js-composer.php:2643
+msgid "Banners Gap"
+msgstr ""
+
+#: includes/js-composer.php:2648
+msgid "No gap"
+msgstr ""
+
+#: includes/js-composer.php:2649
+msgid "2 px"
+msgstr ""
+
+#: includes/js-composer.php:2650
+msgid "3 px"
+msgstr ""
+
+#: includes/js-composer.php:2651
+msgid "4 px"
+msgstr ""
+
+#: includes/js-composer.php:2652
+msgid "5 px"
+msgstr ""
+
+#: includes/js-composer.php:2653
+msgid "6 px"
+msgstr ""
+
+#: includes/js-composer.php:2654
+msgid "8 px"
+msgstr ""
+
+#: includes/js-composer.php:2655
+msgid "10 px"
+msgstr ""
+
+#: includes/js-composer.php:2656
+msgid "20 px"
+msgstr ""
+
+#: includes/js-composer.php:2657
+msgid "30 px"
+msgstr ""
+
+#: includes/js-composer.php:2658
+msgid "40 px"
+msgstr ""
+
+#: includes/js-composer.php:2679
+#: includes/js-composer.php:2685
+#: includes/js-composer.php:2695
+#: includes/js-composer.php:2707
+#: includes/js-composer.php:2727
+#: includes/js-composer.php:2748
+#: includes/js-composer.php:2761
+#: includes/js-composer.php:2771
+#: includes/js-composer.php:2779
+#: includes/js-composer.php:2788
+#: includes/js-composer.php:2795
+#: includes/js-composer.php:2802
+#: includes/js-composer.php:2821
+#: includes/js-composer.php:2834
+msgid "Banner 1"
+msgstr ""
+
+#: includes/js-composer.php:2692
+#: includes/js-composer.php:2859
+#: includes/js-composer.php:3026
+#: includes/js-composer.php:3193
+msgid "External image link"
+msgstr ""
+
+#: includes/js-composer.php:2702
+#: includes/js-composer.php:2869
+#: includes/js-composer.php:3036
+#: includes/js-composer.php:3203
+msgid "Image Position (Desktop)"
+msgstr ""
+
+#: includes/js-composer.php:2718
+#: includes/js-composer.php:2738
+#: includes/js-composer.php:2885
+#: includes/js-composer.php:2905
+#: includes/js-composer.php:3052
+#: includes/js-composer.php:3072
+#: includes/js-composer.php:3219
+#: includes/js-composer.php:3239
+msgid "Custom Position"
+msgstr ""
+
+#: includes/js-composer.php:2722
+#: includes/js-composer.php:2889
+#: includes/js-composer.php:3056
+#: includes/js-composer.php:3223
+msgid "Image Position (Mobile)"
+msgstr ""
+
+#: includes/js-composer.php:2742
+#: includes/js-composer.php:2909
+#: includes/js-composer.php:3076
+#: includes/js-composer.php:3243
+msgid "Custom Image Position (Desktop)"
+msgstr ""
+
+#: includes/js-composer.php:2743
+#: includes/js-composer.php:2756
+#: includes/js-composer.php:2910
+#: includes/js-composer.php:2923
+#: includes/js-composer.php:3077
+#: includes/js-composer.php:3090
+#: includes/js-composer.php:3244
+#: includes/js-composer.php:3257
+msgid "Enter value in format \"vertical horizontal\". Example: \"10px 40px\" or \"30% 50%\""
+msgstr ""
+
+#: includes/js-composer.php:2755
+#: includes/js-composer.php:2922
+#: includes/js-composer.php:3089
+#: includes/js-composer.php:3256
+msgid "Custom Image Position (Mobile)"
+msgstr ""
+
+#: includes/js-composer.php:2775
+#: includes/js-composer.php:2942
+#: includes/js-composer.php:3109
+#: includes/js-composer.php:3276
+msgid "Banner URL"
+msgstr ""
+
+#: includes/js-composer.php:2792
+#: includes/js-composer.php:2959
+#: includes/js-composer.php:3126
+#: includes/js-composer.php:3293
+msgid "Banner tagline"
+msgstr ""
+
+#: includes/js-composer.php:2799
+#: includes/js-composer.php:2966
+#: includes/js-composer.php:3133
+#: includes/js-composer.php:3300
+msgid "Banner text"
+msgstr ""
+
+#: includes/js-composer.php:2805
+#: includes/js-composer.php:2972
+#: includes/js-composer.php:3139
+#: includes/js-composer.php:3306
+msgid "Text Position"
+msgstr ""
+
+#: includes/js-composer.php:2806
+#: includes/js-composer.php:2973
+#: includes/js-composer.php:3140
+#: includes/js-composer.php:3307
+msgid "Banner text position"
+msgstr ""
+
+#: includes/js-composer.php:2825
+#: includes/js-composer.php:2992
+#: includes/js-composer.php:3159
+#: includes/js-composer.php:3326
+msgid "Banner text color"
+msgstr ""
+
+#: includes/js-composer.php:2846
+#: includes/js-composer.php:2852
+#: includes/js-composer.php:2862
+#: includes/js-composer.php:2874
+#: includes/js-composer.php:2894
+#: includes/js-composer.php:2915
+#: includes/js-composer.php:2928
+#: includes/js-composer.php:2938
+#: includes/js-composer.php:2946
+#: includes/js-composer.php:2955
+#: includes/js-composer.php:2962
+#: includes/js-composer.php:2969
+#: includes/js-composer.php:2988
+#: includes/js-composer.php:3001
+msgid "Banner 2"
+msgstr ""
+
+#: includes/js-composer.php:3013
+#: includes/js-composer.php:3019
+#: includes/js-composer.php:3029
+#: includes/js-composer.php:3041
+#: includes/js-composer.php:3061
+#: includes/js-composer.php:3082
+#: includes/js-composer.php:3095
+#: includes/js-composer.php:3105
+#: includes/js-composer.php:3113
+#: includes/js-composer.php:3122
+#: includes/js-composer.php:3129
+#: includes/js-composer.php:3136
+#: includes/js-composer.php:3155
+#: includes/js-composer.php:3168
+msgid "Banner 3"
+msgstr ""
+
+#: includes/js-composer.php:3180
+#: includes/js-composer.php:3186
+#: includes/js-composer.php:3196
+#: includes/js-composer.php:3208
+#: includes/js-composer.php:3228
+#: includes/js-composer.php:3249
+#: includes/js-composer.php:3262
+#: includes/js-composer.php:3272
+#: includes/js-composer.php:3280
+#: includes/js-composer.php:3289
+#: includes/js-composer.php:3296
+#: includes/js-composer.php:3303
+#: includes/js-composer.php:3322
+#: includes/js-composer.php:3335
+msgid "Banner 4"
+msgstr ""
+
+#: includes/js-composer.php:3352
+msgid "MailChimp subscribe form"
+msgstr ""
+
+#: includes/js-composer.php:3375
+msgid "Style 1"
+msgstr ""
+
+#: includes/js-composer.php:3376
+msgid "Style 2"
+msgstr ""
+
+#: includes/js-composer.php:3406
+msgid "Empty Space Advanced"
+msgstr ""
+
+#: includes/js-composer.php:3407
+msgid "Empty spacing with resposive options"
+msgstr ""
+
+#: includes/js-composer.php:3427
+msgid "Desktop"
+msgstr ""
+
+#: includes/js-composer.php:3431
+#: includes/js-composer.php:3439
+#: includes/js-composer.php:3446
+#: includes/js-composer.php:3454
+#: includes/js-composer.php:3461
+#: includes/js-composer.php:3469
+msgid "Responsive Options"
+msgstr ""
+
+#: includes/js-composer.php:3442
+msgid "Tablet"
+msgstr ""
+
+#: includes/js-composer.php:3457
+msgid "Mobile"
+msgstr ""
+
+#: includes/js-composer.php:3479
+msgid "Instagram photos"
+msgstr ""
+
+#: includes/js-composer.php:3501
+msgid "7 Columns"
+msgstr ""
+
+#: includes/js-composer.php:3502
+msgid "8 Columns"
+msgstr ""
+
+#: includes/js-composer.php:3531
+msgid "Instagram photos carousel"
+msgstr ""
+
+#: includes/js-composer.php:3572
+msgid "Show Dots"
+msgstr ""
+
+#: includes/js-composer.php:3579
+msgid "Show Arrows"
+msgstr ""
+
+#: includes/js-composer.php:3667
+#: includes/js-composer.php:3704
+msgid "Id"
+msgstr ""
+
+#: includes/js-composer.php:3667
+#: includes/js-composer.php:3696
+msgid "Sku"
+msgstr ""
+
+#: includes/mega-menu/menus.php:110
+msgctxt "Mega menu options"
+msgid "Options"
+msgstr ""
+
+#: includes/mega-menu/menus.php:114
+#: includes/mega-menu/views/menu.php:3
+msgid "Mega Menu"
+msgstr ""
+
+#: includes/mega-menu/menus.php:134
+#: includes/mega-menu/menus.php:409
+msgid "Mega Item"
+msgstr ""
+
+#: includes/mega-menu/menus.php:182
+msgid "Mega"
+msgstr ""
+
+#: includes/mega-menu/menus.php:198
+msgid "Your changes are not saved. Do you want to leave?"
+msgstr ""
+
+#: includes/mega-menu/menus.php:199
+msgid "You need to enable the mega menu first"
+msgstr ""
+
+#: includes/mega-menu/menus.php:211
+msgid "Mega Menu Items"
+msgstr ""
+
+#: includes/mega-menu/menus.php:221
+msgid "Mega Menu Item List"
+msgstr ""
+
+#: includes/mega-menu/menus.php:245
+msgid "Add to Menu"
+msgstr ""
+
+#: includes/mega-menu/menus.php:274
+#: includes/mega-menu/views/mega-grid-options.php:6
+#: includes/size-guide.php:828
+msgid "Close"
+msgstr ""
+
+#: includes/mega-menu/menus.php:283
+#: includes/mega-menu/views/mega-grid-options.php:155
+msgid "Save Changes"
+msgstr ""
+
+#: includes/mega-menu/menus.php:284
+msgid "Cancel"
+msgstr ""
+
+#: includes/mega-menu/views/content.php:5
+msgid "Allow HTML and Shortcodes"
+msgstr ""
+
+#: includes/mega-menu/views/content.php:6
+msgid "Tip: Build your content inside a page with visual page builder then copy generated content here."
+msgstr ""
+
+#: includes/mega-menu/views/design.php:33
+#: includes/mega-menu/views/mega-grid-options.php:40
+msgid "Margin"
+msgstr ""
+
+#: includes/mega-menu/views/design.php:74
+#: includes/mega-menu/views/icon.php:756
+#: includes/mega-menu/views/mega-grid-options.php:70
+#: includes/mega-menu/widgets/widget.php:315
+msgid "Remove"
+msgstr ""
+
+#: includes/mega-menu/views/design.php:81
+#: includes/mega-menu/views/mega-grid-options.php:77
+msgid "Image Position"
+msgstr ""
+
+#: includes/mega-menu/views/design.php:123
+#: includes/mega-menu/views/mega-grid-options.php:121
+msgid "Repeat"
+msgstr ""
+
+#: includes/mega-menu/views/design.php:125
+#: includes/mega-menu/views/mega-grid-options.php:123
+msgid "No Repeat"
+msgstr ""
+
+#: includes/mega-menu/views/design.php:127
+#: includes/mega-menu/views/mega-grid-options.php:125
+msgid "Tile Horizontally"
+msgstr ""
+
+#: includes/mega-menu/views/design.php:128
+#: includes/mega-menu/views/mega-grid-options.php:126
+msgid "Tile Vertically"
+msgstr ""
+
+#: includes/mega-menu/views/design.php:133
+#: includes/mega-menu/views/mega-grid-options.php:131
+msgid "Attachment"
+msgstr ""
+
+#: includes/mega-menu/views/design.php:135
+#: includes/mega-menu/views/mega-grid-options.php:133
+msgid "Scroll"
+msgstr ""
+
+#: includes/mega-menu/views/design.php:136
+#: includes/mega-menu/views/mega-grid-options.php:134
+msgid "Fixed"
+msgstr ""
+
+#: includes/mega-menu/views/design.php:144
+#: includes/mega-menu/views/mega-grid-options.php:142
+msgid "Cover"
+msgstr ""
+
+#: includes/mega-menu/views/design.php:145
+#: includes/mega-menu/views/mega-grid-options.php:143
+msgid "Contain"
+msgstr ""
+
+#: includes/mega-menu/views/icon.php:707
+msgid "No icon"
+msgstr ""
+
+#: includes/mega-menu/views/icon.php:710
+#: includes/mega-menu/views/icon.php:766
+msgid "SVG Code"
+msgstr ""
+
+#: includes/mega-menu/views/icon.php:728
+msgid "Click to remove"
+msgstr ""
+
+#: includes/mega-menu/views/icon.php:733
+msgid "Search Icon"
+msgstr ""
+
+#: includes/mega-menu/views/icon.php:770
+msgid "Disclaimer: SVG code can be a security risk. It can contain malicious JavaScript that can be executed by your browser. To protect yourself, only use SVG code from trusted sources and inspect it carefully before using it. You are solely responsible for the security of any SVG code that you insert into your website."
+msgstr ""
+
+#: includes/mega-menu/views/mega-grid-column.php:7
+msgid "Decrease width"
+msgstr ""
+
+#: includes/mega-menu/views/mega-grid-column.php:12
+msgid "Increase width"
+msgstr ""
+
+#: includes/mega-menu/views/mega-grid-column.php:19
+#: includes/mega-menu/views/mega-grid-column.php:22
+#: includes/mega-menu/views/mega-grid-options.php:3
+#: includes/mega-menu/views/mega-grid-row.php:16
+#: includes/widgets/products-filter.php:1176
+msgid "Options"
+msgstr ""
+
+#: includes/mega-menu/views/mega-grid-column.php:23
+msgid "Reset width"
+msgstr ""
+
+#: includes/mega-menu/views/mega-grid-column.php:24
+#: includes/mega-menu/views/mega-grid-row.php:17
+msgid "Delete"
+msgstr ""
+
+#: includes/mega-menu/views/mega-grid-column.php:36
+msgid "Add items to this column"
+msgstr ""
+
+#: includes/mega-menu/views/mega-grid-column.php:38
+msgid "Add item"
+msgstr ""
+
+#: includes/mega-menu/views/mega-grid-row.php:5
+msgid "Sort this row"
+msgstr ""
+
+#: includes/mega-menu/views/mega-grid-row.php:9
+msgid "Add Column"
+msgstr ""
+
+#: includes/mega-menu/views/mega-grid-row.php:13
+msgid "Toggle options"
+msgstr ""
+
+#: includes/mega-menu/views/mega.php:13
+msgid "Mega menu"
+msgstr ""
+
+#: includes/mega-menu/views/mega.php:19
+msgid "Mode"
+msgstr ""
+
+#: includes/mega-menu/views/mega.php:22
+msgid "Grid"
+msgstr ""
+
+#: includes/mega-menu/views/mega.php:39
+msgid "Custom width"
+msgstr ""
+
+#: includes/mega-menu/views/mega.php:40
+msgid "width"
+msgstr ""
+
+#: includes/mega-menu/views/mega.php:54
+#: includes/mega-menu/views/menu.php:9
+msgid "Settings"
+msgstr ""
+
+#: includes/mega-menu/views/mega.php:74
+#: includes/mega-menu/views/tab-content.php:8
+msgid "Add a row"
+msgstr ""
+
+#: includes/mega-menu/views/mega.php:81
+msgid "There is no tab. Please add sub-items to create tabs."
+msgstr ""
+
+#: includes/mega-menu/views/mega.php:93
+msgid "Edit Tab"
+msgstr ""
+
+#: includes/mega-menu/views/mega.php:94
+#: includes/mega-menu/views/title.php:3
+msgid "Menu item"
+msgstr ""
+
+#: includes/mega-menu/views/menu.php:4
+msgid "Mega Menu Design"
+msgstr ""
+
+#: includes/mega-menu/views/menu.php:4
+#: includes/mega-menu/views/menu.php:12
+#: includes/widgets/products-filter.php:1175
+msgid "Design"
+msgstr ""
+
+#: includes/mega-menu/views/menu.php:9
+msgid "Menu Setting"
+msgstr ""
+
+#: includes/mega-menu/views/menu.php:10
+#: includes/mega-menu/views/menu.php:14
+msgid "Menu Content"
+msgstr ""
+
+#: includes/mega-menu/views/menu.php:12
+msgid "Mega Column Design"
+msgstr ""
+
+#: includes/mega-menu/views/menu.php:16
+msgid "Menu Icon"
+msgstr ""
+
+#: includes/mega-menu/views/settings.php:6
+msgid "Visibility"
+msgstr ""
+
+#: includes/mega-menu/views/settings.php:10
+msgid "Visible"
+msgstr ""
+
+#: includes/mega-menu/views/settings.php:15
+msgid "Hidden"
+msgstr ""
+
+#: includes/mega-menu/views/settings.php:20
+msgid "Soft hidden (keep spacing)"
+msgstr ""
+
+#: includes/mega-menu/views/settings.php:26
+msgid "Disable link"
+msgstr ""
+
+#: includes/mega-menu/views/settings.php:30
+msgid "Disable menu item link"
+msgstr ""
+
+#: includes/mega-menu/views/title.php:7
+msgid "Back to Top"
+msgstr ""
+
+#: includes/mega-menu/widgets/html.php:30
+msgid "HTML"
+msgstr ""
+
+#: includes/mega-menu/widgets/widget.php:337
+#: includes/widgets/socials.php:139
+msgid "URL"
+msgstr ""
+
+#: includes/mega-menu/widgets/widget.php:344
+msgid "Open link in a new tab"
+msgstr ""
+
+#: includes/portfolio.php:92
+#: includes/portfolio.php:575
+#: includes/portfolio.php:657
+#: includes/portfolio.php:711
+msgctxt "slug"
+msgid "portfolio"
+msgstr ""
+
+#: includes/portfolio.php:94
+#: includes/portfolio.php:509
+msgctxt "slug"
+msgid "portfolio-type"
+msgstr ""
+
+#: includes/portfolio.php:95
+#: includes/portfolio.php:523
+msgctxt "slug"
+msgid "portfolio-tag"
+msgstr ""
+
+#: includes/portfolio.php:98
+msgid "Portfolio Items"
+msgstr ""
+
+#: includes/portfolio.php:100
+#: includes/portfolio.php:102
+#: includes/portfolio.php:277
+msgid "Portfolio"
+msgstr ""
+
+#: includes/portfolio.php:101
+#: includes/portfolio.php:215
+msgid "Project"
+msgstr ""
+
+#: includes/portfolio.php:103
+msgid "All Projects"
+msgstr ""
+
+#: includes/portfolio.php:105
+msgid "Add New Project"
+msgstr ""
+
+#: includes/portfolio.php:106
+msgid "Edit Project"
+msgstr ""
+
+#: includes/portfolio.php:107
+msgid "New Project"
+msgstr ""
+
+#: includes/portfolio.php:108
+msgid "View Project"
+msgstr ""
+
+#: includes/portfolio.php:109
+msgid "Search Projects"
+msgstr ""
+
+#: includes/portfolio.php:110
+msgid "No Projects found"
+msgstr ""
+
+#: includes/portfolio.php:111
+msgid "No Projects found in Trash"
+msgstr ""
+
+#: includes/portfolio.php:112
+msgid "Filter projects list"
+msgstr ""
+
+#: includes/portfolio.php:114
+msgid "Projects list"
+msgstr ""
+
+#: includes/portfolio.php:147
+msgctxt "Portfolio categories"
+msgid "Portfolio Categories"
+msgstr ""
+
+#: includes/portfolio.php:148
+msgctxt "Portfolio category"
+msgid "Category"
+msgstr ""
+
+#: includes/portfolio.php:149
+msgctxt "Portfolio categories"
+msgid "Categories"
+msgstr ""
+
+#: includes/portfolio.php:150
+msgctxt "Portfolio categories"
+msgid "All Categories"
+msgstr ""
+
+#: includes/portfolio.php:151
+msgctxt "Portfolio categories"
+msgid "Edit Category"
+msgstr ""
+
+#: includes/portfolio.php:152
+msgctxt "Portfolio categories"
+msgid "View Category"
+msgstr ""
+
+#: includes/portfolio.php:153
+msgctxt "Portfolio categories"
+msgid "Update Category"
+msgstr ""
+
+#: includes/portfolio.php:154
+msgctxt "Portfolio categories"
+msgid "Add New Category"
+msgstr ""
+
+#: includes/portfolio.php:155
+msgctxt "Portfolio categories"
+msgid "New Category Name"
+msgstr ""
+
+#: includes/portfolio.php:156
+msgctxt "Portfolio categories"
+msgid "Parent Category"
+msgstr ""
+
+#: includes/portfolio.php:157
+msgctxt "Portfolio categories"
+msgid "Parent Category:"
+msgstr ""
+
+#: includes/portfolio.php:158
+msgctxt "Portfolio categories"
+msgid "Search Categories"
+msgstr ""
+
+#: includes/portfolio.php:159
+msgctxt "Portfolio categories"
+msgid "Category list navigation"
+msgstr ""
+
+#: includes/portfolio.php:160
+msgctxt "Portfolio categories"
+msgid "Category list"
+msgstr ""
+
+#: includes/portfolio.php:178
+msgctxt "Portfolio tag"
+msgid "Portfolio Tags"
+msgstr ""
+
+#: includes/portfolio.php:179
+msgctxt "Portfolio tag"
+msgid "Tag"
+msgstr ""
+
+#: includes/portfolio.php:180
+msgctxt "Portfolio tag"
+msgid "Tags"
+msgstr ""
+
+#: includes/portfolio.php:181
+msgctxt "Portfolio tag"
+msgid "All Tags"
+msgstr ""
+
+#: includes/portfolio.php:182
+msgctxt "Portfolio tag"
+msgid "Edit Tag"
+msgstr ""
+
+#: includes/portfolio.php:183
+msgctxt "Portfolio tag"
+msgid "View Tag"
+msgstr ""
+
+#: includes/portfolio.php:184
+msgctxt "Portfolio tag"
+msgid "Update Tag"
+msgstr ""
+
+#: includes/portfolio.php:185
+msgctxt "Portfolio tag"
+msgid "Add New Tag"
+msgstr ""
+
+#: includes/portfolio.php:186
+msgctxt "Portfolio tag"
+msgid "New Tag Name"
+msgstr ""
+
+#: includes/portfolio.php:187
+msgctxt "Portfolio tag"
+msgid "Parent Tag"
+msgstr ""
+
+#: includes/portfolio.php:188
+msgctxt "Portfolio tag"
+msgid "Parent Tag:"
+msgstr ""
+
+#: includes/portfolio.php:189
+msgctxt "Portfolio tag"
+msgid "Search Tags"
+msgstr ""
+
+#: includes/portfolio.php:190
+msgctxt "Portfolio tag"
+msgid "Tag list navigation"
+msgstr ""
+
+#: includes/portfolio.php:191
+msgctxt "Portfolio tag"
+msgid "Tag list"
+msgstr ""
+
+#: includes/portfolio.php:261
+msgid "Portfolio Projects"
+msgstr ""
+
+#: includes/portfolio.php:284
+msgid "Portfolio page"
+msgstr ""
+
+#: includes/portfolio.php:298
+msgid "Portfolio items show at most"
+msgstr ""
+
+#: includes/portfolio.php:313
+msgid "Portfolio Item Permalink"
+msgstr ""
+
+#: includes/portfolio.php:320
+msgid "Portfolio category base"
+msgstr ""
+
+#: includes/portfolio.php:334
+msgid "Portfolio tag base"
+msgstr ""
+
+#: includes/portfolio.php:354
+msgid "Use these settings to control custom post type content"
+msgstr ""
+
+#: includes/portfolio.php:368
+#: includes/portfolio.php:369
+#: includes/portfolio.php:585
+msgctxt "Default slug"
+msgid "portfolio"
+msgstr ""
+
+#: includes/portfolio.php:378
+msgid "Use these settings to control the permalink used specifically for portfolio."
+msgstr ""
+
+#: includes/portfolio.php:400
+msgid "Portfolio base"
+msgstr ""
+
+#: includes/portfolio.php:412
+msgid "Portfolio base with type"
+msgstr ""
+
+#: includes/portfolio.php:422
+msgid "Custom Base"
+msgstr ""
+
+#: includes/portfolio.php:470
+msgid "Enable Portfolio Projects for this site."
+msgstr ""
+
+#: includes/portfolio.php:483
+msgid "&mdash; Select &mdash;"
+msgstr ""
+
+#: includes/portfolio.php:498
+msgctxt "Portfolio items per page"
+msgid "items"
+msgstr ""
+
+#: includes/portfolio.php:513
+msgctxt "Portfolio type base"
+msgid "portfolio-type"
+msgstr ""
+
+#: includes/portfolio.php:527
+msgctxt "Portfolio tag base"
+msgid "portfolio-tag"
+msgstr ""
+
+#: includes/portfolio.php:776
+msgctxt "slug"
+msgid "uncategorized"
+msgstr ""
+
+#: includes/portfolio.php:824
+#: includes/portfolio.php:845
+msgctxt "Portfolio post type breadcrumb"
+msgid "Portfolio"
+msgstr ""
+
+#: includes/shortcodes.php:176
+#: includes/shortcodes.php:2326
+#: includes/shortcodes.php:2381
+msgid "This shortcode only works with the Konte theme"
+msgstr ""
+
+#: includes/shortcodes.php:182
+msgid "Google map requires API Key in order to work."
+msgstr ""
+
+#: includes/shortcodes.php:186
+msgid "No address"
+msgstr ""
+
+#: includes/shortcodes.php:1158
+msgid "Mins"
+msgstr ""
+
+#: includes/shortcodes.php:1159
+msgid "Sec"
+msgstr ""
+
+#: includes/shortcodes.php:1454
+msgid "Best Selling"
+msgstr ""
+
+#: includes/shortcodes.php:1488
+#: includes/widgets/products-filter.php:311
+#: includes/widgets/products-filter.php:498
+msgid "All Products"
+msgstr ""
+
+#: includes/shortcodes.php:1621
+msgid "Explore our products"
+msgstr ""
+
+#: includes/shortcodes.php:2508
+msgid "Can not connect to Google Maps APIs."
+msgstr ""
+
+#: includes/shortcodes.php:2516
+msgid "Can not connect to Google Maps APIs"
+msgstr ""
+
+#: includes/shortcodes.php:2534
+msgid "No location found for the entered address."
+msgstr ""
+
+#: includes/shortcodes.php:2536
+msgid "Invalid request. Did you enter an address?"
+msgstr ""
+
+#: includes/shortcodes.php:2541
+msgid "Unable to contact Google API service."
+msgstr ""
+
+#: includes/shortcodes.php:2715
+msgid "Load More"
+msgstr ""
+
+#: includes/size-guide.php:80
+#: includes/size-guide.php:99
+#: includes/size-guide.php:165
+#: includes/size-guide.php:166
+#: includes/size-guide.php:474
+#: includes/size-guide.php:556
+#: includes/size-guide.php:764
+#: includes/size-guide.php:783
+#: includes/size-guide.php:836
+msgid "Size Guide"
+msgstr ""
+
+#: includes/size-guide.php:104
+msgid "Enable Size Guide"
+msgstr ""
+
+#: includes/size-guide.php:105
+msgid "Enable product size guides"
+msgstr ""
+
+#: includes/size-guide.php:112
+msgid "Enable on variable products only"
+msgstr ""
+
+#: includes/size-guide.php:119
+msgid "Guide Display"
+msgstr ""
+
+#: includes/size-guide.php:125
+#: includes/size-guide.php:494
+msgid "In product tabs"
+msgstr ""
+
+#: includes/size-guide.php:126
+#: includes/size-guide.php:495
+msgid "By clicking on a button"
+msgstr ""
+
+#: includes/size-guide.php:130
+#: includes/size-guide.php:576
+msgid "Button Position"
+msgstr ""
+
+#: includes/size-guide.php:136
+#: includes/size-guide.php:499
+msgid "Bellow short description"
+msgstr ""
+
+#: includes/size-guide.php:137
+#: includes/size-guide.php:500
+msgid "Bellow price"
+msgstr ""
+
+#: includes/size-guide.php:138
+#: includes/size-guide.php:501
+msgid "Bellow Add To Cart button"
+msgstr ""
+
+#: includes/size-guide.php:139
+msgid "Beside the Size attribute (for variable products only)"
+msgstr ""
+
+#: includes/size-guide.php:143
+msgid "Attribute Slug"
+msgstr ""
+
+#: includes/size-guide.php:147
+msgid "This is the slug of a product attribute"
+msgstr ""
+
+#: includes/size-guide.php:163
+msgid "Product size guide"
+msgstr ""
+
+#: includes/size-guide.php:167
+#: includes/size-guide.php:168
+msgid "Size Guides"
+msgstr ""
+
+#: includes/size-guide.php:170
+msgid "Add New Size Guide"
+msgstr ""
+
+#: includes/size-guide.php:171
+msgid "Edit Size Guide"
+msgstr ""
+
+#: includes/size-guide.php:172
+msgid "New Size Guide"
+msgstr ""
+
+#: includes/size-guide.php:173
+msgid "View Size Guide"
+msgstr ""
+
+#: includes/size-guide.php:174
+msgid "Search size guides"
+msgstr ""
+
+#: includes/size-guide.php:175
+msgid "No size guide found"
+msgstr ""
+
+#: includes/size-guide.php:176
+msgid "No size guide found in Trash"
+msgstr ""
+
+#: includes/size-guide.php:177
+msgid "Filter size guides list"
+msgstr ""
+
+#: includes/size-guide.php:178
+msgid "Size guides list navigation"
+msgstr ""
+
+#: includes/size-guide.php:179
+msgid "Size guides list"
+msgstr ""
+
+#: includes/size-guide.php:209
+msgid "Apply to Category"
+msgstr ""
+
+#: includes/size-guide.php:230
+msgid "No Category"
+msgstr ""
+
+#: includes/size-guide.php:234
+#: includes/size-guide.php:288
+msgid "All Categories"
+msgstr ""
+
+#: includes/size-guide.php:263
+msgid "Apply to Categories"
+msgstr ""
+
+#: includes/size-guide.php:264
+msgid "Tables"
+msgstr ""
+
+#: includes/size-guide.php:281
+msgid "No category"
+msgstr ""
+
+#: includes/size-guide.php:295
+msgid "Select Categories"
+msgstr ""
+
+#: includes/size-guide.php:324
+msgid "Table 1"
+msgstr ""
+
+#: includes/size-guide.php:334
+#: includes/size-guide.php:445
+msgid "Table"
+msgstr ""
+
+#: includes/size-guide.php:433
+msgid "Table Name"
+msgstr ""
+
+#: includes/size-guide.php:451
+msgid "Additional Information"
+msgstr ""
+
+#: includes/size-guide.php:502
+msgid "Beside the Size attribute"
+msgstr ""
+
+#: includes/size-guide.php:523
+msgid "--Default--"
+msgstr ""
+
+#: includes/size-guide.php:524
+msgid "--No Size Guide--"
+msgstr ""
+
+#: includes/size-guide.php:568
+msgid "Size Guide Display"
+msgstr ""
+
+#: includes/size-guide.php:585
+#: includes/size-guide.php:643
+#: includes/widgets/products-filter.php:1438
+msgid "Attribute"
+msgstr ""
+
+#: includes/widgets/instagram.php:33
+msgid "Konte - Instagram"
+msgstr ""
+
+#: includes/widgets/instagram.php:36
+msgid "Displays your latest Instagram photos"
+msgstr ""
+
+#: includes/widgets/instagram.php:59
+#: includes/widgets/posts-slider.php:58
+msgid "This widget works with the Konte theme only."
+msgstr ""
+
+#: includes/widgets/instagram.php:113
+#: includes/widgets/popular-posts.php:122
+#: includes/widgets/posts-slider.php:114
+msgid "Title:"
+msgstr ""
+
+#: includes/widgets/instagram.php:118
+msgid "Number of photos:"
+msgstr ""
+
+#: includes/widgets/instagram.php:124
+msgid "Use original image size"
+msgstr ""
+
+#: includes/widgets/instagram.php:128
+msgid "Number of columns:"
+msgstr ""
+
+#: includes/widgets/popular-posts.php:25
+msgid "Popular Posts"
+msgstr ""
+
+#: includes/widgets/popular-posts.php:31
+msgid "Konte - Popular Posts"
+msgstr ""
+
+#: includes/widgets/popular-posts.php:34
+msgid "Displays popular posts"
+msgstr ""
+
+#: includes/widgets/popular-posts.php:127
+#: includes/widgets/posts-slider.php:124
+msgid "Number of posts:"
+msgstr ""
+
+#: includes/widgets/posts-slider.php:25
+msgid "Posts"
+msgstr ""
+
+#: includes/widgets/posts-slider.php:32
+msgid "Konte - Posts Slider"
+msgstr ""
+
+#: includes/widgets/posts-slider.php:35
+msgid "Display a posts slider"
+msgstr ""
+
+#: includes/widgets/posts-slider.php:119
+msgid "Tags:"
+msgstr ""
+
+#: includes/widgets/products-filter.php:40
+msgid "Konte - Products Filter"
+msgstr ""
+
+#: includes/widgets/products-filter.php:43
+msgid "WooCommerce products filter."
+msgstr ""
+
+#: includes/widgets/products-filter.php:133
+msgid "Filter"
+msgstr ""
+
+#: includes/widgets/products-filter.php:134
+msgid "Reset Filter"
+msgstr ""
+
+#: includes/widgets/products-filter.php:208
+msgid "Rated %d star"
+msgid_plural "Rated %d stars"
+msgstr[0] ""
+msgstr[1] ""
+
+#: includes/widgets/products-filter.php:232
+#: includes/widgets/products-filter.php:1254
+msgid "Remove filter"
+msgstr ""
+
+#: includes/widgets/products-filter.php:298
+msgid "Any %s"
+msgstr ""
+
+#: includes/widgets/products-filter.php:309
+msgid "Select a %s"
+msgstr ""
+
+#: includes/widgets/products-filter.php:491
+msgid "New Products"
+msgstr ""
+
+#: includes/widgets/products-filter.php:493
+msgid "Hot Products"
+msgstr ""
+
+#: includes/widgets/products-filter.php:594
+#: includes/widgets/products-filter.php:597
+msgid "Search"
+msgstr ""
+
+#: includes/widgets/products-filter.php:819
+msgid "Any"
+msgstr ""
+
+#: includes/widgets/products-filter.php:1174
+msgid "Filters"
+msgstr ""
+
+#: includes/widgets/products-filter.php:1182
+msgid "There is no filter yet."
+msgstr ""
+
+#: includes/widgets/products-filter.php:1189
+msgid "Add a new filter"
+msgstr ""
+
+#: includes/widgets/products-filter.php:1201
+msgid "Use ajax for filtering"
+msgstr ""
+
+#: includes/widgets/products-filter.php:1208
+msgid "Filtering products instantly (no buttons required)"
+msgstr ""
+
+#: includes/widgets/products-filter.php:1218
+msgid "Update URL"
+msgstr ""
+
+#: includes/widgets/products-filter.php:1228
+msgid "Show active items on top"
+msgstr ""
+
+#: includes/widgets/products-filter.php:1330
+msgid "Group"
+msgstr ""
+
+#: includes/widgets/products-filter.php:1332
+msgid "Attributes"
+msgstr ""
+
+#: includes/widgets/products-filter.php:1334
+msgid "Stock status"
+msgstr ""
+
+#: includes/widgets/products-filter.php:1382
+msgid "Slider"
+msgstr ""
+
+#: includes/widgets/products-filter.php:1387
+#: includes/widgets/products-filter.php:1393
+#: includes/widgets/products-filter.php:1397
+msgid "Dropdown"
+msgstr ""
+
+#: includes/widgets/products-filter.php:1388
+#: includes/widgets/products-filter.php:1398
+msgid "Vertical List"
+msgstr ""
+
+#: includes/widgets/products-filter.php:1389
+#: includes/widgets/products-filter.php:1399
+msgid "Horizontal List"
+msgstr ""
+
+#: includes/widgets/products-filter.php:1390
+#: includes/widgets/products-filter.php:1394
+#: includes/widgets/products-filter.php:1400
+msgid "Checkbox List"
+msgstr ""
+
+#: includes/widgets/products-filter.php:1428
+msgid "Filter Name"
+msgstr ""
+
+#: includes/widgets/products-filter.php:1432
+msgid "Filter By"
+msgstr ""
+
+#: includes/widgets/products-filter.php:1446
+msgid "Display Type"
+msgstr ""
+
+#: includes/widgets/products-filter.php:1451
+msgid "Ranges"
+msgstr ""
+
+#: includes/widgets/products-filter.php:1452
+msgid "Each range on a line, separate by the <code>-</code> symbol. Do not include the currency symbol."
+msgstr ""
+
+#: includes/widgets/products-filter.php:1460
+msgid "Selection Type"
+msgstr ""
+
+#: includes/widgets/products-filter.php:1462
+msgid "Single select"
+msgstr ""
+
+#: includes/widgets/products-filter.php:1463
+msgid "Multiple select"
+msgstr ""
+
+#: includes/widgets/products-filter.php:1472
+msgid "Query Type"
+msgstr ""
+
+#: includes/widgets/products-filter.php:1474
+msgid "AND"
+msgstr ""
+
+#: includes/widgets/products-filter.php:1475
+msgid "OR"
+msgstr ""
+
+#: includes/widgets/products-filter.php:1483
+msgid "Collapsible"
+msgstr ""
+
+#: includes/widgets/products-filter.php:1491
+msgid "Show product counts"
+msgstr ""
+
+#: includes/widgets/products-filter.php:1498
+msgid "Show the search box"
+msgstr ""
+
+#: includes/widgets/products-filter.php:1506
+msgid "Limit the height of items list (scrollable)"
+msgstr ""
+
+#: includes/widgets/socials.php:34
+msgid "Tumblr"
+msgstr ""
+
+#: includes/widgets/socials.php:37
+msgid "Flickr"
+msgstr ""
+
+#: includes/widgets/socials.php:40
+msgid "Behance"
+msgstr ""
+
+#: includes/widgets/socials.php:41
+msgid "StumbleUpon"
+msgstr ""
+
+#: includes/widgets/socials.php:42
+msgid "Github"
+msgstr ""
+
+#: includes/widgets/socials.php:44
+msgid "Vimeo"
+msgstr ""
+
+#: includes/widgets/socials.php:45
+msgid "Houzz"
+msgstr ""
+
+#: includes/widgets/socials.php:46
+msgid "RSS"
+msgstr ""
+
+#: includes/widgets/socials.php:61
+msgid "Konte - Social Links"
+msgstr ""
+
+#: includes/widgets/socials.php:64
+msgid "Display links to social media networks."
+msgstr ""
+
+#: konte-addons.php:129
+msgid "<strong>%s</strong> requires <strong><a href=\"http://bit.ly/wpbakery-page-builder\" target=\"_blank\">WPBakery Page Builder</a></strong> or <strong><a href=\"https://wordpress.org/plugins/elementor/\" target=\"_blank\">Elementor Page Builder</a></strong> plugin to be installed and activated on your site."
+msgstr ""

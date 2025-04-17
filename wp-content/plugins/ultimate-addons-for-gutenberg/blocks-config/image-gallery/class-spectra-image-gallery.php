@@ -53,6 +53,9 @@ if ( ! class_exists( 'Spectra_Image_Gallery' ) ) {
 			add_action( 'wp_ajax_nopriv_uag_load_image_gallery_masonry', array( $this, 'render_masonry_pagination' ) );
 			add_action( 'wp_ajax_uag_load_image_gallery_grid_pagination', array( $this, 'render_grid_pagination' ) );
 			add_action( 'wp_ajax_nopriv_uag_load_image_gallery_grid_pagination', array( $this, 'render_grid_pagination' ) );
+
+			// Prevent Imagify from converting images into <picture> tags, which breaks the Spectra Lightbox.
+			add_filter( 'imagify_allow_picture_tags_for_nextgen', '__return_false' );
 		}
 
 		/**
@@ -994,10 +997,14 @@ if ( ! class_exists( 'Spectra_Image_Gallery' ) ) {
 					),
 				);
 				$media_args             = array(
-					'div'     => array(
+					'div'     => 'carousel' !== $attributes['feedLayout'] ? array(
 						'class'                         => true,
 						'data-spectra-gallery-image-id' => true,
-					),
+						'tabindex'                      => true,
+					) : array(
+						'class'                         => true,
+						'data-spectra-gallery-image-id' => true,
+					), 
 					'picture' => array(),
 					'source'  => array(
 						'media'  => true,
@@ -1078,6 +1085,8 @@ if ( ! class_exists( 'Spectra_Image_Gallery' ) ) {
 						</div>
 					<?php endif; ?>
 				<?php
+				// Restore Imagify's default behavior after the Lightbox has been rendered.
+				remove_filter( 'imagify_allow_picture_tags_for_nextgen', '__return_false' );
 				return ob_get_clean();
 			}
 		}
@@ -1132,7 +1141,7 @@ if ( ! class_exists( 'Spectra_Image_Gallery' ) ) {
 								$image_url = ! empty( $attributes['mediaGallery'][ $i ]['sizes']['thumbnail']['url'] ) ? $attributes['mediaGallery'][ $i ]['sizes']['thumbnail']['url'] : $attributes['mediaGallery'][ $i ]['url'];
 								?>
 								<div class="swiper-slide">
-									<img src="<?php echo esc_url( $image_url ); ?>" alt="<?php echo esc_attr( $attributes['mediaGallery'][ $i ]['alt'] ); ?>"/>
+									<img src="<?php echo esc_url( $image_url ); ?>" tabindex="0" alt="<?php echo esc_attr( $attributes['mediaGallery'][ $i ]['alt'] ); ?>"/>
 								</div>
 							<?php } ?>
 						</div>
@@ -1170,7 +1179,7 @@ if ( ! class_exists( 'Spectra_Image_Gallery' ) ) {
 					}
 					?>
 				</ul>
-				<button type="button" data-role="none" class="spectra-image-gallery__control-arrows spectra-image-gallery__control-arrows--<?php echo esc_attr( $attributes['feedLayout'] ); ?>" aria-label="Next" tabIndex="0" data-direction="Next"<?php echo ( 'grid' === $attributes['feedLayout'] && $attributes['gridPages'] === $attributes['gridPageNumber'] ) ? ' disabled' : ''; ?>>
+				<button type="button" data-role="none" class="spectra-image-gallery__control-arrows spectra-image-gallery__control-arrows--<?php echo esc_attr( $attributes['feedLayout'] ); ?>" aria-label="Next" tabindex="0" data-direction="Next"<?php echo ( 'grid' === $attributes['feedLayout'] && $attributes['gridPages'] === $attributes['gridPageNumber'] ) ? ' disabled' : ''; ?>>
 					<svg width=20 height=20 viewBox="0 0 256 512" aria-hidden="true">
 						<path d="M224.3 273l-136 136c-9.4 9.4-24.6 9.4-33.9 0l-22.6-22.6c-9.4-9.4-9.4-24.6 0-33.9l96.4-96.4-96.4-96.4c-9.4-9.4-9.4-24.6 0-33.9L54.3 103c9.4-9.4 24.6-9.4 33.9 0l136 136c9.5 9.4 9.5 24.6.1 34z">
 						</path>
@@ -1202,7 +1211,7 @@ if ( ! class_exists( 'Spectra_Image_Gallery' ) ) {
 				} else {
 					?>
 					<div class="spectra-image-gallery__control-wrapper wp-block-button">
-						<div class="spectra-image-gallery__control-button wp-block-button__link" aria-label="<?php echo esc_attr( $attributes['paginateButtonText'] ); ?>" tabIndex=0>
+						<div class="spectra-image-gallery__control-button wp-block-button__link" aria-label="<?php echo esc_attr( $attributes['paginateButtonText'] ); ?>" tabindex=0>
 							<?php echo esc_html( $attributes['paginateButtonText'] ); ?>
 						</div>
 					</div>
@@ -1240,7 +1249,7 @@ if ( ! class_exists( 'Spectra_Image_Gallery' ) ) {
 			check_ajax_referer( 'uagb_image_gallery_masonry_ajax_nonce', 'nonce' );
 			$media_atts = array();
 			// sanitizing $attr elements in later stage.
-			$attr                       = isset( $_POST['attr'] ) ? json_decode( stripslashes( $_POST['attr'] ), true ) : array(); //phpcs:ignore WordPress.Security.ValidatedSanitizedInput.InputNotSanitized
+			$attr                       = isset( $_POST['attr'] ) ? json_decode( wp_unslash( $_POST['attr'] ), true ) : array(); // phpcs:ignore WordPress.Security.ValidatedSanitizedInput.InputNotSanitized
 			$attr['gridPageNumber']     = isset( $_POST['page_number'] ) ? sanitize_text_field( $_POST['page_number'] ) : '';
 			$media_atts                 = $this->required_atts( $attr );
 			$media_atts['mediaGallery'] = json_decode( $media_atts['mediaGallery'], true );
@@ -1264,7 +1273,7 @@ if ( ! class_exists( 'Spectra_Image_Gallery' ) ) {
 			check_ajax_referer( 'uagb_image_gallery_grid_pagination_ajax_nonce', 'nonce' );
 			$media_atts = array();
 			// sanitizing $attr elements in later stage.
-			$attr                       = isset( $_POST['attr'] ) ? json_decode( stripslashes( $_POST['attr'] ), true ) : array(); //phpcs:ignore WordPress.Security.ValidatedSanitizedInput.InputNotSanitized
+			$attr                       = isset( $_POST['attr'] ) ? json_decode( wp_unslash( $_POST['attr'] ), true ) : array(); // phpcs:ignore WordPress.Security.ValidatedSanitizedInput.InputNotSanitized
 			$attr['gridPageNumber']     = isset( $_POST['page_number'] ) ? sanitize_text_field( $_POST['page_number'] ) : '';
 			$media_atts                 = $this->required_atts( $attr );
 			$media_atts['mediaGallery'] = json_decode( $media_atts['mediaGallery'], true );
@@ -1335,7 +1344,7 @@ if ( ! class_exists( 'Spectra_Image_Gallery' ) ) {
 				$focusedClass = ' spectra-image-gallery__media-wrapper--focus';
 			}
 			?>
-			<div class='spectra-image-gallery__media-wrapper<?php echo esc_attr( $focusedClass ); ?>' data-spectra-gallery-image-id='<?php echo esc_attr( $mediaArray['id'] ); ?>' >
+			<div class='spectra-image-gallery__media-wrapper<?php echo esc_attr( $focusedClass ); ?>' data-spectra-gallery-image-id='<?php echo esc_attr( $mediaArray['id'] ); ?>' tabindex="0" >
 				<?php
 					$this->render_media_thumbnail( $mediaArray, $atts );
 				?>
@@ -1629,6 +1638,14 @@ if ( ! class_exists( 'Spectra_Image_Gallery' ) ) {
 						return;
 					}
 
+					<?php // Add event listener for Enter and Space key presses. ?>
+					blockScope.addEventListener('keydown', (event) => {
+						if ( 13 === event.keyCode || 32 === event.keyCode ) {
+							<?php // Trigger the click event on the blockScope. ?>
+							blockScope.click();
+						}
+					} );
+
 					let lightboxSwiper = null;
 					let thumbnailSwiper = null;
 
@@ -1650,7 +1667,7 @@ if ( ! class_exists( 'Spectra_Image_Gallery' ) ) {
 						<?php echo wp_json_encode( $lightbox_settings ); ?>
 					);
 					loadLightBoxImages( blockScope, lightboxSwiper, null, <?php echo wp_json_encode( $attr ); ?>, thumbnailSwiper );
-					<?php echo $pro_clicker; //phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped ?>
+					<?php echo $pro_clicker; //phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped -- Already escaped inside pro filter. ?>
 				} );
 			<?php
 			return ob_get_clean();
@@ -1675,6 +1692,15 @@ if ( ! class_exists( 'Spectra_Image_Gallery' ) ) {
 					}
 					const attr = <?php echo wp_json_encode( $attr ); ?>;
 					addClickListeners( blockScope, null, false, null, attr );
+
+					<?php // Add event listener for Enter and Space key presses. ?> 
+					blockScope.addEventListener('keydown', (event) => {
+						if ( 13 === event.keyCode || 32 === event.keyCode ) {
+							// Trigger the click event on the blockScope
+							event.preventDefault();
+							blockScope.click();
+						}
+		});
 				} );
 			<?php
 			return ob_get_clean();

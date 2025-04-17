@@ -55,6 +55,7 @@ class Wishlist_Item {
 			'%s',
 		];
 
+		// phpcs:ignore WordPress.DB.DirectDatabaseQuery.DirectQuery
 		$result = $wpdb->insert(
 			$wpdb->prefix . 'wcboost_wishlist_items',
 			$data,
@@ -85,6 +86,7 @@ class Wishlist_Item {
 		$changes = $item->get_changes();
 
 		if ( array_intersect( ['status', 'quantity', 'wishlist_id', 'date_expires'], array_keys( $changes ) ) ) {
+			// phpcs:ignore WordPress.DB.DirectDatabaseQuery.DirectQuery, WordPress.DB.DirectDatabaseQuery.NoCaching
 			$wpdb->update(
 				$wpdb->prefix . 'wcboost_wishlist_items',
 				[
@@ -122,6 +124,7 @@ class Wishlist_Item {
 
 		do_action( 'wcboost_wishlist_item_delete', $item );
 
+		// phpcs:ignore WordPress.DB.DirectDatabaseQuery.DirectQuery, WordPress.DB.DirectDatabaseQuery.NoCaching
 		$wpdb->delete( $wpdb->prefix . 'wcboost_wishlist_items', [ 'item_id' => $item->get_item_id() ], [ '%d' ] );
 
 		do_action( 'wcboost_wishlist_item_deleted', $item );
@@ -145,18 +148,19 @@ class Wishlist_Item {
 		$item_id = $item->get_item_id();
 
 		if ( ! $item_id ) {
-			throw new \Exception( __( 'Invalid item.', 'wcboost-wishlist' ) );
+			throw new \Exception( esc_html__( 'Invalid item.', 'wcboost-wishlist' ) );
 		}
 
 		// Get from cache if available.
 		$data = wp_cache_get( 'wcboost-wishlist-item-' . $item_id, 'wishlists' );
 
 		if ( false === $data ) {
+			// phpcs:ignore WordPress.DB.DirectDatabaseQuery.DirectQuery
 			$data = $wpdb->get_row( $wpdb->prepare( "SELECT * FROM {$wpdb->prefix}wcboost_wishlist_items WHERE item_id = %d LIMIT 1;", $item_id ) );
 		}
 
 		if ( ! $data ) {
-			throw new \Exception( __( 'No item found with given id.', 'wcboost-wishlist' ) );
+			throw new \Exception( esc_html__( 'No item found with given id.', 'wcboost-wishlist' ) );
 		}
 
 		wp_cache_set( 'wcboost-wishlist-item-' . $item_id, $data, 'wishlists' );
@@ -188,6 +192,7 @@ class Wishlist_Item {
 	public function delete_expired() {
 		global $wpdb;
 
+		// phpcs:ignore WordPress.DB.DirectDatabaseQuery.DirectQuery, WordPress.DB.DirectDatabaseQuery.NoCaching
 		$wpdb->query( "DELETE FROM {$wpdb->prefix}wcboost_wishlist_items WHERE status = 'trash' AND date_expires < CURDATE();" );
 	}
 

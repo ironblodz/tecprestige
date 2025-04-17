@@ -42,10 +42,7 @@ class Products {
 
 	/** @var string product image source option to use the parent product image in Facebook */
 	const PRODUCT_IMAGE_SOURCE_CUSTOM = 'custom';
-
-	/** @var string the meta key used to flag if Commerce is enabled for the product */
-	const COMMERCE_ENABLED_META_KEY = '_wc_facebook_commerce_enabled';
-
+	
 	/** @var string the meta key used to store the Google product category ID for the product */
 	const GOOGLE_PRODUCT_CATEGORY_META_KEY = '_wc_facebook_google_product_category';
 
@@ -224,7 +221,7 @@ class Products {
 	 * @return bool
 	 */
 	public static function product_should_be_deleted( \WC_Product $product ) {
-		return ( 'yes' === get_option( 'woocommerce_hide_out_of_stock_items' ) && ! $product->is_in_stock() ) || ! facebook_for_woocommerce()->get_product_sync_validator( $product )->passes_product_terms_check();
+		return ! facebook_for_woocommerce()->get_product_sync_validator( $product )->passes_product_terms_check();
 	}
 
 
@@ -291,6 +288,10 @@ class Products {
 	 * @return bool
 	 */
 	public static function is_product_visible( \WC_Product $product ) {
+		if ( 'yes' === get_option( 'woocommerce_hide_out_of_stock_items' ) && ! $product->is_in_stock() ) {
+			self::$products_visibility[ $product->get_id() ] = false;
+			return false;
+		}
 		// accounts for a legacy bool value, current should be (string) 'yes' or (string) 'no'
 		if ( ! isset( self::$products_visibility[ $product->get_id() ] ) ) {
 			if ( $product->is_type( 'variable' ) ) {
@@ -374,36 +375,6 @@ class Products {
 			&& self::get_product_price( $product )
 			&& self::is_commerce_enabled_for_product( $product )
 			&& self::product_should_be_synced( $product );
-	}
-
-
-	/**
-	 * Determines whether Commerce is enabled for the product.
-	 *
-	 * @since 2.1.0
-	 *
-	 * @param \WC_Product $product the product object
-	 * @return bool
-	 */
-	public static function is_commerce_enabled_for_product( \WC_Product $product ) {
-		if ( $product->is_type( 'variation' ) ) {
-			$product = wc_get_product( $product->get_parent_id() );
-		}
-		return $product instanceof \WC_Product && wc_string_to_bool( $product->get_meta( self::COMMERCE_ENABLED_META_KEY ) );
-	}
-
-
-	/**
-	 * Enables or disables Commerce for a product.
-	 *
-	 * @since 2.1.0
-	 *
-	 * @param \WC_Product $product the product object
-	 * @param bool        $is_enabled whether or not Commerce is to be enabled
-	 */
-	public static function update_commerce_enabled_for_product( \WC_Product $product, $is_enabled ) {
-		$product->update_meta_data( self::COMMERCE_ENABLED_META_KEY, wc_bool_to_string( $is_enabled ) );
-		$product->save_meta_data();
 	}
 
 
@@ -985,7 +956,8 @@ class Products {
 					$attr_val  = $product->get_attribute( $slug );
 				}
 
-				if ( \WC_Facebookcommerce_Utils::sanitize_variant_name( $attr_name, false ) === $key ) {
+				$sanitized_attr_name = \WC_Facebookcommerce_Utils::sanitize_attribute_name( \WC_Facebookcommerce_Utils::sanitize_variant_name( $attr_name, false ) );
+				if ( $sanitized_attr_name === $key ) {
 					$value = $attr_val;
 					break;
 				}

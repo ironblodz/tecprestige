@@ -6,15 +6,15 @@
  *
  * @author  WCBoost
  * @package WCBoost\Wishlist\Templates
- * @version 1.1
+ * @version 1.1.5
  */
 
 defined( 'ABSPATH' ) || exit;
 
 global $product;
 
-echo apply_filters(
-	'wcboost_wishlist_single_add_to_wishlist_link', // WPCS: XSS ok.
+echo apply_filters( // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
+	'wcboost_wishlist_single_add_to_wishlist_link',
 	sprintf(
 		'<a href="%s" class="%s" %s>' .
 			( empty( $icon ) ? '' : '<span class="wcboost-wishlist-button__icon">' . $icon . '</span>' ) .

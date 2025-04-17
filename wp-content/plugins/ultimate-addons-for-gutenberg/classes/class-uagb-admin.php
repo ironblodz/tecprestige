@@ -9,6 +9,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 	exit; // Exit if accessed directly.
 }
 
+
 if ( ! class_exists( 'UAGB_Admin' ) ) {
 
 	/**
@@ -41,12 +42,21 @@ if ( ! class_exists( 'UAGB_Admin' ) ) {
 				return;
 			}
 
-			add_action( 'admin_enqueue_scripts', array( $this, 'reload_on_migration_complete' ) );
+			global $wp_customize;
+			/**
+			 * Conditionally load the scripts in the customizer.
+			 * If the customizer is not set, it means we are not in the customizer.
+			 * In that case load the script that will reload the page after migration is complete.
+			 */
+			if ( empty( $wp_customize ) ) {
+				add_action( 'admin_enqueue_scripts', array( $this, 'reload_on_migration_complete' ) );
+			}
 			add_action( 'wp_ajax_uag_migrate', array( $this, 'handle_migration_action_ajax' ) );
 
 			add_action( 'admin_notices', array( $this, 'register_notices' ) );
 			add_filter( 'wp_kses_allowed_html', array( $this, 'add_data_attributes' ), 10, 2 );
 			add_action( 'admin_enqueue_scripts', array( $this, 'notice_styles_scripts' ) );
+			add_action( 'admin_enqueue_scripts', array( $this, 'notice_styles_scripts_upgrade_pro' ) );
 			add_filter( 'rank_math/researches/toc_plugins', array( $this, 'toc_plugin' ) );
 			add_action( 'admin_init', array( $this, 'activation_redirect' ) );
 			add_action( 'admin_init', array( $this, 'update_old_user_option_by_url_params' ) );
@@ -128,7 +138,7 @@ if ( ! class_exists( 'UAGB_Admin' ) ) {
 		 * @return string The URL for Spectra Webpage.
 		 */
 		public function update_gutenberg_templates_pro_url() { 
-			return 'https://wpspectra.com/pricing/?utm_source=gutenberg-templates&utm_medium=dashboard&utm_campaign=Starter-Template-Backend';
+			return \UAGB_Admin_Helper::get_spectra_pro_url( '/pricing/', 'gutenberg-templates', 'dashboard', 'Starter-Template-Backend' );
 		}
  
 
@@ -146,7 +156,7 @@ if ( ! class_exists( 'UAGB_Admin' ) ) {
 				return;
 			}
 
-			$spectra_old_user = isset( $_GET['spectra_old_user'] ) ? sanitize_text_field( $_GET['spectra_old_user'] ) : false; //phpcs:ignore WordPress.Security.NonceVerification.Recommended
+			$spectra_old_user = isset( $_GET['spectra_old_user'] ) ? sanitize_text_field( $_GET['spectra_old_user'] ) : false; //phpcs:ignore WordPress.Security.NonceVerification.Recommended -- $_GET['spectra_old_user'] does not provide nonce.
 
 			if ( 'yes' === $spectra_old_user ) {
 				update_option( 'uagb-old-user-less-than-2', 'yes' );
@@ -253,55 +263,15 @@ if ( ! class_exists( 'UAGB_Admin' ) ) {
 		 * @since 1.8.0
 		 */
 		public function register_notices() {
-
+			// Check if assets should be excluded for the current post type.
+			if ( UAGB_Admin_Helper::should_exclude_assets_for_cpt() ) {
+				return; // Early return to prevent loading assets.
+			}
 			if ( ! current_user_can( 'manage_options' ) ) {
 				return;
 			}
 
 			$image_path = UAGB_URL . 'admin-core/assets/images/uag-logo.svg';
-
-			Astra_Notices::add_notice(
-				array(
-					'id'                         => 'uagb-admin-rating',
-					'type'                       => '',
-					'message'                    => sprintf(
-						'<div class="notice-image">
-                            <img src="%1$s" class="custom-logo" alt="Spectra" itemprop="logo"></div>
-                            <div class="notice-content">
-                                <div class="notice-heading">
-                                    %2$s
-                                </div>
-                                %3$s<br />
-                                <div class="astra-review-notice-container">
-                                    <a href="%4$s" class="astra-notice-close uagb-review-notice button-primary" target="_blank">
-                                    %5$s
-                                    </a>
-                                <span class="dashicons dashicons-calendar"></span>
-                                    <a href="#" data-repeat-notice-after="%6$s" class="astra-notice-close uagb-review-notice">
-                                    %7$s
-                                    </a>
-                                <span class="dashicons dashicons-smiley"></span>
-                                    <a href="#" class="astra-notice-close uagb-review-notice">
-                                    %8$s
-                                    </a>
-                                </div>
-                            </div>',
-						$image_path,
-						__( 'Wow! Spectra has already powered over 5 pages on your website!', 'ultimate-addons-for-gutenberg' ),
-						__( 'Would you please mind sharing your views and give it a 5 star rating on the WordPress repository?', 'ultimate-addons-for-gutenberg' ),
-						'https://wordpress.org/support/plugin/ultimate-addons-for-gutenberg/reviews/?filter=5#new-post',
-						__( 'Ok, you deserve it', 'ultimate-addons-for-gutenberg' ),
-						MONTH_IN_SECONDS,
-						__( 'Nope, maybe later', 'ultimate-addons-for-gutenberg' ),
-						__( 'I already did', 'ultimate-addons-for-gutenberg' )
-					),
-					'repeat-notice-after'        => MONTH_IN_SECONDS,
-					'display-notice-after'       => ( 2 * WEEK_IN_SECONDS ), // Display notice after 2 weeks.
-					'priority'                   => 20,
-					'display-with-other-notices' => false,
-					'show_if'                    => true,
-				)
-			);
 
 			if ( ! get_option( 'uag_migration_status', false ) && 'yes' === get_option( 'uagb-old-user-less-than-2' ) && 'in-progress' !== get_option( 'uag_migration_progress_status', '' ) ) {
 
@@ -418,6 +388,51 @@ if ( ! class_exists( 'UAGB_Admin' ) ) {
 					);
 				}
 			}
+			$image_path = UAGB_URL . 'admin-core/assets/images/uag-logo.svg';
+
+			$installed_plugins = get_plugins();
+
+			$status = isset( $installed_plugins['spectra-pro/spectra-pro.php'] ) 
+					? ( is_plugin_active( 'spectra-pro/spectra-pro.php' ) 
+						? 'active' 
+						: 'inactive' ) 
+					: 'not-installed';
+
+			if ( 'not-installed' === $status && isset( $_GET['post_type'] ) && 'spectra-popup' === $_GET['post_type'] ) { // phpcs:ignore WordPress.Security.NonceVerification.Recommended -- $_GET['post_type'] does not provide nonce.
+				Astra_Notices::add_notice(
+					array(
+						'id'                         => 'uagb-spectra-pro-popup-note',
+						'type'                       => '',
+						'message'                    => sprintf(
+							'<div class="notice-image">
+								<img src="%1$s" class="custom-logo" style="max-width: 40px;" alt="Spectra" itemprop="logo"></div>
+								<div class="notice-content">
+									<div class="notice-heading">
+										<strong>
+											%2$s
+										</strong>
+									</div>
+									%3$s<br />
+									<div class="astra-review-notice-container">
+										<a href="%4$s" class="not-astra-notice-close uagb-review-notice button-primary" target="_blank">
+										%5$s
+										</a>
+									
+									</div>
+								</div>',
+							$image_path,
+							__( 'Want to do more with Popup Builder?', 'ultimate-addons-for-gutenberg' ),
+							__( 'Maximize your popup potential with Spectra Pro. Unlock enhanced features, intuitive design options, and increased conversions!', 'ultimate-addons-for-gutenberg' ),
+							esc_url( \UAGB_Admin_Helper::get_spectra_pro_url( '/pricing/', 'free-plugin', 'popup-builder', 'popup-builder-banner' ) ),
+							__( 'Upgrade Now', 'ultimate-addons-for-gutenberg' )
+						),
+						'dismissible'                => true,
+						'priority'                   => 20,
+						'display-with-other-notices' => true,
+						'class'                      => 'spectra-upsell',
+					)
+				);
+			}
 		}
 
 		/**
@@ -434,6 +449,38 @@ if ( ! class_exists( 'UAGB_Admin' ) ) {
 				// Add inline CSS to hide elements with the 'notice' class.
 				$custom_css = '.notice { display: none !important; }';
 				wp_add_inline_style( 'uag-admin-css', $custom_css );
+			}
+		}
+
+		/**
+		 * Enqueue the needed CSS/JS for the plugin / popup page.
+		 *
+		 * @since 2.16.0
+		 * @return void
+		 */
+		public function notice_styles_scripts_upgrade_pro() {
+			$screen = get_current_screen();
+
+			if ( $screen && ( 'plugins' === $screen->base || 'spectra-popup' === $screen->post_type ) ) {
+				wp_enqueue_style( 'uag-admin-spectra-pro-upgrade-pro-css', UAGB_URL . 'admin/assets/admin-notice-spectra-pro-upgrade-pro.css', array(), UAGB_VER );
+			}
+			// Redirect to Pro pricing page when click on Get Spectra Pro button.
+			if ( $screen && 'toplevel_page_spectra' === $screen->base ) {
+				?>
+					<script type="text/javascript">
+						document.addEventListener('DOMContentLoaded', function() {
+							let upgradeLink = document.querySelector('a[href$="&path=upgrade-now"]');
+							if (upgradeLink) {
+								upgradeLink.setAttribute('target', '_blank');
+								upgradeLink.setAttribute('rel', 'noreferrer');
+								upgradeLink.addEventListener('click', function(e) {
+									e.preventDefault();
+									window.open( <?php echo esc_url( \UAGB_Admin_Helper::get_spectra_pro_url( '/pricing/', 'free-plugin', 'dashboard', 'setting' ) ); ?>, '_blank', 'noopener,noreferrer' );
+								});
+							}
+						});
+					</script>
+				<?php
 			}
 		}
 
@@ -480,6 +527,7 @@ if ( ! class_exists( 'UAGB_Admin' ) ) {
 			</script>
 			<?php
 		}
+
 
 		/**
 		 * Rank Math SEO filter to add kb-elementor to the TOC list.

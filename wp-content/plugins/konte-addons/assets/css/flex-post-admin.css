@@ -1,0 +1,57 @@
+.flex-post-setting-field {
+	margin: 1em 0;
+}
+
+.flex-post-setting-field:before,
+.flex-post-setting-field:after {
+	content: "";
+	display: table;
+}
+
+.flex-post-setting-field:after {
+	clear: both;
+}
+
+.flex-post-setting__label {
+	width: 25%;
+	float: left;
+	font-weight: 600;
+}
+
+.flex-post-setting__input {
+	width: 75%;
+	float: right;
+}
+
+.flex-post-setting__preview img {
+	max-width: 100%;
+	max-height: 200px;
+}
+
+.flex-post-setting__input select,
+.flex-post-setting__input input[type=text] {
+	min-width: 33.33%;
+}
+
+.flex-post-setting__input .CodeMirror {
+	border: 1px solid #dedede;
+}
+
+.flex-post-setting__design-background .flex-post-setting__input {
+	width: 40%;
+	float: left;
+}
+
+.flex-post-setting__design-background .flex-post-setting__preview {
+	width: 30%;
+	float: right;
+}
+
+.editor-disabled .composer-switch,
+.editor-disabled #postdivrich {
+	pointer-events: none;
+    z-index: 0;
+    position: absolute;
+    opacity: 0;
+    left: -10000em;
+}

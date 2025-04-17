@@ -65,6 +65,8 @@ if (!class_exists('Webtoffee_Product_Feed_Sync_Idealo')) {
 			add_filter('wt_pf_feed_category_mapping', array($this, 'map_google_category'), 10, 1);
 
                         add_filter('wt_pf_exporter_steps_basic', array($this, 'fn_wt_pf_exporter_steps_basic'), 10, 2);
+                        
+                        add_filter('wt_feed_product_attributes_dropdown', array($this, 'product_attributes_dropdown'), 10, 3);
 			                        
 				
 		}
@@ -175,6 +177,30 @@ if (!class_exists('Webtoffee_Product_Feed_Sync_Idealo')) {
 
 			return $taxonomy;
 		}
+                
+            public function product_attributes_dropdown($attribute_dropdown, $export_channel, $selected = '') {
+
+                if ('idealo' === $export_channel) {
+
+                    $attribute_dropdown .= sprintf( '<option value="%s">%s</option>', 'url', 'Product URL[url]' );
+                    $attribute_dropdown .= sprintf( '<option value="%s">%s</option>', 'categoryPath', 'Product Categories[categoryPath]' );
+                    $attribute_dropdown .= sprintf( '<option value="%s">%s</option>', 'imageUrls', 'Image URLs[imageUrls]' );
+                    $attribute_dropdown .= sprintf( '<option value="%s">%s</option>', 'colour', 'Colour' );
+                    $attribute_dropdown .= sprintf( '<option value="%s">%s</option>', 'hans', 'Hans' );
+                    $attribute_dropdown .= sprintf( '<option value="%s">%s</option>', 'eans', 'Eans' );
+                    $attribute_dropdown .= sprintf( '<option value="%s">%s</option>', 'Quantity', 'Quantity' );
+
+                    if ($selected && strpos($selected, 'wt_static_map_vl:') !== false) {
+                        $selected = 'wt-static-map-vl';
+                    }
+                    if ($selected && strpos($attribute_dropdown, 'value="' . $selected . '"') !== false) {
+                        $attribute_dropdown = str_replace('value="' . $selected . '"', 'value="' . $selected . '"' . ' selected', $attribute_dropdown);
+                    }
+                }
+
+                return $attribute_dropdown;
+            }                
+                
 
 		/**
 		 * Get product categories
@@ -240,11 +266,9 @@ if (!class_exists('Webtoffee_Product_Feed_Sync_Idealo')) {
 			foreach ($fields as $key => $value) {
 				switch ($key) {
 					case 'availability_price':
-						//$fields[$key]['fields']['availability'] = 'Stock Status[availability]';
-						//$fields[$key]['fields']['availability_date'] = 'Availability Date[availability_date]';						
-						$fields[$key]['fields']['price'] = 'Price[price]';
-						//$fields[$key]['fields']['sale_price'] = 'Sale Price[sale_price]';
-						//$fields[$key]['fields']['sale_price_effective_date'] = 'Sale Price Effective Date[sale_price_effective_date]';
+						$fields[$key]['fields']['Quantity'] = 'Quantity[Quantity]';						
+						$fields[$key]['fields']['price'] = 'Price[price]';						
+						$fields[$key]['fields']['FreeReturnDays'] = 'FreeReturnDays[FreeReturnDays]';
 						break;
 
 					case 'unique_product_identifiers':
@@ -261,9 +285,25 @@ if (!class_exists('Webtoffee_Product_Feed_Sync_Idealo')) {
 						$fields[$key]['fields']['material'] = 'Material[material]';
 						$fields[$key]['fields']['size'] = 'Size of the item[size]';
                                                 //$fields[$key]['fields']['quantity'] = 'Quantity [quantity]'; // speker specific and wine specific
+                                                $fields[$key]['fields']['merchantName'] = 'merchantName[merchantName]';
+                                                $fields[$key]['fields']['formerPrice'] = 'formerPrice[formerPrice]';
+                                                $fields[$key]['fields']['voucherCode'] = 'voucherCode[voucherCode]';
+                                                $fields[$key]['fields']['deliveryComment'] = 'deliveryComment[deliveryComment]';
+                                                $fields[$key]['fields']['fulfillmentType'] = 'fulfillmentType[fulfillmentType]';
+                                                $fields[$key]['fields']['merchantId'] = 'merchantId[merchantId]';
+                                                $fields[$key]['fields']['deposit'] = 'deposit[deposit]';
+                                                $fields[$key]['fields']['maxOrderProcessingTime'] = 'maxOrderProcessingTime[maxOrderProcessingTime]';
+                                                $fields[$key]['fields']['twoManHandlingFee'] = 'twoManHandlingFee[twoManHandlingFee]';
+                                                $fields[$key]['fields']['disposalFee'] = 'disposalFee[disposalFee]';
+                                                $fields[$key]['fields']['used'] = 'used[used]';
+                                                $fields[$key]['fields']['download'] = 'download[download]';
+                                                $fields[$key]['fields']['replica'] = 'replica[replica]';
+                                                
+                                                
 						break;
                                             case 'payment_and_delivery':
                                             
+                                                $fields[$key]['fields'][ 'deliveryTime'] = __( 'deliveryTime', 'webtoffee-product-feed' );
                                                 $fields[$key]['fields'][ 'paymentCosts_credit_card'] = __( 'paymentCosts_credit_card', 'webtoffee-product-feed' );
                                                 $fields[$key]['fields'][ 'paymentCosts_cash_in_advance'] = __( 'paymentCosts_cash_in_advance', 'webtoffee-product-feed' );
                                                 $fields[$key]['fields'][ 'paymentCosts_cash_on_delivery'] = __( 'paymentCosts_cash_on_delivery', 'webtoffee-product-feed' );

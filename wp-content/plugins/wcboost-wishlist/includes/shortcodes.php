@@ -98,7 +98,7 @@ class Shortcodes {
 	 * @param \WCBoost\Wishlist\Wishlist $wishlist
 	 * @return string
 	 */
-	protected static function get_wishlist_template( $wishlist ) {
+	public static function get_wishlist_template( $wishlist ) {
 		if ( $wishlist->can_edit() ) {
 			if ( get_query_var( 'edit-wishlist' ) ) {
 				$template = 'wishlist/form-edit-wishlist.php';

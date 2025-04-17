@@ -49,6 +49,7 @@ trait Singleton_Trait {
 	 * Prevent unserializing.
 	 */
 	final public function __wakeup() {
+		// phpcs:ignore WordPress.WP.I18n.TextDomainMismatch
 		wc_doing_it_wrong( __FUNCTION__, __( 'Unserializing instances of this class is forbidden.', 'woocommerce' ), '1.0' );
 		die();
 	}

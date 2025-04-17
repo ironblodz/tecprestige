@@ -5,6 +5,27 @@ window._nslHasOpenedPopup = false;
 window._nslWebViewNoticeElement = null;
 
 window.NSLPopup = function (url, title, w, h) {
+
+    /**
+     * Cross-Origin-Opener-Policy blocked the access to the opener
+     */
+    if (typeof BroadcastChannel === "function") {
+        const _nslLoginBroadCastChannel = new BroadcastChannel('nsl_login_broadcast_channel');
+        _nslLoginBroadCastChannel.onmessage = (event) => {
+            if (window?._nslHasOpenedPopup && event.data?.action === 'redirect') {
+                window._nslHasOpenedPopup = false;
+
+                const url = event.data?.href;
+                _nslLoginBroadCastChannel.close();
+                if (typeof window.nslRedirect === 'function') {
+                    window.nslRedirect(url);
+                } else {
+                    window.opener.location = url;
+                }
+            }
+        };
+    }
+
     const userAgent = navigator.userAgent,
         mobile = function () {
             return /\b(iPhone|iP[ao]d)/.test(userAgent) ||
@@ -352,23 +373,3 @@ window._nslDOMReady(function () {
         })
     }
 });
-
-/**
- * Cross-Origin-Opener-Policy blocked the access to the opener
- */
-if (typeof BroadcastChannel === "function") {
-    const _nslLoginBroadCastChannel = new BroadcastChannel('nsl_login_broadcast_channel');
-    _nslLoginBroadCastChannel.onmessage = (event) => {
-        if (window?._nslHasOpenedPopup && event.data?.action === 'redirect') {
-            window._nslHasOpenedPopup = false;
-
-            const url = event.data?.href;
-            _nslLoginBroadCastChannel.close();
-            if (typeof window.nslRedirect === 'function') {
-                window.nslRedirect(url);
-            } else {
-                window.opener.location = url;
-            }
-        }
-    };
-}

@@ -31,7 +31,8 @@ $provider = $this->getProvider();
             </li>
             <li><?php printf(__('Enter a name for your App to the "<b>%1$s</b>" field, which will appear as the name of the app asking for consent.', 'nextend-facebook-connect'), 'App name'); ?></li>
             <li><?php printf(__('For the "<b>%1$s</b>" field, select an email address that users can use to contact you with questions about their consent.', 'nextend-facebook-connect'), 'User support email'); ?></li>
-            <li><?php printf(__('Fill the %1$s field with the url of your homepage, probably: %2$s', 'nextend-facebook-connect'), '"<b>Application home page</b>"', '<b>' . str_replace(parse_url(site_url(), PHP_URL_PATH), "", site_url()) . '</b>'); ?></li>
+            <li><?php printf(__('Fill the %1$s field with the url of your homepage, probably: %2$s', 'nextend-facebook-connect'), '"<b>Application home page</b>"', '<b>' . $provider->getAdmin()
+                                                                                                                                                                                     ->getSiteUrlWithoutPath() . '</b>'); ?></li>
             <li><?php printf(__('Enter your privacy policy and terms of service links into the %1$s and %2$s fields.', 'nextend-facebook-connect'), '"<b>Application privacy policy link</b>"', '"<b>Application terms of service link</b>"'); ?></li>
             <li><?php printf(__('Under the "<b>%1$s</b>" section press the "<b>%2$s</b>" button and  enter your domain name, probably: <b>%3$s</b> without subdomains!', 'nextend-facebook-connect'), 'Authorized domains', 'Add Domain', str_replace('www.', '', $_SERVER['HTTP_HOST'])); ?></li>
             <li><?php printf(__('At the "<b>%1$s</b>" section, enter an email address that %2$s can use to notify you about any changes to your project.', 'nextend-facebook-connect'), 'Developer contact information', 'Google'); ?></li>

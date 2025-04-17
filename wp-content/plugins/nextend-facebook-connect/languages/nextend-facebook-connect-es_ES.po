@@ -1,8 +1,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: nextend-facebook-connect\n"
-"POT-Creation-Date: 2024-07-30 16:05+0200\n"
-"PO-Revision-Date: 2024-07-30 16:05+0200\n"
+"POT-Creation-Date: 2025-02-05 19:36+0100\n"
+"PO-Revision-Date: 2025-02-05 19:36+0100\n"
 "Last-Translator: Gabriel Vilaró <gabo@etereo.ch>\n"
 "Language-Team: nextend-facebook-connect\n"
 "Language: es_ES\n"
@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
-"X-Generator: Poedit 3.3.1\n"
+"X-Generator: Poedit 3.5\n"
 "X-Poedit-Basepath: ../..\n"
 "X-Poedit-SourceCharset: UTF-8\n"
 "X-Poedit-KeywordsList: __;_e;__ngettext:1,2;_n:1,2;__ngettext_noop:1,2;"
@@ -775,31 +775,25 @@ msgid "Right"
 msgstr ""
 
 #, fuzzy
-#| msgid "BuddyPress register button style"
-msgid "BuddyPress registration integration"
-msgstr "Estilo del botón de registro BuddyPress"
+#| msgid "Ask E-mail on registration"
+msgid "Email template for registration"
+msgstr "Preguntar E-mail durante el registro"
+
+#, fuzzy
+#| msgid "WordPress default"
+msgid "WordPress default notification"
+msgstr "Configuración predeterminada de Wordpress"
+
+#, fuzzy
+#| msgid "WordPress default"
+msgid "BuddyPress welcome notification"
+msgstr "Configuración predeterminada de Wordpress"
 
 #, php-format
 msgid ""
-"When this setting is enabled the actual registration will be done by %1$s, "
-"so it could send the activation emails uppon registration."
+"Defines whether the registration with %1$s will send the same welcome "
+"notification that %2$s does, instead of the %3$s default one."
 msgstr ""
-
-#, php-format
-msgid ""
-"%1$s To prevent the login with social login until the account is activated, "
-"you also need to enable the %2$s feature on the %3$s tab!"
-msgstr ""
-
-#, fuzzy
-#| msgid "Usage"
-msgid "Usage:"
-msgstr "Uso"
-
-#, fuzzy
-#| msgid "Show login buttons"
-msgid "Support login restrictions"
-msgstr "Mostrar botones de iniciar sesión"
 
 #, fuzzy
 #| msgid "Icon button"
@@ -824,6 +818,11 @@ msgstr "Estilo de Botón:"
 #, php-format
 msgid "%1$s Add your custom actions here. One action per line."
 msgstr ""
+
+#, fuzzy
+#| msgid "Usage"
+msgid "Usage:"
+msgstr "Uso"
 
 #, php-format
 msgid ""
@@ -1028,6 +1027,11 @@ msgstr "URL de redirección fija"
 msgid "If you want to blacklist redirect url params. One pattern per line."
 msgstr ""
 
+#, fuzzy
+#| msgid "Show login buttons"
+msgid "Support login restrictions"
+msgstr "Mostrar botones de iniciar sesión"
+
 #, php-format
 msgid "Please visit to our %1$s to check what plugins are supported!"
 msgstr ""
@@ -1057,7 +1061,8 @@ msgstr "para Registrarse"
 msgid ""
 "Set a custom label for the social buttons in registration forms and for "
 "shortcodes with %1$s parameter set to %2$s.<br>The register specific labels "
-"can be modified at the Buttons tab of each provider."
+"can be modified at the Buttons tab of each provider.<br>This option also "
+"allows the use of register specific %3$s options."
 msgstr ""
 
 msgid "Redirect overlay"
@@ -1217,16 +1222,6 @@ msgid "Link buttons on"
 msgstr "Sin botones de enlace"
 
 #, fuzzy
-#| msgid "Ask E-mail on registration"
-msgid "Email template for registration"
-msgstr "Preguntar E-mail durante el registro"
-
-#, fuzzy
-#| msgid "WordPress default"
-msgid "WordPress default notification"
-msgstr "Configuración predeterminada de Wordpress"
-
-#, fuzzy
 #| msgid "WooCommerce register form"
 msgid "WooCommerce registration notification"
 msgstr "Formulario de registro WooCommerce"
@@ -1328,6 +1323,9 @@ msgstr "Verificar la configuración de nuevo"
 msgid "Please save your changes before verifying settings."
 msgstr "Guarda tus cambios antes de verificar la configuración, por favor."
 
+msgid "Error: Email verification status is not checked in this provider!"
+msgstr ""
+
 msgid "Authentication successful"
 msgstr "Autenticación exitosa"
 
@@ -1376,21 +1374,14 @@ msgstr ""
 msgid "This %s account is already linked to another user."
 msgstr "Esta cuenta %s ya está vinculada a otro usuario."
 
-#, php-format
-msgid ""
-"It looks like your %1$s email address is not verified. Please verify the "
-"email address of your %1$s account first!"
-msgstr ""
-
 msgid "User registration is currently not allowed."
 msgstr ""
 
 #, php-format
 msgid ""
-"It looks like your %1$s email address is not verified. <br>Please verify the "
-"email address of your %1$s account first, or login to your existing account "
-"using your password and link your %1$s account to your existing account "
-"manually!"
+"We found a user with your %1$s email address but it looks like its email "
+"address is not verified.%2$sPlease login to your existing account using your "
+"password and link your %1$s account to it manually!"
 msgstr ""
 
 #, php-format
@@ -1478,10 +1469,10 @@ msgid ""
 "that appears next to the %3$s item."
 msgstr ""
 
-#, php-format
-msgid ""
-"Press the %1$s button that you can find below the %2$s section, next to %3$s."
-msgstr ""
+#, fuzzy, php-format
+#| msgid "Click on the Create button"
+msgid "Press the %1$s option that you can find below the %2$s section."
+msgstr "Haz clic en el botón Create"
 
 #, fuzzy, php-format
 #| msgid ""
@@ -1542,52 +1533,33 @@ msgstr "Navegar a %s"
 msgid "Log in with your %s credentials if you are not logged in."
 msgstr "Inicia sesión con tus %s credenciales si no has iniciado sesión."
 
-#, fuzzy, php-format
-#| msgid "Click on the Create button"
-msgid ""
-"Click on the %1$s button and then choose the %2$s option and press %3$s!"
-msgstr "Haz clic en el botón Create"
-
-#, fuzzy, php-format
-#| msgid "Click on the Create button"
-msgid "Select %1$s."
-msgstr "Haz clic en el botón Create"
-
-#, php-format
-msgid ""
-"Fill the %1$s and %2$s fields. The specified app name will appear on your "
-"%3$s!"
-msgstr ""
-
 #, php-format
 msgid ""
 "%1$sOptional%2$s: choose a %3$s if you would like to. If you didn't choose a "
-"%3$s at this point, you will need to select it in step 24, before you start "
+"%3$s at this point, you will need to select it in step 23, before you start "
 "the %4$s! "
 msgstr ""
 
 #, fuzzy, php-format
-#| msgid "Click on the \"Create New App\" button"
-msgid "Click the %1$s button and complete the Security Check."
-msgstr "Haz clic en el botón de \"Create New App\" por favor"
-
-#, php-format
-msgid ""
-"A message at the top of the page might prompt you to switch to %1$s. Ignore "
-"that, as our integration is for %2$s!"
-msgstr ""
+#| msgid "Click on the Create button"
+msgid "Click on the %1$s button and choose the %2$s option!"
+msgstr "Haz clic en el botón Create"
 
 #, fuzzy, php-format
-#| msgid "Click on the \"Create New App\" button"
+#| msgid "Click on the Create button"
 msgid ""
-"Click on the %1$s button. (If you receive a blank page after you pressed the "
-"%1$s button, you might need to refresh the page.)"
-msgstr "Haz clic en el botón de \"Create New App\" por favor"
+"Click on the %1$s button and fill the %2$s and %3$s fields. The specified "
+"app name will appear on your %4$s!"
+msgstr "Haz clic en el botón Create"
 
-#, php-format
+#, fuzzy, php-format
+#| msgid "Click on the Create button"
 msgid ""
-"Press the %1$s button on the top right corner, so you can return to the "
-"previous page."
+"Click on the %1$s button, read the documents listed below the requirements "
+"then press the %2$s button."
+msgstr "Haz clic en el botón Create"
+
+msgid "Complete the security check if you are prompted with the modal."
 msgstr ""
 
 #, fuzzy, php-format
@@ -1598,13 +1570,17 @@ msgid ""
 msgstr "Denomina tu proyecto y luego haz clic en el botón Create"
 
 #, fuzzy, php-format
-#| msgid "Click on the Create button"
-msgid "Press the %1$s button on the top right corner again."
-msgstr "Haz clic en el botón Create"
+#| msgid "Click on the \"Create New App\" button"
+msgid ""
+"Click on the %1$s button. (If you receive a blank page after you pressed the "
+"%1$s button, you might need to refresh the page.)"
+msgstr "Haz clic en el botón de \"Create New App\" por favor"
 
 #, fuzzy, php-format
 #| msgid "Name your project and then click on the Create button"
-msgid "On the left side, click on the %1$s tab, then click %2$s."
+msgid ""
+"On the left side in the side bar, click on the gear icon ( %1$s ) then click "
+"%2$s."
 msgstr "Denomina tu proyecto y luego haz clic en el botón Create"
 
 #, fuzzy, php-format
@@ -1621,6 +1597,20 @@ msgid ""
 "Fill up the %1$s field. Provide a publicly available and easily accessible "
 "privacy policy that explains what data you are collecting and how you will "
 "use that data."
+msgstr ""
+"Llena la \"Privacy Policy URL\". Proporciona una política de privacidad "
+"accesible al público y de fácil acceso que explique cuales datos estás "
+"recopilando y cómo utilizarás esos datos."
+
+#, fuzzy, php-format
+#| msgid ""
+#| "Fill up the \"Privacy Policy URL\". Provide a publicly available and "
+#| "easily accessible privacy policy that explains what data you are "
+#| "collecting and how you will use that data."
+msgid ""
+"Fill up the %1$s field. Provide a publicly available terms and conditions "
+"page link, where you describe the rules and guidelines that your visitors "
+"must agree to."
 msgstr ""
 "Llena la \"Privacy Policy URL\". Proporciona una política de privacidad "
 "accesible al público y de fácil acceso que explique cuales datos estás "
@@ -1690,14 +1680,24 @@ msgid ""
 "Meta, which may take several days."
 msgstr ""
 
+#, fuzzy, php-format
+#| msgid "Name your project and then click on the Create button"
+msgid "Once your verification is completed, click on the %1$s tab. "
+msgstr "Denomina tu proyecto y luego haz clic en el botón Create"
+
+#, php-format
+msgid ""
+"To obtain access to permissions, you must answer some questions about your "
+"data handling practices, click on the %1$s link, that you find next to %2$s "
+"and answer questions about the data handling."
+msgstr ""
+
 #, php-format
 msgid ""
 "Currently your app is in Development Mode which also means that people "
-"outside of your business can not use it. Once your verification is "
-"completed, click on the %1$s tab and publish your app by clicking on the "
-"blue %1$s button at the bottom right corner. Before you press it, it is "
-"recommended to check the steps listed on the %2$s page, if you configured "
-"everything properly."
+"outside of your business can not use it. To change this, click on the %1$s "
+"option on the left side again, and publish your app by clicking on the blue "
+"%1$s button at the bottom right corner."
 msgstr ""
 
 #, fuzzy, php-format
@@ -1987,6 +1987,9 @@ msgid ""
 "Disable, when you don't want to see the account select prompt on each login."
 msgstr ""
 
+msgid "Original"
+msgstr ""
+
 msgid "Continue with <b>Google</b>"
 msgstr "Sigue con <b>Google</b>"
 
@@ -2194,9 +2197,6 @@ msgstr ""
 #| msgid "App Secret"
 msgid "API Key Secret"
 msgstr "App Secret"
-
-msgid "Original"
-msgstr ""
 
 #, fuzzy
 #| msgid "Continue with <b>VK</b>"
@@ -3070,47 +3070,14 @@ msgstr "Haz clic en el botón Create"
 #, php-format
 msgid ""
 "Select an image for your App, fill in the \"%1$s\" and \"%2$s\" fields, "
-"comply with the \"%3$s\", then click on the \"%4$s\" button!"
+"select a \"%3$s\" then comply with the \"%4$s\", finally click on the "
+"\"%5$s\" button!"
 msgstr ""
 
 #, fuzzy, php-format
 #| msgid "Once you have a project, you'll end up in the dashboard."
 msgid "Once you have a project, click on it, and you will enter the %1$s."
 msgstr "Una vez que tengas un proyecto, llegarás al escritorio."
-
-#, php-format
-msgid ""
-"Copy and save the \"%1$s\" value. This is what you will use later on the "
-"Settings tab for the \"%1$s\" field."
-msgstr ""
-
-#, php-format
-msgid ""
-"Then in the side bar on the left side, find the \"%1$s\" menu and click on "
-"the \"%2$s\" menu point. Click on the \"%3$s\" button, then on \"%4$s\"."
-msgstr ""
-
-#, php-format
-msgid ""
-"Copy and save this code, this is what you will use for the \"%1$s\" on the "
-"Settings tab."
-msgstr ""
-
-#, php-format
-msgid ""
-"Also, make sure to set the \"%1$s\" to \"%2$s\" with the \"%3$s\" button."
-msgstr ""
-
-#, php-format
-msgid "Next, go to the \"%1$s\" in the \"%2$s\" menu on the left."
-msgstr ""
-
-#, fuzzy, php-format
-#| msgid "Enter your domain name to the App Domains"
-msgid ""
-"Click on the blue \"%1$s\" button, then enter your domain name into the "
-"\"%2$s\" field, probably: %3$s"
-msgstr "Ingresa tu nombre de dominio a los App Domains"
 
 #, php-format
 msgid ""
@@ -3144,13 +3111,13 @@ msgid ""
 msgstr ""
 
 #, php-format
-msgid ""
-"%s - Purpose: Accounts will be registered or linked based on this email "
-"address."
+msgid "%s - Purpose: This image will be used as the avatar of the account."
 msgstr ""
 
 #, php-format
-msgid "%s - Purpose: This image will be used as the avatar of the account."
+msgid ""
+"%s - Purpose: Accounts will be registered or linked based on this email "
+"address."
 msgstr ""
 
 #, php-format
@@ -3167,14 +3134,48 @@ msgstr ""
 
 #, php-format
 msgid ""
-"%1$s The \"%2$s\" type itself and certain scopes (e.g. \"%3$s\", \"%4$s\" - "
-"used when you turn on the corresponding setting on our %5$s tab), will "
-"require you to register business information, or if you are a single "
-"developer verify your identity (both can be done under the \"%6$s\" menu "
-"point), in order to be able to request consent to these items."
+"%1$s Certain scopes, like the \"%2$s\" or e.g. \"%3$s\", \"%4$s\" (used when "
+"you turn on the corresponding setting on our %5$s tab), will require you to "
+"register business information, or if you are a single developer verify your "
+"identity (both can be done under the \"%6$s\" menu point), in order to be "
+"able to request consent to these items."
 msgstr ""
 
 msgid "WARNING:"
+msgstr ""
+
+#, php-format
+msgid "Next, go to the \"%1$s\" in the \"%2$s\" menu on the left."
+msgstr ""
+
+#, fuzzy, php-format
+#| msgid "Enter your domain name to the App Domains"
+msgid ""
+"Click on the blue \"%1$s\" button, then enter your domain name into the "
+"\"%2$s\" field, probably: %3$s"
+msgstr "Ingresa tu nombre de dominio a los App Domains"
+
+#, php-format
+msgid ""
+"Then in the side bar on the left side, find the \"%1$s\" menu and click on "
+"the \"%2$s\" menu point. Click on the \"%3$s\" button, then on \"%4$s\"."
+msgstr ""
+
+#, php-format
+msgid ""
+"Copy and save this code, this is what you will use for the \"%1$s\" on the "
+"Settings tab."
+msgstr ""
+
+#, php-format
+msgid ""
+"Also, make sure to set the \"%1$s\" to \"%2$s\" with the \"%3$s\" button."
+msgstr ""
+
+#, php-format
+msgid ""
+"Then, go to the \"%1$s\" menu, and copy the \"%2$s\" value. This is what you "
+"will use later on the Settings tab for the \"%2$s\" field."
 msgstr ""
 
 #, php-format
@@ -3203,6 +3204,14 @@ msgid "Force user to enter login credentials on each login"
 msgstr ""
 
 msgid "Start the authentication with the Kakao Account sign-up page."
+msgstr ""
+
+#, fuzzy
+#| msgid "Email"
+msgid "Email scope"
+msgstr "Email"
+
+msgid "Disable, when you have no rights for email address."
 msgstr ""
 
 msgid "Mini"
@@ -3863,11 +3872,6 @@ msgid ""
 "to tick the other necessary fields either! )"
 msgstr ""
 
-#, fuzzy
-#| msgid "Email"
-msgid "Email scope"
-msgstr "Email"
-
 #, fuzzy, php-format
 #| msgid "Name your project and then click on the Create button"
 msgid "Fill the %1$s and %2$s fields."
@@ -3903,9 +3907,6 @@ msgstr ""
 #| msgid "App Secret"
 msgid "Secret"
 msgstr "App Secret"
-
-msgid "Disable, when you have no rights for email address."
-msgstr ""
 
 msgid "Continue with <b>PayPal</b>"
 msgstr "Sigue con <b>PayPal</b>"
@@ -4195,6 +4196,12 @@ msgstr "Haz clic en el botón Create"
 
 #, php-format
 msgid ""
+"Copy and save the \"%1$s\" value. This is what you will use later on the "
+"Settings tab for the \"%1$s\" field."
+msgstr ""
+
+#, php-format
+msgid ""
 "Click on \"%1$s\", copy and save the \"%2$s\" value. This is what you will "
 "use later on the Settings tab for the \"%2$s\" field."
 msgstr ""
@@ -4347,47 +4354,64 @@ msgid ""
 "Log in to your %s developer account or register one if you don't have any!"
 msgstr ""
 
+#, fuzzy, php-format
+#| msgid "Name your project and then click on the Create button"
+msgid "On the top right corner click on %1$s then on %2$s."
+msgstr "Denomina tu proyecto y luego haz clic en el botón Create"
+
+#, fuzzy, php-format
+#| msgid "Locate the blue \"Create application\" button and click on it."
+msgid "Locate the red %1$s button and click on it."
+msgstr "Busca el botón azul \"Create application\" y haz click en el."
+
 #, php-format
-msgid "On the top right corner click on %1$s then click on the %2$s option."
+msgid ""
+"You will see a popup window. Select the %1$s option, and enter an %2$s, then "
+"click %3$s."
 msgstr ""
 
 #, php-format
 msgid ""
-"Find the %1$s section and upload an image as %2$s, then enter an %3$s, a "
-"%4$s and choose a value for %5$s."
+"Find the %1$s section, and upload an image for the %2$s, update the %3$s if "
+"necessary, choose a %4$s, and add a %5$s"
 msgstr ""
 
 #, php-format
 msgid ""
-"For %1$s you should enable the %2$s option then enter the URL of your "
-"website into the %3$s field, probably: %4$s"
+"Enter your %1$s and %2$s URLs. You will also need to %3$sverify the URL "
+"properties%4$s."
 msgstr ""
 
 #, php-format
 msgid ""
-"Click on %1$s on the left hand menu then add the %2$s product, and press the "
+"For %1$s you should enable the %2$s option, then enter the URL of your "
+"website into the %3$s field.<br>Probably: %4$s <br>You will also need to "
+"%5$sverify the URL properties%6$s."
+msgstr ""
+
+#, fuzzy, php-format
+#| msgid "Name your project and then click on the Create button"
+msgid ""
+"Afterwards, click on %1$s section, then add the %2$s product, and press the "
 "%3$s button."
-msgstr ""
-
-#, fuzzy, php-format
-#| msgid "Name your project and then click on the Create button"
-msgid "At the left hand menu click on the %1$s option under %2$s."
 msgstr "Denomina tu proyecto y luego haz clic en el botón Create"
 
-#, php-format
-msgid "Enter your %1$s and %2$s URLs."
-msgstr ""
+#, fuzzy, php-format
+#| msgid "Make sure that the \"%1$s\" field contains %2$s"
+msgid ""
+"Next, for the %1$s field under the %2$s product, add the following URL: "
+msgstr "Asegúrate que el campo \"%1$s\" tiene %2$s"
 
 #, fuzzy, php-format
 #| msgid "Name your project and then click on the Create button"
-msgid "Scroll up and click on the %s button."
+msgid "At the top of the page, click on the %s button."
 msgstr "Denomina tu proyecto y luego haz clic en el botón Create"
 
 #, php-format
 msgid ""
-"Currently your App is in %1$s status, meaning that you don't have access to "
+"Currently your App is in %1$s mode, meaning that you don't have access to "
 "the credentials which are necessary for the %2$s integration. In order to "
-"gain access, click on the %3$s on the top right corner."
+"gain access, click on the %3$s in the top right corner."
 msgstr ""
 
 #, php-format
@@ -4399,15 +4423,15 @@ msgstr ""
 
 #, php-format
 msgid ""
-"Wait until your App gets approved. This can take a couple of days. If you "
-"scroll up to the top of the page you will be able to inspect the %1$s below "
-"the %2$s section. If you want to learn more about the App review process, "
-"you can find more information in the %3$sofficial documentation%4$s."
+"Wait until your App gets approved. This can take a couple of days. On the "
+"left side you will see %1$s once your App has been approved. If you want to "
+"learn more about the App review process, you can find more information in "
+"the %2$sofficial documentation%3$s."
 msgstr ""
 
 #, php-format
 msgid ""
-"Once the %1$s says %2$s, you will be able to reveal the %3$s and %4$s by "
+"Once your App is %1$s, you will be able to reveal the %2$s and %3$s by "
 "clicking on the eye icon next to these fields. You will need these "
 "credentials for the provider configuration."
 msgstr ""
@@ -4781,6 +4805,36 @@ msgstr "Confirmar contraseña"
 msgid "Username"
 msgstr "Usuario"
 
+#, fuzzy
+#~| msgid "BuddyPress register button style"
+#~ msgid "BuddyPress registration integration"
+#~ msgstr "Estilo del botón de registro BuddyPress"
+
+#, fuzzy, php-format
+#~| msgid "Click on the Create button"
+#~ msgid "Select %1$s."
+#~ msgstr "Haz clic en el botón Create"
+
+#, fuzzy, php-format
+#~| msgid "Click on the \"Create New App\" button"
+#~ msgid "Click the %1$s button and complete the Security Check."
+#~ msgstr "Haz clic en el botón de \"Create New App\" por favor"
+
+#, fuzzy, php-format
+#~| msgid "Click on the Create button"
+#~ msgid "Press the %1$s button on the top right corner again."
+#~ msgstr "Haz clic en el botón Create"
+
+#, fuzzy, php-format
+#~| msgid "Name your project and then click on the Create button"
+#~ msgid "At the left hand menu click on the %1$s option under %2$s."
+#~ msgstr "Denomina tu proyecto y luego haz clic en el botón Create"
+
+#, fuzzy, php-format
+#~| msgid "Name your project and then click on the Create button"
+#~ msgid "Scroll up and click on the %s button."
+#~ msgstr "Denomina tu proyecto y luego haz clic en el botón Create"
+
 #, fuzzy, php-format
 #~| msgid "Click on the Create button"
 #~ msgid "Hit the %1$s button next to the old URI."
@@ -4791,11 +4845,6 @@ msgstr "Usuario"
 #~| "Add the following URL to the \"Allowed Return URLs\" field <b>%s</b> "
 #~ msgid "Add your web domain or URL to the \"%1$s\" field."
 #~ msgstr "Agrega la siguiente URL al campo \"Allowed Return URLs\" <b>%s</b> "
-
-#, fuzzy, php-format
-#~| msgid "Make sure that the \"%1$s\" field contains %2$s"
-#~ msgid "For the \"%1$s\", enter the following URL: "
-#~ msgstr "Asegúrate que el campo \"%1$s\" tiene %2$s"
 
 #, fuzzy
 #~| msgid "No Connect button in register form"

@@ -6,20 +6,15 @@
 
 <table class="form-table" style="table-layout: fixed;">
 
-    <?php
-
-    /** @ignore */
-
-    do_action('mc4wp_admin_form_before_mailchimp_settings_rows', $opts, $form);
-    ?>
+    <?php do_action('mc4wp_admin_form_before_mailchimp_settings_rows', $opts, $form); ?>
 
     <tr valign="top">
-        <th scope="row" style="width: 250px;"><?php echo esc_html__('Lists this form subscribes to', 'mailchimp-for-wp'); ?></th>
+        <th scope="row" style="width: 250px;"><?php echo esc_html__('Audiences this form subscribes to', 'mailchimp-for-wp'); ?></th>
         <?php
         // loop through lists
         if (empty($lists)) {
             ?>
-            <td colspan="2"><?php echo sprintf(wp_kses(__('No lists found, <a href="%s">are you connected to Mailchimp</a>?', 'mailchimp-for-wp'), array( 'a' => array( 'href' => array() ) )), admin_url('admin.php?page=mailchimp-for-wp')); ?></td>
+            <td colspan="2"><?php echo sprintf(wp_kses(__('No audiences found, <a href="%s">are you connected to Mailchimp</a>?', 'mailchimp-for-wp'), [ 'a' => [ 'href' => [] ] ]), admin_url('admin.php?page=mailchimp-for-wp')); ?></td>
             <?php
         } else {
             ?>
@@ -38,7 +33,7 @@
                     }
                     ?>
                 </ul>
-                <p class="description"><?php echo esc_html__('Select the list(s) to which people who submit this form should be subscribed.', 'mailchimp-for-wp'); ?></p>
+                <p class="description"><?php echo esc_html__('Select the Mailchimp audience to which people who submit this form should be subscribed.', 'mailchimp-for-wp'); ?></p>
             </td>
             <?php
         }
@@ -76,10 +71,10 @@
     </tr>
 
     <?php
-    $config = array(
+    $config = [
         'element' => 'mc4wp_form[settings][update_existing]',
         'value'   => 1,
-    );
+    ];
     ?>
     <tr valign="top" data-showif="<?php echo esc_attr(json_encode($config)); ?>">
         <th scope="row"><?php echo esc_html__('Replace interest groups?', 'mailchimp-for-wp'); ?></th>
@@ -111,11 +106,7 @@
         </td>
     </tr>
 
-    <?php
-    /** @ignore */
-    do_action('mc4wp_admin_form_after_mailchimp_settings_rows', $opts, $form);
-    ?>
-
+    <?php do_action('mc4wp_admin_form_after_mailchimp_settings_rows', $opts, $form); ?>
 </table>
 
 <div class="mc4wp-margin-m"></div>
@@ -124,10 +115,7 @@
 
 <table class="form-table" style="table-layout: fixed;">
 
-    <?php
-    /** @ignore */
-    do_action('mc4wp_admin_form_before_behaviour_settings_rows', $opts, $form);
-    ?>
+    <?php do_action('mc4wp_admin_form_before_behaviour_settings_rows', $opts, $form); ?>
 
     <tr valign="top">
         <th scope="row"><?php echo esc_html__('Hide form after a successful sign-up?', 'mailchimp-for-wp'); ?></th>
@@ -150,7 +138,7 @@
         <td>
             <input type="text" class="widefat" name="mc4wp_form[settings][redirect]" id="mc4wp_form_redirect" placeholder="<?php echo sprintf(esc_attr__('Example: %s', 'mailchimp-for-wp'), esc_attr(site_url('/thank-you/'))); ?>" value="<?php echo esc_attr($opts['redirect']); ?>" />
             <p class="description">
-                <?php echo wp_kses(__('Leave empty or enter <code>0</code> for no redirect. Otherwise, use complete (absolute) URLs, including <code>http://</code>.', 'mailchimp-for-wp'), array( 'code' => array() )); ?>
+                <?php echo wp_kses(__('Leave empty or enter <code>0</code> for no redirect. Otherwise, use complete (absolute) URLs, including <code>http://</code>.', 'mailchimp-for-wp'), [ 'code' => [] ]); ?>
             </p>
             <p class="description">
                 <?php echo esc_html__('Your "subscribed" message will not show when redirecting to another page, so make sure to let your visitors know they were successfully subscribed.', 'mailchimp-for-wp'); ?>
@@ -159,10 +147,7 @@
         </td>
     </tr>
 
-    <?php
-    /** @ignore */
-    do_action('mc4wp_admin_form_after_behaviour_settings_rows', $opts, $form);
-    ?>
+    <?php do_action('mc4wp_admin_form_after_behaviour_settings_rows', $opts, $form); ?>
 
 </table>
 

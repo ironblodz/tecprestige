@@ -58,14 +58,28 @@ class Users extends Module {
 	}
 
 	/**
-	 * The table in the database.
+	 * The table name.
 	 *
 	 * @access public
 	 *
 	 * @return string
+	 * @deprecated since 3.11.0 Use table() instead.
 	 */
 	public function table_name() {
+		_deprecated_function( __METHOD__, '3.11.0', 'Automattic\\Jetpack\\Sync\\Users->table' );
 		return 'usermeta';
+	}
+
+	/**
+	 * The table in the database with the prefix.
+	 *
+	 * @access public
+	 *
+	 * @return string|bool
+	 */
+	public function table() {
+		global $wpdb;
+		return $wpdb->usermeta;
 	}
 
 	/**
@@ -746,7 +760,7 @@ class Users extends Module {
 		$query = "meta_key = '{$wpdb->prefix}user_level' AND meta_value > 0";
 
 		// The $config variable is a list of user IDs to sync.
-		if ( is_array( $config ) ) {
+		if ( is_array( $config ) && ! empty( $config ) ) {
 			$query .= ' AND user_id IN (' . implode( ',', array_map( 'intval', $config ) ) . ')';
 		}
 

@@ -27,7 +27,7 @@ class Upgrade {
 		$restored           = get_option( 'nta_wa_restored', false );
 		$restoredBackground = get_option( 'nta_wa_background_restored', false );
 
-		if ( $restored === false || $restored == 0 ) {
+		if ( false === $restored || 0 === $restored ) {
 			$old_posts = get_posts(
 				array(
 					'post_type'   => 'whatsapp-accounts',
@@ -38,7 +38,7 @@ class Upgrade {
 			);
 			if ( count( $old_posts ) > 0 ) {
 				$this->runBackground( $restoredBackground );
-				if ( $restoredBackground == 1 ) {
+				if ( 1 === $restoredBackground ) {
 					add_action( 'admin_notices', array( $this, 'renderNotice' ) );
 					add_action( 'wp_ajax_njt_wa_restore', array( $this, 'runRestore' ) );
 				}
@@ -49,13 +49,13 @@ class Upgrade {
 	}
 
 	public function runBackground( $restoredBackground ) {
-		if ( $restoredBackground === false || $restoredBackground == 0 ) {
+		if ( false === $restoredBackground || 0 === $restoredBackground ) {
 			try {
 				update_option( 'nta_wa_background_restored', 1 );
 				$this->restoreMeta();
 				$this->restoreOption();
 				update_option( 'nta_wa_restored', 1 );
-			} catch ( Exception $e ) {
+			} catch ( \Exception $e ) {
 				update_option( 'nta_wa_background_restored', 1 );
 			}
 		}
@@ -67,7 +67,7 @@ class Upgrade {
 			$this->restoreMeta( true );
 			$this->restoreOption();
 			update_option( 'nta_wa_restored', 1 );
-		} catch ( Exception $e ) {
+		} catch ( \Exception $e ) {
 			wp_send_json_error(
 				array(
 					'message' => __( 'Please contact us! we can\'t restore your accounts!', 'wp-whatsapp' ),
@@ -83,13 +83,13 @@ class Upgrade {
 		?>
 			<div class="notice notice-error is-dismissible" id="njt-wa-restore-wrapper">
 				<div style="font-size: 1.3em; font-weight: 600; margin-top: 1em;">
-					<?php _e( 'WhatsApp database update required', 'wp-whatsapp' ); ?>
+					<?php echo esc_html__( 'WhatsApp database update required', 'wp-whatsapp' ); ?>
 				</div>
 				<p>
-					<span><?php _e( 'WhatsApp has been updated! To use the latest version, you have to update your database to make your WhatsApp accounts work correctly.', 'wp-whatsapp' ); ?></span>
+					<span><?php echo esc_html__( 'WhatsApp has been updated! To use the latest version, you have to update your database to make your WhatsApp accounts work correctly.', 'wp-whatsapp' ); ?></span>
 					<div>
 						<button class="button button-primary" id="nta-wa-restore">
-							<strong><?php _e( 'Update WhatsApp Database', 'wp-whatsapp' ); ?></strong>
+							<strong><?php echo esc_html__( 'Update WhatsApp Database', 'wp-whatsapp' ); ?></strong>
 						</button>
 					</div>
 				</p>
@@ -104,7 +104,7 @@ class Upgrade {
 						dataType: 'json',
 						data: {
 							'action': 'njt_wa_restore',
-							'nonce': '<?php echo wp_create_nonce( 'nta_wa_restore_nonce' ); ?>'
+							'nonce': '<?php echo esc_attr( wp_create_nonce( 'nta_wa_restore_nonce' ) ); ?>'
 						}
 					}).done(function(result) {
 						if (result.success) {
@@ -143,7 +143,7 @@ class Upgrade {
 		foreach ( $daysOfWeek as $dayKey ) {
 			$timeString         = explode( '-', $old_meta[ "nta_{$dayKey}_working" ] );
 			$results[ $dayKey ] = array(
-				'isWorkingOnDay' => $old_meta[ "nta_{$dayKey}" ] == 'checked' ? 'ON' : 'OFF',
+				'isWorkingOnDay' => 'checked' === $old_meta[ "nta_{$dayKey}" ] ? 'ON' : 'OFF',
 				'workHours'      => array(
 					array(
 						'startTime' => $timeString[0],
@@ -187,14 +187,14 @@ class Upgrade {
 			)
 		);
 
-		if ( $cleanBefore === true ) {
+		if ( true === $cleanBefore ) {
 			$this->cleanOldRestored( $old_posts );
 		}
 
 		if ( count( $old_posts ) > 0 ) {
 			foreach ( $old_posts as $old_post ) {
 				$old_meta_info = get_post_meta( $old_post->ID, 'nta_whatsapp_accounts', true );
-				if ( $old_meta_info !== false ) {
+				if ( false !== $old_meta_info ) {
 					$new_meta_info = array(
 						'accountName'       => $old_post->post_title,
 						'title'             => $old_meta_info['nta_title'],
@@ -202,12 +202,12 @@ class Upgrade {
 						'willBeBackText'    => $old_meta_info['nta_offline_text'],
 						'dayOffsText'       => $old_meta_info['nta_over_time'],
 						'predefinedText'    => $old_meta_info['nta_predefined_text'],
-						'isAlwaysAvailable' => ( isset( $old_meta_info['nta_button_available'] ) && $old_meta_info['nta_button_available'] == 'ON' ) ? 'ON' : 'OFF',
+						'isAlwaysAvailable' => ( isset( $old_meta_info['nta_button_available'] ) && 'ON' === $old_meta_info['nta_button_available'] ) ? 'ON' : 'OFF',
 						'daysOfWeekWorking' => $this->daysOfWeekWorkingParse( $old_meta_info ),
 					);
 
-					$widget_show = $old_meta_info['nta_active'] == 'active' ? 'ON' : 'OFF';
-					$wc_show     = $old_meta_info['wo_active'] == 'active' ? 'ON' : 'OFF';
+					$widget_show = 'active' === $old_meta_info['nta_active'] ? 'ON' : 'OFF';
+					$wc_show     = 'active' === $old_meta_info['wo_active'] ? 'ON' : 'OFF';
 
 					$widget_position = $old_meta_info['position'];
 					$wc_position     = $old_meta_info['wo_position'];
@@ -215,7 +215,7 @@ class Upgrade {
 
 				$old_button_styles = get_post_meta( $old_post->ID, 'nta_wabutton_style', true );
 
-				if ( $old_button_styles === false ) {
+				if ( false === $old_button_styles ) {
 					$new_meta_styles = array(
 						'type'            => 'round',
 						'backgroundColor' => '#2DB742',
@@ -247,7 +247,7 @@ class Upgrade {
 
 	public static function restoreOption() {
 		$old_option = get_option( 'nta_whatsapp_setting', false );
-		if ( $old_option !== false ) {
+		if ( false !== $old_option ) {
 			$new_option_styles = array(
 				'title'              => $old_option['widget_name'],
 				'responseText'       => $old_option['widget_responseText'],
@@ -257,8 +257,6 @@ class Upgrade {
 				'scrollHeight'       => 500,
 				'isShowScroll'       => 'OFF',
 				'isShowResponseText' => 'ON',
-				'isShowPoweredBy'    => 'ON',
-
 				'btnLabel'           => $old_option['widget_label'],
 				'btnLabelWidth'      => 156,
 				'btnPosition'        => $old_option['widget_position'],
@@ -267,16 +265,16 @@ class Upgrade {
 				'btnBottomDistance'  => 30,
 				'isShowBtnLabel'     => 'ON',
 
-				'isShowGDPR'         => ( isset( $old_option['show_gdpr'] ) && $old_option['show_gdpr'] == 'ON' ) ? 'ON' : 'OFF',
+				'isShowGDPR'         => ( isset( $old_option['show_gdpr'] ) && 'ON' === $old_option['show_gdpr'] ) ? 'ON' : 'OFF',
 				'gdprContent'        => $old_option['widget_gdpr'],
 			);
 
 			$new_option_display = array(
-				'displayCondition' => $old_option['display-pages'] == 'show' ? 'includePages' : 'excludePages',
+				'displayCondition' => 'show' === $old_option['display-pages'] ? 'includePages' : 'excludePages',
 				'includePages'     => ! empty( $old_option['nta-wa-show-pages'] ) ? $old_option['nta-wa-show-pages'] : array(),
 				'excludePages'     => ! empty( $old_option['nta-wa-hide-pages'] ) ? $old_option['nta-wa-hide-pages'] : array(),
-				'showOnDesktop'    => ( isset( $old_option['show_on_desktop'] ) && $old_option['show_on_desktop'] == 'ON' ) ? 'ON' : 'OFF',
-				'showOnMobile'     => ( isset( $old_option['show_on_mobile'] ) && $old_option['show_on_mobile'] == 'ON' ) ? 'ON' : 'OFF',
+				'showOnDesktop'    => ( isset( $old_option['show_on_desktop'] ) && 'ON' === $old_option['show_on_desktop'] ) ? 'ON' : 'OFF',
+				'showOnMobile'     => ( isset( $old_option['show_on_mobile'] ) && 'ON' === $old_option['show_on_mobile'] ) ? 'ON' : 'OFF',
 				'time_symbols'     => 'h:m',
 			);
 
@@ -289,7 +287,7 @@ class Upgrade {
 		update_option( 'nta_wa_widget_display', $new_option_display );
 
 		$old_option = get_option( 'nta_wa_woobutton_setting', false );
-		if ( $old_option !== false ) {
+		if ( false !== $old_option ) {
 			$new_option = array(
 				'position' => $old_option['nta_woo_button_position'],
 				'isShow'   => ! empty( $old_option['nta_woo_button_status'] ) ? 'ON' : 'OFF',
@@ -300,7 +298,7 @@ class Upgrade {
 		update_option( 'nta_wa_woocommerce', $new_option );
 
 		$old_option = get_option( 'nta_wa_ga_setting', false );
-		if ( $old_option !== false ) {
+		if ( false !== $old_option ) {
 			$new_option = array(
 				'enabledGoogle'   => 'ON',
 				'enabledFacebook' => 'OFF',

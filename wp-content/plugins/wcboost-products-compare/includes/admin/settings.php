@@ -75,10 +75,10 @@ class Settings {
 				'desc'    => __( 'Load the list and buttons via AJAX to bypass the cache', 'wcboost-products-compare' ),
 				'type'    => 'checkbox',
 				'id'      => 'wcboost_products_compare_ajax_bypass_cache',
-				'default' => defined( 'WP_CACHE' ) && WP_CACHE ? 'yes' : 'no',
+				'default' => 'no',
 			],
 			[
-				'name'    => __( 'User tracking', 'wcboost-products-compare' ),
+				'name'    => __( 'Comparision data tracking', 'wcboost-products-compare' ),
 				'desc'    => __( 'Monitor user comparison statistics.', 'wcboost-products-compare' )
 							. '<p class="description">' . __( 'This data gives insights into product performance, user interests, and is used to calculate similar products. Enabling this option may add additional meta data to products.', 'wcboost-products-compare' ) . '</p>',
 				'type'    => 'checkbox',

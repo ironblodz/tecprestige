@@ -6,7 +6,7 @@
  *
  * @author  WCBoost
  * @package WCBoost\Wishlist\Templates
- * @version 1.1
+ * @version 1.1.5
  */
 
 defined( 'ABSPATH' ) || exit;
@@ -111,7 +111,7 @@ if ( ! isset( $wishlist ) ) {
 					<td class="product-quantity" data-title="<?php esc_attr_e( 'Quantity', 'wcboost-wishlist' ); ?>">
 						<?php
 						if ( $_product->is_sold_individually() ) {
-							printf( '1 <input type="hidden" name="wishlist_item[%s][qty]" value="1" />', $item_key );
+							printf( '1 <input type="hidden" name="wishlist_item[%s][qty]" value="1" />', esc_attr( $item_key ) );
 						} else {
 							woocommerce_quantity_input(
 								[

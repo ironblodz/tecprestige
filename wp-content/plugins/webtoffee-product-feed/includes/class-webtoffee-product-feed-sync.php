@@ -82,13 +82,15 @@ class Webtoffee_Product_Feed_Sync {
 		if ( defined( 'WEBTOFFEE_PRODUCT_FEED_SYNC_VERSION' ) ) {
 			$this->version = WEBTOFFEE_PRODUCT_FEED_SYNC_VERSION;
 		} else {
-			$this->version = '2.2.1';
+			$this->version = '2.2.8';
 		}
 		$this->plugin_name = 'webtoffee-product-feed';
 		$this->plugin_base_name	 = WT_PRODUCT_FEED_BASE_NAME;
 
 		$this->load_dependencies();
-		$this->set_locale();
+                if(get_bloginfo('version') < 6.7){
+                    $this->set_locale();
+                }
 		$this->define_admin_hooks();
 	}
 
@@ -183,7 +185,7 @@ class Webtoffee_Product_Feed_Sync {
 
 		$plugin_i18n = new Webtoffee_Product_Feed_Sync_i18n();
 
-		$this->loader->add_action( 'plugins_loaded', $plugin_i18n, 'load_plugin_textdomain' );
+		$this->loader->add_action( 'init', $plugin_i18n, 'load_plugin_textdomain' );
 	}
 
 	/**
@@ -218,10 +220,10 @@ class Webtoffee_Product_Feed_Sync {
 		$this->loader->add_action( 'wp_ajax_fbfeed_batch_status_ajax', $plugin_admin, 'wt_fbfeed_batch_status' );
 		
 		$this->loader->add_action( 'wp_ajax_wt_fbfeed_ajax_save_category', $plugin_admin, 'wt_fbfeed_ajax_save_category' );
-		$this->loader->add_filter( 'plugin_action_links_' . $this->get_plugin_base_name(), $plugin_admin, 'add_productfeed_action_links' );
+		$this->loader->add_filter( 'plugin_action_links_' . $this->get_plugin_base_name(), $plugin_admin, 'add_productfeed_action_links' );   
                 
-                $this->loader->add_action( 'woocommerce_before_delete_product_variation', $plugin_admin, 'delete_product_from_fb', 10, 1 );
-                $this->loader->add_action( 'wp_trash_post', $plugin_admin, 'delete_product_from_fb', 10, 1 );
+                $this->loader->add_filter( 'admin_footer_text', $plugin_admin, 'admin_footer_text', 1 );
+                
 	}
 
 	/**

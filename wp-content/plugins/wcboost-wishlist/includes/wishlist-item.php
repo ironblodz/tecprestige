@@ -105,7 +105,10 @@ class Wishlist_Item extends \WC_Data {
 		try {
 			$this->data_store->read( $this );
 		} catch ( \Exception $e ) {
-			error_log( $e->getMessage() );
+			if ( defined( 'WP_DEBUG' ) && WP_DEBUG ) {
+				// phpcs:ignore WordPress.PHP.DevelopmentFunctions.error_log_error_log
+				error_log( 'Error reading wishlist item: ' . $e->getMessage() );
+			}
 		}
 	}
 

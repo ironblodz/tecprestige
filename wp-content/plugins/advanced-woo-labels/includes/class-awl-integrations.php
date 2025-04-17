@@ -30,6 +30,11 @@ if ( ! class_exists( 'AWL_Integrations' ) ) :
         public $child_theme = '';
 
         /**
+         * @var AWL_Integrations Active plugins arrray
+         */
+        public $active_plugins = array();
+
+        /**
          * Main AWL_Integrations Instance
          *
          * @static
@@ -56,6 +61,15 @@ if ( ! class_exists( 'AWL_Integrations' ) ) :
                     $this->current_theme = $theme->parent()->get( 'Name' );
                 }
             }
+
+            $active_plugins = get_option( 'active_plugins', array() );
+
+            if ( is_multisite() ) {
+                $network_active_plugins = get_site_option( 'active_sitewide_plugins', array() );
+                $active_plugins = array_merge( $active_plugins, array_keys( $network_active_plugins ) );
+            }
+
+            $this->active_plugins = $active_plugins;
 
             $this->includes();
 
@@ -124,7 +138,7 @@ if ( ! class_exists( 'AWL_Integrations' ) ) :
                 include_once( AWL_DIR . '/includes/modules/class-awl-divi.php' );
             }
 
-            if ( class_exists( 'WC_Product_Table_Plugin' ) ) {
+            if ( class_exists( 'WC_Product_Table_Plugin' ) || class_exists('Barn2\Plugin\WC_Product_Table\Product_Table') ) {
                 include_once( AWL_DIR . '/includes/modules/class-awl-barn-tables.php' );
             }
 
@@ -162,6 +176,20 @@ if ( ! class_exists( 'AWL_Integrations' ) ) :
 
             if ( defined( 'WPF_DIR' ) || defined( 'WPF_SITE_URL' ) ) {
                 include_once( AWL_DIR . '/includes/modules/class-awl-wpf.php' );
+            }
+
+            if ( defined( 'BREAKDANCE_PLUGIN_URL' ) ) {
+                include_once( AWL_DIR . '/includes/modules/class-awl-breakdance.php' );
+            }
+
+            // Discount Rules and Dynamic Pricing for WooCommerce
+            if ( in_array( 'easy-woocommerce-discounts/easy-woocommerce-discounts.php', $this->active_plugins ) ) {
+                include_once( AWL_DIR . '/includes/modules/class-awl-easy-discounts.php' );
+            }
+
+            // Essential Addons for Elementor
+            if ( in_array( 'essential-addons-for-elementor-lite/essential_adons_elementor.php', $this->active_plugins ) || in_array( 'essential-addons-for-elementor/essential_adons_elementor.php', $this->active_plugins ) ) {
+                include_once( AWL_DIR . '/includes/modules/class-awl-essential-addons.php' );
             }
 
             if ( 'Avada' === $this->current_theme ) {
@@ -349,6 +377,7 @@ if ( ! class_exists( 'AWL_Integrations' ) ) :
 
                 case 'Uncode':
                     $hooks['on_image']['archive'] = array( 'uncode_entry_visual_after_image' => array( 'priority' => 10 ) );
+                    $hooks['before_title']['archive']= array( 'uncode_inner_entry_after_title' => array( 'priority' => 10 ) );
                     break;
 
                 case 'Total':
@@ -404,6 +433,13 @@ if ( ! class_exists( 'AWL_Integrations' ) ) :
                     $hooks['before_title']['single']['woocommerce_single_product_summary'] = array( 'priority' => 1, 'js' => array( '.c-product__title', 'before' ) );
                     break;
 
+                case 'Shopical':
+                    if ( ! is_singular('product') ) {
+                        $hooks['on_image']['archives']['shopical_woocommerce_after_shop_loop_item_title'] = array( 'priority' => 1, 'js' => array( '.product-image-wrapper', 'append' ) );
+                    }
+                    $hooks['before_title']['archives']['shopical_woocommerce_after_shop_loop_item_title'] = array( 'priority' => 2, 'js' => array( '.product-title a', 'before' ) );
+                    break;
+
             }
 
             // Oxygen builder
@@ -418,13 +454,17 @@ if ( ! class_exists( 'AWL_Integrations' ) ) :
             }
 
             // Product Gallery Slider for Woocommerce ( Formerly Twist )
-            if ( class_exists( 'Twist' ) ) {
-                $hooks['on_image']['single']['wpgs_after_image_gallery'] = array( 'priority' => 10, 'js' => array( '.wpgs-image', 'prepend' ) );
+            if ( in_array( 'twist/twist.php', $this->active_plugins ) ) {
+                if ( wp_is_mobile() ) {
+                    $hooks['on_image']['single']['wpgs_after_image_gallery'] = array( 'priority' => 10, 'js' => array( '.mob-image .wpgs-image', 'prepend' ) );
+                } else {
+                    $hooks['on_image']['single']['wpgs_after_image_gallery'] = array( 'priority' => 10, 'js' => array( '.wpgs-image', 'prepend' ) );
+                }
             }
 
             // Additional Variation Images Gallery for WooCommerce plugin
-            if ( class_exists( 'Woo_Variation_Gallery' ) ) {
-                $hooks['on_image']['single']['woo_variation_product_gallery_start'] = array( 'priority' => 10, 'js' => array( '.woo-variation-gallery-slider-wrapper', 'append' ) );
+            if ( class_exists( 'Woo_Variation_Gallery' ) || defined( 'WOO_VARIATION_GALLERY_PLUGIN_VERSION' ) ) {
+                $hooks['on_image']['single']['woo_variation_product_gallery_start'] = array( 'priority' => 10, 'js' => array( '.veb-variation-gallery-slider-wrapper', 'append' ) );
             }
 
             // Premium Addons for Elementor
@@ -451,6 +491,27 @@ if ( ! class_exists( 'AWL_Integrations' ) ) :
             if ( defined( 'SP_WPSPRO_PATH' ) || defined( 'SP_WPS_PATH' ) ) {
                 $hooks['before_title']['archive']['sp_wpspro_before_product_title'] = array( 'priority' => 10 );
                 $hooks['on_image']['archive']['sp_wpspro_before_product_thumbnail'] = array( 'priority' => 10 );
+            }
+
+            // CommerceKit by CommerceGurus
+            if ( class_exists( 'CommerceGurus_Gallery' ) ) {
+                $hooks['on_image']['single']['commercekit_before_gallery'] = array( 'priority' => 10, 'js' => array( '#commercegurus-pdp-gallery .swiper-container', 'append' ) );
+            }
+
+            // Product Video Gallery for Woocommerce
+            if ( defined('NICKX_PLUGIN_VERSION') ) {
+                $hooks['on_image']['single']['woocommerce_before_single_product_summary'] = array( 'priority' => 10, 'js' => array( '.images > div', 'append' ) );
+            }
+
+            // Ultimate addons for Beaver Builder plugin
+            if ( in_array( 'bb-ultimate-addon/bb-ultimate-addon.php', $this->active_plugins ) ) {
+                $hooks['on_image']['archive']['uabb_woo_products_before_summary_wrap'] = array( 'priority' => 10, 'js' => array( '.uabb-woo-products-thumbnail-wrap', 'append' ) );
+                $hooks['before_title']['archive']['uabb_woo_products_title_before'] = array( 'priority' => 10 );
+            }
+
+            // Variation Images Gallery for WooCommerce
+            if ( in_array( 'woo-product-variation-gallery/woo-product-variation-gallery.php', $this->active_plugins ) ) {
+                $hooks['on_image']['single']['rtwpvg_product_badge'] = array( 'priority' => 10 );
             }
 
             return $hooks;
@@ -554,6 +615,22 @@ if ( ! class_exists( 'AWL_Integrations' ) ) :
 
             $output = '';
 
+            if ( 'Shopical' === $this->current_theme ) {
+                $output .= '<style>.products .product-image-wrapper { position: relative; }</style>';
+            }
+
+            // WooCommerce Load More Products plugin
+            if ( defined( 'BeRocket_Load_More_Products_version' ) ) {
+                $output .= '<script>
+                    jQuery(document).on( "berocket_lmp_end", function() {
+                        window.document.dispatchEvent(new Event("AWLTriggerJsReplace", {
+                            bubbles: true,
+                            cancelable: true
+                        }));
+                    } );
+                </script>';
+            }
+
             echo $output;
 
         }
@@ -582,6 +659,10 @@ if ( ! class_exists( 'AWL_Integrations' ) ) :
                 remove_action( 'iconic_woothumbs_before_images', 'woocommerce_show_product_sale_flash', 10 );
             }
 
+            if ( in_array( 'bb-ultimate-addon/bb-ultimate-addon.php', $this->active_plugins ) ) {
+                add_filter( 'uabb_woo_products_sale_flash', function ( $image ) { return ''; }, 100 );
+            }
+
             add_filter( 'woocommerce_blocks_product_grid_item_html', 'AWL_Integrations_Callbacks::woocommerce_blocks_product_grid_item_html_hide_bagge', 10, 3 );
 
         }
@@ -607,6 +688,34 @@ if ( ! class_exists( 'AWL_Integrations' ) ) :
                 add_filter( 'woocommerce_stock_html', function ( $html ) {
                     return '';
                 } );
+            }
+
+            if ( 'Blocksy' === $this->current_theme ) {
+
+                add_filter( 'blocksy:woocommerce:product-card:badges', function ( $badges ) {
+                    $new_badges = array();
+                    if ( ! empty( $badges ) ) {
+                        foreach ( $badges as $badge ) {
+                            if ( strpos( $badge, 'out-of-stock' ) === false ) {
+                                $new_badges[] = $badge;
+                            }
+                        }
+                    }
+                    return $new_badges;
+                } );
+
+                add_filter( 'blocksy:woocommerce:single:after-sale-badge', function ( $badges ) {
+                    $new_badges = array();
+                    if ( ! empty( $badges ) ) {
+                        foreach ( $badges as $badge ) {
+                            if ( strpos( $badge, 'out-of-stock' ) === false ) {
+                                $new_badges[] = $badge;
+                            }
+                        }
+                    }
+                    return $new_badges;
+                } );
+
             }
 
         }

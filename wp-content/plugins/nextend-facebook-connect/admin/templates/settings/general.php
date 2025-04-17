@@ -72,19 +72,11 @@
         <th scope="row"><?php _e('Page for register flow', 'nextend-facebook-connect'); ?></th>
         <td>
             <?php
-            add_filter('get_pages', array(
-                'NextendSocialLogin',
-                'getFreePagesForRegisterFlow'
-            ));
-
             wp_dropdown_pages(array(
                 'name'             => 'register-flow-page',
                 'show_option_none' => __('None', "nextend-facebook-connect"),
-                'selected'         => $settings->get('register-flow-page')
-            ));
-            remove_filter('get_pages', array(
-                'NextendSocialLogin',
-                'getFreePagesForRegisterFlow'
+                'selected'         => $settings->get('register-flow-page'),
+                'exclude'          => NextendSocialLogin::getExcludedPagesForRegisterFlow()
             ));
             ?>
             <p class="description" id="tagline-register-flow-page-1"><?php _e("This setting is used when you request additional data from the users (such as email address) and to display the Terms and conditions.", "nextend-facebook-connect"); ?></p>
@@ -97,20 +89,11 @@
         <td>
 
             <?php
-            add_filter('get_pages', array(
-                'NextendSocialLogin',
-                'getFreePagesForOauthProxyPage'
-            ));
-
             wp_dropdown_pages(array(
                 'name'             => 'proxy-page',
                 'show_option_none' => __('None', "nextend-facebook-connect"),
-                'selected'         => $settings->get('proxy-page')
-            ));
-
-            remove_filter('get_pages', array(
-                'NextendSocialLogin',
-                'getFreePagesForOauthProxyPage'
+                'selected'         => $settings->get('proxy-page'),
+                'exclude'          => NextendSocialLogin::getExcludedPagesForOauthProxyPage()
             ));
             ?>
             <p class="description" id="tagline-proxy-page-1"><?php _e("You can use this setting when wp-login.php page is not available to handle the OAuth flow.", "nextend-facebook-connect") ?></p>
@@ -278,7 +261,7 @@
                               value="1" <?php if ($settings->get('custom_register_label') == '1') : ?> checked="checked" <?php endif; ?>>
                     <span><?php _e('Enabled', 'nextend-facebook-connect'); ?></span></label><br>
             </fieldset>
-            <p class="description"><?php printf(__('Set a custom label for the social buttons in registration forms and for shortcodes with %1$s parameter set to %2$s.<br>The register specific labels can be modified at the Buttons tab of each provider.', 'nextend-facebook-connect'), '<b>labeltype</b>', '<b>register</b>'); ?></p>
+            <p class="description"><?php printf(__('Set a custom label for the social buttons in registration forms and for shortcodes with %1$s parameter set to %2$s.<br>The register specific labels can be modified at the Buttons tab of each provider.<br>This option also allows the use of register specific %3$s options.', 'nextend-facebook-connect'), '<b>labeltype</b>', '<b>register</b>', '<a href="https://nextendweb.com/nextend-social-login-docs/global-settings-custom-actions/" target="_blank">Custom Actions</a>'); ?></p>
         </td>
     </tr>
 

@@ -1,0 +1,9 @@
+Ar condicionado monosplit, 18000 BTUS
+
+Dimensões unidade interior: 885x195x299 mmm
+Dimensões unidade exterior: 800x285x714 mm
+Potência de arrefecimento: 5 (1,4-5,4) kW
+Potência de aquecimento : 5,8 (1,4-7,5) kW
+BTUS: 18.000
+SEER: 7,5
+SCOP: 4,5

@@ -2,8 +2,8 @@
 Contributors: facebook, automattic, woothemes
 Tags: facebook, woocommerce, marketing, product catalog feed, pixel
 Requires at least: 5.6
-Tested up to: 6.6
-Stable tag: 3.2.8
+Tested up to: 6.7
+Stable tag: 3.4.6
 Requires PHP: 7.4
 MySQL: 5.6 or greater
 License: GPLv2 or later
@@ -40,67 +40,15 @@ When opening a bug on GitHub, please give us as many details as possible.
 
 == Changelog ==
 
-= 3.2.8 - 2024-09-03 =
-* Update - Access Token retrieval procedure.
-* Update - Use get_title() for content_name to match catalog name.
+= 3.4.6 - 2025-04-04 =
+* Fix - Product availability syncing by @vinkmeta in #3010
+* Fix - Product attribute sort error which prevented product edits in certain scenarios by @iodic in #3012
 
-= 3.2.7 - 2024-08-13 =
-* Dev - Updated `phpcs` ruleset.
-* Fix - Update failing due to undefined constant error in Lifecycle.
-* Tweak - WC 9.2 compatibility.
+= 3.4.5 - 2025-04-01 =
+* Tweak - Add new product field external_update_time to measure product update latency by @mshymon in #2973
+* Fix - for 'PHP Warning: Undefined variable $fb_product_parent' by @mshymon in #2976
+* Fix - Updated logic to choose/create the feed for product sync by @mshymon in #2989
+* Add - Facebook Product Data Tab Enhancement by @devbodaghe in #2938
+* Fix - PHP Warning for empty attributes by @vinkmeta in #3001
 
-= 3.2.6 - 2024-07-23 =
-* Add - Filter facebook_for_woocommerce_fb_product_description.
-* Fix - Remove deprecated FILTER_SANITIZE_STRING usage.
-* Tweak - Align PHP require version to composer.json.
-
-= 3.2.5 - 2024-07-10 =
-* Tweak - WC 9.1 compatibility.
-* Tweak - WP 6.6 compatibility.
-
-= 3.2.4 - 2024-06-13 =
-* Dev - Adds support for wp-env.
-* Tweak - Fully remove Facebook Messenger code references.
-* Tweak - WC 9.0 compatibility.
-
-= 3.2.3 - 2024-05-28 =
-* Add - Versioning and compatibility checks to implement support policy.
-* Fix - Errors and warnings while generating pot file.
-* Tweak - Bump Marketing API version to v20.0.
-* Tweak - Remove hidden files from build archive.
-
-= 3.2.2 - 2024-05-14 =
-* Fix - Incorrect alert for Product Sets without excluded categories.
-* Tweak - WC 8.9 compatibility.
-
-= 3.2.1 - 2024-05-07 =
-* Fix - Defer only AddToCart events if applicable.
-* Fix - Direct upgrade path from < 3.1.13 to ≥ 3.2.0.
-* Tweak - Adds WooCommerce as a dependency to the plugin header.
-* Tweak - Revert to WooCommerce.com domain.
-
-= 3.2.0 - 2024-05-01 =
-* Tweak - PHP8.3 to GitHub PHPCS and Unit Tests workflows.
-* Update - Remove the sunsetted Messenger Chat feature.
-
-= 3.1.15 - 2024-04-16 =
-* Tweak - Replace the middleware URL from connect.woocommerce.com to api.woocommerce.com/integrations.
-* Tweak - Test environment setup to resolve notice.
-
-= 3.1.14 - 2024-04-03 =
-* Fix - Remove facebook_messenger_deprecation_warning notice on deactivation.
-* Tweak - Insert pixel-event-placeholder element via vanilla JS.
-* Tweak - WC 8.8 compatibility.
-
-= 3.1.13 - 2024-03-27 =
-* Add - Messenger feature deprecation notices.
-
-= 3.1.12 - 2024-03-19 =
-* Tweak - Check if condition is set before setting a default value.
-* Tweak - Updates readme.txt to meet WordPress requirements.
-
-= 3.1.11 - 2024-03-12 =
-* Fix - Add video syncs to fbproduct.
-* Fix - Deprecation warnings with PHP 8.2.
-* Tweak - WC 8.7 compatibility.
-* Tweak - WP 6.5 compatibility.
+[See changelog for all versions](https://raw.githubusercontent.com/facebook/facebook-for-woocommerce/refs/heads/main/changelog.txt).

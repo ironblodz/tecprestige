@@ -103,8 +103,6 @@ class Updates extends Module {
 			2
 		);
 
-		add_action( 'automatic_updates_complete', $callable );
-
 		if ( is_multisite() ) {
 			add_filter( 'pre_update_site_option_wpmu_upgrade_site', array( $this, 'update_core_network_event' ), 10, 2 );
 			add_action( 'jetpack_sync_core_update_network', $callable, 10, 3 );
@@ -232,9 +230,10 @@ class Updates extends Module {
 		switch ( $transient ) {
 			case 'update_plugins':
 				if ( ! empty( $update->response ) && is_array( $update->response ) ) {
-					foreach ( $update->response as $plugin_slug => $response ) {
-						if ( ! empty( $plugin_slug ) && isset( $response->new_version ) ) {
-							$updates[] = array( $plugin_slug => $response->new_version );
+					foreach ( $update->response as $plugin_slug => $plugin_data ) {
+						$plugin_data = (array) $plugin_data;
+						if ( ! empty( $plugin_slug ) && isset( $plugin_data['new_version'] ) ) {
+							$updates[] = array( $plugin_slug => $plugin_data['new_version'] );
 						}
 					}
 				}
@@ -249,9 +248,10 @@ class Updates extends Module {
 				break;
 			case 'update_themes':
 				if ( ! empty( $update->response ) && is_array( $update->response ) ) {
-					foreach ( $update->response as $theme_slug => $response ) {
-						if ( ! empty( $theme_slug ) && isset( $response['new_version'] ) ) {
-							$updates[] = array( $theme_slug => $response['new_version'] );
+					foreach ( $update->response as $theme_slug => $theme_data ) {
+						$theme_data = (array) $theme_data;
+						if ( ! empty( $theme_slug ) && isset( $theme_data['new_version'] ) ) {
+							$updates[] = array( $theme_slug => $theme_data['new_version'] );
 						}
 					}
 				}
@@ -263,12 +263,12 @@ class Updates extends Module {
 				break;
 			case 'update_core':
 				if ( ! empty( $update->updates ) && is_array( $update->updates ) ) {
-					foreach ( $update->updates as $response ) {
-						if ( ! empty( $response->response ) && 'latest' === $response->response ) {
+					foreach ( $update->updates as $core_update ) {
+						if ( ! empty( $core_update->response ) && 'latest' === $core_update->response ) {
 							continue;
 						}
-						if ( ! empty( $response->response ) && isset( $response->packages->full ) ) {
-							$updates[] = array( $response->response => $response->packages->full );
+						if ( ! empty( $core_update->response ) && isset( $core_update->packages->full ) ) {
+							$updates[] = array( $core_update->response => $core_update->packages->full );
 						}
 					}
 				}

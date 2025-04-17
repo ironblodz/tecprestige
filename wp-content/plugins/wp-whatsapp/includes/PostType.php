@@ -67,14 +67,14 @@ class PostType {
 				'thumbnail',
 			),
 			'capabilities'      => array(
-				'edit_post'          => 'manage_options',
-				'read_post'          => 'manage_options',
-				'delete_post'        => 'manage_options',
-				'edit_posts'         => 'manage_options',
-				'edit_others_posts'  => 'manage_options',
-				'delete_posts'       => 'manage_options',
-				'publish_posts'      => 'manage_options',
-				'read_private_posts' => 'manage_options',
+				'edit_post'          => 'nta_wa_manage',
+				'read_post'          => 'nta_wa_manage',
+				'delete_post'        => 'nta_wa_manage',
+				'edit_posts'         => 'nta_wa_manage',
+				'edit_others_posts'  => 'nta_wa_manage',
+				'delete_posts'       => 'nta_wa_manage',
+				'publish_posts'      => 'nta_wa_manage',
+				'read_private_posts' => 'nta_wa_manage',
 			),
 		);
 		register_post_type( 'whatsapp-accounts', $args );
@@ -182,19 +182,24 @@ class PostType {
 		$new_account = array(
 			'number'            => sanitize_text_field( $_POST['number'] ),
 			'title'             => sanitize_text_field( $_POST['title'] ),
-			'predefinedText'    => wp_kses_post( $_POST['predefinedText'] ),
+			'predefinedText'    => wp_kses_post( str_replace( '&', '%26', $_POST['predefinedText'] ) ),
 			'willBeBackText'    => sanitize_text_field( $_POST['willBeBackText'] ),
 			'dayOffsText'       => sanitize_text_field( $_POST['dayOffsText'] ),
 			'isAlwaysAvailable' => 'ON',
 		);
 
-		$daysOfWeekWorking = $_POST['daysOfWeekWorking'];
+		$daysOfWeekWorking = isset( $_POST['daysOfWeekWorking'] ) ? $_POST['daysOfWeekWorking'] : array( 'sunday', 'monday', 'tuesday', 'wednesday', 'thursday', 'friday', 'saturday' );
 
 		$new_account['daysOfWeekWorking'] = array_map(
 			function ( $day ) {
 				return array(
 					'isWorkingOnDay' => isset( $day['isWorkingOnDay'] ) ? 'ON' : 'OFF',
-					'workHours'      => $day['workHours'],
+					'workHours'      => isset( $day['workHours'] ) ? $day['workHours'] : array(
+						array(
+							'startTime' => '08:00',
+							'endTime'   => '17:30',
+						),
+					),
 				);
 			},
 			$daysOfWeekWorking

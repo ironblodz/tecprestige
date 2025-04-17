@@ -2,6 +2,8 @@
 use SW_WAPF\Includes\Classes\Html;
 /* @var $field array */
 /* @var $type string */
+
+$field_types = \SW_WAPF\Includes\Classes\Fields::get_field_types();
 ?>
 
 <div class="wapf-field" rv-data-field-id="field.id" rv-class-wapf--active="activeField | equalIds field">
@@ -33,7 +35,17 @@ use SW_WAPF\Includes\Classes\Html;
             </div>
         </div>
         <div class="wapf-field__label" rv-on-click="setActiveField">
-            {field.label} <span class="wapf-field__type"><span rv-text="field.type | fieldType"></span>&nbsp;&nbsp;&nbsp;&nbsp;ID: {field.id}</span>
+            {field.label} 
+            <span class="wapf-field__type">
+                <?php foreach( $field_types as $ft ) {
+                    if( !$ft['pro'] ) {
+                        echo '<span rv-if="field.type | eq \'' . $ft['id'] . '\'">' . $ft['title'] . '</span>';
+                    }
+                } 
+                ?>
+                &nbsp;&nbsp;&nbsp;&nbsp;
+                ID: {field.id}
+            </span>
         </div>
 
         <div class="wapf-field__actions">

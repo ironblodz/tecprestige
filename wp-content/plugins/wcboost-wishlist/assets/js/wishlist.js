@@ -45,6 +45,72 @@
 	};
 
 	/**
+	 * Flyout notices
+	 *
+	 * @param {string} message
+	 * @param {object} options
+	 */
+	var WCBoostNotice = function( message, options ) {
+		this.options = $.extend( {
+			duration: 3000,
+			type: 'notice',
+		}, options );
+
+		this.$notice = null;
+		this.$wrapper = $( '#wcboost-flyout-notices-container' );
+
+		if ( ! this.$wrapper.length ) {
+			this.$wrapper = $( '<div id="wcboost-flyout-notices-container" class="wcboost-flyout-notices-container" />' ).appendTo( document.body );
+		}
+
+		this.$notice = $( '<div class="wcboost-flyout-notice wcboost-notice" role="alert"/>' )
+			.addClass( 'wcboost-notice--' + this.options.type )
+			.append( $( message ) );
+
+		this.wait = null;
+
+		// Methods.
+		this.show = this.show.bind( this );
+		this.hide = this.hide.bind( this );
+		this.delayHide = this.delayHide.bind( this );
+		this.resetDelayHide = this.resetDelayHide.bind( this );
+
+		// Events.
+		if ( this.options.duration > 0 ) {
+			this.$notice
+				.on( 'mouseenter', this.resetDelayHide )
+				.on( 'mouseleave', this.delayHide );
+		}
+	}
+
+	WCBoostNotice.prototype.show = function() {
+		if ( ! this.$notice ) {
+			return;
+		}
+
+		this.$notice.hide();
+		this.$wrapper.append( this.$notice );
+		this.$notice.fadeIn();
+
+		if ( this.options.duration > 0 ) {
+			this.delayHide();
+		}
+	}
+
+	WCBoostNotice.prototype.delayHide = function() {
+		this.resetDelayHide();
+		this.wait = setTimeout( this.hide, this.options.duration );
+	}
+
+	WCBoostNotice.prototype.hide = function() {
+		this.$notice.fadeOut();
+	}
+
+	WCBoostNotice.prototype.resetDelayHide = function() {
+		clearTimeout( this.wait );
+	}
+
+	/**
 	 * AddToWishlistHandler class
 	 */
 	var AddToWishlistHandler = function() {
@@ -101,6 +167,16 @@
 			},
 			success: function( response ) {
 				if ( ! response.success ) {
+					if ( response.data && response.data.message ) {
+						var notice = new WCBoostNotice( response.data.message );
+						notice.show();
+					}
+
+					if ( response.data && response.data.redirect_url ) {
+						location.href = response.data.redirect_url;
+					}
+
+					self.updateButton( $button, 'removed' );
 					return;
 				}
 
@@ -249,9 +325,12 @@
 
 			case 'removed':
 				$button.removeClass( 'added loading' );
-				$button.attr( 'href', data.add_url );
 				$button.find( this.selectors.text ).text( wcboost_wishlist_params.i18n_add_to_wishlist );
 				$button.find( this.selectors.icon ).html( wcboost_wishlist_params.icon_normal );
+
+				if ( data && data.add_url ) {
+					$button.attr( 'href', data.add_url );
+				}
 				break;
 
 			case 'update_id':
@@ -335,8 +414,8 @@
 			$blocking = self.$form ? self.$form : self.$wrapper;
 
 		$.ajax( {
-			url:       event.currentTarget.href,
-			type:     'GET',
+			url     : event.currentTarget.href,
+			type    : 'GET',
 			dataType: 'html',
 			beforeSend: function() {
 				block( $blocking );
@@ -401,13 +480,28 @@
 			var $emptyWishlist = $( '.wishlist-empty', $html ).closest( '.wcboost-wishlist' );
 
 			// Notices are handled later.
-			$emptyWishlist.find( '.woocommerce-error, .woocommerce-message, .woocommerce-info, .is-info, .is-success, .is-error' ).not( '.wishlist-empty' ).remove();
+			$emptyWishlist
+				.find( '.woocommerce-error, .woocommerce-message, .woocommerce-info, .is-info, .is-success, .is-error' )
+				.filter( function() {
+					if ( $( this ).closest( '.wishlist-empty' ).length ) {
+						return false;
+					}
+
+					return ! $( this ).hasClass( 'wishlist-empty' );
+				} )
+				.remove();
 
 			self.$wrapper.html( $emptyWishlist.html() );
 			self.$form = null;
 
 			// Remove the template's notice from the list of notices.
-			$notices = $notices.not( '.wishlist-empty' );
+			$notices = $notices.filter( function() {
+				if ( $( this ).closest( '.wishlist-empty' ).length ) {
+					return false;
+				}
+
+				return ! $( this ).hasClass( 'wishlist-empty' );
+			} );
 
 			// Notify plugins that the cart was emptied.
 			$( document.body ).trigger( 'wishlist_emptied', [ self ] );
@@ -446,19 +540,12 @@
 	var WishlistShareHandler = function() {
 		var self = this;
 
-		// Notice holder.
-		self.$notice = $( '<div class="wcboost-wishlist-share-notice" aria-hidden="true" style="display: none" />' );
-		self.$notice.append( '<div class="wcboost-wishlist-share-notice__text" />' );
-		self.$notice.append( '<a class="wcboost-wishlist-share-notice__close">' + wcboost_wishlist_params.i18n_close_button_text + '</a>' );
-		self.$notice.appendTo( document.body );
-
 		self.openSocialShareIframe = self.openSocialShareIframe.bind( self );
 		self.showCopiedNotice = self.showCopiedNotice.bind( self );
 		self.showWishlistURLNotice = self.showWishlistURLNotice.bind( self );
 
 		// Events.
 		$( document.body ).on( 'click.wcboost-wishlist', '.wcboost-wishlist-share-link', { wishlistShareHandler: self }, self.onClickShareLink );
-		self.$notice.on( 'click.wcboost-wishlist', '.wcboost-wishlist-share-notice__close', { wishlistShareHandler: self }, self.closeNotice );
 	}
 
 	WishlistShareHandler.prototype.onClickShareLink = function( event ) {
@@ -473,21 +560,19 @@
 
 		// Copy wishlist page URL to clipboard.
 		if ( 'link' === social ) {
+			event.preventDefault();
+
 			try {
 				navigator.clipboard.writeText( url ).then( self.showCopiedNotice );
 			} catch ( e ) {
 				self.showWishlistURLNotice( url );
 			}
+		} else {
+			var opened = self.openSocialShareIframe( url );
 
-			event.preventDefault();
-			return;
-		}
-
-		// Open the iframe of the sharer.
-		var opened = self.openSocialShareIframe( url );
-
-		if ( opened ) {
-			event.preventDefault();
+			if ( opened ) {
+				event.preventDefault();
+			}
 		}
 	}
 
@@ -509,31 +594,39 @@
 	}
 
 	WishlistShareHandler.prototype.showCopiedNotice = function() {
-		var self = this;
+		if ( ! this.copiedNotice ) {
+			this.copiedNotice = new WCBoostNotice(
+				$( '<div class="wcboost-wishlist-link-copied-notice wcboost-wishlist-share-notice" />' ).text( wcboost_wishlist_params.i18n_link_copied_notice ),
+				{
+					type: 'message'
+				}
+			);
+		}
 
-		self.$notice.find( '.wcboost-wishlist-share-notice__text' ).html( '' ).text( wcboost_wishlist_params.i18n_link_copied_notice );
-		self.$notice.fadeIn( 200 );
-
-		setTimeout( function() {
-			self.$notice.fadeOut( 200 );
-		}, 2000 );
+		this.copiedNotice.show();
 	}
 
 	WishlistShareHandler.prototype.showWishlistURLNotice = function( url ) {
-		var self = this,
-			$input = $( '<input type="text" value="' + url + '" />' );
+		if ( ! this.urlNotice ) {
+			var $notice = $( '<div class="wcboost-wishlist-share-notice" />' );
 
-		self.$notice.find( '.wcboost-wishlist-share-notice__text' ).html( '' ).append( $input );
-		self.$notice.fadeIn( 200 );
-		$input.focus();
-	}
+			$notice.append( '<input type="text" value="" />' );
+			$notice.append( '<span class="wcboost-wishlist-share-notice__close" role="button">' + wcboost_wishlist_params.i18n_close_button_text + '</span>' );
 
-	WishlistShareHandler.prototype.closeNotice = function( event ) {
-		event.preventDefault();
+			var notice = new WCBoostNotice( $notice, {
+				duration: -1,
+				type: 'info'
+			});
 
-		var self = event.data.wishlistShareHandler;
+			$notice.on( 'click', '.wcboost-wishlist-share-notice__close', function() {
+				notice.hide();
+			} );
 
-		self.$notice.fadeOut( 200 );
+			this.urlNotice = notice;
+		}
+
+		this.urlNotice.show();
+		this.urlNotice.$notice.find( 'input' ).val( url ).focus();
 	}
 
 	/**

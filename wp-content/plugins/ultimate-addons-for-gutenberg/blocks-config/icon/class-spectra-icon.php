@@ -446,6 +446,43 @@ if ( ! class_exists( 'Spectra_Icon' ) ) {
 			$iconTopMobileMargin    = isset( $attributes['iconTopMobileMargin'] ) ? $attributes['iconTopMobileMargin'] : '';
 			$margin_variables       = array( $iconBottomMargin, $iconLeftMargin, $iconRightMargin, $iconTopMargin, $iconBottomTabletMargin, $iconLeftTabletMargin, $iconRightTabletMargin, $iconTopTabletMargin, $iconBottomMobileMargin, $iconLeftMobileMargin, $iconRightMobileMargin, $iconTopMobileMargin );
 
+			$desktop_class = '';
+			$tab_class     = '';
+			$mob_class     = '';
+
+			if ( array_key_exists( 'UAGHideDesktop', $attributes ) || array_key_exists( 'UAGHideTab', $attributes ) || array_key_exists( 'UAGHideMob', $attributes ) ) {
+
+				$desktop_class = ( isset( $attributes['UAGHideDesktop'] ) ) ? 'uag-hide-desktop' : '';
+
+				$tab_class = ( isset( $attributes['UAGHideTab'] ) ) ? 'uag-hide-tab' : '';
+
+				$mob_class = ( isset( $attributes['UAGHideMob'] ) ) ? 'uag-hide-mob' : '';
+			}
+
+			$zindex_desktop           = '';
+			$zindex_tablet            = '';
+			$zindex_mobile            = '';
+			$zindex_wrap              = array();
+			$zindex_extention_enabled = ( isset( $attributes['zIndex'] ) || isset( $attributes['zIndexTablet'] ) || isset( $attributes['zIndexMobile'] ) );
+
+			if ( $zindex_extention_enabled ) {
+				$zindex_desktop = ( isset( $attributes['zIndex'] ) ) ? '--z-index-desktop:' . $attributes['zIndex'] . ';' : false;
+				$zindex_tablet  = ( isset( $attributes['zIndexTablet'] ) ) ? '--z-index-tablet:' . $attributes['zIndexTablet'] . ';' : false;
+				$zindex_mobile  = ( isset( $attributes['zIndexMobile'] ) ) ? '--z-index-mobile:' . $attributes['zIndexMobile'] . ';' : false;
+
+				if ( $zindex_desktop ) {
+					array_push( $zindex_wrap, $zindex_desktop );
+				}
+
+				if ( $zindex_tablet ) {
+					array_push( $zindex_wrap, $zindex_tablet );
+				}
+
+				if ( $zindex_mobile ) {
+					array_push( $zindex_wrap, $zindex_mobile );
+				}
+			}
+
 			$has_margin = false;
 			foreach ( $margin_variables as $margin ) {
 				if ( is_numeric( $margin ) ) {
@@ -459,6 +496,10 @@ if ( ! class_exists( 'Spectra_Icon' ) ) {
 				$block_id,
 				( is_array( $attributes ) && isset( $attributes['className'] ) ) ? $attributes['className'] : '',
 				$margin_class,
+				$desktop_class,
+				$tab_class,
+				$mob_class,
+				$zindex_extention_enabled ? 'uag-blocks-common-selector' : '',
 			);
 	
 			$iconSvg     = isset( $attributes['icon'] ) ? $attributes['icon'] : 'circle-check';
@@ -474,19 +515,19 @@ if ( ! class_exists( 'Spectra_Icon' ) ) {
 	  
 			if ( $iconHtml ) {
 
-				$role_attr        = ( 'image' === $attributes['iconAccessabilityMode'] ) ? 'img' : 'graphics-symbol';
+				$role_attr        = ( 'image' === $attributes['iconAccessabilityMode'] ) ? ' role="img"' : ( ( 'svg' === $attributes['iconAccessabilityMode'] ) ? ' role="graphics-symbol"' : '' );
 				$aria_hidden_attr = ( 'presentation' === $attributes['iconAccessabilityMode'] ) ? 'true' : 'false';
 				$aria_label_attr  = ( 'presentation' !== $attributes['iconAccessabilityMode'] ) ? ' aria-label="' . esc_attr( $attributes['iconAccessabilityDesc'] ) . '"' : '';
 			
 				$iconHtml = preg_replace(
 					'/<svg(.*?)>/',
-					'<svg$1 role="' . esc_attr( $role_attr ) . '" aria-hidden="' . $aria_hidden_attr . '"' . $aria_label_attr . '>',
+					'<svg$1' . $role_attr . ' aria-hidden="' . $aria_hidden_attr . '"' . $aria_label_attr . '>',
 					$iconHtml
 				);
 			}
 			
 
-			$aria_label_attr = ( 'presentation' !== $attributes['iconAccessabilityMode'] ) ? ' aria-label="' . esc_attr( implode( '', str_split( $attributes['icon'] ) ) ) . '"' : '';
+			$aria_label_attr = ( 'presentation' !== $attributes['iconAccessabilityMode'] ) ? ( empty( $attributes['iconAccessabilityDesc'] ) ? implode( '', str_split( $attributes['icon'] ) ) : $attributes['iconAccessabilityDesc'] ) : '';
 
 			// Check and prepend the protocol if necessary.
 			if ( '#' !== $linkUrl ) {
@@ -505,12 +546,19 @@ if ( ! class_exists( 'Spectra_Icon' ) ) {
 
 			ob_start();
 			?>      
-			<div class="<?php echo esc_attr( implode( ' ', $main_classes ) ); ?>"	>
+			<div class="<?php echo esc_attr( implode( ' ', $main_classes ) ); ?>"
+			style="<?php echo esc_attr( implode( '', $zindex_wrap ) ); ?>" >
 				<?php if ( $has_margin ) : ?>
 				<div class='uagb-icon-margin-wrapper'>
 				<?php endif; ?>
-					<span class="uagb-svg-wrapper"<?php echo esc_attr( $aria_label_attr ); ?>>		
-						<?php echo $iconHtml; // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped ?>
+					<span class="uagb-svg-wrapper" 
+					<?php 
+					if ( $aria_label_attr ) {
+						echo ' aria-label="' . esc_attr( $aria_label_attr ) . '"';
+					} 
+					?>
+					tabindex="0">		
+						<?php echo $iconHtml; // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped -- Already escaped & sanitize inside render_svg_html(). ?>
 					</span>
 				<?php if ( $has_margin ) : ?>
 				</div>
@@ -520,6 +568,41 @@ if ( ! class_exists( 'Spectra_Icon' ) ) {
 			return ob_get_clean();
 
 		}
+
+		/**
+		 * Renders Front-end Click Event.
+		 *
+		 * @param string $id             Block ID.
+		 * @since 2.15.0
+		 * @return string|false                The Output Buffer.
+		 */
+		public static function render_icon_click( $id ) {
+			ob_start();
+			?>
+				window.addEventListener( 'DOMContentLoaded', () => {
+					const blockScope = document.querySelector( '.uagb-block-<?php echo esc_html( $id ); ?>' );
+					if ( ! blockScope ) {
+						return;
+					}
+
+					const anchorElement = blockScope.querySelector('a');
+					if (!anchorElement) {
+						return;
+					} 
+
+					<?php // Add event listener for Enter and Space key presses. ?> 
+					blockScope.addEventListener('keydown', (event) => {
+						if ( 13 === event.keyCode || 32 === event.keyCode ) {
+							event.preventDefault();
+							<?php // Trigger the click event on the blockScope. ?> 
+							anchorElement.click();	
+						}
+					} );
+				} );
+			<?php
+			return ob_get_clean();
+		}
+
 	}
 
 		

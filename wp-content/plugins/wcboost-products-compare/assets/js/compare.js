@@ -148,7 +148,9 @@
 						break;
 				}
 
-				$( document.body ).trigger( 'added_to_compare', [ $button, fragments, response.data.count ] );
+				$( document.body )
+					.trigger( 'wcboost_compare_item_added', [ response.data ] )
+					.trigger( 'added_to_compare', [ $button, fragments, response.data.count ] );
 
 				if ( 'redirect' === wcboost_products_compare_params.added_behavior && wcboost_products_compare_params.page_url ) {
 					window.location = wcboost_products_compare_params.page_url;
@@ -191,7 +193,9 @@
 				$button.find( self.selectors.text ).text( wcboost_products_compare_params.i18n_button_add );
 				$button.find( self.selectors.icon ).html( wcboost_products_compare_params.icon_normal );
 
-				$( document.body ).trigger( 'removed_from_compare', [ $button, fragments ] );
+				$( document.body )
+					.trigger( 'wcboost_compare_item_removed', [ response.data ] )
+					.trigger( 'removed_from_compare', [ $button, fragments ] );
 			},
 			complete: function() {
 				$button.removeClass( 'loading' );

@@ -19,7 +19,7 @@ use NTA_WhatsApp\Helper;
 				<% if (!_.isEmpty(account.avatar)) { %>
 					<div class="wa_img_wrap" style="background: url(<%= account.avatar %>) center center no-repeat; background-size: cover;"></div>
 				<% } else { %>
-					<?php echo Helper::print_icon(); ?>
+					<?php echo Helper::print_icon(); //phpcs:ignore ?>
 				<% } %>
 			</div>
 			<div class="container-block">
@@ -44,9 +44,9 @@ use NTA_WhatsApp\Helper;
 	<label class="nta-list-status">
 		<strong>
 			<% if (_.isEmpty(activeAccounts)) { %>
-			<?php echo __( 'Please select accounts you want them to display in WhatsApp Chat Widget', 'wp-whatsapp' ); ?>
+			<?php echo esc_html__( 'Please select accounts you want them to display in WhatsApp Chat Widget', 'wp-whatsapp' ); ?>
 			<% } else { %>
-			<?php echo __( 'Selected Accounts:', 'wp-whatsapp' ); ?>
+			<?php echo esc_html__( 'Selected Accounts:', 'wp-whatsapp' ); ?>
 			<% } %>
 		</strong>
 	</label>
@@ -60,7 +60,7 @@ use NTA_WhatsApp\Helper;
 							<% if (!_.isEmpty(account.avatar)) { %>
 								<div class="wa_img_wrap" style="background: url(<%= account.avatar %>) center center no-repeat; background-size: cover;"></div>
 							<% } else { %>
-								<?php echo Helper::print_icon(); ?>
+								<?php echo Helper::print_icon(); //phpcs:ignore ?>
 							<% } %>
 						</div>
 						<div class="container-block">
@@ -80,7 +80,7 @@ use NTA_WhatsApp\Helper;
 							<a data-remove="<%= account.accountId %>" class="btn-remove-account">Remove</a>
 						</div>
 						<div class="icon-block">
-							<img src="<?php echo NTA_WHATSAPP_PLUGIN_URL . 'assets/img/bar-sortable.svg'; ?>" width="20px">
+							<img src="<?php echo esc_url( NTA_WHATSAPP_PLUGIN_URL . 'assets/img/bar-sortable.svg' ); ?>" width="20px">
 						</div>
 					</div>
 				</div>

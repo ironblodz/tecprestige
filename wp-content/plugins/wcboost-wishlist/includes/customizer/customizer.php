@@ -47,14 +47,14 @@ class Customizer {
 
 		$wp_customize->add_section( 'wcboost_wishlist_page', [
 			'title'       => esc_html__( 'Wishlist Page', 'wcboost-wishlist' ),
-			'description' => esc_html__( 'These options let you change the appearance of the wishlist page.', 'wcboost-variation-swatches' ),
+			'description' => esc_html__( 'These options let you change the appearance of the wishlist page.', 'wcboost-wishlist' ),
 			'priority'    => 20,
 			'panel'    => $panel,
 		] );
 
 		$wp_customize->add_section( 'wcboost_wishlist_button', [
 			'title'       => esc_html__( 'Wishlist Button', 'wcboost-wishlist' ),
-			'description' => esc_html__( 'These options let you change the appearance of the wishlist button.', 'wcboost-variation-swatches' ),
+			'description' => esc_html__( 'These options let you change the appearance of the wishlist button.', 'wcboost-wishlist' ),
 			'priority'    => 20,
 			'panel'       => $panel,
 		] );
@@ -519,7 +519,7 @@ class Customizer {
 			$wp_customize->add_panel( 'wcboost', [
 				'priority'   => 200,
 				'capability' => 'manage_woocommerce',
-				'title'      => __( 'WCBoost', 'wcboost' ),
+				'title'      => __( 'WCBoost', 'wcboost-wishlist' ),
 			] );
 		}
 	}

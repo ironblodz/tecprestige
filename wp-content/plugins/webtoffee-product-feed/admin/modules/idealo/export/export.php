@@ -273,7 +273,7 @@ if (!class_exists('Webtoffee_Product_Feed_Sync_Idealo_Export')) {
                     if( $product->is_type( 'variation' ) ){
                         $parent_id = $product->get_parent_id();
                         $parent_post = get_post( $parent_id );
-                        if( !is_object( $parent_post ) || ( is_object( $parent_post ) && 'draft' == $parent_post->post_status ) ){
+                        if( !is_object( $parent_post ) || ( is_object( $parent_post ) && ( 'draft' == $parent_post->post_status || 'private' == $parent_post->post_status || 'pending' == $parent_post->post_status ) ) ){
                             continue;
                         }
                     }
@@ -324,7 +324,6 @@ if (!class_exists('Webtoffee_Product_Feed_Sync_Idealo_Export')) {
             $export_columns = $this->parent_module->get_selected_column_names();
 
             $product_id = $product_object->get_id();
-            $product = get_post($product_id);
 
             $csv_columns = $export_columns;
 
@@ -376,9 +375,7 @@ if (!class_exists('Webtoffee_Product_Feed_Sync_Idealo_Export')) {
                 }
             }
 
-
-
-            return apply_filters('wt_batch_product_export_row_data', $row, $product);
+            return apply_filters("wt_batch_product_export_row_data_{$this->parent_module->module_base}", $row, $product_object);
         }
 
         /**
@@ -968,6 +965,9 @@ if (!class_exists('Webtoffee_Product_Feed_Sync_Idealo_Export')) {
             if ('' == $custom_gtin) {
                 $custom_gtin = get_post_meta($this->product->get_id(), '_wt_google_gtin', true);
             }
+            if(!$custom_gtin){
+                $custom_gtin = get_post_meta($this->product->get_id(), '_global_unique_id', true);
+            }
             $gtin = ('' == $custom_gtin) ? '' : $custom_gtin;
             return apply_filters('wt_feed_product_gtin', $gtin, $this->product);
         }
@@ -1246,6 +1246,7 @@ if (!class_exists('Webtoffee_Product_Feed_Sync_Idealo_Export')) {
 
         public function price($catalog_attr, $product_attr, $export_columns) {
             $price = $this->product->get_regular_price();
+            $price = wc_get_price_including_tax($this->product, array('price' => $price));
             
             if ($this->product->is_type('variable')) {
                 $price = $this->first_variation_price();

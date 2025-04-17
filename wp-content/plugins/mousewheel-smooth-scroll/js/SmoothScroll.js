@@ -1,5 +1,5 @@
 //
-// SmoothScroll for websites v1.4.10 (Balazs Galambosi)
+// SmoothScroll for websites v1.5.1 (Balazs Galambosi)
 // http://www.smoothscroll.net/
 //
 // Licensed under the terms of the MIT license.
@@ -35,7 +35,7 @@ var defaultOptions = {
 
     // Keyboard Settings
     keyboardSupport   : true,  // option
-    arrowScroll       : 50    // [px]
+    arrowScroll       : 50,    // [px]   
 };
 
 var options = defaultOptions;
@@ -53,9 +53,6 @@ var refreshSize;
 var deltaBuffer = [];
 var deltaBufferTimer;
 var isMac = /^Mac/.test(navigator.platform);
-
-var key = { left: 37, up: 38, right: 39, down: 40, spacebar: 32, pageup: 33, pagedown: 34, end: 35, home: 36 };
-var arrowKeys = { 37: 1, 38: 1, 39: 1, 40: 1 };
 
 /***********************************************
  * INITIALIZE
@@ -297,7 +294,7 @@ function wheel(event) {
         init();
     }
     
-    var target = event.target;
+    var target = getEventTargetDeep(event);
 
     // leave early if default action is prevented   
     // or it's a zooming event with CTRL 
@@ -308,10 +305,27 @@ function wheel(event) {
     // leave embedded content alone (flash & pdf)
     if (isNodeName(activeElement, 'embed') || 
        (isNodeName(target, 'embed') && /\.pdf/i.test(target.src)) ||
-        isNodeName(activeElement, 'object') ||
-        target.shadowRoot) {
+        isNodeName(activeElement, 'object')) {
         return true;
     }
+
+    // TODO:
+    //
+    // wheelDeltaY (DEPRECATED):
+    //   - Mac: positive (+) for scrolling down; Win: negative (-) for up
+    //   - Mac & Win: in simple case multiple of 120 or 100 (except Firefox maybe)
+    //   - scaled by zoom level (hard to detect, devicePixelRatio affected by ppi)
+    // deltaY (NEW):
+    //   - Mac: negative (-) for scrolling down; Win: positive (+) for up
+    //   - Win: in simple case it's multiple of 300
+    //   - Mac: can be any number because of default shitty "acceleration"
+    //          some third party apps might change it to line-based (120x)
+    //   - scaled by zoom level (hard to detect, devicePixelRatio affected by ppi)
+    //
+    // For touchpad in Chromium this seems to hold true: 
+    //    e.wheelDeltaY === (e.deltaY * -3)
+    // but it also holds for mouses on Safari Mac with default "acceleration".
+    // Also not future-proof because wheelDeltaY is deprecated
 
     var deltaX = -event.wheelDeltaX || event.deltaX || 0;
     var deltaY = -event.wheelDeltaY || event.deltaY || 0;
@@ -376,9 +390,9 @@ function wheel(event) {
  */
 function keydown(event) {
 
-    var target   = event.target;
+    var target = getEventTargetDeep(event);
     var modifier = event.ctrlKey || event.altKey || event.metaKey || 
-                  (event.shiftKey && event.keyCode !== key.spacebar);
+                  (event.shiftKey && event.code !== 'Space');
     
     // our own tracked active element could've been removed from the DOM
     if (!document.body.contains(activeElement)) {
@@ -404,13 +418,14 @@ function keydown(event) {
     // [spacebar] should trigger button press, leave it alone
     if ((isNodeName(target, 'button') ||
          isNodeName(target, 'input') && buttonTypes.test(target.type)) &&
-        event.keyCode === key.spacebar) {
+        event.code === 'Space') {
       return true;
     }
 
-    // [arrwow keys] on radio buttons should be left alone
+    // [arrow keys] on radio buttons should be left alone
     if (isNodeName(target, 'input') && target.type == 'radio' &&
-        arrowKeys[event.keyCode])  {
+        (event.code === 'ArrowUp' || event.code === 'ArrowDown' || 
+         event.code === 'ArrowLeft' || event.code === 'ArrowRight'))  {
       return true;
     }
     
@@ -429,37 +444,37 @@ function keydown(event) {
         clientHeight = window.innerHeight;
     }
 
-    switch (event.keyCode) {
-        case key.up:
+    switch (event.code) {
+        case 'ArrowUp':
             y = -options.arrowScroll;
             break;
-        case key.down:
+        case 'ArrowDown':
             y = options.arrowScroll;
             break;         
-        case key.spacebar: // (+ shift)
+        case 'Space':
             shift = event.shiftKey ? 1 : -1;
             y = -shift * clientHeight * 0.9;
             break;
-        case key.pageup:
+        case 'PageUp':
             y = -clientHeight * 0.9;
             break;
-        case key.pagedown:
+        case 'PageDown':
             y = clientHeight * 0.9;
             break;
-        case key.home:
+        case 'Home':
             if (overflowing == document.body && document.scrollingElement)
                 overflowing = document.scrollingElement;
             y = -overflowing.scrollTop;
             break;
-        case key.end:
+        case 'End':
             var scroll = overflowing.scrollHeight - overflowing.scrollTop;
             var scrollRemaining = scroll - clientHeight;
             y = (scrollRemaining > 0) ? scrollRemaining + 10 : 0;
             break;
-        case key.left:
+        case 'ArrowLeft':
             x = -options.arrowScroll;
             break;
-        case key.right:
+        case 'ArrowRight':
             x = options.arrowScroll;
             break;            
         default:
@@ -475,7 +490,16 @@ function keydown(event) {
  * Mousedown event only for updating activeElement
  */
 function mousedown(event) {
-    activeElement = event.target;
+    activeElement = getEventTargetDeep(event);
+}
+
+/**
+ * Get the deepest event target even through shadow DOM.
+ * @param {Object} event
+ * @return {Element}
+ */
+function getEventTargetDeep(event) {
+    return event.composedPath ? event.composedPath()[0] : event.target;
 }
 
 
@@ -526,7 +550,7 @@ function overflowingAncestor(el) {
     var elems = [];
     var body = document.body;
     var rootScrollHeight = root.scrollHeight;
-    do {
+    while (el) {
         var cached = getCache(el, false);
         if (cached) {
             return setCache(elems, cached);
@@ -542,7 +566,9 @@ function overflowingAncestor(el) {
         } else if (isContentOverflowing(el) && overflowAutoOrScroll(el)) {
             return setCache(elems, el);
         }
-    } while ((el = el.parentElement));
+        // Support shadow DOM
+        el = el.parentElement || (el.getRootNode && el.getRootNode().host); 
+    }
 }
 
 function isContentOverflowing(el) {
@@ -599,11 +625,11 @@ function directionCheck(x, y) {
     }
 }
 
-if (window.localStorage && localStorage.SS_deltaBuffer) {
-    try { // #46 Safari throws in private browsing for localStorage 
+try { // #46 Safari throws in private browsing for localStorage 
+    if (localStorage.SS_deltaBuffer) {
         deltaBuffer = localStorage.SS_deltaBuffer.split(',');
-    } catch (e) { } 
-}
+    }
+} catch (e) { } 
 
 function isTouchpad(deltaY) {
     if (!deltaY) return;
@@ -636,7 +662,7 @@ function allDeltasDivisableBy(divisor) {
 }
 
 function isInsideYoutubeVideo(event) {
-    var elem = event.target;
+    var elem = getEventTargetDeep(event);
     var isControl = false;
     if (document.URL.indexOf ('www.youtube.com/watch') != -1) {
         do {
@@ -728,11 +754,12 @@ function pulse(x) {
 var userAgent = window.navigator.userAgent;
 var isEdge    = /Edge/.test(userAgent); // thank you MS
 var isChrome  = /chrome/i.test(userAgent) && !isEdge; 
-var isSafari  = /safari/i.test(userAgent) && !isEdge; 
+var isSafari  = /safari/i.test(userAgent) && !isEdge;
 var isFirefox = /firefox/i.test(userAgent);
 var isMobile  = /mobile/i.test(userAgent);
 var isIEWin7  = /Windows NT 6.1/i.test(userAgent) && /rv:11/i.test(userAgent);
 var isOldSafari = isSafari && (/Version\/8/i.test(userAgent) || /Version\/9/i.test(userAgent));
+
 var isEnabledForBrowser = isEnabledForBrowserCheck();
 
 function isEnabledForBrowserCheck(){

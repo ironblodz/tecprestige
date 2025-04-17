@@ -20,9 +20,9 @@ require_once(NSL_PATH . '/compat.php');
 
 class NextendSocialLogin {
 
-    public static $version = '3.1.14';
+    public static $version = '3.1.17';
 
-    public static $nslPROMinVersion = '3.1.14';
+    public static $nslPROMinVersion = '3.1.17';
 
     public static $proxyPage = false;
 
@@ -149,6 +149,7 @@ class NextendSocialLogin {
 
     public static function init() {
         add_action('plugins_loaded', 'NextendSocialLogin::plugins_loaded');
+
         register_activation_hook(NSL_PATH_FILE, 'NextendSocialLogin::install');
 
         add_action('delete_user', 'NextendSocialLogin::delete_user');
@@ -169,7 +170,7 @@ class NextendSocialLogin {
             ),
             'licenses'                         => array(),
             'terms_show'                       => 0,
-            'terms'                            => __('By clicking Register, you accept our <a href="#privacy_policy_url" target="_blank">Privacy Policy</a>', 'nextend-facebook-connect'),
+            'terms'                            => '',
             'store_name'                       => 1,
             'store_email'                      => 1,
             'avatar_store'                     => 1,
@@ -195,54 +196,58 @@ class NextendSocialLogin {
             'embedded_login_form_button_style' => 'default',
             'embedded_login_form_layout'       => 'below',
 
-            'custom_actions'               => '',
-            'custom_actions_button_style'  => 'default',
-            'custom_actions_button_layout' => 'default',
-            'custom_actions_button_align'  => 'left',
+            'custom_actions'                        => '',
+            'custom_actions_button_style'           => 'default',
+            'custom_actions_button_layout'          => 'default',
+            'custom_actions_button_align'           => 'left',
+            'custom_actions_register'               => '',
+            'custom_actions_register_button_style'  => 'default',
+            'custom_actions_register_button_layout' => 'default',
+            'custom_actions_register_button_align'  => 'left',
 
             'comment_login_button' => 'show',
             'comment_button_align' => 'left',
             'comment_button_style' => 'default',
 
-            'buddypress_register_button'          => 'bp_before_account_details_fields',
-            'buddypress_register_button_align'    => 'left',
-            'buddypress_register_button_style'    => 'default',
-            'buddypress_register_form_layout'     => 'default',
-            'buddypress_login'                    => 'show',
-            'buddypress_login_form_layout'        => 'default',
-            'buddypress_login_button_style'       => 'default',
-            'buddypress_sidebar_login'            => 'show',
-            'buddypress_social_accounts_tab'      => 'show',
-            'buddypress_registration_integration' => '0',
+            'buddypress_register_button'             => 'bp_before_account_details_fields',
+            'buddypress_register_button_align'       => 'left',
+            'buddypress_register_button_style'       => 'default',
+            'buddypress_register_form_layout'        => 'default',
+            'buddypress_login'                       => 'show',
+            'buddypress_login_form_layout'           => 'default',
+            'buddypress_login_button_style'          => 'default',
+            'buddypress_sidebar_login'               => 'show',
+            'buddypress_social_accounts_tab'         => 'show',
+            'buddypress_registration_email_template' => 'buddypress',
 
-            'woocommerce_login'                => 'after',
-            'woocommerce_login_form_layout'    => 'default',
-            'woocommerce_register'             => 'after',
-            'woocommerce_register_form_layout' => 'default',
-            'woocommerce_billing'              => 'before',
-            'woocommerce_billing_form_layout'  => 'default',
-            'woocoommerce_form_button_style'   => 'default',
-            'woocoommerce_form_button_align'   => 'left',
-            'woocommerce_account_details'      => 'before',
-
-            'memberpress_login'                        => 'before',
-            'memberpress_form_button_align'            => 'left',
-            'memberpress_login_form_button_style'      => 'default',
-            'memberpress_login_form_layout'            => 'below-separator',
-            'memberpress_signup'                       => 'before',
-            'memberpress_signup_form_button_style'     => 'default',
-            'memberpress_signup_form_layout'           => 'below-separator',
-            'memberpress_account_details'              => 'after',
-            'registration_notification_notify'         => '0',
-            'debug'                                    => '0',
-            'bypass_cache'                             => '1',
-            'show_linked_providers'                    => '0',
-            'login_restriction'                        => '0',
-            'avatars_in_all_media'                     => '0',
-            'custom_register_label'                    => '0',
-            'review_state'                             => -1,
+            'woocommerce_login'                        => 'after',
+            'woocommerce_login_form_layout'            => 'default',
+            'woocommerce_register'                     => 'after',
+            'woocommerce_register_form_layout'         => 'default',
+            'woocommerce_billing'                      => 'before',
+            'woocommerce_billing_form_layout'          => 'default',
+            'woocoommerce_form_button_style'           => 'default',
+            'woocoommerce_form_button_align'           => 'left',
+            'woocommerce_account_details'              => 'before',
             'woocommerce_dismissed'                    => 0,
             'woocoommerce_registration_email_template' => 'woocommerce',
+
+            'memberpress_login'                    => 'before',
+            'memberpress_form_button_align'        => 'left',
+            'memberpress_login_form_button_style'  => 'default',
+            'memberpress_login_form_layout'        => 'below-separator',
+            'memberpress_signup'                   => 'before',
+            'memberpress_signup_form_button_style' => 'default',
+            'memberpress_signup_form_layout'       => 'below-separator',
+            'memberpress_account_details'          => 'after',
+            'registration_notification_notify'     => '0',
+            'debug'                                => '0',
+            'bypass_cache'                         => '1',
+            'show_linked_providers'                => '0',
+            'login_restriction'                    => '0',
+            'avatars_in_all_media'                 => '0',
+            'custom_register_label'                => '0',
+            'review_state'                         => -1,
 
             'userpro_show_login_form'            => 'show',
             'userpro_show_register_form'         => 'show',
@@ -561,6 +566,25 @@ class NextendSocialLogin {
             }
 
         }
+    }
+
+    public static function getDefaultPrivacyTerms() {
+        return __('By clicking Register, you accept our <a href="#privacy_policy_url" target="_blank">Privacy Policy</a>', 'nextend-facebook-connect');
+    }
+
+    public static function getPrivacyTerms() {
+        $terms = self::$settings->get('terms');
+        if ($terms === '') {
+            /**
+             * As of WordPress 6.7 the text domain should be registered on the 'init' action or later.
+             * Thus, we are not allowed, to define this string in the default settings on the plugins_loaded action anymore.
+             *
+             * @see NSLDEV-663
+             */
+            $terms = self::getDefaultPrivacyTerms();
+        }
+
+        return $terms;
     }
 
     public static function fixSocialRabbit() {
@@ -1457,32 +1481,38 @@ el.setAttribute("href",href+"redirect="+encodeURIComponent(window.location.href)
         return $proxyPage;
     }
 
-    public static function getFreePagesForRegisterFlow($pages) {
+    public static function getExcludedPagesForRegisterFlow() {
+        $pages = get_pages();
 
-        $availablePages = array();
+        $unavailablePageIDs = [];
+
         foreach ($pages as $page) {
             $post_states = array();
             $post_states = apply_filters('display_post_states', $post_states, $page);
-            if (NextendSocialLogin::getRegisterFlowPage() === $page->ID || !$post_states || (count($post_states) === 1 && array_intersect(self::$allowedPostStates, array_keys($post_states)))) {
-                $availablePages[] = $page;
+
+            if (NextendSocialLogin::getRegisterFlowPage() !== $page->ID && (!empty($post_states) && ((count($post_states) === 1 && !array_intersect(self::$allowedPostStates, array_keys($post_states))) || count($post_states) > 1))) {
+                $unavailablePageIDs[] = $page->ID;
             }
         }
 
-        return $availablePages;
+        return $unavailablePageIDs;
     }
 
-    public static function getFreePagesForOauthProxyPage($pages) {
+    public static function getExcludedPagesForOauthProxyPage() {
+        $pages = get_pages();
 
-        $availablePages = array();
+        $unavailablePageIDs = [];
+
         foreach ($pages as $page) {
             $post_states = array();
             $post_states = apply_filters('display_post_states', $post_states, $page);
-            if (NextendSocialLogin::getProxyPage() === $page->ID || !$post_states || (count($post_states) === 1 && array_intersect(self::$allowedPostStates, array_keys($post_states)))) {
-                $availablePages[] = $page;
+
+            if (NextendSocialLogin::getProxyPage() !== $page->ID && (!empty($post_states) && ((count($post_states) === 1 && !array_intersect(self::$allowedPostStates, array_keys($post_states))) || count($post_states) > 1))) {
+                $unavailablePageIDs[] = $page->ID;
             }
         }
 
-        return $availablePages;
+        return $unavailablePageIDs;
     }
 
     public static function is_register_allowed($isAllowed) {

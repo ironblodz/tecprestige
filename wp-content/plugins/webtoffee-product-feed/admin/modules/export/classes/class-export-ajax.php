@@ -576,7 +576,7 @@ class Webtoffee_Product_Feed_Sync_Export_Ajax
             /*
              * Skip category mapping execution for google promotion, buy on google and local product inventory
              */
-            $skip_category_mapping_channels = apply_filters( 'wt_pf_category_mapping_disabled_channels', array('google_local_product_inventory', 'google_promotions', 'buyon_google') );
+            $skip_category_mapping_channels = apply_filters( 'wt_pf_category_mapping_disabled_channels', array('google_local_product_inventory', 'google_promotions', 'buyon_google', 'vivino') );
             if (in_array($this->to_export, $skip_category_mapping_channels)) {
                 return '';
             }
@@ -609,6 +609,8 @@ class Webtoffee_Product_Feed_Sync_Export_Ajax
                             $export_post_type = 'facebook';
                         }elseif('fruugo' === $this->to_export){
                             $export_post_type = 'fruugo';
+                        }elseif('onbuy' === $this->to_export){
+                            $export_post_type = 'onbuy';
                         }else{
                             $export_post_type = 'google';
                         }                        

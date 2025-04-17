@@ -84,14 +84,15 @@ class NextendSocialProviderGoogle extends NextendSocialProviderOAuth {
         );
 
         parent::__construct(array(
-            'client_id'      => '',
-            'client_secret'  => '',
-            'select_account' => 1,
-            'skin'           => 'light',
-            'login_label'    => 'Continue with <b>Google</b>',
-            'register_label' => 'Sign up with <b>Google</b>',
-            'link_label'     => 'Link account with <b>Google</b>',
-            'unlink_label'   => 'Unlink account from <b>Google</b>'
+            'client_id'          => '',
+            'client_secret'      => '',
+            'select_account'     => 1,
+            'skin'               => 'light',
+            'login_label'        => 'Continue with <b>Google</b>',
+            'register_label'     => 'Sign up with <b>Google</b>',
+            'link_label'         => 'Link account with <b>Google</b>',
+            'unlink_label'       => 'Unlink account from <b>Google</b>',
+            'profile_image_size' => 'default'
         ));
     }
 
@@ -144,7 +145,7 @@ class NextendSocialProviderGoogle extends NextendSocialProviderOAuth {
     public function validateSettings($newData, $postedData) {
         $newData = parent::validateSettings($newData, $postedData);
 
-        foreach ($postedData AS $key => $value) {
+        foreach ($postedData as $key => $value) {
 
             switch ($key) {
                 case 'tested':
@@ -154,6 +155,7 @@ class NextendSocialProviderGoogle extends NextendSocialProviderOAuth {
                         $newData['tested'] = 0;
                     }
                     break;
+                case 'profile_image_size':
                 case 'skin':
                     $newData[$key] = trim(sanitize_text_field($value));
                     break;
@@ -241,7 +243,6 @@ class NextendSocialProviderGoogle extends NextendSocialProviderOAuth {
      * @return string
      */
     public function getAuthUserData($key) {
-
         switch ($key) {
             case 'id':
                 return $this->authUserData['id'];
@@ -254,7 +255,34 @@ class NextendSocialProviderGoogle extends NextendSocialProviderOAuth {
             case 'last_name':
                 return !empty($this->authUserData['family_name']) ? $this->authUserData['family_name'] : '';
             case 'picture':
-                return $this->authUserData['picture'];
+                $profile_image_size = $this->settings->get('profile_image_size');
+                $profile_image      = $this->authUserData['picture'];
+                $avatar_url         = '';
+
+                if (!empty($profile_image)) {
+                    switch ($profile_image_size) {
+                        case 'small':
+                            $avatar_url = str_replace('=s96-c', '=s50-c', $profile_image);
+                            break;
+                        case 'medium':
+                            $avatar_url = str_replace('=s96-c', '=s360-c', $profile_image);
+                            break;
+                        case 'large':
+                            $avatar_url = str_replace('=s96-c', '=s480-c', $profile_image);
+                            break;
+                        case 'extralarge':
+                            $avatar_url = str_replace('=s96-c', '=s720-c', $profile_image);
+                            break;
+                        case 'original':
+                            $avatar_url = str_replace('=s96-c', '', $profile_image);
+                            break;
+                        default:
+                            $avatar_url = $profile_image;
+                            break;
+                    }
+                }
+
+                return $avatar_url;
         }
 
         return parent::getAuthUserData($key);
@@ -299,6 +327,14 @@ class NextendSocialProviderGoogle extends NextendSocialProviderOAuth {
 
         return parent::getSyncDataFieldDescription($fieldName);
     }
+
+    public function getProviderEmailVerificationStatus() {
+        /**
+         * The email address returned by Google is always verified
+         */
+        return true;
+    }
+
 }
 
 NextendSocialLogin::addProvider(new NextendSocialProviderGoogle);

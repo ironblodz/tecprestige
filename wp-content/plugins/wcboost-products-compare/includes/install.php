@@ -96,7 +96,7 @@ class Install {
 		}
 
 		$row_meta = [
-			'docs'    => '<a href="https://docs.wcboost.com/plugin/woocommerce-products-compare/?utm_source=wp-plugins&utm_campaign=plugin-uri&utm_medium=wp-dash" aria-label="' . esc_attr__( 'View documentation', 'wcboost-products-compare' ) . '">' . esc_html__( 'Docs', 'wcboost-products-compare' ) . '</a>',
+			'docs'    => '<a href="https://docs.wcboost.com/plugin/woocommerce-products-compare/?utm_source=docs-link&utm_campaign=wp-dash&utm_medium=plugin-meta" aria-label="' . esc_attr__( 'View documentation', 'wcboost-products-compare' ) . '">' . esc_html__( 'Docs', 'wcboost-products-compare' ) . '</a>',
 			'support' => '<a href="https://wordpress.org/support/plugin/wcboost-products-compare/" aria-label="' . esc_attr__( 'Visit community forums', 'wcboost-products-compare' ) . '">' . esc_html__( 'Community support', 'wcboost-products-compare' ) . '</a>',
 		];
 

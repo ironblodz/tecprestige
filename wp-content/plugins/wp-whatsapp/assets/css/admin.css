@@ -483,3 +483,42 @@ input.njt-wa-pro:checked::before {
 .form-table th {
   white-space: nowrap;
 }
+
+.nta-wa-setting-width {
+  width: 80%;
+}
+
+.nta-wa-list-col4 {
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.nta-wa-setting-width.nta-wa-list-col4 {
+}
+
+.nta-wa-setting-width .nta-wa-list-col4 .list-col4-item {
+  flex: 0 0 33%;
+  max-width: 33%;
+}
+.nta-wa-setting-width .settings-form .nta-wa-list-col4 .list-col4-item {
+  flex: 0 0 50%;
+  max-width: 50%;
+}
+
+@media screen and (max-width: 769px) {
+  .nta-wa-setting-width {
+    width: 100%;
+  }
+}
+
+@media only screen and (min-width: 1400px) {
+  .nta-wa-list-col4 .list-col4-item {
+    flex: 0 0 14%;
+    max-width: 14%;
+  }
+}
+@media only screen and (min-width: 2500px) {
+  .nta-wa-setting-width {
+    width: 50% !important;
+  }
+}

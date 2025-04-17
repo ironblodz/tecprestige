@@ -27,8 +27,30 @@ class Ajax_Handler {
 	 * @since 1.0.0
 	 */
 	public static function add_to_wishlist() {
-		if ( ! isset( $_POST['product_id'] ) ) {
-			return;
+		// phpcs:disable WordPress.Security.NonceVerification
+		if ( empty( $_POST['product_id'] ) ) {
+			wp_send_json_error();
+			exit;
+		}
+
+		// Stop if not allowing guests to creating wishlishs.
+		if ( ! wc_string_to_bool( get_option( 'wcboost_wishlist_enable_guest_wishlist', 'yes' ) ) && ! is_user_logged_in() ) {
+			$data = [];
+
+			if ( 'redirect_to_account_page' == get_option( 'wcboost_wishlist_guest_behaviour', 'message' ) ) {
+				$data['redirect_url'] = wc_get_page_permalink( 'myaccount' );
+			} else {
+				$message = get_option( 'wcboost_wishlist_guest_message', __( 'You need to login to add products to your wishlist', 'wcboost-wishlist' ) );
+
+				if ( $message ) {
+					ob_start();
+					wc_print_notice( $message, 'notice' );
+					$data['message'] = ob_get_clean();
+				}
+			}
+
+			wp_send_json_error( $data );
+			exit;
 		}
 
 		$product_id     = apply_filters( 'wcboost_wishlist_add_to_wishlist_product_id', absint( $_POST['product_id'] ) );
@@ -64,6 +86,7 @@ class Ajax_Handler {
 
 		if ( $was_added && ! is_wp_error( $was_added ) ) {
 			if ( wc_string_to_bool( get_option( 'wcboost_wishlist_redirect_after_add' ) ) ) {
+				/* translators: %s: product name */
 				$message = sprintf( esc_html__( '%s has been added to your wishlist', 'wcboost-wishlist' ), '&ldquo;' . $product->get_title() . '&rdquo;' );
 
 				wc_add_notice( $message );
@@ -71,7 +94,7 @@ class Ajax_Handler {
 
 			wp_send_json_success( [
 				'fragments'      => self::get_refreshed_fragments(),
-				'wishlist_hash'  => $wishlist->get_id() ? md5( get_current_blog_id() . '_' . $wishlist->get_id() . '_' . $wishlist->get_wishlist_token() ) : '',
+				'wishlist_hash'  => $wishlist->get_hash(),
 				'wishlist_url'   => $wishlist->get_public_url(),
 				'wishlist_items' => self::get_wishlist_items( $wishlist_id ),
 				'remove_url'     => $item->get_remove_url(),
@@ -80,23 +103,25 @@ class Ajax_Handler {
 		} else {
 			wp_send_json_error();
 		}
+		// phpcs:enable
 	}
 
 	/**
 	 * AJAX remove wishlist item
 	 */
 	public static function remove_wishlist_item() {
-		// phpcs:ignore WordPress.Security.NonceVerification.Missing
-		$item_key    = isset( $_POST['item_key'] ) ? wc_clean( wp_unslash( $_POST['item_key'] ) ) : '';
+		// phpcs:disable WordPress.Security.NonceVerification.Missing, WordPress.Security.ValidatedSanitizedInput.InputNotSanitized
+		$item_key    = wc_clean( isset( $_POST['item_key'] ) ? wp_unslash( $_POST['item_key'] ) : '' );
 		$wishlist_id = isset( $_POST['wishlist_id'] ) ? absint( $_POST['wishlist_id'] ) : 0;
 		$wishlist    = Helper::get_wishlist( $wishlist_id );
 		$item        = $wishlist->get_item( $item_key );
 		$was_removed = $wishlist->remove_item( $item_key );
+		// phpcs:enable
 
 		if ( $was_removed && ! is_wp_error( $was_removed ) ) {
 			wp_send_json_success( [
 				'fragments'      => self::get_refreshed_fragments(),
-				'wishlist_hash'  => $wishlist->get_id() ? md5( get_current_blog_id() . '_' . $wishlist->get_id() . '_' . $wishlist->get_wishlist_token() ) : '',
+				'wishlist_hash'  => $wishlist->get_hash(),
 				'wishlist_url'   => $wishlist->get_public_url(),
 				'wishlist_items' => self::get_wishlist_items( $wishlist_id ),
 				'restore_url'    => $item->get_restore_url(),
@@ -115,11 +140,10 @@ class Ajax_Handler {
 	 */
 	public static function get_wishlist_fragments() {
 		// phpcs:ignore WordPress.Security.NonceVerification.Missing
-		$fragments = self::get_refreshed_fragments();
+		$product_ids = ! empty( $_POST['product_ids'] ) ? array_map( 'absint', $_POST['product_ids'] ) : [];
+		$fragments   = self::get_refreshed_fragments();
 
-		if ( ! empty( $_POST['product_ids'] ) ) {
-			$product_ids = array_map( 'absint', $_POST['product_ids'] );
-
+		if ( ! empty( $product_ids ) ) {
 			foreach ( $product_ids as $id ) {
 				if ( $id ) {
 					$button = do_shortcode( '[wcboost_wishlist_button product_id="' . $id . '"]' );
@@ -132,7 +156,7 @@ class Ajax_Handler {
 
 		wp_send_json_success( [
 			'fragments'      => $fragments,
-			'wishlist_hash'  => $wishlist->get_id() ? md5( get_current_blog_id() . '_' . $wishlist->get_id() . '_' . $wishlist->get_wishlist_token() ) : '',
+			'wishlist_hash'  => $wishlist->get_hash(),
 			'wishlist_items' => self::get_wishlist_items(),
 		] );
 	}

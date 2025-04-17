@@ -27,6 +27,9 @@ export function getIdFromString( label ) {
 
 export function getPanelIdFromRef( ref ) {
 	if ( ref.current ) {
+		if ( ref.current?.parentElement?.dataset?.panelId ){
+			return ref.current.parentElement.dataset.panelId;
+		} 
 		const parentElement = ref.current.parentElement.closest( '.components-panel__body' );
 		if ( parentElement && parentElement.querySelector( '.components-panel__body-title' ) ) {
 			return getIdFromString( parentElement.querySelector( '.components-panel__body-title' ).textContent );
@@ -75,6 +78,39 @@ export function getUnitDimension( input ) {
         return match[1];
     }
     return 'px';
+}
+
+// Get 2 version strings, and do a comparison based on the operator parsed.
+export function compareVersions( version1, version2, sign = '=' ) {
+	// Function to normalize the given version string.
+	// Split the version string at every hyphen and dot, then convert the parts to integers, then pad with zeros if necessary, and take only the first three parts.
+    const normalizeVersion = ( version ) => 
+        version.split( '-' )[0].split( '.' ).map( part => parseInt( part, 10 ) || 0 ).concat( 0, 0, 0 ).slice( 0, 3 );
+
+	// Normalize both input versions and get the resulting normalized values.
+    const [ v1, v2 ] = [ normalizeVersion( version1 ), normalizeVersion( version2 ) ];
+
+	// Compare the normalized versions using reduce.
+    const comparison = v1.reduce( ( acc, part, i ) => acc || ( part - ( v2[ i ] || 0 ) ), 0 );
+
+    // Check the comparison result based on the provided operator
+	switch ( sign ) {
+		case '<':
+			// Return true if v1 is less than v2.
+			return comparison < 0;
+		case '<=':
+			// Return true if v1 is less than or equal to v2.
+			return comparison <= 0;
+		case '>':
+			// Return true if v1 is greater than v2.
+			return comparison > 0;
+		case '>=':
+			// Return true if v1 is greater than or equal to v2.
+			return comparison >= 0;
+		default:
+			// Default: return true if v1 equals v2.
+			return comparison === 0;
+	}
 }
 
 export function convertToPixel( lengthString ) {
@@ -193,3 +229,19 @@ export const isCustomizerPage = () => {
 
     return true;
 }
+
+/**
+ * 
+ * @param {Function} func function to be debounced.
+ * @param {number} delay time in milliseconds.
+ * @return {Function} - that will be debounced.
+ */
+export const debounce = ( func, delay ) => {
+	let timeout;
+	return ( ...args ) => {
+		clearTimeout( timeout );
+		timeout = setTimeout( () => {
+			func( ...args );
+		}, delay );
+	};
+};

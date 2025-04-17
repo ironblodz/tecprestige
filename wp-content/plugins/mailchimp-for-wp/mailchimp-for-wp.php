@@ -4,15 +4,16 @@
 Plugin Name: MC4WP: Mailchimp for WordPress
 Plugin URI: https://www.mc4wp.com/#utm_source=wp-plugin&utm_medium=mailchimp-for-wp&utm_campaign=plugins-page
 Description: Mailchimp for WordPress by ibericode. Adds various highly effective sign-up methods to your site.
-Version: 4.9.16
+Version: 4.10.3
 Author: ibericode
 Author URI: https://www.ibericode.com/
 Text Domain: mailchimp-for-wp
 Domain Path: /languages
-License: GPL v3
+License: GPL-3.0-or-later
+License URI: http://www.gnu.org/licenses/gpl-3.0.html
 
 Mailchimp for WordPress
-Copyright (C) 2012 - 2024, Danny van Kooten, hi@dannyvankooten.com
+Copyright (C) 2012 - 2025, Danny van Kooten, hi@dannyvankooten.com
 
 This program is free software: you can redistribute it and/or modify
 it under the terms of the GNU General Public License as published by
@@ -31,23 +32,18 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 // Prevent direct file access
 defined('ABSPATH') or exit;
 
-/** @ignore */
-function _mc4wp_load_plugin()
-{
+// bootstrap main plugin
+add_action('plugins_loaded', function () {
     global $mc4wp;
 
     // don't run if Mailchimp for WP Pro 2.x is activated
-    if (defined('MC4WP_VERSION')) {
+    // don't run if PHP version is lower than 7.4.0
+    if (defined('MC4WP_VERSION') || PHP_VERSION_ID < 70400) {
         return;
     }
 
-    // don't run if PHP version is lower than 5.6
-    if (PHP_VERSION_ID < 50600) {
-    	return;
-    }
-
     // bootstrap the core plugin
-    define('MC4WP_VERSION', '4.9.16');
+    define('MC4WP_VERSION', '4.10.3');
     define('MC4WP_PLUGIN_DIR', __DIR__);
     define('MC4WP_PLUGIN_FILE', __FILE__);
 
@@ -94,21 +90,18 @@ function _mc4wp_load_plugin()
             $integrations_admin->add_hooks();
         }
     }
-}
 
-function _mc4wp_on_plugin_activation()
-{
-    // schedule the action hook to refresh the stored Mailchimp lists on a daily basis
+    // bootstrap integrations
+    require __DIR__ . '/integrations/bootstrap.php';
+}, 8);
+
+// schedule the action hook to refresh the stored Mailchimp lists on a daily basis
+register_activation_hook(__FILE__, function () {
     $time_string = sprintf('tomorrow %d:%d am', rand(0, 7), rand(0, 59));
     wp_schedule_event(strtotime($time_string), 'daily', 'mc4wp_refresh_mailchimp_lists');
-}
+});
 
-// bootstrap custom integrations
-function _mc4wp_bootstrap_integrations()
-{
-    require_once MC4WP_PLUGIN_DIR . '/integrations/bootstrap.php';
-}
-
-add_action('plugins_loaded', '_mc4wp_load_plugin', 8);
-add_action('plugins_loaded', '_mc4wp_bootstrap_integrations', 90);
-register_activation_hook(__FILE__, '_mc4wp_on_plugin_activation');
+// remove scheduled hook when plugin is deactivated
+register_deactivation_hook(__FILE__, function () {
+    wp_clear_scheduled_hook('mc4wp_refresh_mailchimp_lists');
+});

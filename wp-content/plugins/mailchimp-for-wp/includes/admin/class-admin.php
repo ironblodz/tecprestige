@@ -55,17 +55,17 @@ class MC4WP_Admin
     {
 
         // Actions used globally throughout WP Admin
-        add_action('admin_menu', array( $this, 'build_menu' ));
-        add_action('admin_init', array( $this, 'initialize' ));
+        add_action('admin_menu', [ $this, 'build_menu' ]);
+        add_action('admin_init', [ $this, 'initialize' ]);
 
-        add_action('current_screen', array( $this, 'customize_admin_texts' ));
-        add_action('wp_dashboard_setup', array( $this, 'register_dashboard_widgets' ));
-        add_action('mc4wp_admin_empty_lists_cache', array( $this, 'renew_lists_cache' ));
-        add_action('mc4wp_admin_empty_debug_log', array( $this, 'empty_debug_log' ));
+        add_action('current_screen', [ $this, 'customize_admin_texts' ]);
+        add_action('wp_dashboard_setup', [ $this, 'register_dashboard_widgets' ]);
+        add_action('mc4wp_admin_empty_lists_cache', [ $this, 'renew_lists_cache' ]);
+        add_action('mc4wp_admin_empty_debug_log', [ $this, 'empty_debug_log' ]);
 
-        add_action('admin_notices', array( $this, 'show_api_key_notice' ));
-        add_action('mc4wp_admin_dismiss_api_key_notice', array( $this, 'dismiss_api_key_notice' ));
-        add_action('admin_enqueue_scripts', array( $this, 'enqueue_assets' ));
+        add_action('admin_notices', [ $this, 'show_api_key_notice' ]);
+        add_action('mc4wp_admin_dismiss_api_key_notice', [ $this, 'dismiss_api_key_notice' ]);
+        add_action('admin_enqueue_scripts', [ $this, 'enqueue_assets' ]);
 
         $this->ads->add_hooks();
         $this->messages->add_hooks();
@@ -81,7 +81,7 @@ class MC4WP_Admin
     {
 
         // register settings
-        register_setting('mc4wp_settings', 'mc4wp', array( $this, 'save_general_settings' ));
+        register_setting('mc4wp_settings', 'mc4wp', [ $this, 'save_general_settings' ]);
 
         // Load upgrader
         $this->init_upgrade_routines();
@@ -179,10 +179,10 @@ class MC4WP_Admin
 
             // if we have at least one form, we're going to run upgrade routine for v3 => v4 anyway.
             $posts = get_posts(
-                array(
+                [
                     'post_type'   => 'mc4wp-form',
                     'posts_per_page' => 1,
-                )
+                ]
             );
             if (empty($posts)) {
                 return;
@@ -275,34 +275,34 @@ class MC4WP_Admin
         $mailchimp = new MC4WP_MailChimp();
 
         // css
-        wp_register_style('mc4wp-admin', mc4wp_plugin_url('assets/css/admin.css'), array(), MC4WP_VERSION);
+        wp_register_style('mc4wp-admin', mc4wp_plugin_url('assets/css/admin.css'), [], MC4WP_VERSION);
         wp_enqueue_style('mc4wp-admin');
 
         // js
-        wp_register_script('mc4wp-admin', mc4wp_plugin_url('assets/js/admin.js'), array(), MC4WP_VERSION, true);
+        wp_register_script('mc4wp-admin', mc4wp_plugin_url('assets/js/admin.js'), [], MC4WP_VERSION, true);
         wp_enqueue_script('mc4wp-admin');
         $connected       = ! empty($opts['api_key']);
-        $mailchimp_lists = $connected ? $mailchimp->get_lists() : array();
+        $mailchimp_lists = $connected ? $mailchimp->get_lists() : [];
         wp_localize_script(
             'mc4wp-admin',
             'mc4wp_vars',
-            array(
+            [
                 'ajaxurl' => admin_url('admin-ajax.php'),
                 'nonce' => wp_create_nonce('mc4wp-ajax'),
-                'mailchimp' => array(
+                'mailchimp' => [
                     'api_connected' => $connected,
                     'lists'         => $mailchimp_lists,
-                ),
+                ],
                 'countries' => MC4WP_Tools::get_countries(),
-                'i18n'      => array(
+                'i18n'      => [
                     'invalid_api_key'                => __('The given value does not look like a valid Mailchimp API key.', 'mailchimp-for-wp'),
                     'pro_only'                       => __('This is a premium feature. Please upgrade to Mailchimp for WordPress Premium to be able to use it.', 'mailchimp-for-wp'),
-                    'renew_mailchimp_lists'          => __('Renew Mailchimp lists', 'mailchimp-for-wp'),
-                    'fetching_mailchimp_lists'       => __('Fetching Mailchimp lists', 'mailchimp-for-wp'),
-                    'fetching_mailchimp_lists_done'  => __('Done! Mailchimp lists renewed.', 'mailchimp-for-wp'),
-                    'fetching_mailchimp_lists_error' => __('Failed to renew your lists. An error occured.', 'mailchimp-for-wp'),
-                ),
-            )
+                    'renew_mailchimp_lists'          => __('Renew Mailchimp audiences', 'mailchimp-for-wp'),
+                    'fetching_mailchimp_lists'       => __('Fetching Mailchimp audiences', 'mailchimp-for-wp'),
+                    'fetching_mailchimp_lists_done'  => __('Done! Mailchimp audiences renewed.', 'mailchimp-for-wp'),
+                    'fetching_mailchimp_lists_error' => __('Failed to renew your audiences. An error occured.', 'mailchimp-for-wp'),
+                ],
+            ]
         );
 
         /**
@@ -325,23 +325,23 @@ class MC4WP_Admin
     {
         $required_cap = $this->tools->get_required_capability();
 
-        $menu_items = array(
-            array(
+        $menu_items = [
+            [
                 'title'    => esc_html__('Mailchimp API Settings', 'mailchimp-for-wp'),
                 'text'     => 'Mailchimp',
                 'slug'     => '',
-                'callback' => array( $this, 'show_generals_setting_page' ),
+                'callback' => [ $this, 'show_generals_setting_page' ],
                 'position' => 0,
-            ),
-            array(
+            ],
+            [
                 'title'    => esc_html__('Other Settings', 'mailchimp-for-wp'),
                 'text'     => esc_html__('Other', 'mailchimp-for-wp'),
                 'slug'     => 'other',
-                'callback' => array( $this, 'show_other_setting_page' ),
+                'callback' => [ $this, 'show_other_setting_page' ],
                 'position' => 90,
-            ),
+            ],
 
-        );
+        ];
 
         /**
         * Filters the menu items to appear under the main menu item.
@@ -363,10 +363,10 @@ class MC4WP_Admin
 
         // add top menu item
         $icon = file_get_contents(MC4WP_PLUGIN_DIR . '/assets/img/icon.svg');
-        add_menu_page('Mailchimp for WP', 'MC4WP', $required_cap, 'mailchimp-for-wp', array( $this, 'show_generals_setting_page' ), 'data:image/svg+xml;base64,' . base64_encode($icon), '99.68491');
+        add_menu_page('Mailchimp for WP', 'MC4WP', $required_cap, 'mailchimp-for-wp', [ $this, 'show_generals_setting_page' ], 'data:image/svg+xml;base64,' . base64_encode($icon), '99.68491');
 
         // sort submenu items by 'position'
-        usort($menu_items, array( $this, 'sort_menu_items_by_position' ));
+        usort($menu_items, [ $this, 'sort_menu_items_by_position' ]);
 
         // add sub-menu items
         foreach ($menu_items as $item) {
@@ -406,7 +406,7 @@ class MC4WP_Admin
     {
         $opts      = mc4wp_get_options();
         $api_key   = mc4wp_get_api_key();
-        $lists     = array();
+        $lists     = [];
         $connected = ! empty($api_key);
 
         if ($connected) {
@@ -432,7 +432,9 @@ class MC4WP_Admin
             }
         }
 
-        $obfuscated_api_key = mc4wp_obfuscate_string($api_key);
+        $obfuscated_api_key       = mc4wp_obfuscate_string($api_key);
+        $is_procaptcha_configured = MC4WP_Procaptcha::get_instance()->is_enabled();
+
         require MC4WP_PLUGIN_DIR . '/includes/views/general-settings.php';
     }
 
@@ -499,8 +501,12 @@ class MC4WP_Admin
         }
 
         echo '<div class="notice notice-warning mc4wp-is-dismissible">';
-        echo '<p>', sprintf(wp_kses(__('To get started with Mailchimp for WordPress, please <a href="%s">enter your Mailchimp API key on the settings page of the plugin</a>.', 'mailchimp-for-wp'), array( 'a' => array( 'href' => array() ) )), admin_url('admin.php?page=mailchimp-for-wp')), '</p>';
-        echo '<form method="post"><input type="hidden" name="_mc4wp_action" value="dismiss_api_key_notice" /><button type="submit" class="notice-dismiss"><span class="screen-reader-text">Dismiss this notice.</span></button></form>';
+        echo '<p>', sprintf(wp_kses(__('To get started with Mailchimp for WordPress, please <a href="%s">enter your Mailchimp API key on the settings page of the plugin</a>.', 'mailchimp-for-wp'), [ 'a' => [ 'href' => [] ] ]), admin_url('admin.php?page=mailchimp-for-wp')), '</p>';
+        echo '<form method="post">';
+        wp_nonce_field('_mc4wp_action', '_wpnonce');
+        echo '<input type="hidden" name="_mc4wp_action" value="dismiss_api_key_notice" />';
+        echo '<button type="submit" class="notice-dismiss"><span class="screen-reader-text">Dismiss this notice.</span></button>';
+        echo '</form>';
         echo '</div>';
     }
 

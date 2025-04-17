@@ -247,7 +247,6 @@ class NextendSocialProviderFacebook extends NextendSocialProviderOAuth {
     }
 
     public function getAuthUserData($key) {
-
         switch ($key) {
             case 'id':
                 return $this->authUserData['id'];
@@ -322,6 +321,14 @@ class NextendSocialProviderFacebook extends NextendSocialProviderOAuth {
 
         return parent::getSyncDataFieldDescription($fieldName);
     }
+
+    public function getProviderEmailVerificationStatus() {
+        /**
+         * The email address (when) returned by Facebook is always verified
+         */
+        return true;
+    }
+
 }
 
 NextendSocialLogin::addProvider(new NextendSocialProviderFacebook);

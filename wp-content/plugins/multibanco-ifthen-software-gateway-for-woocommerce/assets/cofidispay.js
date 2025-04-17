@@ -1,5 +1,9 @@
+/**
+ * The Cofidis Pay frontend javascript
+ */
+
 jQuery(
-	function( $ ) {
+	function ( $ ) {
 
 		var order_id;
 		var order_key;
@@ -11,7 +15,7 @@ jQuery(
 			order_id  = $( '#cofidispay-order-id' ).val();
 			order_key = $( '#cofidispay-order-key' ).val();
 			setTimeout(
-				function(){
+				function () {
 					cofidispay_ifthenpay_order_check_status();
 				},
 				interval
@@ -20,6 +24,8 @@ jQuery(
 
 		function cofidispay_ifthenpay_order_check_status() {
 			total_interval = total_interval + interval;
+			page_url       = new URL( window.location.href );
+			page_url.searchParams.set( 'cache_buster', Math.random() );
 			console.log( 'Checking Cofidis Pay payment status, after ' + interval + 'ms (total: ' + total_interval + 'ms)' );
 			var data = {
 				action: 'wc_cofidispay_ifthenpay_order_status',
@@ -29,17 +35,17 @@ jQuery(
 			$.post(
 				woocommerce_params.ajax_url,
 				data,
-				function( response ) {
+				function ( response ) {
 					var response = JSON.parse( response );
 					console.log( 'Status: ' + response.order_status );
-					if ( response.order_status && ( response.order_status == 'processing' || response.order_status == 'completed' ) ) {
-						  // DONE
-						  location.reload();
+					if ( response.order_status && ( response.order_status === 'processing' || response.order_status === 'completed' || response.expired ) ) {
+						// DONE
+						window.location.href = page_url.toString() + '#ifthenpay_payment_received';
 					} else {
 						interval = Math.round( interval * 1.2 );
 						if ( total_interval <= cofidispay_expire ) {
 							setTimeout(
-								function(){
+								function () {
 									cofidispay_ifthenpay_order_check_status();
 								},
 								interval

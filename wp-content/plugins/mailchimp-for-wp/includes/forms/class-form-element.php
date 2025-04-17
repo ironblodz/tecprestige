@@ -27,7 +27,7 @@ class MC4WP_Form_Element
      * - lists: Customized number of Mailchimp list ID's to subscribe to.
      * - email_type: The email type
      */
-    public $config = array();
+    public $config = [];
 
     /**
      * @var bool
@@ -39,7 +39,7 @@ class MC4WP_Form_Element
      * @param string $id
      * @param array $config
      */
-    public function __construct(MC4WP_Form $form, $id, array $config = array())
+    public function __construct(MC4WP_Form $form, $id, array $config = [])
     {
         $this->form   = $form;
         $this->ID     = $id;
@@ -160,7 +160,7 @@ class MC4WP_Form_Element
         $form     = $this->form;
 
         // check if content contains {response} tag
-        if (stripos($this->form->content, '{response}') !== false) {
+        if (strpos($this->form->content, '{response}') !== false) {
             return '';
         }
 
@@ -240,10 +240,10 @@ class MC4WP_Form_Element
         $form                  = $this;
         $form_action_attribute = null;
 
-        $attributes = array(
+        $attributes = [
             'id'    => $this->ID,
             'class' => $this->get_css_classes(),
-        );
+        ];
 
         /**
          * Filters the `action` attribute of the `<form>` element.
@@ -284,7 +284,7 @@ class MC4WP_Form_Element
      * @param array|null $config Use this to override the configuration for this form element
      * @return string
      */
-    public function generate_html(array $config = null)
+    public function generate_html(?array $config = null)
     {
         if ($config) {
             $this->config = $config;
@@ -332,7 +332,7 @@ class MC4WP_Form_Element
      */
     protected function get_css_classes()
     {
-        $classes = array();
+        $classes = [];
         $form    = $this->form;
 
         $classes[] = 'mc4wp-form';

@@ -38,6 +38,12 @@ class Plugin {
 
 			update_option( 'njt_wa_version', NTA_WHATSAPP_VERSION );
 		}
+
+		// Add capability for administrator
+		$role = get_role( 'administrator' );
+		if ( $role ) {
+			$role->add_cap( 'nta_wa_manage' );
+		}
 	}
 
 	public static function deactivate() {

@@ -118,7 +118,7 @@ class Data {
 	}
 
 	/**
-	 * Get counter of times a product was added to cart from the compare wishlist
+	 * Get counter of times a product was added to cart from the compare list.
 	 *
 	 * @param  int  $product_id
 	 *

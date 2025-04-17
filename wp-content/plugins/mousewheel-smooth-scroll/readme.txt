@@ -3,8 +3,8 @@ Contributors: KubiQ
 Donate link: https://www.paypal.me/jakubnovaksl
 Tags: smooth scroll, mousewheel scroll, scrolling
 Requires at least: 3.0.1
-Tested up to: 6.5
-Stable tag: 6.5
+Tested up to: 6.7
+Stable tag: 6.7.2
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -28,6 +28,21 @@ You can play with settings and test it here:
 1. Plugin settings
 
 == Changelog ==
+
+= 6.7.2 =
+* fix typo for allowedBrowsers gblazex library not saving selection
+
+= 6.7.1 =
+* new easing option for Lenis library
+
+= 6.7 =
+* tested on WP 6.7
+* new possibility to switch to a Lenis smooth scroll library
+
+= 6.6 =
+* tested on WP 6.6
+* updated SmoothScroll js library to version 1.5.1
+* small backend code changes
 
 = 6.5 =
 * tested on WP 6.5

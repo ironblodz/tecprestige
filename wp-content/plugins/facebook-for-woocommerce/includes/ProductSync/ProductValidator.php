@@ -133,7 +133,6 @@ class ProductValidator {
 	public function validate() {
 		$this->validate_sync_enabled_globally();
 		$this->validate_product_status();
-		$this->validate_product_stock_status();
 		$this->validate_product_sync_field();
 		$this->validate_product_price();
 		$this->validate_product_visibility();
@@ -151,7 +150,6 @@ class ProductValidator {
 	 */
 	public function validate_but_skip_status_check() {
 		$this->validate_sync_enabled_globally();
-		$this->validate_product_stock_status();
 		$this->validate_product_sync_field();
 		$this->validate_product_price();
 		$this->validate_product_visibility();
@@ -168,7 +166,6 @@ class ProductValidator {
 	 */
 	public function validate_but_skip_sync_field() {
 		$this->validate_sync_enabled_globally();
-		$this->validate_product_stock_status();
 		$this->validate_product_price();
 		$this->validate_product_visibility();
 		$this->validate_product_terms();
@@ -269,17 +266,6 @@ class ProductValidator {
 	}
 
 	/**
-	 * Check whether the product should be excluded due to being out of stock.
-	 *
-	 * @throws ProductExcludedException If product should not be synced.
-	 */
-	protected function validate_product_stock_status() {
-		if ( 'yes' === get_option( 'woocommerce_hide_out_of_stock_items' ) && ! $this->product->is_in_stock() ) {
-			throw new ProductExcludedException( __( 'Product must be in stock.', 'facebook-for-woocommerce' ) );
-		}
-	}
-
-	/**
 	 * Check whether the product's visibility excludes it from sync.
 	 *
 	 * Products are excluded if they are hidden from the store catalog or from search results.
@@ -289,7 +275,30 @@ class ProductValidator {
 	protected function validate_product_visibility() {
 		$product = $this->product_parent ? $this->product_parent : $this->product;
 
-		if ( ! $product->is_visible() ) {
+		/**
+		 * Instead of directly calling $product->is_visible(), copying the logic of is_visible() here
+		 * excluding the logic for woocommerce_hide_out_of_stock_items because we want to sync out of
+		 * stock items as well irrespective of Inventory settings.
+		 * ===Logic Starts here===
+		 */
+		$visible = 'visible' === $product->get_catalog_visibility() || ( is_search() && 'search' === $product->get_catalog_visibility() ) || ( ! is_search() && 'catalog' === $product->get_catalog_visibility() );
+		if ( 'trash' === $product->get_status() ) {
+			$visible = false;
+		} elseif ( 'publish' !== $product->get_status() && ! current_user_can( 'edit_post', $product->get_id() ) ) {
+			$visible = false;
+		}
+		if ( $product->get_parent_id() ) {
+			$parent_product = wc_get_product( $product->get_parent_id() );
+
+			if ( $parent_product && 'publish' !== $parent_product->get_status() && ! current_user_can( 'edit_post', $parent_product->get_id() ) ) {
+				$visible = false;
+			}
+		}
+		/**
+		 * ===Logic Ends here===
+		 */
+
+		if ( ! $visible ) {
 			throw new ProductExcludedException( __( 'This product cannot be synced to Facebook because it is hidden from your store catalog.', 'facebook-for-woocommerce' ) );
 		}
 	}

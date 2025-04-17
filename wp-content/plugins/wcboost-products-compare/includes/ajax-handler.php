@@ -1,6 +1,8 @@
 <?php
 namespace WCBoost\ProductsCompare;
 
+use MailPoet\AdminPages\Pages\Help;
+
 class Ajax_Handler {
 
 	/**
@@ -50,10 +52,12 @@ class Ajax_Handler {
 			}
 
 			wp_send_json_success( [
-				'fragments'   => self::get_refreshed_fragments(),
-				'remove_url'  => Helper::get_remove_url( $product ),
-				'compare_url' => wc_get_page_permalink( 'compare' ),
-				'count'       => Plugin::instance()->list->count_items(),
+				'fragments'     => self::get_refreshed_fragments(),
+				'remove_url'    => Helper::get_remove_url( $product ),
+				'compare_url'   => wc_get_page_permalink( 'compare' ),
+				'count'         => Plugin::instance()->list->count_items(),
+				'compare_items' => self::get_compare_items(),
+				'compare_hash'  => Plugin::instance()->list->get_hash(),
 			] );
 		} else {
 			wp_send_json_error();
@@ -70,8 +74,10 @@ class Ajax_Handler {
 
 		if ( false !== $product_id ) {
 			wp_send_json_success( [
-				'fragments' => self::get_refreshed_fragments(),
-				'add_url'   => Helper::get_add_url( $product_id ),
+				'fragments'     => self::get_refreshed_fragments(),
+				'compare_items' => self::get_compare_items(),
+				'compare_hash'  => Plugin::instance()->list->get_hash(),
+				'add_url'       => Helper::get_add_url( $product_id ),
 			] );
 		} else {
 			wp_send_json_error();
@@ -99,7 +105,9 @@ class Ajax_Handler {
 		}
 
 		wp_send_json_success( [
-			'fragments' => $fragments,
+			'fragments'     => $fragments,
+			'compare_items' => self::get_compare_items(),
+			'compare_hash'  => Plugin::instance()->list->get_hash(),
 		] );
 	}
 
@@ -119,5 +127,23 @@ class Ajax_Handler {
 		];
 
 		return apply_filters( 'wcboost_products_compare_add_to_compare_fragments', $data );
+	}
+
+	/**
+	 * Get contents of the compare list
+	 *
+	 * @since 1.0.6
+	 *
+	 * @return void
+	 */
+	protected static function get_compare_items() {
+		$items = Plugin::instance()->list->get_items();
+		$data  = [];
+
+		foreach ( $items as $key => $product_id ) {
+			$data[ $product_id ] = [ 'remove_url' => Helper::get_remove_url( $product_id ) ];
+		}
+
+		return $data;
 	}
 }

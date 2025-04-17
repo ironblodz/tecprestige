@@ -16,7 +16,7 @@ abstract class MC4WP_Dynamic_Content_Tags
     /**
      * @var array Array of registered dynamic content tags
      */
-    protected $tags = array();
+    protected $tags = [];
 
     /**
      * Register template tags
@@ -24,58 +24,58 @@ abstract class MC4WP_Dynamic_Content_Tags
     protected function register()
     {
         // Global tags can go here
-        $this->tags['cookie'] = array(
-            'description' => sprintf(__('Data from a cookie.', 'mailchimp-for-wp')),
-            'callback'    => array( $this, 'get_cookie' ),
+        $this->tags['cookie'] = [
+            'description' => __('Data from a cookie.', 'mailchimp-for-wp'),
+            'callback'    => [ $this, 'get_cookie' ],
             'example'     => "cookie name='my_cookie' default='Default Value'",
-        );
+        ];
 
-        $this->tags['email'] = array(
+        $this->tags['email'] = [
             'description' => __('The email address of the current visitor (if known).', 'mailchimp-for-wp'),
-            'callback'    => array( $this, 'get_email' ),
-        );
+            'callback'    => [ $this, 'get_email' ],
+        ];
 
-        $this->tags['current_url'] = array(
+        $this->tags['current_url'] = [
             'description' => __('The URL of the page.', 'mailchimp-for-wp'),
             'callback'    => 'mc4wp_get_request_url',
-        );
+        ];
 
-        $this->tags['current_path'] = array(
+        $this->tags['current_path'] = [
             'description' => __('The path of the page.', 'mailchimp-for-wp'),
             'callback'    => 'mc4wp_get_request_path',
-        );
+        ];
 
-        $this->tags['date'] = array(
+        $this->tags['date'] = [
             'description' => sprintf(__('The current date. Example: %s.', 'mailchimp-for-wp'), '<strong>' . gmdate('Y/m/d', time() + ( get_option('gmt_offset') * HOUR_IN_SECONDS )) . '</strong>'),
             'replacement' => gmdate('Y/m/d', time() + ( get_option('gmt_offset') * HOUR_IN_SECONDS )),
-        );
+        ];
 
-        $this->tags['time'] = array(
+        $this->tags['time'] = [
             'description' => sprintf(__('The current time. Example: %s.', 'mailchimp-for-wp'), '<strong>' . gmdate('H:i:s', time() + ( get_option('gmt_offset') * HOUR_IN_SECONDS )) . '</strong>'),
             'replacement' => gmdate('H:i:s', time() + ( get_option('gmt_offset') * HOUR_IN_SECONDS )),
-        );
+        ];
 
-        $this->tags['language'] = array(
+        $this->tags['language'] = [
             'description' => sprintf(__('The site\'s language. Example: %s.', 'mailchimp-for-wp'), '<strong>' . get_locale() . '</strong>'),
             'callback'    => 'get_locale',
-        );
+        ];
 
-        $this->tags['ip'] = array(
+        $this->tags['ip'] = [
             'description' => sprintf(__('The visitor\'s IP address. Example: %s.', 'mailchimp-for-wp'), '<strong>' . mc4wp_get_request_ip_address() . '</strong>'),
             'callback'    => 'mc4wp_get_request_ip_address',
-        );
+        ];
 
-        $this->tags['user'] = array(
-            'description' => sprintf(__('The property of the currently logged-in user.', 'mailchimp-for-wp')),
-            'callback'    => array( $this, 'get_user_property' ),
+        $this->tags['user'] = [
+            'description' => __('The property of the currently logged-in user.', 'mailchimp-for-wp'),
+            'callback'    => [ $this, 'get_user_property' ],
             'example'     => "user property='user_email'",
-        );
+        ];
 
-        $this->tags['post'] = array(
-            'description' => sprintf(__('Property of the current page or post.', 'mailchimp-for-wp')),
-            'callback'    => array( $this, 'get_post_property' ),
+        $this->tags['post'] = [
+            'description' => __('Property of the current page or post.', 'mailchimp-for-wp'),
+            'callback'    => [ $this, 'get_post_property' ],
             'example'     => "post property='ID'",
-        );
+        ];
     }
 
     /**
@@ -83,7 +83,7 @@ abstract class MC4WP_Dynamic_Content_Tags
      */
     public function all()
     {
-        if ($this->tags === array()) {
+        if (count($this->tags) === 0) {
             $this->register();
         }
 
@@ -108,7 +108,7 @@ abstract class MC4WP_Dynamic_Content_Tags
                 $replacement = $config['replacement'];
             } elseif (isset($config['callback'])) {
                 // parse attributes
-                $attributes = array();
+                $attributes = [];
                 if (isset($matches[2])) {
                     $attribute_string = $matches[2];
                     $attributes       = shortcode_parse_atts($attribute_string);
@@ -139,10 +139,10 @@ abstract class MC4WP_Dynamic_Content_Tags
         $this->escape_function = $escape_function;
 
         // replace strings like this: {tagname attr="value"}
-        $string = preg_replace_callback('/\{(\w+)(\ +(?:(?!\{)[^}\n])+)*\}/', array( $this, 'replace_tag' ), $string);
+        $string = preg_replace_callback('/\{(\w+)(\ +(?:(?!\{)[^}\n])+)*\}/', [ $this, 'replace_tag' ], $string);
 
         // call again to take care of nested variables
-        $string = preg_replace_callback('/\{(\w+)(\ +(?:(?!\{)[^}\n])+)*\}/', array( $this, 'replace_tag' ), $string);
+        $string = preg_replace_callback('/\{(\w+)(\ +(?:(?!\{)[^}\n])+)*\}/', [ $this, 'replace_tag' ], $string);
         return $string;
     }
 
@@ -183,7 +183,7 @@ abstract class MC4WP_Dynamic_Content_Tags
      *
      * @return string
      */
-    protected function get_cookie($args = array())
+    protected function get_cookie($args = [])
     {
         if (empty($args['name'])) {
             return '';
@@ -206,7 +206,7 @@ abstract class MC4WP_Dynamic_Content_Tags
      *
      * @return string
      */
-    protected function get_user_property($args = array())
+    protected function get_user_property($args = [])
     {
         $property = empty($args['property']) ? 'user_email' : $args['property'];
         $default  = isset($args['default']) ? $args['default'] : '';
@@ -226,7 +226,7 @@ abstract class MC4WP_Dynamic_Content_Tags
      *
      * @return string
      */
-    protected function get_post_property($args = array())
+    protected function get_post_property($args = [])
     {
         global $post;
         $property = empty($args['property']) ? 'ID' : $args['property'];
@@ -245,7 +245,7 @@ abstract class MC4WP_Dynamic_Content_Tags
     protected function get_email()
     {
         if (! empty($_REQUEST['EMAIL'])) {
-            return $_REQUEST['EMAIL'];
+            return strip_tags($_REQUEST['EMAIL']);
         }
 
         // then , try logged-in user

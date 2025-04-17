@@ -131,12 +131,10 @@ abstract class NextendSocialProviderDummy {
      * If the provider returns an email address, we should only attempt to use that for registration and auto-linking if
      * the email address is verified on the provider's end!
      *
-     * By default, we consider all social media account email addresses verified.
-     *
      * @return bool
      */
     public function getProviderEmailVerificationStatus() {
-        return true;
+        throw  new Exception(__('Error: Email verification status is not checked in this provider!', 'nextend-facebook-connect'));
     }
 
 }

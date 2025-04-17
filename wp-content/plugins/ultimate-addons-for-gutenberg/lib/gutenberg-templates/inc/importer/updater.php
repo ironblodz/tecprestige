@@ -8,6 +8,7 @@
 namespace Gutenberg_Templates\Inc\Importer;
 
 use Gutenberg_Templates\Inc\Traits\Instance;
+use Gutenberg_Templates\Inc\Traits\Helper;
 
 if ( ! defined( 'ABSPATH' ) ) {
 	exit;
@@ -151,6 +152,34 @@ class Updater {
 			}
 
 			$this->remove_deprecated_option();
+		}
+
+		if ( version_compare( $old_version, '2.3.4', '<' ) ) {
+			$common_css_content = get_option( 'ast-block-templates-spectra-common-styles', '' );
+			if ( ! empty( $common_css_content ) ) {
+				Helper::instance()->update_json_file( 'ast-block-templates-spectra-common-styles', $common_css_content );
+				delete_option( 'ast-block-templates-spectra-common-styles' );
+			}
+		}
+
+		if ( version_compare( $old_version, '2.4.5', '<' ) ) {
+
+			global $wpdb;
+
+			// Query to get all options that start with 'ast-block-templates_data-'.
+			$options = $wpdb->get_col( //phpcs:ignore
+				$wpdb->prepare(
+					"SELECT option_name FROM {$wpdb->options} WHERE option_name LIKE %s",
+					'ast-block-templates_data-%'
+				)
+			);
+
+			// Loop through each option and delete it.
+			if ( $options ) {
+				foreach ( $options as $option ) {
+					delete_option( $option );
+				}
+			}
 		}
 	}
 }

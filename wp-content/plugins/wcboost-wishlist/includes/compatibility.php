@@ -39,6 +39,9 @@ class Compatibility {
 
 			// Always use the same item key for removing actions.
 			add_filter( 'wcboost_wishlist_item_key', [ $this, 'translate_item_key_to_default' ], 10, 3 );
+
+			// Translate the wishlist page ID.
+			add_filter( 'option_wcboost_wishlist_page_id', [ $this, 'translate_option_wishlist_page_id' ] );
 		}
 	}
 
@@ -135,6 +138,17 @@ class Compatibility {
 		}
 
 		return md5( implode( '_', [ $product_id, $variation_id ] ) );
+	}
+
+	/**
+	 * Translate the option of wishlist page id
+	 *
+	 * @param  int $page_id
+	 *
+	 * @return int
+	 */
+	public function translate_option_wishlist_page_id( $page_id ) {
+		return apply_filters( 'wpml_object_id', $page_id, 'page' );
 	}
 }
 

@@ -1,0 +1,32 @@
+.konte-elementor-widget::after {
+	content: 'Konte';
+	position: absolute;
+	top: 5px;
+	right: 5px;
+	padding: 0 3px;
+	background-color: #000;
+	color: #fff;
+	font-size: 10px;
+	font-weight: 500;
+	font-family: var(--e-a-font-family);
+	line-height: 16px;
+	text-align: center;
+	border-radius: 2px;
+	pointer-events: none;
+}
+
+.elementor-navigator__element__element-type .konte-elementor-widget {
+	position: relative;
+}
+
+.elementor-navigator__element__element-type .konte-elementor-widget::after {
+	content: "K";
+	font-size: 6px;
+	line-height: 10px;
+	min-width: 10px;
+	padding: 0;
+	top: -5px;
+	left: -8px;
+	right: auto;
+	border-radius: 10px;
+}

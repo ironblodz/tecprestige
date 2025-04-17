@@ -1,11 +1,11 @@
 === Google for WooCommerce ===
 Contributors: automattic, google, woocommerce
 Tags: woocommerce, google, product feed, ads, listings
-Requires at least: 5.9
-Tested up to: 6.6
+Requires at least: 6.1
+Tested up to: 6.8
 Requires PHP: 7.4
 Requires PHP Architecture: 64 Bits
-Stable tag: 2.8.5
+Stable tag: 2.9.11
 License: GPLv3
 License URI: https://www.gnu.org/licenses/gpl-3.0.html
 
@@ -51,8 +51,8 @@ Once you’re running Google Ads campaigns, the Google tag feature in the extens
 
 = Minimum Requirements =
 
-* WordPress 5.9 or greater
-* WooCommerce 6.9 or greater
+* WordPress 6.1 or greater
+* WooCommerce 7.9 or greater
 * PHP version 7.4 or greater
 * PHP Architecture 64 bits
 * MySQL version 5.6 or greater
@@ -140,29 +140,20 @@ To allow your products to appear in all relevant locations, make sure you’ve c
 
 == Changelog ==
 
-= 2.8.5 - 2024-09-05 =
-* Break - Remove WooCommerce Navigation integration.
-* Fix - Issue with syncing shipping rates with more than two decimals.
-* Fix - Log exceptions triggered by assets being enqueued before being registered.
-* Tweak - Use remote-site-status to check the WPCOM Auth status.
-* Tweak - WC 9.3.0 compatibility.
+= 2.9.11 - 2025-04-15 =
+* Fix - Ads merchant linking failure display issue & improve retry mechanism.
+* Fix - Compatibility issue with WordPress 6.8 and WooCommerce 9.8, which may cause all pages not to display properly.
+* Tweak - WC 9.8 compatibility.
+* Tweak - WP 6.8 compatibility.
 
-= 2.8.4 - 2024-08-28 =
-* Dev - Align namespaces for unit tests.
-* Dev - Avoid accidentally using the event object to reset the asset group values in the CampaignAssetsForm component.
-* Dev - Migrate jest tests to use Node.js 20.
-* Dev - Rewrite the replacer of JSON.stringify in getReportKey to ensure it returns the same key regardless of the query keys' order.
-* Dev - Upgrade to use Node.js 20 and bump npm dependencies.
-* Dev - Use a fixed SKU number when testing product adapter.
-* Fix - issue with comma separators for Shipping Rates.
-* Tweak - Connect Test Page errors when WPCOM token is not connected.
-* Tweak - Make the Tooltip use the new placement prop when WordPress >= 6.4.
-* Tweak - Replace deprecated event.keyCode with event.code for the verification code inputs in the contact information setting.
-* Tweak - Update the copy in the "Linked accounts" of the accounts connection setting to include Google Ads account.
+= 2.9.10 - 2025-03-18 =
+* Dev - Add the conversion action details to the connection test page.
+* Fix - It may be unable to connect to the auto-selected Google Ads account after disconnecting during onboarding.
 
-= 2.8.3 - 2024-08-20 =
-* Fix - Return empty array props as empty objects in WCOM Proxy responses.
-* Tweak - Display additional context in error message when Google Ads account limit reached.
-* Tweak - Upgrade readme details in WPORG.
+= 2.9.9 - 2025-02-18 =
+* Fix - Error displayed when accessing campaign assets editing page without attached asset groups.
+* Tweak - Opt-in to URL expansion.
+* Tweak - Supplement the implementation of API Pull for the Settings page.
+* Tweak - WC 9.7 compatibility.
 
 [See changelog for all versions](https://raw.githubusercontent.com/woocommerce/google-listings-and-ads/trunk/changelog.txt).

@@ -121,11 +121,20 @@ class Frontend {
 			] )
 		);
 
+		$hash = md5( get_current_blog_id() . '_' . get_site_url( get_current_blog_id(), '/' ) . get_template() );
+
 		wp_enqueue_script( 'wcboost-products-compare-fragments', $plugin->plugin_url( '/assets/js/compare-fragments' . $suffix . '.js' ), [ 'jquery' ], $plugin->version, true );
-		wp_localize_script( 'wcboost-products-compare-fragments', 'wcboost_products_compare_fragments_params', [
-			'refresh_on_load' => get_option( 'wcboost_products_compare_ajax_bypass_cache', defined( 'WP_CACHE' ) && WP_CACHE ? 'yes' : 'no' ),
-			'timeout'         => apply_filters( 'wcboost_wishlist_ajax_timeout', 5000 ),
-		] );
+		wp_localize_script(
+			'wcboost-products-compare-fragments',
+			'wcboost_products_compare_fragments_params',
+			apply_filters( 'wcboost_products_compare_fragments_params', [
+				'refresh_on_load' => get_option( 'wcboost_products_compare_ajax_bypass_cache', 'no' ),
+				'hash_key'        => 'wcboost_compare_hash_' . $hash,
+				'fragment_name'   => 'wcboost_compare_fragments_' . $hash,
+				'list_name'       => 'wcboost_compare_' . $hash,
+				'timeout'         => apply_filters( 'wcboost_products_compare_ajax_timeout', 5000 ),
+			] )
+		);
 	}
 
 	/**

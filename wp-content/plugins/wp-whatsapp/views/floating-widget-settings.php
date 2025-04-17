@@ -6,14 +6,14 @@ if ( isset( $_GET['tab'] ) ) {
 }
 ?>
 <div class="wrap">
-	<h1>Floating Widget</h1>
+	<h1><?php echo esc_html__( 'Floating Widget', 'wp-whatsapp' ); ?></h1>
 
 	<?php settings_errors(); ?>
 	<div id="njt-tabs">
 		<ul class="nav-tab-wrapper nta-tab-wrapper">
-			<li><a href="#tabs-1" class="nav-tab nta-selected-tab"><?php echo __( 'Selected Accounts', 'wp-whatsapp' ); ?></a></li>
-			<li><a href="#tabs-2" class="nav-tab nta-design-tab" data-action="njt_wa_save_design_setting"><?php echo __( 'Design', 'wp-whatsapp' ); ?></a></li>
-			<li><a href="#tabs-3" class="nav-tab nta-display-setting-tab" data-action="njt_wa_save_display_setting"><?php echo __( 'Display Settings', 'wp-whatsapp' ); ?></a></li>
+			<li><a href="#tabs-1" class="nav-tab nta-selected-tab"><?php echo esc_html__( 'Selected Accounts', 'wp-whatsapp' ); ?></a></li>
+			<li><a href="#tabs-2" class="nav-tab nta-design-tab" data-action="njt_wa_save_design_setting"><?php echo esc_html__( 'Design', 'wp-whatsapp' ); ?></a></li>
+			<li><a href="#tabs-3" class="nav-tab nta-display-setting-tab" data-action="njt_wa_save_display_setting"><?php echo esc_html__( 'Display Settings', 'wp-whatsapp' ); ?></a></li>
 		</ul>
 		<div class="nta-tabs-content">
 			<form method="post" action="options.php">

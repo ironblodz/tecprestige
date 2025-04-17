@@ -30,17 +30,40 @@ class Compare_List {
 			$this->load_products_manually( $product_ids );
 		} else {
 			$this->id = wc_rand_hash();
-			$this->load_products_from_session();
+
+			if ( ! did_action( 'wp_loaded' ) ) {
+				add_action( 'wp_loaded', [ $this, 'load_products_from_session' ] );
+			} else {
+				$this->load_products_from_session();
+			}
 		}
 	}
 
 	/**
-	 * Get the list id
+	 * Init hooks.
+	 * This method is called individually after initialization of the main list.
 	 *
-	 * @return string
+	 * @since 1.0.6
+	 *
+	 * @return void
 	 */
-	public function get_id() {
-		return $this->id;
+	public function init() {
+		// Should be called with user-defined list only.
+		if ( ! $this->get_id() ) {
+			return;
+		}
+
+		// Persistent compare list stored to usermeta.
+		add_action( 'wcboost_products_compare_product_added', [ $this, 'update_persistent_list' ] );
+		add_action( 'wcboost_products_compare_product_removed', [ $this, 'update_persistent_list' ] );
+		add_action( 'wcboost_products_compare_list_emptied', [ $this, 'delete_persistent_list' ] );
+
+		// Cookie events.
+		add_action( 'wcboost_products_compare_product_added', [ $this, 'maybe_set_cookies' ] );
+		add_action( 'wcboost_products_compare_product_removed', [ $this, 'maybe_set_cookies' ] );
+		add_action( 'wcboost_products_compare_list_emptied', [ $this, 'maybe_set_cookies' ] );
+		add_action( 'wp', [ $this, 'maybe_set_cookies' ], 99 );
+		add_action( 'shutdown', [ $this, 'maybe_set_cookies' ], 0 );
 	}
 
 	/**
@@ -48,12 +71,24 @@ class Compare_List {
 	 *
 	 * @return void
 	 */
-	protected function load_products_from_session() {
+	public function load_products_from_session() {
 		if ( ! WC()->session ) {
 			return;
 		}
 
-		$data = WC()->session->get( self::SESSION_KEY, [ 'id' => '', 'items' => [] ] );
+		$data = WC()->session->get( self::SESSION_KEY, null );
+		$update_session = false;
+		$merge_list = (bool) get_user_meta( get_current_user_id(), '_wcboost_products_compare_load_after_login', true );
+
+		if ( null === $data || $merge_list ) {
+			$saved          = $this->get_saved_list();
+			$data           = $data ? $data : [ 'id' => '', 'items' => [] ];
+			$data['id']     = empty( $data['items'] ) ? $saved['id'] : $data['id'];
+			$data['items']  = array_merge( $saved['items'], $data['items'] );
+			$update_session = true;
+
+			delete_user_meta( get_current_user_id(), '_wcboost_products_compare_load_after_login' );
+		}
 
 		foreach ( $data['items'] as $product_id ) {
 			$key = Helper::generate_item_key( $product_id );
@@ -62,6 +97,14 @@ class Compare_List {
 
 		if ( ! empty( $data['id'] ) ) {
 			$this->id = $data['id'];
+		}
+
+		if ( $update_session ) {
+			$this->update();
+
+			if ( $merge_list ) {
+				$this->update_persistent_list();
+			}
 		}
 	}
 
@@ -83,6 +126,15 @@ class Compare_List {
 			$key = Helper::generate_item_key( $product_id );
 			$this->items[ $key ] = $product_id;
 		}
+	}
+
+	/**
+	 * Get the list id
+	 *
+	 * @return string
+	 */
+	public function get_id() {
+		return $this->id;
 	}
 
 	/**
@@ -160,7 +212,6 @@ class Compare_List {
 		$this->items = [];
 
 		if ( $reset_db ) {
-			$this->id = '';
 			$this->delete();
 		}
 
@@ -189,6 +240,32 @@ class Compare_List {
 	}
 
 	/**
+	 * Get the hash based on list contents.
+	 *
+	 * @since 1.0.6
+	 *
+	 * @return string
+	 */
+	public function get_hash() {
+		$hash = $this->get_id() ? md5( wp_json_encode( $this->get_items() ) . $this->count_items() ) : '';
+
+		return apply_filters( 'wcboost_products_compare_hash', $hash, $this );
+	}
+
+	/**
+	 * Get the list contents for session
+	 *
+	 * @since 1.0.6
+	 * @return array
+	 */
+	public function get_list_for_session() {
+		return [
+			'id'    => $this->id,
+			'items' => array_values( $this->items ),
+		];
+	}
+
+	/**
 	 * Update the session.
 	 * Just update the product ids to the session.
 	 *
@@ -201,10 +278,10 @@ class Compare_List {
 		}
 
 		if ( $this->id ) {
-			WC()->session->set( self::SESSION_KEY, [
-				'id'    => $this->id,
-				'items' => array_values( $this->items ),
-			] );
+			WC()->session->set(
+				self::SESSION_KEY,
+				$this->get_list_for_session()
+			);
 		}
 	}
 
@@ -217,6 +294,99 @@ class Compare_List {
 		// Initialize the customer session if it is not already initialized.
 		if ( WC()->session && WC()->session->has_session() ) {
 			WC()->session->set( self::SESSION_KEY, null );
+		}
+	}
+
+	/**
+	 * Get the persistent list from the database.
+	 *
+	 * @since  1.0.6
+	 * @return array
+	 */
+	private function get_saved_list() {
+		$saved = [
+			'id'    => '',
+			'items' => [],
+		];
+
+		if ( apply_filters( 'wcboost_products_compare_persistent_enabled', true ) ) {
+			$saved_list = get_user_meta( get_current_user_id(), '_wcboost_products_compare_' . get_current_blog_id(), true );
+
+			if ( isset( $saved_list['items'] ) ) {
+				$saved['items'] = array_filter( (array) $saved_list['items'] );
+			}
+
+			if ( isset( $saved_list['id'] ) ) {
+				$saved['id'] = $saved_list['id'];
+			}
+		}
+
+		return $saved;
+	}
+
+	/**
+	 * Update persistent list
+	 *
+	 * @since 1.0.6
+	 * @return void
+	 */
+	public function update_persistent_list() {
+		if ( $this->get_id() && get_current_user_id() && apply_filters( 'wcboost_products_compare_persistent_enabled', true ) ) {
+			update_user_meta(
+				get_current_user_id(),
+				'_wcboost_products_compare_' . get_current_blog_id(),
+				$this->get_list_for_session()
+			);
+		}
+	}
+
+	/**
+	 * Delete the persistent list permanently
+	 *
+	 * @since 1.0.6
+	 * @return void
+	 */
+	public function delete_persistent_list() {
+		if ( $this->get_id() && get_current_user_id() && apply_filters( 'wcboost_products_compare_persistent_enabled', true ) ) {
+			delete_user_meta( get_current_user_id(), '_wcboost_products_compare_' . get_current_blog_id() );
+		}
+	}
+
+	/**
+	 * Will set cookies if needed and when possible.
+	 *
+	 * Headers are only updated if headers have not yet been sent.
+	 *
+	 * @since 1.0.6
+	 * @return void
+	 */
+	public function maybe_set_cookies() {
+		if ( headers_sent() || ! did_action( 'wp_loaded' ) ) {
+			return;
+		}
+
+		if ( ! $this->is_empty() ) {
+			$this->set_cookies( true );
+		} else {
+			$this->set_cookies( false );
+		}
+	}
+
+	/**
+	 * Set the comparison cookie
+	 *
+	 * @since 1.0.6
+	 *
+	 * @param  bool $set Should the cookie be set or unset.
+	 *
+	 * @return void
+	 */
+	private function set_cookies( $set = true )  {
+		if ( $set ) {
+			wc_setcookie( 'wcboost_compare_hash', $this->get_hash() );
+		} else {
+			wc_setcookie( 'wcboost_compare_hash', '', time() - HOUR_IN_SECONDS );
+			unset( $_COOKIE['wcboost_compare_hash'] );
 		}
 	}
 }

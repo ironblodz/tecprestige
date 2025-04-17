@@ -86,11 +86,36 @@ namespace SW_WAPF\Includes\Classes {
 					'title' => __('Text swatches','advanced-product-fields-for-woocommerce'),
 					'pro'   => true,
 				],
+                [
+                    'id'    => 'child-products',
+                    'title' => __('Child products','advanced-product-fields-for-woocommerce'),
+                    'pro'   => true,
+                ],
+                [
+                    'id'    => 'cards',
+                    'title' => __('Cards','advanced-product-fields-for-woocommerce'),
+                    'pro'   => true,
+                ],
+                [
+                    'id'    => 'img-qty',
+                    'title' => __('Images + quantities','advanced-product-fields-for-woocommerce'),
+                    'pro'   => true,
+                ],
+                [
+                    'id'    => 'calc',
+                    'title' => __('Calculation','advanced-product-fields-for-woocommerce'),
+                    'pro'   => true,
+                ],
 				[
 					'id'    => 'img',
-					'title' => __('Content: image','advanced-product-fields-for-woocommerce'),
+					'title' => __('Content: shortcodes & HTML','advanced-product-fields-for-woocommerce'),
 					'pro'   => true,
 				],
+                [
+                    'id'    => 'img',
+                    'title' => __('Content: image','advanced-product-fields-for-woocommerce'),
+                    'pro'   => true,
+                ],
 				[
 					'id'    => 'section',
 					'title' => __('Layout: section','advanced-product-fields-for-woocommerce'),
@@ -390,7 +415,7 @@ namespace SW_WAPF\Includes\Classes {
             $options = [
                 'fixed'     => [ 'label' => __('Flat fee (not quantity-based)', 'advanced-product-fields-for-woocommerce'), 'pro' => false ],
                 'qt'        => [ 'label' => __('Quantity based flat fee (Pro only)', 'advanced-product-fields-for-woocommerce'), 'pro' => true ],
-                'fx'        => [ 'label' => __('Formula (Pro only)', 'advanced-product-fields-for-woocommerce'), 'pro' => true ],
+                'fx'        => [ 'label' => __('Formula/calculation (Pro only)', 'advanced-product-fields-for-woocommerce'), 'pro' => true ],
                 'percent'   => [ 'label' => __('Percentage based (Pro only)', 'advanced-product-fields-for-woocommerce'), 'pro' => true ],
                 'nr'        => [ 'label' => __('Amount &times; field value (Pro only)', 'advanced-product-fields-for-woocommerce'), 'pro' => true ],
                 'char'      => [ 'label' => __('Amount &times; character count (Pro only)', 'advanced-product-fields-for-woocommerce'), 'pro' => true ],

@@ -81,6 +81,7 @@ if ( ! class_exists( 'UAGB_Admin_Helper' ) ) {
 				'uag_blocks_editor_spacing'         => apply_filters( 'uagb_default_blocks_editor_spacing', self::get_admin_settings_option( 'uag_blocks_editor_spacing', 0 ) ),
 				'uag_load_font_awesome_5'           => self::get_admin_settings_option( 'uag_load_font_awesome_5' ),
 				'uag_auto_block_recovery'           => self::get_admin_settings_option( 'uag_auto_block_recovery' ),
+				'uag_enable_bsf_analytics_option'   => self::get_admin_settings_option( 'spectra_analytics_optin', 'no' ),
 				'uag_content_width'                 => $content_width,
 				'spectra_core_blocks'               => apply_filters(
 					'spectra_core_blocks',
@@ -413,6 +414,65 @@ if ( ! class_exists( 'UAGB_Admin_Helper' ) ) {
 		}
 
 		/**
+		 * Checks if assets should be excluded for a given Custom Post Type (CPT).
+		 *
+		 * This static method determines if assets should be excluded based on the given CPT and
+		 * any additional exclusions provided via a filter.
+		 *
+		 * @since 2.16.0
+		 * @return bool True if assets should be excluded for the given CPT, false otherwise.
+		 */
+		public static function should_exclude_assets_for_cpt() {
+			// Define the default CPTs to always exclude.
+			$default_excluded_cpts = array( 'sureforms_form' );
+
+			// Get the filtered CPT(s) that should not load assets.
+			$filtered_excluded_cpts = apply_filters( 'exclude_uagb_assets_for_cpts', array() );
+
+			// If the filtered value is not an array, set it to an empty array.
+			if ( ! is_array( $filtered_excluded_cpts ) ) {
+				$filtered_excluded_cpts = array();
+			}
+
+			// Merge default and filtered excluded CPTs.
+			$excluded_cpts = array_merge( $default_excluded_cpts, $filtered_excluded_cpts );
+
+			// Pass the excluded CPTs to the 'ast_block_templates_exclude_post_types' filter.
+			add_filter(
+				'ast_block_templates_exclude_post_types',
+				function() use ( $excluded_cpts ) {
+					return $excluded_cpts;
+				}
+			);
+
+			// Pass the excluded CPTs to the 'zipwp_images_excluded_post_types' filter.
+			add_filter(
+				'zipwp_images_excluded_post_types',
+				function() use ( $excluded_cpts ) {
+					return $excluded_cpts;
+				}
+			);
+
+			// Initialize post type variable.
+			$post_type = '';
+
+			// Check if we're in the admin/editor context.
+			if ( is_admin() ) {
+				// Get the current screen and retrieve the post type.
+				$screen    = function_exists( 'get_current_screen' ) ? get_current_screen() : null;
+				$post_type = ( $screen instanceof WP_Screen ) ? $screen->post_type : ''; // Admin: use WP_Screen.
+			} else {
+				// On frontend: get the post type from the queried object.
+				$queried_object = get_queried_object();
+				$post_type      = ( $queried_object instanceof WP_Post ) ? get_post_type( $queried_object ) : ''; // Frontend: use WP_Post.
+			}
+
+			// Return true if the post type matches any in the excluded CPTs list.
+			return in_array( $post_type, $excluded_cpts );
+		}
+
+
+		/**
 		 * Get Global Content Width
 		 *
 		 * @since 2.0.0
@@ -463,19 +523,48 @@ if ( ! class_exists( 'UAGB_Admin_Helper' ) ) {
 		/**
 		 * Get Spectra Pro URL with required params
 		 *
+		 * @param string $path     Path for the Website URL.
+		 * @param string $source   UMM source.
+		 * @param string $medium   UTM medium.
+		 * @param string $campaign UTM campaign.
 		 * @since 2.7.11
 		 * @return string
 		 */
-		public static function get_spectra_pro_url() {
-			$url       = SPECTRA_PRO_PLUGIN_URL;
-			$affiliate = get_option( 'spectra_partner_url_param', '' );
-			$affiliate = is_string( $affiliate ) ? sanitize_text_field( $affiliate ) : '';
+		public static function get_spectra_pro_url( $path, $source = '', $medium = '', $campaign = '' ) {
+			if ( ! defined( 'UAGB_URI' ) ) {
+				define( 'UAGB_URI', trailingslashit( 'https://wpspectra.com/' ) );
+			}
+			$url             = esc_url( UAGB_URI . $path );
+			$spectra_pro_url = trailingslashit( $url );
 
-			if ( ! empty( $affiliate ) ) {
-				return add_query_arg( array( 'bsf' => $affiliate ), SPECTRA_PRO_PLUGIN_URL );
+			// Modify the utm_source parameter using the UTM ready link function to include tracking information.
+			if ( class_exists( '\BSF_UTM_Analytics\Inc\Utils' ) && is_callable( '\BSF_UTM_Analytics\Inc\Utils::get_utm_ready_link' ) ) {
+				$spectra_pro_url = \BSF_UTM_Analytics\Inc\Utils::get_utm_ready_link( $spectra_pro_url, 'ultimate-addons-for-gutenberg' );
+			} else {
+				if ( ! empty( $source ) ) {
+					$spectra_pro_url = add_query_arg( 'utm_source', sanitize_text_field( $source ), $spectra_pro_url );
+				}
 			}
 
-			return esc_url( $url );
+			// Set up our URL if we have a medium.
+			if ( ! empty( $medium ) ) {
+				$spectra_pro_url = add_query_arg( 'utm_medium', sanitize_text_field( $medium ), $spectra_pro_url );
+			}
+
+			// Set up our URL if we have a campaign.
+			if ( ! empty( $campaign ) ) {
+				$spectra_pro_url = add_query_arg( 'utm_campaign', sanitize_text_field( $campaign ), $spectra_pro_url );
+			}
+
+			$spectra_pro_url = apply_filters( 'spectra_get_pro_url', $spectra_pro_url, $url );
+			$spectra_pro_url = remove_query_arg( 'bsf', is_string( $spectra_pro_url ) ? $spectra_pro_url : '' );
+
+			$ref = get_option( 'spectra_partner_url_param', '' );
+			if ( ! empty( $ref ) && is_string( $ref ) ) {
+				$spectra_pro_url = add_query_arg( 'bsf', sanitize_text_field( $ref ), $spectra_pro_url );
+			}
+
+			return $spectra_pro_url;
 		}
 	}
 

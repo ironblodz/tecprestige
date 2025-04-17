@@ -3,9 +3,9 @@ Contributors: RealMag777
 Donate link: https://pluginus.net/affiliate/woocommerce-currency-switcher
 Tags: woocommerce, currency, switcher, currency switcher, converter
 Requires at least: 4.9.0
-Tested up to: 6.6
+Tested up to: 6.7
 Requires PHP: 7.4
-Stable tag: 1.4.2.1
+Stable tag: 1.4.2.3
 License: GPLv2 or later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
 
@@ -126,6 +126,10 @@ Also the plugin has ajaxed shortcode/widget of [currency converter](https://demo
 
 📅&nbsp;Compatible with [RnB - WooCommerce Booking & Rental Plugin](https://codecanyon.pluginus.net/item/rnb-woocommerce-rental-booking-system/14835145)
 
+📅&nbsp;Compatible with [WebToffee Product Feed for WooCommerce plugin](https://www.webtoffee.com/product/woocommerce-product-feed/)
+
+📅&nbsp;Compatible with [Points and Rewards for WooCommerce by WP Swings](https://wordpress.org/plugins/points-and-rewards-for-woocommerce/)
+
 🔄&nbsp;95% compatibility with different payment gates in multi currency mode, just try it!
 
 🧪&nbsp;We do [compatibility](https://currency-switcher.com/codex/#compatibility) with our special program [FOX LABS](https://currency-switcher.com/woocs-labs)
@@ -179,12 +183,21 @@ R: [Video Tutorials](https://currency-switcher.com/video/)
 Q: More FAQ answers?
 R: [FAQ](https://currency-switcher.com/faq/)
 
+Q: Where can I send security bug report about the plugin?
+R: You can report security bugs through the Patchstack Vulnerability Disclosure Program. The Patchstack team help validate, triage and handle any security vulnerabilities. [Report a security vulnerability.](https://patchstack.com/database/vdp/woocommerce-currency-switcher)
+
 
 == Screenshots ==
 1. Currency options
 
 
 == Changelog ==
+
+= 1.4.2.3 =
+* 1 security issue fixed thanks to mikemyers and bounty program of Wordfence
+
+= 1.4.2.2 =
+* 1 security issue fixed thanks to Arkadiusz Hydzik from Wordfence
 
 = 1.4.2.1 =
 * 1 security issue fixed thanks to Ananda Dhakal from patchstack.com
@@ -472,7 +485,7 @@ Plugin release. Operate all the basic functions.
 
 == License ==
 
-This plugin is copyright pluginus.net &copy; 2012-2024 with [GNU General Public License][] by realmag777.
+This plugin is copyright pluginus.net &copy; 2012-2025 with [GNU General Public License][] by realmag777.
 
 This program is free software; you can redistribute it and/or modify it under the terms of the [GNU General Public License][] as published by the Free Software Foundation; either version 2 of the License, or (at your option) any later version.
 

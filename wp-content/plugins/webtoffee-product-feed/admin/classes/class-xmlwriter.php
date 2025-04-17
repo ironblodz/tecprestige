@@ -32,7 +32,7 @@ class Webtoffee_Product_Feed_Sync_Basic_Xmlwriter extends XMLWriter
         if( 'google_product_reviews' === $to_export ){
             $item_key = 'review';
         }
-        if( 'skroutz' === $to_export ){
+        if( 'skroutz' === $to_export || 'vivino' === $to_export ){
             $item_key = 'product'; // skroutz
         } 
         if( 'fruugo' === $to_export ){
@@ -40,6 +40,9 @@ class Webtoffee_Product_Feed_Sync_Basic_Xmlwriter extends XMLWriter
         } 
         if( 'heureka' === $to_export ){
             $item_key = 'SHOPITEM';
+        }    
+        if( 'yandex' === $to_export ){
+            $item_key = 'dummyoffer';
         }        
         
         $this->to_export_channel = $to_export;        
@@ -128,10 +131,59 @@ if ('product' === $this->to_export) {
                 $xml_end_data = '</SHOP>';
             }            
 
+            
+            if ('yandex' === $this->to_export_channel) {
+                
 
+                if(isset($this->form_data['post_type_form_data']['wt_pf_inc_exc_category'])){
+                    $categories = array();
+                    foreach ($this->form_data['post_type_form_data']['wt_pf_inc_exc_category'] as $key => $cat_slug){
+                        $categories[] = get_term_by('slug', $cat_slug, 'product_cat');
+                    }                   
+                }else{
+
+                    $args = array(
+                        'taxonomy' => 'product_cat',
+                        'get' => 'all'
+                    );
+                    $categories = get_categories($args);
+                }
+                
+                $category_node = '';
+                if(!empty($categories)){
+                    foreach ($categories as $category) {
+                        $category_node.='<category id="'.$category->term_id.'">'.$category->name.'</category>';
+                    }
+                }
+                
+                $currency = get_woocommerce_currency();
+                $xml_start_data = '<yml_catalog date="2020-11-22T14:37:38+03:00">
+    <shop>
+        <name><![CDATA[ '.$site_name.' ]]></name>
+        <company><![CDATA[ '.$site_name.' ]]></company>
+        <url><![CDATA[ '.$site_url.'  ]]></url>
+        <currencies>
+            <currency id="'.$currency.'" rate="1"/>
+        </currencies>
+        <categories>
+        '.$category_node.'
+        </categories>
+        <offers>';
+                $xml_end_data = '</offers></shop></yml_catalog>';
+            }            
+            
+            if ('vivino' === $this->to_export_channel) {
+                $fav_icon_url = get_site_icon_url();
+                            $xml_start_data = '<vivino-product-list>
+<meta-data><feed-generation-date>'.date('Y-m-d H:i').'</feed-generation-date>
+</meta-data>';
+                            $xml_end_data = '</vivino-product-list>';
+            }
             /* creating xml doc data */
             $xml_data=$doc_xml_data.$xml_start_data.$prev_body_xml_data.$body_xml_data.$xml_end_data;
 
+            $xml_data = str_replace( ['<dummyoffer>', '</dummyoffer>'],['', ''] , $xml_data);
+            
             $fp=fopen($file_path,'w');  //writing the full xml data to file
             fwrite($fp,$xml_data);
             fclose($fp);
@@ -159,7 +211,7 @@ if ('product' === $this->to_export) {
 
     public function start_elm(&$xml_writer, $key)
     {   
-		if('item' !== $key && 'review' !== $this->to_export && 'product' !== $this->to_export && 'label' !== $key && 'value' !== $key  && 'fruugo' !== $this->to_export_channel  && 'heureka' !== $this->to_export_channel  ){
+		if('item' !== $key && 'review' !== $this->to_export && 'product' !== $this->to_export && 'label' !== $key && 'value' !== $key  && 'fruugo' !== $this->to_export_channel  && 'heureka' !== $this->to_export_channel && 'yandex' !== $this->to_export_channel && 'vivino' !== $this->to_export_channel ){
 			$key = 'g:'.sanitize_title($key);
 		}
 
@@ -177,7 +229,7 @@ if ('product' === $this->to_export) {
                 }else{
                     $gkey = 'g:'.sanitize_title($key);
                 }
-                if( 'fruugo' === $this->to_export_channel || 'heureka' === $this->to_export_channel || 'pinterest_rss' === $this->to_export_channel ){
+                if( 'fruugo' === $this->to_export_channel || 'heureka' === $this->to_export_channel || 'pinterest_rss' === $this->to_export_channel || 'vivino' === $this->to_export_channel || 'yandex' === $this->to_export_channel  ){
                     $gkey = $key;
                 }                
         $xml_writer->writeElement($gkey, $value);
@@ -244,8 +296,11 @@ if ('product' === $this->to_export) {
                 $xml_writer->text($element_value);
             }else
             {
+                if(empty($element_value) || null === $element_value ){
+                    return;
+                }
                 //wrap element in CDATA tag if it contain illegal characters
-                if( ( false !== strpos($element_value, '<') || false !== strpos($element_value, '>') || apply_filters('wt_iew_xml_node_wrap_cdata', false, $element_value) ) &&  'ratings' !== $element_key )
+                if( ( null !== $element_value && !empty($element_value) && false !== strpos($element_value, '<') || false !== strpos($element_value, '>') || apply_filters('wt_iew_xml_node_wrap_cdata', false, $element_value) ) &&  'ratings' !== $element_key )
                 { 
                     $arr = explode(':', $element_key); 
                     if(isset($arr[1]))

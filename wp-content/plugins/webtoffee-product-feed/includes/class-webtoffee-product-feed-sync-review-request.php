@@ -54,10 +54,10 @@ class Webtoffee_Product_Feed_Sync_Review_Request
             $this->banner_message = sprintf(esc_html__("Hey, we at %sWebToffee%s would like to thank you for using our plugin. We would really appreciate if you could take a moment to drop a quick review that will inspire us to keep going.", 'webtoffee-product-feed'), '<b>', '</b>');
 
             /* button texts */
-            $this->later_btn_text   = __("Remind me later", 'webtoffee-product-feed');
-            $this->never_btn_text   = __("Not interested", 'webtoffee-product-feed');
-            $this->review_btn_text  = __("Review here", 'webtoffee-product-feed');
-            $this->report_bug_text  = __("Report a bug", 'webtoffee-product-feed');
+            $this->later_btn_text   = __( 'Remind me later', 'webtoffee-product-feed');
+            $this->never_btn_text   = __( 'Not interested', 'webtoffee-product-feed');
+            $this->review_btn_text  = __( 'Review now', 'webtoffee-product-feed');
+            $this->report_bug_text  = __( 'Report a bug', 'webtoffee-product-feed');
 
             add_action('admin_notices', array($this, 'show_banner')); /* show banner */
             add_action('admin_print_footer_scripts', array($this, 'add_banner_scripts')); /* add banner scripts */
@@ -137,9 +137,9 @@ class Webtoffee_Product_Feed_Sync_Review_Request
                 <?php echo wp_kses_post( $this->banner_message ); ?>
             </p>
             <p>
-                <a class="button button-secondary" style="color:#333; border-color:#ccc; background:#efefef;" data-type="later"><?php echo esc_html( $this->later_btn_text ); ?></a>
-                <a class="button button-secondary" style="color:#333; border-color:#ccc; background:#efefef;" data-type="never"><?php echo esc_html( $this->never_btn_text ); ?></a>
-                <a class="button-secondary" style="color:#333; border-color:#ccc; background:#efefef;" href="https://www.webtoffee.com/contact/" target="_blank"><?php echo esc_html( $this->report_bug_text ); ?></a>
+                <a class="button button-secondary" style="color:#333; background:#efefef;" data-type="later"><?php echo esc_html( $this->later_btn_text ); ?></a>
+                <a class="button button-secondary" style="color:#333; background:#efefef;" data-type="never"><?php echo esc_html( $this->never_btn_text ); ?></a>
+                <a class="button-secondary" style="color:#333; background:#efefef;" href="https://www.webtoffee.com/contact/" target="_blank"><?php echo esc_html( $this->report_bug_text ); ?></a>
                 <a class="button button-primary" data-type="review"><?php echo esc_html( $this->review_btn_text ); ?></a>
             </p>
             <div class="wt-cli-review-footer" style="position: relative;">

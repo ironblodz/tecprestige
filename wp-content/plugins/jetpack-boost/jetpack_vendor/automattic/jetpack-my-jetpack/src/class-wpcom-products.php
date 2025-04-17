@@ -9,6 +9,7 @@ namespace Automattic\Jetpack\My_Jetpack;
 
 use Automattic\Jetpack\Connection\Client;
 use Automattic\Jetpack\Connection\Manager as Connection_Manager;
+use Automattic\Jetpack\Current_Plan;
 use Automattic\Jetpack\Status\Visitor;
 use Jetpack_Options;
 use WP_Error;
@@ -36,6 +37,13 @@ class Wpcom_Products {
 	const MY_JETPACK_PURCHASES_TRANSIENT_KEY = 'my-jetpack-purchases';
 
 	/**
+	 * Store the data on failed WPCOM requests.
+	 *
+	 * @var array
+	 */
+	private static $wpcom_request_failures = array();
+
+	/**
 	 * Fetches the list of products from WPCOM
 	 *
 	 * @return Object|WP_Error
@@ -49,13 +57,19 @@ class Wpcom_Products {
 		);
 
 		if ( $blog_id ) {
+			$request_label   = 'get_products_from_wpcom_blog_' . $blog_id;
+			$request_failure = static::get_request_failure( $request_label );
+			if ( null !== $request_failure ) {
+				return $request_failure;
+			}
+
 			// If has a blog id, use connected endpoint.
 			$endpoint = sprintf( '/sites/%d/products/?_locale=%s&type=jetpack', $blog_id, get_user_locale() );
 
 			// If available in the user data, set the user's currency as one of the params
 			if ( $connection->is_user_connected() ) {
 				$user_details = $connection->get_connected_user_data();
-				if ( $user_details['user_currency'] && $user_details['user_currency'] !== 'USD' ) {
+				if ( ! empty( $user_details['user_currency'] ) && $user_details['user_currency'] !== 'USD' ) {
 					$endpoint .= sprintf( '&currency=%s', $user_details['user_currency'] );
 				}
 			}
@@ -69,6 +83,12 @@ class Wpcom_Products {
 				)
 			);
 		} else {
+			$request_label   = 'get_products_from_wpcom';
+			$request_failure = static::get_request_failure( $request_label );
+			if ( null !== $request_failure ) {
+				return $request_failure;
+			}
+
 			$endpoint = 'https://public-api.wordpress.com/rest/v1.1/products?locale=' . get_user_locale() . '&type=jetpack';
 
 			$wpcom_request = wp_remote_get(
@@ -84,11 +104,13 @@ class Wpcom_Products {
 		if ( 200 === $response_code ) {
 			return json_decode( wp_remote_retrieve_body( $wpcom_request ) );
 		} else {
-			return new WP_Error(
+			$error = new WP_Error(
 				'failed_to_fetch_wpcom_products',
 				esc_html__( 'Unable to fetch the products list from WordPress.com', 'jetpack-my-jetpack' ),
 				array( 'status' => $response_code )
 			);
+			static::set_request_failure( $request_label, $error );
+			return $error;
 		}
 	}
 
@@ -99,6 +121,8 @@ class Wpcom_Products {
 	 * @return string
 	 */
 	private static function build_check_hash() {
+		static $has_user_data_fetch_error = false;
+
 		$hash_string = 'check_hash_';
 		$connection  = new Connection_Manager();
 
@@ -109,8 +133,11 @@ class Wpcom_Products {
 		if ( $connection->is_user_connected() ) {
 			$hash_string .= 'user_connected';
 			// Add the user's currency
-			$user_details = $connection->get_connected_user_data();
-			if ( $user_details['user_currency'] ) {
+			$user_details = $has_user_data_fetch_error ? false : $connection->get_connected_user_data();
+
+			if ( $user_details === false ) {
+				$has_user_data_fetch_error = true;
+			} elseif ( ! empty( $user_details['user_currency'] ) ) {
 				$hash_string .= '_' . $user_details['user_currency'];
 			}
 		}
@@ -295,6 +322,11 @@ class Wpcom_Products {
 			return $stored_purchases;
 		}
 
+		$request_failure = static::get_request_failure( 'get_site_current_purchases' );
+		if ( null !== $request_failure ) {
+			return $request_failure;
+		}
+
 		$site_id = Jetpack_Options::get_option( 'id' );
 
 		$response = Client::wpcom_json_api_request_as_blog(
@@ -305,7 +337,9 @@ class Wpcom_Products {
 			)
 		);
 		if ( 200 !== wp_remote_retrieve_response_code( $response ) ) {
-			return new WP_Error( 'purchases_state_fetch_failed' );
+			$error = new WP_Error( 'purchases_state_fetch_failed' );
+			static::set_request_failure( 'get_site_current_purchases', $error );
+			return $error;
 		}
 
 		$body      = wp_remote_retrieve_body( $response );
@@ -314,5 +348,58 @@ class Wpcom_Products {
 		set_transient( self::MY_JETPACK_PURCHASES_TRANSIENT_KEY, $purchases, 5 );
 
 		return $purchases;
+	}
+
+	/**
+	 * Gets the site's currently active "plan" (bundle).
+	 *
+	 * @param bool $reload  Whether to refresh data from wpcom or not.
+	 * @return array
+	 */
+	public static function get_site_current_plan( $reload = false ) {
+		static $reloaded_already = false;
+
+		if ( $reload && ! $reloaded_already ) {
+			Current_Plan::refresh_from_wpcom();
+			$reloaded_already = true;
+		}
+
+		return Current_Plan::get();
+	}
+
+	/**
+	 * Reset the request failures to retry the API requests.
+	 *
+	 * @return void
+	 */
+	public static function reset_request_failures() {
+		static::$wpcom_request_failures = array();
+	}
+
+	/**
+	 * Record the request failure to prevent repeated requests.
+	 *
+	 * @param string   $request_label The request label.
+	 * @param WP_Error $error The error.
+	 *
+	 * @return void
+	 */
+	private static function set_request_failure( $request_label, WP_Error $error ) {
+		static::$wpcom_request_failures[ $request_label ] = $error;
+	}
+
+	/**
+	 * Get the pre-saved request failure if exists.
+	 *
+	 * @param string $request_label The request label.
+	 *
+	 * @return null|WP_Error
+	 */
+	private static function get_request_failure( $request_label ) {
+		if ( array_key_exists( $request_label, static::$wpcom_request_failures ) ) {
+			return static::$wpcom_request_failures[ $request_label ];
+		}
+
+		return null;
 	}
 }

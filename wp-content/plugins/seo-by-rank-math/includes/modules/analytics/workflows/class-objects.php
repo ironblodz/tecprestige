@@ -76,13 +76,12 @@ class Objects extends Base {
 				KEY analytics_object_page (page(190))
 			) $collate;";
 
-		require_once ABSPATH . 'wp-admin/includes/upgrade.php';
+		require_once ABSPATH . 'wp-admin/includes/upgrade.php'; // @phpstan-ignore-line
 		try {
 			dbDelta( $schema );
 		} catch ( Exception $e ) { // phpcs:ignore
 			// Will log.
 		}
-
 	}
 
 	/**
@@ -114,12 +113,9 @@ class Objects extends Base {
 	 * Flat posts
 	 */
 	public function flat_posts() {
-		$post_types = $this->do_filter( 'analytics/post_types', Helper::get_accessible_post_types() );
-		unset( $post_types['attachment'] );
-
 		$ids = get_posts(
 			[
-				'post_type'      => array_keys( $post_types ),
+				'post_type'      => $this->get_post_types(),
 				'post_status'    => 'publish',
 				'fields'         => 'ids',
 				'posts_per_page' => -1,
@@ -129,7 +125,7 @@ class Objects extends Base {
 		$counter = 0;
 		$chunks  = \array_chunk( $ids, 50 );
 		foreach ( $chunks as $chunk ) {
-			$counter++;
+			++$counter;
 			as_schedule_single_action(
 				time() + ( 60 * ( $counter / 2 ) ),
 				'rank_math/analytics/flat_posts',
@@ -148,5 +144,18 @@ class Objects extends Base {
 
 		// Clear cache.
 		Workflow::add_clear_cache( time() + ( 60 * ( ( $counter + 2 ) / 2 ) ) );
+	}
+
+	/**
+	 * Get post types to process.
+	 */
+	private function get_post_types() {
+		$post_types = $this->do_filter( 'analytics/post_types', Helper::get_accessible_post_types() );
+		unset( $post_types['attachment'] );
+		if ( isset( $post_types['web-story'] ) ) {
+			unset( $post_types['web-story'] );
+		}
+
+		return array_keys( $post_types );
 	}
 }

@@ -1,13 +1,13 @@
 === WCBoost - Variation Swatches ===
 Contributors: wcboost
 Tags: woocommerce, product attribute, product color, variation swatches, variable products
-Tested up to: 6.6
-Stable tag: 1.0.17
+Tested up to: 6.7
+Stable tag: 1.1.1
 Requires PHP: 7.0
 Requires at least: 4.5
 WC requires at least: 3.0.0
-WC tested up to: 8.9
-License: GPLv3
+WC tested up to: 9.3.3
+License: GPLv3 or later
 License URI: https://www.gnu.org/licenses/gpl-3.0.html
 
 WCBoost – Variation Swatches is the ultimate plugin to display WooCommerce product variations in style.
@@ -105,6 +105,14 @@ Upgrade to [WCBoost Variation Swatches PRO](https://wcboost.com/plugin/woocommer
 
   You can enable your customers to buy variable products directly from the archive pages, such as shop, category, or tag pages. By enabling the swatches selection on the archive page, your potential customers can preview variations right on the archive page and add variations to the cart. This feature can help you increase your sales and conversions by reducing the number of clicks and page loads.
 
+- **Auto convert default dropdown into image swatches**
+
+  The plugin can automatically convert the default WooCommerce dropdowns to image swatches. It uses your variation images to create the swatches, so you don’t have to do any extra work.
+
+- **Create stunning dual-color and multi-color swatches**
+
+  You can easily create swatches that display multiple colors at once. Perfect for items like multi-colored shirts, patterned dresses, or gradient designs. Just pick the colors you want, and the plugin will display them in a split swatch. It helps your customers easily to see exactly what they’re getting.
+
 - **Show variation swatches in the desired position of archive pages**
 
   You can choose where to display your swatches on archive pages, such as before or after the add to cart button.
@@ -182,8 +190,18 @@ WooCommerce has an option to hide out-of-stock products from the catalog, it wor
 
 == Changelog ==
 
+= 1.1.1 =
+* Fix custom swatches update issue in product data meta box.
+
+= 1.1.0 =
+* Improve accessibility for swatches.
+* Fix the issue with swatches height is not set properly.
+* Fix security issues reported by the plugin checker.
+* Ensured compatibility with WordPress 6.7
+* Ensured compatibility with WooCommerce 9.3
+
 = 1.0.17 =
-- Fix a CSS issue with Divi builder.
+* Fix a CSS issue with Divi builder.
 * Ensured compatibility with WooCommerce 8.9
 
 = 1.0.16 =

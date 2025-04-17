@@ -86,7 +86,13 @@ class UAGB_Init_Blocks {
 		}
 
 		add_action( 'init', array( $this, 'register_popup_builder' ) );
+		add_filter( 'srfm_enable_redirect_activation', '__return_false' );
+
+		add_action( 'wp_ajax_uagb_sureforms', array( $this, 'sureforms_plugin_activator' ) );
+		add_action( 'wp_ajax_uagb_surecart', array( $this, 'surecart_plugin_activator' ) );
+
 	}
+
 
 	/**
 	 * Register the Popup Builder CPT.
@@ -394,7 +400,7 @@ class UAGB_Init_Blocks {
 			$taxonomies = get_object_taxonomies( $post_type, 'objects' );
 			$data       = array();
 
-			$get_singular_name = get_post_type_object( $post_type );
+			$get_taxonomy_names = get_post_type_object( $post_type ); // Renaming this variable to follow proper naming convention.
 			foreach ( $taxonomies as $tax_slug => $tax ) {
 				if ( ! $tax->public || ! $tax->show_ui || ! $tax->show_in_rest ) {
 					continue;
@@ -413,7 +419,8 @@ class UAGB_Init_Blocks {
 							'name'          => $t_obj->name,
 							'count'         => $t_obj->count,
 							'link'          => get_term_link( $t_obj->term_id ),
-							'singular_name' => $get_singular_name->labels->singular_name,
+							'singular_name' => $get_taxonomy_names ? $get_taxonomy_names->labels->singular_name : 'Post',
+							'plural_name'   => $get_taxonomy_names ? $get_taxonomy_names->labels->name : 'Posts', // Adding this field to use it on the editor.
 						);
 					}
 
@@ -443,7 +450,8 @@ class UAGB_Init_Blocks {
 							'name'          => $t_obj->name,
 							'count'         => $t_obj->count,
 							'link'          => get_term_link( $t_obj->term_id ),
-							'singular_name' => $get_singular_name->labels->singular_name,
+							'singular_name' => $get_taxonomy_names ? $get_taxonomy_names->labels->singular_name : 'Post',
+							'plural_name'   => $get_taxonomy_names ? $get_taxonomy_names->labels->name : 'Posts', // Adding this field to use it on the editor.
 							'children'      => $child_cat_arr,
 						);
 
@@ -476,7 +484,8 @@ class UAGB_Init_Blocks {
 							'name'          => $t_obj->name,
 							'count'         => $t_obj->count,
 							'link'          => get_term_link( $t_obj->term_id ),
-							'singular_name' => $get_singular_name->labels->singular_name,
+							'singular_name' => $get_taxonomy_names ? $get_taxonomy_names->labels->singular_name : 'Post',
+							'plural_name'   => $get_taxonomy_names ? $get_taxonomy_names->labels->name : 'Posts', // Adding this field to use it on the editor.
 							'children'      => $child_cat_empty_tax_arr,
 						);
 					}
@@ -527,8 +536,8 @@ class UAGB_Init_Blocks {
 		}
 
 		check_ajax_referer( 'uagb_ajax_nonce', 'nonce' );
-
-		$value = isset( $_POST['value'] ) ? json_decode( stripslashes( $_POST['value'] ), true ) : array(); //phpcs:ignore WordPress.Security.ValidatedSanitizedInput.InputNotSanitized
+		// security validation done in later stage.
+		$value = isset( $_POST['value'] ) ? json_decode( wp_unslash( $_POST['value'] ), true ) : array(); // phpcs:ignore WordPress.Security.ValidatedSanitizedInput.InputNotSanitized
 
 		\UAGB_Admin_Helper::update_admin_settings_option( 'uag_recaptcha_secret_key_v2', sanitize_text_field( $value['reCaptchaSecretKeyV2'] ) );
 		\UAGB_Admin_Helper::update_admin_settings_option( 'uag_recaptcha_secret_key_v3', sanitize_text_field( $value['reCaptchaSecretKeyV3'] ) );
@@ -540,6 +549,234 @@ class UAGB_Init_Blocks {
 		);
 		wp_send_json_success( $response_data );
 
+	}
+
+	/**
+	 * Renders the Sure Form.
+	 *
+	 * @since 2.19.0
+	 * @return void
+	 */
+	public function sureforms_plugin_activator() {
+		// Check user capability.
+		if ( ! ( current_user_can( 'activate_plugins' ) && current_user_can( 'install_plugins' ) ) ) {
+			wp_send_json_error(
+				array(
+					'success' => false,
+					'message' => 'User is not authenticated!',
+				) 
+			);
+		}
+
+		// Verify nonce.
+		if ( ! check_ajax_referer( 'uagb_ajax_nonce', 'security', false ) ) {
+			wp_send_json_error(
+				array(
+					'success' => false,
+					'message' => 'Invalid nonce.',
+				) 
+			);
+		}
+
+		$installed_plugins   = get_plugins();
+		$status_of_sureforms = isset( $installed_plugins['sureforms/sureforms.php'] ) 
+			? ( is_plugin_active( 'sureforms/sureforms.php' ) ? 'active' : 'inactive' ) 
+			: 'not-installed';
+
+		if ( class_exists( '\BSF_UTM_Analytics\Inc\Utils' ) && is_callable( '\BSF_UTM_Analytics\Inc\Utils::update_referer' ) ) {
+			// If the plugin is found and the update_referer function is callable, update the referer with the corresponding product slug.
+			\BSF_UTM_Analytics\Inc\Utils::update_referer( 'ultimate-addons-for-gutenberg', 'sureforms' );
+		}
+
+		// If plugin is not installed, install it first.
+		if ( 'not-installed' === $status_of_sureforms ) {
+			include_once ABSPATH . 'wp-admin/includes/class-wp-upgrader.php';
+			include_once ABSPATH . 'wp-admin/includes/plugin-install.php';
+
+			$plugin_slug = 'sureforms';
+			$plugin_data = plugins_api( 'plugin_information', array( 'slug' => $plugin_slug ) );
+
+			// Check if $plugin_data is valid and contains the download_link property.
+			if ( is_wp_error( $plugin_data ) || ! is_object( $plugin_data ) || empty( $plugin_data->download_link ) ) {
+				wp_send_json_error(
+					array(
+						'success' => false,
+						'message' => 'Error fetching plugin data.',
+					) 
+				);
+			}
+
+			if ( is_object( $plugin_data ) || is_array( $plugin_data ) ) {
+				$download_link = ( is_object( $plugin_data ) && isset( $plugin_data->download_link ) ) ? $plugin_data->download_link : '';
+				$skin          = new WP_Ajax_Upgrader_Skin();
+				$upgrader      = new Plugin_Upgrader( $skin );
+				$installed     = $upgrader->install( $download_link );
+
+				if ( is_wp_error( $installed ) ) {
+					wp_send_json_error(
+						array(
+							'success' => false,
+							'message' => 'Failed to install the plugin.',
+						) 
+					);
+				}
+			}
+
+			$installed_plugins   = get_plugins();
+			$status_of_sureforms = isset( $installed_plugins['sureforms/sureforms.php'] ) ? 'inactive' : 'not-installed';
+		}
+
+		// If the plugin is installed but inactive, activate it.
+		if ( 'inactive' === $status_of_sureforms ) {
+			$activate = activate_plugin( 'sureforms/sureforms.php', '', false, false );
+
+			if ( is_wp_error( $activate ) ) {
+				wp_send_json_error(
+					array(
+						'success' => false,
+						'message' => $activate->get_error_message(),
+					) 
+				);
+			}
+
+			wp_send_json_success(
+				array(
+					'success' => true,
+					'message' => 'Plugin successfully activated.',
+				) 
+			);
+		}
+
+		// If already active, send a success message.
+		if ( 'active' === $status_of_sureforms ) {
+			wp_send_json_success(
+				array(
+					'success' => true,
+					'message' => 'Plugin is already active.',
+				) 
+			);
+		}
+
+		// If no condition matches, send an error response.
+		wp_send_json_error(
+			array(
+				'success' => false,
+				'message' => 'Unexpected error occurred.',
+			) 
+		);
+	}
+
+	/**
+	 * Renders the Sure Form.
+	 *
+	 * @since 2.19.0
+	 * @return void
+	 */
+	public function surecart_plugin_activator() {
+		// Check user capability.
+		if ( ! ( current_user_can( 'activate_plugins' ) && current_user_can( 'install_plugins' ) ) ) {
+			wp_send_json_error(
+				array(
+					'success' => false,
+					'message' => 'User is not authenticated!',
+				) 
+			);
+		}
+
+		// Verify nonce.
+		if ( ! check_ajax_referer( 'uagb_ajax_nonce', 'security', false ) ) {
+			wp_send_json_error(
+				array(
+					'success' => false,
+					'message' => 'Invalid nonce.',
+				) 
+			);
+		}
+
+		$installed_plugins  = get_plugins();
+		$status_of_surecart = isset( $installed_plugins['surecart/surecart.php'] ) 
+			? ( is_plugin_active( 'surecart/surecart.php' ) ? 'active' : 'inactive' ) 
+			: 'not-installed';
+
+		if ( class_exists( '\BSF_UTM_Analytics\Inc\Utils' ) && is_callable( '\BSF_UTM_Analytics\Inc\Utils::update_referer' ) ) {
+			// If the plugin is found and the update_referer function is callable, update the referer with the corresponding product slug.
+			\BSF_UTM_Analytics\Inc\Utils::update_referer( 'ultimate-addons-for-gutenberg', 'surecart' );
+		}
+
+		// If plugin is not installed, install it first.
+		if ( 'not-installed' === $status_of_surecart ) {
+			include_once ABSPATH . 'wp-admin/includes/class-wp-upgrader.php';
+			include_once ABSPATH . 'wp-admin/includes/plugin-install.php';
+
+			$plugin_slug = 'surecart';
+			$plugin_data = plugins_api( 'plugin_information', array( 'slug' => $plugin_slug ) );
+
+			if ( is_wp_error( $plugin_data ) || ! is_object( $plugin_data ) || empty( $plugin_data->download_link ) ) {
+				wp_send_json_error(
+					array(
+						'success' => false,
+						'message' => 'Error fetching plugin data.',
+					) 
+				);
+			}
+
+			if ( is_object( $plugin_data ) || is_array( $plugin_data ) ) {
+				$download_link = ( is_object( $plugin_data ) && isset( $plugin_data->download_link ) ) ? $plugin_data->download_link : '';
+				$skin          = new WP_Ajax_Upgrader_Skin();
+				$upgrader      = new Plugin_Upgrader( $skin );
+				$installed     = $upgrader->install( $download_link );
+
+				if ( is_wp_error( $installed ) ) {
+					wp_send_json_error(
+						array(
+							'success' => false,
+							'message' => 'Failed to install the plugin.',
+						) 
+					);
+				}
+			}
+
+			$installed_plugins  = get_plugins();
+			$status_of_surecart = isset( $installed_plugins['surecart/surecart.php'] ) ? 'inactive' : 'not-installed';
+		}
+
+		// If the plugin is installed but inactive, activate it.
+		if ( 'inactive' === $status_of_surecart ) {
+			$activate = activate_plugin( 'surecart/surecart.php' );
+			if ( is_wp_error( $activate ) ) {
+				wp_send_json_error(
+					array(
+						'success' => false,
+						'message' => $activate->get_error_message(),
+					) 
+				);
+			}
+
+			wp_send_json_success(
+				array(
+					'success' => true,
+					'message' => 'Plugin successfully activated.',
+				) 
+			);
+		}
+
+		// If already active, send a success message.
+		if ( 'active' === $status_of_surecart ) {
+			wp_send_json_success(
+				array(
+					'success' => true,
+					'message' => 'Plugin is already active.',
+				) 
+			);
+		}
+
+		// If no condition matches, send an error response.
+		wp_send_json_error(
+			array(
+				'success' => false,
+				'message' => 'Unexpected error occurred.',
+			) 
+		);
 	}
 
 	/**
@@ -569,7 +806,7 @@ class UAGB_Init_Blocks {
 	 * @since 1.0.0
 	 */
 	public function register_block_category( $categories, $post ) {
-		return array_merge(
+		$categories = array_merge(
 			array(
 				array(
 					'slug'  => 'uagb',
@@ -578,6 +815,44 @@ class UAGB_Init_Blocks {
 			),
 			$categories
 		);
+		// Define the new category to be added.
+		$new_category = array(
+			'slug'  => 'extension',
+			'title' => __( 'Extensions', 'ultimate-addons-for-gutenberg' ),
+			'icon'  => '',
+		);
+
+		// Find the index where the new category should be inserted.
+		$insert_after_slug = 'spectra-pro'; // Default insertion point.
+		$insert_index      = false;
+
+		// Look for the 'spectra-pro' category.
+		foreach ( $categories as $index => $category ) {
+			if ( $insert_after_slug === $category['slug'] ) {
+				$insert_index = $index + 1;
+				break;
+			}
+		}
+
+		// If 'spectra-pro' is not found, look for 'uagb'.
+		if ( false === $insert_index ) {
+			$insert_after_slug = 'uagb';
+			foreach ( $categories as $index => $category ) {
+				if ( $insert_after_slug === $category['slug'] ) {
+					$insert_index = $index + 1;
+					break;
+				}
+			}
+		}
+
+		// If neither is found, append the new category at the end.
+		if ( false === $insert_index ) {
+			$categories[] = $new_category;
+		} else {
+			array_splice( $categories, $insert_index, 0, array( $new_category ) );
+		}
+
+		return $categories;
 	}
 
 	/**
@@ -599,15 +874,41 @@ class UAGB_Init_Blocks {
 	}
 
 	/**
+	 * Get the status of a plugin.
+	 * This function is used internally in the editor upsell scripts to check if Spectra Pro is installed or not.
+	 *
+	 * @since 2.19.2
+	 *
+	 * @param  string $plugin_init_file Plugin init file.
+	 * @return string
+	 */
+	public static function get_plugin_status( $plugin_init_file ) {
+
+		$installed_plugins = get_plugins();
+
+		if ( ! isset( $installed_plugins[ $plugin_init_file ] ) ) {
+			return 'Install';
+		} elseif ( is_plugin_active( $plugin_init_file ) ) {
+			return 'Activated';
+		} else {
+			return 'Installed';
+		}
+	}
+
+	/**
 	 * Enqueue Gutenberg block assets for backend editor.
 	 *
 	 * @since 1.0.0
 	 */
 	public function editor_assets() {
+		// Check if assets should be excluded for the current post type.
+		if ( UAGB_Admin_Helper::should_exclude_assets_for_cpt() ) {
+			return; // Early return to prevent loading assets.
+		}
 
 		$uagb_ajax_nonce = wp_create_nonce( 'uagb_ajax_nonce' );
 
-		$script_dep_path = UAGB_DIR . 'dist/blocks.asset.php';
+		$script_dep_path = UAGB_DIR . 'dist/blocks.min.asset.php';
 		$script_info     = file_exists( $script_dep_path )
 			? include $script_dep_path
 			: array(
@@ -629,9 +930,10 @@ class UAGB_Init_Blocks {
 		wp_enqueue_style( 'wp-codemirror' );
 
 		// Scripts.
+		$blocks_script = file_exists( UAGB_DIR . 'dist/blocks.min.js' ) ? 'blocks.min.js' : 'blocks.js';
 		wp_enqueue_script(
 			'uagb-block-editor-js', // Handle.
-			UAGB_URL . 'dist/blocks.js',
+			UAGB_URL . 'dist/' . $blocks_script,
 			$script_dep, // Dependencies, defined above.
 			$script_info['version'], // UAGB_VER.
 			true // Enqueue the script in the footer.
@@ -646,6 +948,8 @@ class UAGB_Init_Blocks {
 			array( 'wp-edit-blocks' ), // Dependency to include the CSS after it.
 			UAGB_VER
 		);
+
+		wp_localize_script( 'uagb-block-editor-js', 'uag_react', array( 'pro_plugin_status' => self::get_plugin_status( 'spectra-pro/spectra-pro.php' ) ) );
 
 		wp_enqueue_script( 'uagb-deactivate-block-js', UAGB_URL . 'admin/assets/blocks-deactivate.js', array( 'wp-blocks' ), UAGB_VER, true );
 
@@ -744,12 +1048,31 @@ class UAGB_Init_Blocks {
 			),
 		);
 
-		$inherit_from_theme = 'deleted' !== UAGB_Admin_Helper::get_admin_settings_option( 'uag_btn_inherit_from_theme_fallback', 'deleted' ) ? 'disabled' : UAGB_Admin_Helper::get_admin_settings_option( 'uag_btn_inherit_from_theme', 'disabled' );
+		$inherit_from_theme               = 'deleted' !== UAGB_Admin_Helper::get_admin_settings_option( 'uag_btn_inherit_from_theme_fallback', 'deleted' ) ? 'disabled' : UAGB_Admin_Helper::get_admin_settings_option( 'uag_btn_inherit_from_theme', 'disabled' );
+		$astra_theme_settings_available   = defined( 'ASTRA_THEME_SETTINGS' );
+		$astra_theme_body_text_decoration = $astra_theme_settings_available && function_exists( 'astra_get_font_extras' ) && function_exists( 'astra_get_option' ) ? astra_get_font_extras( astra_get_option( 'body-font-extras' ), 'text-decoration' ) : '';
+		$installed_plugins                = get_plugins();
+		$status                           = isset( $installed_plugins['spectra-pro/spectra-pro.php'] ) 
+					? ( is_plugin_active( 'spectra-pro/spectra-pro.php' ) 
+						? 'active' 
+						: 'inactive' ) 
+					: 'not-installed';
+		$status_of_surecart               = isset( $installed_plugins['surecart/surecart.php'] ) 
+					? ( is_plugin_active( 'surecart/surecart.php' ) 
+						? 'active' 
+						: 'inactive' ) 
+					: 'not-installed';
+		$status_of_sureforms              = isset( $installed_plugins['sureforms/sureforms.php'] ) 
+					? ( is_plugin_active( 'sureforms/sureforms.php' ) 
+						? 'active' 
+						: 'inactive' ) 
+					: 'not-installed';
 
 		$localized_params = array(
 			'cf7_is_active'                           => class_exists( 'WPCF7_ContactForm' ),
 			'gf_is_active'                            => class_exists( 'GFForms' ),
 			'category'                                => 'uagb',
+			'premium_category'                        => 'extension',
 			'ajax_url'                                => admin_url( 'admin-ajax.php' ),
 			'spectra_admin_urls'                      => $spectra_admin_urls,
 			'cf7_forms'                               => $this->get_cf7_forms(),
@@ -795,7 +1118,7 @@ class UAGB_Init_Blocks {
 			'auto_block_recovery'                     => UAGB_Admin_Helper::get_admin_settings_option( 'uag_auto_block_recovery' ),
 			'font_awesome_5_polyfill'                 => array(),
 			'spectra_custom_fonts'                    => apply_filters( 'spectra_system_fonts', array() ),
-			'spectra_pro_status'                      => is_plugin_active( 'spectra-pro/spectra-pro.php' ),
+			'spectra_pro_status'                      => $status,
 			'spectra_custom_css_example'              => __(
 				'Use custom class added in block\'s advanced settings to target your desired block. Examples:
 		.my-class {text-align: center;} // my-class is a custom selector',
@@ -814,13 +1137,29 @@ class UAGB_Init_Blocks {
 			'uag_enable_gbs_extension'                => \UAGB_Admin_Helper::get_admin_settings_option( 'uag_enable_gbs_extension', 'enabled' ),
 			'current_theme'                           => wp_get_theme()->get( 'Name' ),
 			'is_gutenberg_activated'                  => is_plugin_active( 'gutenberg/gutenberg.php' ), // TODO: Once Gutenberg merged the rename functionality code in WP then we need to remove localization part for is_gutenberg_activated.
-			'is_astra_based_theme'                    => defined( 'ASTRA_THEME_SETTINGS' ),
+			'header_titlebar_status'                  => UAGB_Admin_Helper::get_admin_settings_option( 'uag_enable_header_titlebar', 'enabled' ),
+			'is_astra_based_theme'                    => $astra_theme_settings_available,
+			'astra_body_text_decoration'              => $astra_theme_body_text_decoration,
+			// creating an array of iframe names to ignore and checking against that array.
+			// Add more iframe names to ignore, this is done by using the 'spectra_exclude_crops_iframes' filter.
+			'exclude_crops_iframes'                   => apply_filters( 'spectra_exclude_crops_iframes', array( '__privateStripeMetricsController8690' ) ),
+			'status_of_sureforms'                     => $status_of_sureforms,
+			'status_of_surecart'                      => $status_of_surecart,
+			'docsUrl'                                 => \UAGB_Admin_Helper::get_spectra_pro_url( '/docs/', 'free-plugin', 'uagb-editor-page', 'uagb-plugin' ),
 		);
 
 		wp_localize_script(
 			'uagb-block-editor-js',
 			'uagb_blocks_info',
 			$localized_params
+		);
+
+		// Enqueue the assets for editor upsells.
+		wp_enqueue_style(
+			'spectra-upsell-banner-tailwind-style',
+			UAGB_URL . 'dist/blocks.css',
+			array(),
+			UAGB_VER
 		);
 
 		// To match the editor with frontend.
@@ -978,7 +1317,8 @@ class UAGB_Init_Blocks {
 		$block_id = 'uagb-block-' . $block['attrs']['block_id'];
 
 		// Replace the block id with the block id and the style class name.
-		$html = str_replace( $block_id, $block_id . ' ' . $style_class_name, $block_content );
+		$replacement_string = esc_attr( $block_id ) . ' ' . esc_attr( $style_class_name );
+		$html               = str_replace( $block_id, $replacement_string, $block_content );
 
 		return $html;
 	}
@@ -1022,7 +1362,7 @@ class UAGB_Init_Blocks {
 		}
 
 		if ( ! empty( $_POST['defaultAllowedQuickSidebarBlocks'] ) ) {
-			$spectra_default_allowed_quick_sidebar_blocks = json_decode( stripslashes( $_POST['defaultAllowedQuickSidebarBlocks'] ), true ); // phpcs:ignore WordPress.Security.ValidatedSanitizedInput.InputNotSanitized
+			$spectra_default_allowed_quick_sidebar_blocks = json_decode( wp_unslash( sanitize_text_field( $_POST['defaultAllowedQuickSidebarBlocks'] ) ), true );
 			\UAGB_Admin_Helper::update_admin_settings_option( 'uagb_quick_sidebar_allowed_blocks', $spectra_default_allowed_quick_sidebar_blocks );
 			wp_send_json_success();
 		}
@@ -1056,7 +1396,7 @@ class UAGB_Init_Blocks {
 			wp_send_json_error( $response_data );
 		}
 
-		$global_block_styles = json_decode( stripslashes( $_POST['spectraGlobalStyles'] ), true ); // phpcs:ignore WordPress.Security.ValidatedSanitizedInput.InputNotSanitized
+		$global_block_styles = json_decode( wp_unslash( sanitize_text_field( $_POST['spectraGlobalStyles'] ) ), true );
 
 		if ( ! empty( $_POST['bulkUpdateStyles'] ) && 'no' !== $_POST['bulkUpdateStyles'] ) {
 			update_option( 'spectra_global_block_styles', $global_block_styles );
@@ -1154,7 +1494,7 @@ class UAGB_Init_Blocks {
 		update_option( 'spectra_gbs_google_fonts', $spectra_gbs_google_fonts );
 
 		if ( ! empty( $_POST['globalBlockStylesFontFamilies'] ) ) {
-			$spectra_gbs_google_fonts_editor = json_decode( stripslashes( $_POST['globalBlockStylesFontFamilies'] ), true ); // phpcs:ignore WordPress.Security.ValidatedSanitizedInput.InputNotSanitized
+			$spectra_gbs_google_fonts_editor = json_decode( wp_unslash( sanitize_text_field( $_POST['globalBlockStylesFontFamilies'] ) ), true );
 			update_option( 'spectra_gbs_google_fonts_editor', $spectra_gbs_google_fonts_editor );
 		}
 

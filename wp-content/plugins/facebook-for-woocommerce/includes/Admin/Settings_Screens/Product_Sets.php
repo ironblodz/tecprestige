@@ -1,5 +1,4 @@
 <?php
-// phpcs:ignoreFile
 /**
  * Copyright (c) Facebook, Inc. and its affiliates. All Rights Reserved
  *
@@ -11,7 +10,7 @@
 
 namespace WooCommerce\Facebook\Admin\Settings_Screens;
 
-defined( 'ABSPATH' ) or exit;
+defined( 'ABSPATH' ) || exit;
 
 use WooCommerce\Facebook\Admin\Abstract_Settings_Screen;
 
@@ -27,6 +26,13 @@ class Product_Sets extends Abstract_Settings_Screen {
 	 * Connection constructor.
 	 */
 	public function __construct() {
+		add_action( 'init', array( $this, 'initHook' ) );
+	}
+
+	/**
+	 * Initializes this settings page's properties.
+	 */
+	public function initHook(): void {
 		$this->id    = self::ID;
 		$this->label = __( 'Product sets', 'facebook-for-woocommerce' );
 		$this->title = __( 'Product sets', 'facebook-for-woocommerce' );

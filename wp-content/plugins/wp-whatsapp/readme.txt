@@ -3,8 +3,8 @@ Contributors: ninjateam
 Donate link: https://1.envato.market/WP-WhatsApp
 Tags: whatsapp, whatsapp chat, woocommerce whatsapp, click to chat, whatsapp business
 Requires at least: 3.0
-Tested up to: 6.5
-Stable tag: 3.6.7
+Tested up to: 6.7.2
+Stable tag: 3.7.2
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -24,16 +24,16 @@ You're free to add **multiple** customer service agents, sales reps, technical s
 
 [youtube https://www.youtube.com/watch?v=7YNIHLtiNo4]
 
-This is the best way to connect and interact with your audience. Via WP WhatsApp button, you can offer support directly, accept order on WhatsApp, build trust, and increase customer loyalty.
+This is the best way to connect and interact with your audience. Via the WP WhatsApp button, you can offer support directly, accept orders on WhatsApp, build trust, and increase customer loyalty.
 
 ###⚡️ FEATURES
 
 **WhatsApp Floating Widget**
-Show WhatsApp chat widget on selected pages or all pages' corner.
+Show WhatsApp chat widget on selected pages or all pages' corners.
 - Agent name
 - Agent title
 - Custom color & greetings
-- Set pre-filled message with dynamic shortcodes
+- Set pre-filled messages with dynamic shortcodes
 - Custom availability & working hours (PRO)
 - Avatar (PRO)
 
@@ -135,6 +135,21 @@ Definitely yes! The pro version comes with cutting-edge features and performance
 3. WhatsApp Gutenberg Block Demo
 
 == Changelog ==
+
+= Apr 4, 2025 - Version 3.7.2 =
+- Fixed: Small UI bugs
+
+= Apr 3, 2025 - Version 3.7.1 =
+- Updated: Remove label
+
+= Jan 14, 2025 - Version 3.7.0 =
+- Added: User role permissions
+
+= Nov 13, 2024 - Version 3.6.9 =
+- Fixed: Security 
+
+= Jul 29, 2024 - Version 3.6.8 =
+- Fixed: Font style issue
 
 = Jun 18, 2024 – Version 3.6.7 =
 - Improved: Button style conflicting with theme

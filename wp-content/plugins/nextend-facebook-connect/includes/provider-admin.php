@@ -104,7 +104,7 @@ class NextendSocialProviderAdmin {
             }
         }
 
-        foreach ($postedData AS $key => $value) {
+        foreach ($postedData as $key => $value) {
 
             switch ($key) {
                 case 'login_label':
@@ -381,6 +381,13 @@ class NextendSocialProviderAdmin {
 
             include($path);
         }
+    }
+
+    public static function getSiteUrlWithoutPath() {
+        $siteUrl     = site_url();
+        $siteUrlPath = parse_url($siteUrl, PHP_URL_PATH);
+
+        return $siteUrlPath ? str_replace($siteUrlPath, "", $siteUrl) : $siteUrl;
     }
 }
 

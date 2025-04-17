@@ -1643,8 +1643,8 @@ final class WOOCS {
         if (!$suppress_filters) {
             $currencies = apply_filters('woocs_currency_data_manipulation', $currencies);
         }
-
-        if (count($currencies) > 2) {
+        
+         if (count($currencies) > 2) {
             $currencies = array_slice($currencies, 0, 2);
         }
 
@@ -3869,6 +3869,10 @@ final class WOOCS {
 
                             $min_value = $product1->get_variation_price('min', true) * $currencies[$сurr['name']]['rate'];
                             $max_value = $product1->get_variation_price('max', true) * $currencies[$сurr['name']]['rate'];
+                            if (!$this->is_multiple_allowed) {
+                                $min_value = $min_value * $currencies[$сurr['name']]['rate'];
+                                $max_value = $max_value * $currencies[$сurr['name']]['rate'];
+                            }
                             //***
                             $min_max_values = $this->_get_min_max_variation_prices($product1, $сurr['name']);
                             if (!empty($min_max_values)) {
@@ -4210,7 +4214,12 @@ final class WOOCS {
         if (!isset($currencies[$currency])) {
             $currency = $this->default_currency;
         }
-        wp_die(do_shortcode('[woocs_rates exclude="' . esc_attr($_REQUEST['exclude']) . '" precision="' . (int) $_REQUEST['precision'] . '" current_currency="' . esc_attr($currency) . '"]'));
+
+        if (!empty($_REQUEST['exclude'])) {
+            $excluded_currenies = array_intersect(array_keys($currencies), explode(',', sanitize_text_field($_REQUEST['exclude'])));
+        }
+
+        wp_die(do_shortcode('[woocs_rates exclude="' . esc_attr(implode(',', $excluded_currenies)) . '" precision="' . (int) $_REQUEST['precision'] . '" current_currency="' . esc_attr($currency) . '"]'));
     }
 
     public function wc_price($price, $convert = true, $args = array(), $product = NULL, $decimals = -1) {
@@ -4429,8 +4438,7 @@ final class WOOCS {
 //wp-content\plugins\woocommerce\includes\shipping\free-shipping\class-wc-shipping-free-shipping.php #192
     public function woocommerce_shipping_free_shipping_is_available($is_available, $package, $this_shipping = null) {
         global $woocommerce;
-        $currencies = $this->get_currencies();
-        {
+        $currencies = $this->get_currencies(); {
             $has_coupon = false;
             $has_met_min_amount = false;
 
@@ -4599,16 +4607,20 @@ final class WOOCS {
             $currencies = $this->get_currencies();
             $_REQUEST['get_product_price_by_ajax'] = 1;
             if (!empty($custom_prices) AND is_array($custom_prices)) {
-                $custom_prices = array_unique($custom_prices);
+                // $custom_prices = array_unique($custom_prices);
                 foreach ($custom_prices as $p) {
-                    if (!isset($currencies[$p['currency']])) {
-                        $p['currency'] = $this->default_currency;
+
+                    $curr = sanitize_key($p['currency']);
+
+                    //check for currency existance
+                    if (!isset($currencies[$curr])) {
+                        $curr = $this->default_currency;
                     }
-                    
+
                     $result[$p['value']] = do_shortcode("[woocs_show_custom_price "
-                            . "value=" . sanitize_text_field($p['value'])
+                            . "value=" . floatval($p['value'])
                             . " decimals=" . intval($p['decimals'])
-                            . " currency=" . sanitize_text_field($p['currency'])
+                            . " currency=" . $curr
                             . " ]");
                 }
             }
@@ -6355,9 +6367,9 @@ final class WOOCS {
                 <button onclick="javascript: pn_<?php echo esc_attr($slug) ?>_dismiss_review(1); void(0);" title="<?php esc_html_e('Later', 'woocommerce-currency-switcher'); ?>" class="notice-dismiss"></button>
                 <div id="pn_<?php echo esc_attr($slug) ?>_review_suggestion">
                     <p>
-                            <?php esc_html_e('Hi! Are you enjoying using ', 'woocommerce-currency-switcher'); ?>
+                        <?php esc_html_e('Hi! Are you enjoying using ', 'woocommerce-currency-switcher'); ?>
                         <i>
-            <?php esc_html_e('FOX - Currency Switcher Professional for WooCommerce?', 'woocommerce-currency-switcher'); ?>
+                            <?php esc_html_e('FOX - Currency Switcher Professional for WooCommerce?', 'woocommerce-currency-switcher'); ?>
                         </i>
                     </p>
                     <p><a href="javascript: pn_<?php echo esc_attr($slug) ?>_set_review(1); void(0);"><?php esc_html_e('Yes, I love it', 'woocommerce-currency-switcher'); ?></a> 🙂 | <a href="javascript: pn_<?php echo esc_attr($slug) ?>_set_review(0); void(0);"><?php esc_html_e('Not really...', 'woocommerce-currency-switcher'); ?></a></p>
@@ -6367,7 +6379,7 @@ final class WOOCS {
                     <p>
                         <?php esc_html_e('That\'s awesome! Could you please do us a BIG favor and give it a 5-star rating on ', 'woocommerce-currency-switcher'); ?>
                         <?php echo esc_html($on) ?>
-            <?php esc_html_e(' to help us spread the word and boost our motivation?', 'woocommerce-currency-switcher'); ?>
+                        <?php esc_html_e(' to help us spread the word and boost our motivation?', 'woocommerce-currency-switcher'); ?>
                     </p>
 
                     <p><strong>~ PluginUs.Net developers team</strong></p>
@@ -6545,18 +6557,18 @@ final class WOOCS {
         ?>
         <div class="notice notice-info woocs-pos-relative" id="цщщсы_incompatibility_plugin">
             <p>
-        <?php esc_html_e("Oh no! It looks like you are using two different currency switching plugins and this may lead to incorrect conversion and payment problems", 'woocommerce-currency-switcher'); ?>
+                <?php esc_html_e("Oh no! It looks like you are using two different currency switching plugins and this may lead to incorrect conversion and payment problems", 'woocommerce-currency-switcher'); ?>
             </p>
             <span>
                 <b>
-        <?php esc_html_e("Incompatible plugin:", 'woocommerce-currency-switcher'); ?>
+                    <?php esc_html_e("Incompatible plugin:", 'woocommerce-currency-switcher'); ?>
                 </b>
             </span>
             <span>
                 <i><?php echo esc_html($incompatible_plugin); ?></i>
             </span>
             <p>
-        <?php esc_html_e("We strongly recommend disabling one of these plugins for stable operation of your site.", 'woocommerce-currency-switcher'); ?>
+                <?php esc_html_e("We strongly recommend disabling one of these plugins for stable operation of your site.", 'woocommerce-currency-switcher'); ?>
             </p>
         </div>	
         <?php

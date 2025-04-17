@@ -1,0 +1,4 @@
+2025-04-17T17:31:57+00:00 DEBUG Upgrade to 9.4.4 started
+2025-04-17T17:31:57+00:00 DEBUG Upgrade to 9.4.4 finished
+2025-04-17T21:34:56+00:00 DEBUG - Callback (/tecprestige/wc-api/WC_Multibanco_IfThen_Webdados/?chave=CHAVE_ANTI_PHISHING&entidade=ENTIDADE&referencia=REFERENCIA&valor=VALOR&datahorapag=DATA_HORA_PAGAMENTO&terminal=TERMINAL&ifthenpayfee=FEE) with all arguments from ::1
+2025-04-17T21:34:56+00:00 WARNING -- Argument errors - Key - Ref (numeric) - Ref (length) - Ent (numeric) - Ent (length) - Value

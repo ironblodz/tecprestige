@@ -233,7 +233,7 @@ namespace SW_WAPF\Includes\Controllers {
                 'name'      => __( '"Add to cart" button text', 'advanced-product-fields-for-woocommerce' ),
                 'type'      => 'text',
                 'id'        => 'wapf_add_to_cart_text',
-                'desc_tip'  => __( 'When a product has custom fields, what should the "add to cart" button say?.', 'advanced-product-fields-for-woocommerce' ),
+                'desc_tip'  => __( 'When a product has custom fields, what should the "add to cart" button say?', 'advanced-product-fields-for-woocommerce' ),
                 'default'   => __('Select options','advanced-product-fields-for-woocommerce')
             ];
 

@@ -1,5 +1,4 @@
 <?php
-// phpcs:ignoreFile
 /**
  * Copyright (c) Facebook, Inc. and its affiliates. All Rights Reserved
  *
@@ -13,6 +12,9 @@ namespace WooCommerce\Facebook\Products;
 
 defined( 'ABSPATH' ) || exit;
 
+use Error;
+use Exception;
+use WC_Facebookcommerce_Utils;
 use WooCommerce\Facebook\Framework\Helper;
 use WooCommerce\Facebook\Utilities\Heartbeat;
 use WooCommerce\Facebook\Framework\Plugin\Exception as PluginException;
@@ -36,6 +38,8 @@ class Feed {
 	/** @var string the WordPress option name where the secret included in the feed URL is stored */
 	const OPTION_FEED_URL_SECRET = 'wc_facebook_feed_url_secret';
 
+	/** @var string the feed name for creating a new feed by this plugin */
+	const FEED_NAME = 'Product Feed by Facebook for WooCommerce plugin. DO NOT DELETE.';
 
 	/**
 	 * Feed constructor.
@@ -62,6 +66,9 @@ class Feed {
 
 		// handle the feed data request
 		add_action( 'woocommerce_api_' . self::REQUEST_FEED_ACTION, array( $this, 'handle_feed_data_request' ) );
+
+		// Send request for feed one time upload after feed file generated
+		add_action( 'wc_facebook_feed_generation_completed', array( $this, 'send_request_to_upload_feed' ) );
 	}
 
 
@@ -71,6 +78,7 @@ class Feed {
 	 * @internal
 	 *
 	 * @since 1.11.0
+	 * @throws PluginException If the feed secret is invalid, file is not readable, or other errors occur.
 	 */
 	public function handle_feed_data_request() {
 		\WC_Facebookcommerce_Utils::log( 'Facebook is requesting the product feed.' );
@@ -170,12 +178,142 @@ class Feed {
 		 * @since 1.11.0
 		 * @since 2.5.0 Feed generation interval increased to 24h.
 		 *
-		 * @param int $interval the frequency with which the product feed data is generated, in seconds. Defaults to every 15 minutes.
+		 * @param int $interval the frequency with which the product feed data is generated, in seconds.
 		 */
 		$interval = apply_filters( 'wc_facebook_feed_generation_interval', DAY_IN_SECONDS );
 		if ( ! as_next_scheduled_action( self::GENERATE_FEED_ACTION ) ) {
 			as_schedule_recurring_action( time(), max( 2, $interval ), self::GENERATE_FEED_ACTION, array(), facebook_for_woocommerce()->get_id_dasherized() );
 		}
+	}
+
+
+	/**
+	 * Sends request to Meta to start a one-time feed file upload session.
+	 *
+	 * @internal
+	 */
+	public function send_request_to_upload_feed() {
+		$feed_id = self::retrieve_or_create_integration_feed_id();
+		if ( empty( $feed_id ) ) {
+			WC_Facebookcommerce_Utils::log( 'Feed: integration feed ID is null or empty, feed will not be uploaded.' );
+			return;
+		}
+
+		$data = [
+			'url' => self::get_feed_data_url(),
+		];
+
+		try {
+			facebook_for_woocommerce()->get_api()->create_upload( $feed_id, $data );
+		} catch ( Exception $exception ) {
+			facebook_for_woocommerce()->log( 'Failed to create feed upload request: ' . $exception->getMessage() );
+		}
+	}
+
+	/**
+	 * Retrieves or creates an integration feed ID
+	 *
+	 * @return      string the integration feed ID
+	 *
+	 * @internal
+	 */
+	public function retrieve_or_create_integration_feed_id() {
+		// Attempt 1. Request feeds data from Meta and filter the right one
+		$feed_id = self::request_and_filter_integration_feed_id();
+		if ( $feed_id ) {
+			facebook_for_woocommerce()->get_integration()->update_feed_id( $feed_id );
+			WC_Facebookcommerce_Utils::log( 'Feed: feed_id = ' . $feed_id . ', queried and selected from Meta API.' );
+			return $feed_id;
+		}
+
+		// Attempt 2. Create a new feed
+		$feed_id = self::create_feed_id();
+		if ( $feed_id ) {
+			facebook_for_woocommerce()->get_integration()->update_feed_id( $feed_id );
+			WC_Facebookcommerce_Utils::log( 'Feed: feed_id = ' . $feed_id . ', created a new feed via Meta API.' );
+			return $feed_id;
+		}
+
+		return '';
+	}
+
+	/**
+	 * Queries existing feeds for the integration catalog and filters
+	 * the plugin integration feed ID
+	 *
+	 * @return      string the integration feed ID
+	 *
+	 * @internal
+	 * @throws Exception|Error If there is an error getting feed nodes, catalog, or if no catalog ID is available.
+	 */
+	private function request_and_filter_integration_feed_id() {
+		try {
+			$catalog_id = facebook_for_woocommerce()->get_integration()->get_product_catalog_id();
+			if ( '' === $catalog_id ) {
+				throw new Error( 'No catalog ID' );
+			}
+			$feed_nodes = facebook_for_woocommerce()->get_api()->read_feeds( $catalog_id )->data;
+		} catch ( Exception $e ) {
+			$message = sprintf( 'There was an error trying to get feed nodes for catalog: %s', $e->getMessage() );
+			WC_Facebookcommerce_Utils::log( $message );
+			return '';
+		}
+
+		if ( empty( $feed_nodes ) ) {
+			return '';
+		}
+
+		/*
+			We need to detect which feed is the one that was created for Facebook for WooCommerce plugin usage.
+
+			We are detecting based on the name.
+			- Option 1. Plugin can create this feed name currently.
+			- Option 2. Plugin used to create a feed name 'Initial product sync from WooCommerce. DO NOT DELETE.'
+		*/
+		foreach ( $feed_nodes as $feed ) {
+			try {
+				$feed_metadata = facebook_for_woocommerce()->get_api()->read_feed( $feed['id'] );
+			} catch ( Exception $e ) {
+				$message = sprintf( 'There was an error trying to get feed metadata: %s', $e->getMessage() );
+				WC_Facebookcommerce_Utils::log( $message );
+				continue;
+			}
+
+			if ( self::FEED_NAME === $feed_metadata['name'] ||
+				'Initial product sync from WooCommerce. DO NOT DELETE.' === $feed_metadata['name'] ) {
+				return $feed['id'];
+			}
+		}
+
+		return '';
+	}
+
+	/**
+	 * Makes a request to Meta to create a new feed
+	 *
+	 * @return      string the integration feed ID
+	 *
+	 * @internal
+	 * @throws Exception|Error If there is an error creating the feed or if no catalog ID is available.
+	 */
+	private function create_feed_id() {
+		try {
+			$catalog_id = facebook_for_woocommerce()->get_integration()->get_product_catalog_id();
+			if ( '' === $catalog_id ) {
+				throw new Error( 'No catalog ID' );
+			}
+
+			$data = [
+				'name' => self::FEED_NAME,
+			];
+
+			$feed = facebook_for_woocommerce()->get_api()->create_feed( $catalog_id, $data );
+			return $feed['id'];
+		} catch ( Exception $exception ) {
+			facebook_for_woocommerce()->log( 'Could not create a feed: ' . $exception->getMessage() );
+		}
+
+		return '';
 	}
 
 
@@ -192,7 +330,7 @@ class Feed {
 		$disabled = false;
 		if ( function_exists( 'ini_get' ) ) {
 			$disabled_functions = @ini_get( 'disable_functions' );
-			$disabled = is_string( $disabled_functions ) && in_array( 'fpassthru', explode( ',', $disabled_functions ), false );
+			$disabled           = is_string( $disabled_functions ) && in_array( 'fpassthru', explode( ',', $disabled_functions ), false );
 		}
 		return $disabled;
 	}

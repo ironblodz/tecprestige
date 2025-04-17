@@ -402,7 +402,7 @@ class THWCFD_Utils {
 				$text = __($text, 'woocommerce');
 			}
 		}
-		echo $text;
+		echo esc_html($text);
 	}
 	/***********************************
 	 ----- i18n functions - END ------
@@ -427,6 +427,70 @@ class THWCFD_Utils {
 				error_log( $log );
 			}
 		}
+	}
+
+	public static function get_allowed_html(){
+		$allowed_html = array(
+			'input' => array(
+				'type' => array(),
+				'id' => array(),
+				'name' => array(),
+				'value' => array(),
+				'style' => array(),
+				'checked' => array(),
+				'class' => array(), 
+			),
+			'label' => array(
+				'for' => array(),
+				'style' => array(),
+			),
+			'textarea' => array(
+				'name' => array(),
+				'rows' => array(),
+				'cols' => array(),
+				'style' => array(), 
+			),
+			'select' => array(
+				'name' => array(),
+				'style' => array(),
+				'class' => array(),
+				'onchange' => array(),
+				'multiple' => array(),
+				'style' => array(),
+        		'placeholder' => array(),
+			),
+			'option' => array(
+				'value' => array(),
+			),
+			'th' => array(
+				'colspan' => array(),
+				'rowspan' => array(),
+				'style' => array(),
+				'class' => array(),
+			),
+			'tr' => array(
+				'style' => array(),
+				'class' => array(),
+			),
+			'td' => array(
+				'colspan' => array(),
+				'rowspan' => array(),
+				'style' => array(),
+				'class' => array(),
+			),
+			'h3' => array(),
+			'p' => array(),
+			'strong' => array(),
+			'br' => array(),
+		);
+		return $allowed_html;
+	}
+
+	public static function convert_string_to_array($str, $separator = ','){
+		if(!is_array($str)){
+			$str = array_map('trim', explode($separator, $str));
+		}
+		return $str;
 	}
 }
 

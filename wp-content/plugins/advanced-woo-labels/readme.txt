@@ -3,8 +3,8 @@ Contributors: Mihail Barinov
 Donate link: https://www.paypal.com/donate/?hosted_button_id=FDRDNZE6XAKE8
 Tags: woocommerce, labels, product labels, badges, woocommerce labels
 Requires at least: 4.0
-Tested up to: 6.6
-Stable tag: 2.01
+Tested up to: 6.8
+Stable tag: 2.16
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -91,6 +91,10 @@ There is a large variety of such conditions and more information you can find [h
 
 Yes, you can use plugin [text variables](https://advanced-woo-labels.com/guide/text-variables/) to show a variety of different product parameters like price, discount value, sku, quantity, sales number, reviews, rating, attributes, etc.
 
+= How can I report security bugs? =
+
+You can report security bugs through the Patchstack Vulnerability Disclosure Program. The Patchstack team help validate, triage and handle any security vulnerabilities. [Report a security vulnerability.](https://patchstack.com/database/vdp/advanced-woo-labels)
+
 == Screenshots ==
 
 1. Labels and labels groups
@@ -108,6 +112,74 @@ Yes, you can use plugin [text variables](https://advanced-woo-labels.com/guide/t
 == Changelog ==
 
 [View full changelog](https://advanced-woo-labels.com/guide/free-version-changelog/?utm_source=wp-repo&utm_medium=listing&utm_campaign=awl-repo)
+
+= 2.16 ( 10.04.2025 ) =
+* Update - Tested with WC 9.8
+* Fix - Strip some html from labels preview
+
+= 2.15 ( 31.03.2025 ) =
+* Update - Integration with Product Video Gallery for Woocommerce plugin
+
+= 2.14 ( 17.03.2025 ) =
+* Add - Support for Essential Addons for Elementor plugin
+
+= 2.13 ( 03.03.2025 ) =
+* Update - Tested with WC 9.7
+* Fix - Disable stripping of plus symbol inside label text
+
+= 2.12 ( 17.02.2025 ) =
+* Update - Description of pro version inside admin
+
+= 2.11 ( 03.02.2025 ) =
+* Update - Tested with WC 9.6
+
+= 2.10 ( 20.01.2025 ) =
+* Fix - Links styles inside admin tooltips
+
+= 2.09 ( 30.12.2024 ) =
+* Update - Tested with WC 9.5
+* Update - Styles of label edit page
+* Update - Make the label preview box float after the user scrolls
+* Update - Pro admin block description
+* Update - Reorder label display conditions settings fields
+* Fix - Hide admin tooltips when needed
+* Fix - Styles for admin checkboxes
+* Dev - Add new labels condition operators
+
+= 2.08 ( 16.12.2024 ) =
+* Update - Automatically deactivate free version when activate pro
+
+= 2.07 ( 26.11.2024 ) =
+* Update - Tested with WC 9.4
+* Update - Integration with Blocksy theme
+
+= 2.06 ( 11.11.2024 ) =
+* Add - Discount Rules and Dynamic Pricing for WooCommerce plugin integration
+* Add - Integration with Variation Images Gallery for WooCommerce plugin
+
+= 2.05 ( 28.10.2024 ) =
+* Fix - Strip some html from labels preview
+
+= 2.04 ( 14.10.2024 ) =
+* Add - Support for Ultimate Addons for Beaver Builder plugin
+* Update - Support for Product Gallery Slider for Woocommerce plugin
+* Update - Admin page notices about integrations
+
+= 2.03 ( 01.10.2024 ) =
+* Add - Support for Product Video Gallery for Woocommerce plugin
+* Update - Support for Product Gallery Slider for Woocommerce plugin
+* Update - Integration with Uncode theme
+* Update - Integration with WooCommerce Product Table plugin
+* Fix - Support for WooCommerce Load More Products plugin
+
+= 2.02 ( 16.09.2024 ) =
+* Add - Support for Shopical theme
+* Add - Support for CommerceKit by CommerceGurus plugin
+* Add - Support for Breakdance plugin
+* Update - Tested with WC 9.3
+* Update - Support for Product Filter by WBW plugin. Fix labels display on archive pages
+* Update - Integration with Additional Variation Images Gallery for WooCommerce plugin
+* Fix - Strip some html from labels preview
 
 = 2.01 ( 02.09.2024 ) =
 * Add - Support for TastyDaily theme
@@ -285,63 +357,3 @@ Yes, you can use plugin [text variables](https://advanced-woo-labels.com/guide/t
 * Update - Tested with WC 7.6
 * Update - Support for Flatsome theme
 * Fix - Flatsome theme broken products links with link labels
-
-= 1.65 ( 03.04.2023 ) =
-* Fix - Bug with awl_get_product_labels shortcode execution
-
-= 1.64 ( 20.03.2023 ) =
-* Update - Tested with WC 7.5
-
-= 1.63 ( 06.03.2023 ) =
-* Add - WP-CLI support
-
-= 1.62 ( 20.02.2023 ) =
-* Add - Support for Basel theme
-* Add - Support for Blocksy theme
-* Update - Tested with WC 7.4
-* Update - Support for WooCommerce Gutenberg blocks
-
-= 1.61 ( 06.02.2023 ) =
-* Update - Admin page notices
-* Update - Support for Total theme
-
-= 1.60 ( 23.01.2023 ) =
-* Update - Tested with WC 7.3
-
-= 1.59 ( 09.01.2023 ) =
-* Update - Tested with WC 7.2
-* Update - Labels settings page
-
-= 1.58 ( 12.12.2022 ) =
-* Update - Labels settings page
-* Update - Admin settings page styles
-
-= 1.57 ( 28.11.2022 ) =
-* Add - Support for WooCommerce Gutenberg blocks
-* Update - Formatting for price text variable
-* Update - XStore theme support
-* Update - Astra theme support
-* Fix - Ajax search for products for label editor
-* Fix - Product Filter for WooCommerce by XforWooCommerce plugin ajax filters bug
-
-= 1.56 ( 14.11.2022 ) =
-* Add - Support for Additional Variation Images Gallery for WooCommerce plugin
-* Add - New label style options: Font weight and Letter spacing
-* Update - Tested with WC 7.1
-* Update - Support for Flatsome theme
-* Dev - Add awl_settings_field_{field_id} filter
-
-= 1.55 ( 31.10.2022 ) =
-* Update - Support for XStore theme
-* Dev - Add awl_compare_condition_values helper function
-
-= 1.54 ( 17.10.2022 ) =
-* Update - Admin notices
-* Update - Tested with WC 7.0
-
-= 1.53 ( 19.09.2022 ) =
-* Add - Support for Uncode theme
-* Update - Tested with WC 6.9
-
-= 1.52 ( 05.09.2022 ) =
-* Update - Support for Product Gallery Slider for Woocommerce ( Formerly Twist ) plugin

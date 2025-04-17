@@ -189,7 +189,7 @@ class Webtoffee_Product_Feed_Sync_Admin {
                                 'template_del_error'=>__('Unable to delete template', 'webtoffee-product-feed'),
                                 'template_del_loader'=>__('Deleting template...', 'webtoffee-product-feed'),                             
 				'value_empty'=>__('Value is empty.', 'webtoffee-product-feed'),
-				'error'=> __('Something went wrong. Please reload the page and check', 'webtoffee-product-feed'),
+				'error'=> sprintf( __( 'Something went wrong. Please reload and check or %s contact our support %s for easy troubleshooting.', 'webtoffee-product-feed' ), '<a href="https://www.webtoffee.com/contact/" target="_blank">', '</a>' ),
 				'success'=>__('Success.', 'webtoffee-product-feed'),
 				'loading'=>__('Loading...', 'webtoffee-product-feed'),
 				'sure'=>__('Are you sure?', 'webtoffee-product-feed'),
@@ -234,7 +234,7 @@ class Webtoffee_Product_Feed_Sync_Admin {
 		'<a href="' . esc_url( admin_url( 'admin.php?page=webtoffee-product-feed' ) ) . '">' . __( 'FB Sync', 'webtoffee-product-feed' ) . '</a>',
 		'<a target="_blank" href="https://wordpress.org/support/plugin/webtoffee-product-feed/">' . __( 'Support', 'webtoffee-product-feed' ) . '</a>',
 		'<a target="_blank" href="https://www.webtoffee.com/webtoffee-product-feed-user-guide/">' . __( 'Documentation', 'webtoffee-product-feed' ) . '</a>',
-		'<a target="_blank" href="https://wordpress.org/support/plugin/webtoffee-product-feed/reviews#new-post">' . __( 'Review', 'webtoffee-product-feed' ) . '</a>',
+		'<a target="_blank" style="color:#f909ff;" href="https://wordpress.org/support/plugin/webtoffee-product-feed/reviews#new-post">' . __( 'Review', 'webtoffee-product-feed' ) . '</a>',
 		'<a target="_blank" href="'. esc_url("https://www.webtoffee.com/product/woocommerce-product-feed/?utm_source=free_plugin_listing&utm_medium=feed_basic&utm_campaign=WooCommerce_Product_Feed&utm_content=" . WEBTOFFEE_PRODUCT_FEED_SYNC_VERSION).'" style="color:#3db634;">' . __( 'Upgrade', 'webtoffee-product-feed' ) . '</a>',
 	);
 	if ( array_key_exists( 'deactivate', $links ) ) {
@@ -243,7 +243,31 @@ class Webtoffee_Product_Feed_Sync_Admin {
 	return array_merge( $plugin_links, $links );
 }
 
-	
+
+        /**
+         * Change the admin footer text on feed admin pages.
+         *
+         * @since  2.2.6
+         *
+         * @param  string $footer_text The footer text.
+         *
+         * @return string
+         */
+        public function admin_footer_text( $footer_text ) {
+
+            if ( ! current_user_can( 'manage_woocommerce' ) || ! Webtoffee_Product_Feed_Sync_Common_Helper::wt_is_screen_allowed() ) {
+                return $footer_text;
+            }
+            // Change the footer text.
+            $footer_text = sprintf(
+            /* translators: 1: Product Feed 2:: five stars */
+                __( 'If you like %1$s please leave us a %2$s rating. A huge thanks in advance!', 'webtoffee-product-feed' ),
+                sprintf( '<strong>%s</strong>', esc_html__( 'Product Feed for WooCommerce', 'webtoffee-product-feed' ) ),
+                '<a href="https://wordpress.org/support/plugin/webtoffee-product-feed/reviews#new-post" target="_blank" class="wt-rating-link" data-rated="' . esc_attr__( 'Thanks :)', 'webtoffee-product-feed' ) . '">&#9733;&#9733;&#9733;&#9733;&#9733;</a>'
+            );
+
+            return $footer_text;
+        }
 	
 	
 	
@@ -476,8 +500,8 @@ class Webtoffee_Product_Feed_Sync_Admin {
 							<!--<p><?php //esc_html_e( 'You are currently connected to your FB account.', 'webtoffee-product-feed' ); ?></p>-->
 							<?php if ( isset( $catalog_details ) ): ?>
 							<div class="catalogs-list-section">
-								<div class="dashicons-before dashicons-cart" style="float:left; width: 25%;"><?php esc_html_e( 'Catalogs associated with your FB account:', 'webtoffee-product-feed'); ?></div>
-							<div class="fb-catalog-list"  style="float:right; width: 75%;">	
+								<div class="dashicons-before dashicons-cart" style="float:left; width: 50%;"><?php esc_html_e( 'Catalogs associated with your FB account:', 'webtoffee-product-feed'); ?></div>
+							<div class="fb-catalog-list"  style="float:right; width: 50%;">	
 								<?php
 									if ( !empty( $catalog_details ) ) {
 										$ic = 0;
@@ -684,6 +708,7 @@ class Webtoffee_Product_Feed_Sync_Admin {
 							<div style="float:right;border: 1px solid #ccc;width:25%">
 							<?php 
 							$fb_sync_tab = true;
+                                                        $utm_source = 'free_plugin_sidebar_sync';
 							include plugin_dir_path(WT_PRODUCT_FEED_PLUGIN_FILENAME).'admin/views/market.php'; 							
 							?>
 							</div>
@@ -1426,7 +1451,7 @@ class Webtoffee_Product_Feed_Sync_Admin {
 			'submenu',
 			$parent_menu_key,
 			__( 'Facebook/Instagram Catalog Sync', 'webtoffee-product-feed' ),
-			__( 'Facebook/Instagram Catalog Sync', 'webtoffee-product-feed' ), 
+			__( 'FB/Insta Catalog', 'webtoffee-product-feed' ), 
 			apply_filters('wt_import_export_allowed_capability', 'import'),
 			WT_Fb_Catalog_Manager_Settings::PAGE_ID,
 			array($this, 'render')
@@ -1446,11 +1471,22 @@ class Webtoffee_Product_Feed_Sync_Admin {
 				}
 			}
 		}
+                
+                add_submenu_page($parent_menu_key, esc_html__('Pro upgrade'), '<span class="wt-pf-go-premium">' . esc_html__('Pro upgrade') . '</span>', 'import', WEBTOFFEE_PRODUCT_FEED_ID . '#wt-pro-upgrade', array($this, 'admin_upgrade_premium_settings'));
+                
 		if(function_exists('remove_submenu_page')){
 			//remove_submenu_page(WT_PIEW_POST_TYPE, WT_PIEW_POST_TYPE);
 		}
 	}
 	
+        
+	public function admin_upgrade_premium_settings()
+	{
+
+		wp_safe_redirect(admin_url('admin.php?page=webtoffee_product_feed#wt-pro-upgrade'));
+		exit();
+	}
+        
 	public function wt_menu_order_changer( &$arr, $index_arr ) {
 			$arr_t = array();
 			foreach ( $index_arr as $i => $v ) {
@@ -1668,15 +1704,21 @@ class Webtoffee_Product_Feed_Sync_Admin {
                     'google_local_product_inventory' => 'webtoffee-product-feed',
                     'google_local_inventory_ads' => 'webtoffee-product-feed',
                     'google_promotions' => 'webtoffee-product-feed',
-                    'buyon_google' => 'webtoffee-product-feed',                            
+                    'buyon_google' => 'webtoffee-product-feed',
+					'google_product_reviews' => 'webtoffee-product-feed',                            
                     'pricespy' => 'webtoffee-product-feed',
                     'pricerunner' => 'webtoffee-product-feed',
                     'skroutz' => 'webtoffee-product-feed',
                     'shopzilla' => 'webtoffee-product-feed',
                     'fruugo' => 'webtoffee-product-feed',
                     'heureka' => 'webtoffee-product-feed',
-                    'google_product_reviews' => 'webtoffee-product-feed',
-                    'leguide' => 'webtoffee-product-feed'
+                    'leguide' => 'webtoffee-product-feed',
+                    'vivino' => 'webtoffee-product-feed',
+                    'onbuy' => 'webtoffee-product-feed',
+                    'twitter' => 'webtoffee-product-feed',
+                    'yandex' => 'webtoffee-product-feed',
+                    'rakuten' => 'webtoffee-product-feed',
+                    'shopmania' => 'webtoffee-product-feed'
                 );
 
                 foreach ($addon_modules_basic as $module_key => $module_path)
@@ -1697,94 +1739,7 @@ class Webtoffee_Product_Feed_Sync_Admin {
 	public static function module_exists($module)
 	{
 		return in_array($module, self::$existing_modules);
-	}
-                
-        
-        /**
-         * Delete products from FB
-         * 
-         * @param int $postid
-         */
-        public function delete_product_from_fb($postid) {
-
-            $wt_pf_default_catalog = Webtoffee_Product_Feed_Sync_Common_Helper::get_advanced_settings('default_catalog');
-
-            if ($wt_pf_default_catalog) {
-                $access_token = get_option(WT_Fb_Catalog_Manager_Settings::OPTION_ACCESS_TOKEN, '');
-
-                $product = wc_get_product($postid);
-                if ($product) {
-                    $url = "https://graph.facebook.com/v17.0/{$wt_pf_default_catalog}/items_batch?access_token=" . $access_token;
-
-                    $request_body = array();
-
-                    if ('variable' === $product->get_type()) {
-                        $fb_retailer_id = $product->get_sku() ? $product->get_sku() . '_' . $postid : 'wc_post_id_' . $postid;
-                        $request_body[] = array(
-                            'method' => 'DELETE',
-                            'data' => array(
-                                'id' => $fb_retailer_id,
-                            ),
-                        );
-                        $all_variations = $product->get_children();
-                        foreach ($all_variations as $variant_id) {
-                            $variant_product = wc_get_product($variant_id);
-                            $fb_retailer_id = $variant_product->get_sku() ? $variant_product->get_sku() . '_' . $variant_id : 'wc_post_id_' . $variant_id;
-                            $request_body[] = array(
-                                'method' => 'DELETE',
-                                'data' => array(
-                                    'id' => $fb_retailer_id,
-                                ),
-                            );
-                        }
-                    } else {
-
-                        $fb_retailer_id = $product->get_sku() ? $product->get_sku() . '_' . $postid : 'wc_post_id_' . $postid;
-                        $request_body = array(
-                            array(
-                                'method' => 'DELETE',
-                                'data' => array(
-                                    'id' => $fb_retailer_id,
-                                ),
-                            ),
-                        );
-                    }
-
-                    $body = array(
-                        'access_token' => $access_token,
-                        'item_type' => 'PRODUCT_ITEM',
-                        'requests' => $request_body,
-                    );
-
-                    $args = array(
-                        'method' => 'POST',
-                        'headers' => array(
-                            'Content-Type' => 'application/json',
-                        ),
-                        'body' => wp_json_encode($body),
-                    );
-
-                    $response = wp_remote_request($url, $args);
-
-                    if (is_wp_error($response)) {
-                         
-                        $this->wt_log_data_change('wt-feed-upload', 'Failed to process the requests. Error: '.$response->get_error_message() .' ID='. $postid );                        
-                    } else {
-                        $body = wp_remote_retrieve_body($response);
-                        $result = json_decode($body);
-
-                        if (isset($result->success)) {
-                            $this->wt_log_data_change('wt-feed-upload', 'Requests processed successfully. ID='.$postid );                        
-                        } elseif (isset($result->errors)) {
-                            $this->wt_log_data_change('wt-feed-upload', 'Failed to process the requests. Error: ' . $body .' ID='. $postid );                        
-                        } else {
-                            $this->wt_log_data_change('wt-feed-upload', 'Unexpected response: ' . $body .' ID='. $postid );                        
-                        }
-                    }
-                }
-            }
-
-        }
+	}                    
 
     }
 }

@@ -1,4 +1,4 @@
-# Copyright (C) 2024 advanced-product-fields-for-woocommerce
+# Copyright (C) 2025 advanced-product-fields-for-woocommerce
 # This file is distributed under the same license as the advanced-product-fields-for-woocommerce package.
 msgid ""
 msgstr ""
@@ -214,138 +214,158 @@ msgid "Text swatches"
 msgstr ""
 
 #: dist/includes/classes/class-fields.php:91
-msgid "Content: image"
+msgid "Child products"
 msgstr ""
 
 #: dist/includes/classes/class-fields.php:96
-msgid "Layout: section"
+msgid "Cards"
 msgstr ""
 
-#: dist/includes/classes/class-fields.php:115
-msgid "Message"
+#: dist/includes/classes/class-fields.php:101
+msgid "Images + quantities"
+msgstr ""
+
+#: dist/includes/classes/class-fields.php:106
+msgid "Calculation"
+msgstr ""
+
+#: dist/includes/classes/class-fields.php:111
+msgid "Content: shortcodes & HTML"
 msgstr ""
 
 #: dist/includes/classes/class-fields.php:116
-msgid "Displays text alongside the checkbox."
+msgid "Content: image"
 msgstr ""
 
 #: dist/includes/classes/class-fields.php:121
+msgid "Layout: section"
+msgstr ""
+
+#: dist/includes/classes/class-fields.php:140
+msgid "Message"
+msgstr ""
+
+#: dist/includes/classes/class-fields.php:141
+msgid "Displays text alongside the checkbox."
+msgstr ""
+
+#: dist/includes/classes/class-fields.php:146
 msgid "Checked"
 msgstr ""
 
-#: dist/includes/classes/class-fields.php:122
+#: dist/includes/classes/class-fields.php:147
 msgid "Unchecked"
 msgstr ""
 
-#: dist/includes/classes/class-fields.php:126, dist/includes/classes/class-fields.php:141, dist/includes/classes/class-fields.php:162, dist/includes/classes/class-fields.php:194, dist/includes/classes/class-fields.php:227, dist/includes/classes/class-fields.php:249
+#: dist/includes/classes/class-fields.php:151, dist/includes/classes/class-fields.php:166, dist/includes/classes/class-fields.php:187, dist/includes/classes/class-fields.php:219, dist/includes/classes/class-fields.php:252, dist/includes/classes/class-fields.php:274
 msgid "Default value"
 msgstr ""
 
-#: dist/includes/classes/class-fields.php:127, dist/includes/classes/class-fields.php:142, dist/includes/classes/class-fields.php:163, dist/includes/classes/class-fields.php:195, dist/includes/classes/class-fields.php:228, dist/includes/classes/class-fields.php:250
+#: dist/includes/classes/class-fields.php:152, dist/includes/classes/class-fields.php:167, dist/includes/classes/class-fields.php:188, dist/includes/classes/class-fields.php:220, dist/includes/classes/class-fields.php:253, dist/includes/classes/class-fields.php:275
 msgid "The pre-set value of the field when the page loads."
 msgstr ""
 
-#: dist/includes/classes/class-fields.php:132, dist/includes/classes/class-fields.php:153, dist/includes/classes/class-fields.php:174, dist/includes/classes/class-fields.php:218, dist/includes/classes/class-fields.php:240, dist/includes/classes/class-fields.php:261, dist/views/admin/settings/options.php:19
+#: dist/includes/classes/class-fields.php:157, dist/includes/classes/class-fields.php:178, dist/includes/classes/class-fields.php:199, dist/includes/classes/class-fields.php:243, dist/includes/classes/class-fields.php:265, dist/includes/classes/class-fields.php:286, dist/views/admin/settings/options.php:19
 msgid "Adjust pricing"
 msgstr ""
 
-#: dist/includes/classes/class-fields.php:133, dist/includes/classes/class-fields.php:154, dist/includes/classes/class-fields.php:175, dist/includes/classes/class-fields.php:219, dist/includes/classes/class-fields.php:241, dist/includes/classes/class-fields.php:262
+#: dist/includes/classes/class-fields.php:158, dist/includes/classes/class-fields.php:179, dist/includes/classes/class-fields.php:200, dist/includes/classes/class-fields.php:244, dist/includes/classes/class-fields.php:266, dist/includes/classes/class-fields.php:287
 msgid "Should the price of the product or cart change when the user interacts with this field?"
 msgstr ""
 
-#: dist/includes/classes/class-fields.php:147, dist/includes/classes/class-fields.php:168, dist/includes/classes/class-fields.php:200, dist/includes/classes/class-fields.php:233, dist/includes/classes/class-fields.php:255
+#: dist/includes/classes/class-fields.php:172, dist/includes/classes/class-fields.php:193, dist/includes/classes/class-fields.php:225, dist/includes/classes/class-fields.php:258, dist/includes/classes/class-fields.php:280
 msgid "Placeholder text"
 msgstr ""
 
-#: dist/includes/classes/class-fields.php:148, dist/includes/classes/class-fields.php:169, dist/includes/classes/class-fields.php:201, dist/includes/classes/class-fields.php:234, dist/includes/classes/class-fields.php:256
+#: dist/includes/classes/class-fields.php:173, dist/includes/classes/class-fields.php:194, dist/includes/classes/class-fields.php:226, dist/includes/classes/class-fields.php:259, dist/includes/classes/class-fields.php:281
 msgid "Appears within the input field"
 msgstr ""
 
-#: dist/includes/classes/class-fields.php:183
+#: dist/includes/classes/class-fields.php:208
 msgid "Number type"
 msgstr ""
 
-#: dist/includes/classes/class-fields.php:184
+#: dist/includes/classes/class-fields.php:209
 msgid "Allow integers (whole numbers) or decimals."
 msgstr ""
 
-#: dist/includes/classes/class-fields.php:186
+#: dist/includes/classes/class-fields.php:211
 msgid "Integer"
 msgstr ""
 
-#: dist/includes/classes/class-fields.php:187
+#: dist/includes/classes/class-fields.php:212
 msgid "Integer & decimals"
 msgstr ""
 
-#: dist/includes/classes/class-fields.php:206
+#: dist/includes/classes/class-fields.php:231
 msgid "Minimum value"
 msgstr ""
 
-#: dist/includes/classes/class-fields.php:207
+#: dist/includes/classes/class-fields.php:232
 msgid "No minimum"
 msgstr ""
 
-#: dist/includes/classes/class-fields.php:212
+#: dist/includes/classes/class-fields.php:237
 msgid "Maximum value"
 msgstr ""
 
-#: dist/includes/classes/class-fields.php:213
+#: dist/includes/classes/class-fields.php:238
 msgid "No maximum"
 msgstr ""
 
-#: dist/includes/classes/class-fields.php:270, dist/includes/classes/class-fields.php:281, dist/includes/classes/class-fields.php:293
+#: dist/includes/classes/class-fields.php:295, dist/includes/classes/class-fields.php:306, dist/includes/classes/class-fields.php:318
 msgid "Options"
 msgstr ""
 
-#: dist/includes/classes/class-fields.php:271
+#: dist/includes/classes/class-fields.php:296
 msgid "Add the options for this select list."
 msgstr ""
 
-#: dist/includes/classes/class-fields.php:282
+#: dist/includes/classes/class-fields.php:307
 msgid "Each option is a checkbox."
 msgstr ""
 
-#: dist/includes/classes/class-fields.php:294
+#: dist/includes/classes/class-fields.php:319
 msgid "Each option is a radio button."
 msgstr ""
 
-#: dist/includes/classes/class-fields.php:304, dist/includes/classes/class-fields.php:312
+#: dist/includes/classes/class-fields.php:329, dist/includes/classes/class-fields.php:337
 msgid "Content"
 msgstr ""
 
-#: dist/includes/classes/class-fields.php:305, dist/includes/classes/class-fields.php:313
+#: dist/includes/classes/class-fields.php:330, dist/includes/classes/class-fields.php:338
 msgid "Enter your text here. Do you need to add shortcodes & HTML? Consider upgrading to our Pro version."
 msgstr ""
 
-#: dist/includes/classes/class-fields.php:392
+#: dist/includes/classes/class-fields.php:417
 msgid "Flat fee (not quantity-based)"
 msgstr ""
 
-#: dist/includes/classes/class-fields.php:393
+#: dist/includes/classes/class-fields.php:418
 msgid "Quantity based flat fee (Pro only)"
 msgstr ""
 
-#: dist/includes/classes/class-fields.php:394
-msgid "Formula (Pro only)"
+#: dist/includes/classes/class-fields.php:419
+msgid "Formula/calculation (Pro only)"
 msgstr ""
 
-#: dist/includes/classes/class-fields.php:395
+#: dist/includes/classes/class-fields.php:420
 msgid "Percentage based (Pro only)"
 msgstr ""
 
-#: dist/includes/classes/class-fields.php:396
+#: dist/includes/classes/class-fields.php:421
 msgid "Amount &times; field value (Pro only)"
 msgstr ""
 
-#: dist/includes/classes/class-fields.php:397
+#: dist/includes/classes/class-fields.php:422
 msgid "Amount &times; character count (Pro only)"
 msgstr ""
 
-#: dist/includes/classes/class-fields.php:414, dist/includes/classes/class-fields.php:425
+#: dist/includes/classes/class-fields.php:439, dist/includes/classes/class-fields.php:450
 msgid "true"
 msgstr ""
 
-#: dist/includes/classes/class-fields.php:414, dist/includes/classes/class-fields.php:425
+#: dist/includes/classes/class-fields.php:439, dist/includes/classes/class-fields.php:450
 msgid "false"
 msgstr ""
 
@@ -353,7 +373,7 @@ msgstr ""
 msgid "Title"
 msgstr ""
 
-#: dist/includes/classes/class-wapf-list-table.php:16, dist/views/admin/field.php:58
+#: dist/includes/classes/class-wapf-list-table.php:16, dist/views/admin/field.php:70
 msgid "Type"
 msgstr ""
 
@@ -450,7 +470,7 @@ msgid "\"Add to cart\" button text"
 msgstr ""
 
 #: dist/includes/controllers/class-admin-controller.php:248
-msgid "When a product has custom fields, what should the \"add to cart\" button say?."
+msgid "When a product has custom fields, what should the \"add to cart\" button say?"
 msgstr ""
 
 #: dist/includes/controllers/class-admin-controller.php:249, dist/includes/controllers/class-product-controller.php:121
@@ -497,51 +517,59 @@ msgstr ""
 msgid "And"
 msgstr ""
 
-#: dist/views/admin/field.php:59
+#: dist/views/admin/field-list.php:17
+msgid "Add your 1st Field"
+msgstr ""
+
+#: dist/views/admin/field-list.php:30
+msgid "Add a Field"
+msgstr ""
+
+#: dist/views/admin/field.php:71
 msgid "What type of field should this be?"
 msgstr ""
 
-#: dist/views/admin/field.php:67
+#: dist/views/admin/field.php:79
 msgid "Label"
 msgstr ""
 
-#: dist/views/admin/field.php:68
+#: dist/views/admin/field.php:80
 msgid "This is the label that is shown next to the field."
 msgstr ""
 
-#: dist/views/admin/field.php:77
+#: dist/views/admin/field.php:89
 msgid "Instructions"
 msgstr ""
 
-#: dist/views/admin/field.php:78
+#: dist/views/admin/field.php:90
 msgid "Instructions can be used to display extra information near the field. Keep it short."
 msgstr ""
 
-#: dist/views/admin/field.php:85
+#: dist/views/admin/field.php:97
 msgid "Required"
 msgstr ""
 
-#: dist/views/admin/field.php:86
+#: dist/views/admin/field.php:98
 msgid "Select \"yes\" if the field should require input from the user."
 msgstr ""
 
-#: dist/views/admin/field.php:109
+#: dist/views/admin/field.php:121
 msgid "Repeat field"
 msgstr ""
 
-#: dist/views/admin/field.php:110
+#: dist/views/admin/field.php:122
 msgid "Should this field be repeated multiple times either by a button or quantity input box?"
 msgstr ""
 
-#: dist/views/admin/field.php:119
+#: dist/views/admin/field.php:131
 msgid "Conditionals"
 msgstr ""
 
-#: dist/views/admin/field.php:120
+#: dist/views/admin/field.php:132
 msgid "Only show this field when conditional rules are true."
 msgstr ""
 
-#: dist/views/admin/field.php:129
+#: dist/views/admin/field.php:141
 msgid "Wrapper attributes"
 msgstr ""
 
